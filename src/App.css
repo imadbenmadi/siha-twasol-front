@@ -50,7 +50,7 @@ textarea {
 .loader {
     width: 20px;
     height: 20px;
-    border: 3px solid #9da0e3;
+    border: 3px solid #2A77F1;
     border-bottom-color: transparent;
     border-radius: 50%;
     display: inline-block;
@@ -83,7 +83,7 @@ textarea {
 }
 
 .custom-overflow::-webkit-scrollbar-thumb {
-    background-color: #9da0e3; /* Change the color as needed */
+    background-color: #2A77F1; /* Change the color as needed */
     border-radius: 999px; /* Makes the thumb round */
     cursor: pointer;
 }

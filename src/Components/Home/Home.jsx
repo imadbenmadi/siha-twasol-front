@@ -9,15 +9,16 @@ import howWeWorkImage_image from "../../../public/Home/how_we_work_image.png";
 import howWeWork_image from "../../../public/Home/how_we_work.png";
 import instagram_image from "../../../public/Home/instgram.png";
 import linkedin_image from "../../../public/Home/linkedin.png";
-import service1_image from "../../../public/Home/Feature1.png";
-import service2_image from "../../../public/Home/Feature2.png";
-import service3_image from "../../../public/Home/Feature3.png";
+import Feature1_image from "../../../public/Home/Feature1.png";
+import Feature2_image from "../../../public/Home/Feature2.png";
+import Feature3_image from "../../../public/Home/Feature3.png";
 import whatsup_image from "../../../public/Home/whatup.png";
 import Logo from "../../../public/Logo.png";
 import NavBar from "./NavBar/NavBar";
 import React from "react";
 import { useState, useEffect } from "react";
 import Hero from "./Hero";
+import Features from "./Features";
 function Home() {
     const [loading, setLoading] = useState(true);
 
@@ -36,9 +37,9 @@ function Home() {
                     howWeWork_image,
                     instagram_image,
                     linkedin_image,
-                    service1_image,
-                    service2_image,
-                    service3_image,
+                    Feature1_image,
+                    Feature2_image,
+                    Feature3_image,
                     whatsup_image,
                 ];
                 images.forEach((imageSrc) => {
@@ -75,6 +76,7 @@ function Home() {
             <NavBar />
             <div className=" mt-[60px]">
                 <Hero />
+                <Features />
             </div>
         </div>
     );
