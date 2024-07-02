@@ -123,7 +123,7 @@ function Login() {
                                     ) : Privacy ? (
                                         <button
                                             type="submit"
-                                            className=" bg-perpol_v py-2 mt-4 rounded-2xl text-white font-semibold "
+                                            className=" bg-blue_v py-2 mt-4 rounded-2xl text-white font-semibold "
                                             disabled={isSubmitting}
                                         >
                                             Get Started
@@ -145,7 +145,7 @@ function Login() {
                             Don’t have an account?{" "}
                             <Link
                                 to={"/Register"}
-                                className=" underline text-perpol_v"
+                                className=" underline text-blue_v"
                             >
                                 Sign up
                             </Link>

@@ -14,7 +14,6 @@ function Register() {
     }
     return (
         <div className="flex">
-            
             <div className="w-full h-screen overflow-y-auto py-12 bg-white flex flex-col items-center justify-center ">
                 <div className=" w-[80%] text-black_text">
                     <div className=" pb-4 pt-24 md:pt-0 ">
@@ -78,7 +77,7 @@ function Register() {
                                         <div
                                             className={` cursor-pointer flex items-center justify-between gap-2  ${
                                                 userType_value == "freelancer"
-                                                    ? "border-2 border-perpol_v text-perpol_v"
+                                                    ? "border-2 border-blue_v text-blue_v"
                                                     : "border border-gray_white text-gray-400"
                                             } rounded-lg  text-base py-1 font-semibold px-4`}
                                             onClick={() => {
@@ -95,13 +94,13 @@ function Register() {
                                                 className={` w-4 h-4 rounded-full border-2 ${
                                                     userType_value ==
                                                     "freelancer"
-                                                        ? "border-perpol_v"
+                                                        ? "border-blue_v"
                                                         : "border-gray_white"
                                                 } flex items-center justify-center`}
                                             >
                                                 {userType_value ==
                                                     "freelancer" && (
-                                                    <div className=" w-2 h-2 rounded-full bg-perpol_v"></div>
+                                                    <div className=" w-2 h-2 rounded-full bg-blue_v"></div>
                                                 )}
                                             </div>
                                             <div>Freelancer</div>
@@ -109,7 +108,7 @@ function Register() {
                                         <div
                                             className={` cursor-pointer flex items-center justify-between gap-2  ${
                                                 userType_value == "client"
-                                                    ? "border-2 border-perpol_v text-perpol_v"
+                                                    ? "border-2 border-blue_v text-blue_v"
                                                     : "border border-gray_white text-gray-400"
                                             } rounded-lg  text-base py-1 font-semibold px-4`}
                                             onClick={() => {
@@ -125,12 +124,12 @@ function Register() {
                                             <div
                                                 className={` w-4 h-4 rounded-full border-2 ${
                                                     userType_value == "client"
-                                                        ? "border-perpol_v"
+                                                        ? "border-blue_v"
                                                         : "border-gray_white"
                                                 } flex items-center justify-center`}
                                             >
                                                 {userType_value == "client" && (
-                                                    <div className=" w-2 h-2 rounded-full bg-perpol_v"></div>
+                                                    <div className=" w-2 h-2 rounded-full bg-blue_v"></div>
                                                 )}
                                             </div>
                                             <div>Client</div>
@@ -236,7 +235,7 @@ function Register() {
                                     ) : Privacy ? (
                                         <button
                                             type="submit"
-                                            className=" bg-perpol_v py-2 mt-4 rounded-2xl text-white font-semibold "
+                                            className=" bg-blue_v py-2 mt-4 rounded-2xl text-white font-semibold "
                                             disabled={isSubmitting}
                                         >
                                             Get Started
@@ -257,7 +256,7 @@ function Register() {
                             Already have an account?{" "}
                             <Link
                                 to={"/Login"}
-                                className=" underline text-perpol_v"
+                                className=" underline text-blue_v"
                             >
                                 Sign in
                             </Link>
