@@ -54,7 +54,7 @@ function Footer() {
                             <img
                                 src={Logo}
                                 alt="Logo"
-                                className=" w-full lg:w-[145px] "
+                                className=" w-full w-[70px] "
                             />
                         </Link>
                         <a
@@ -83,7 +83,7 @@ function Footer() {
                         <img src={Instagram} className=" w-10 " />
                     </a>
                     <a href="https://www.instagram.com/dzid_com/">
-                        <img src={Whatsup} className=" w-8 " />
+                        <img src={Whatsup} className=" w-10 " />
                     </a>{" "}
                 </div>
                 <div className="self-center mt-16 text-sm leading-5 text-center text-black max-md:mt-10">
