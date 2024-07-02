@@ -13,7 +13,7 @@ function Features() {
                 </div>
             </div>
             <div
-                className=" flex flex-col md:flex-row items-center lg:justify-center gap-12  md:overflow-x-auto overflow-hidden
+                className=" flex flex-col flex-wrap justify-center md:flex-row items-center gap-12  md:overflow-x-auto overflow-hidden
             custom-overflow px-12 py-12"
             >
                 <div className=" w-[300px] md:h-[250px] shrink-0 border shadow-[#2a77f147] shadow-xl  rounded-xl py-4">
