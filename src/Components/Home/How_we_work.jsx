@@ -3,7 +3,7 @@ import howWeWork_image2 from "../../../public/Home/how_we_work_image.png";
 import howWeWork_image from "../../../public/Home/how_we_work.png";
 function How_we_work() {
     return (
-        <div className="min-h-[70vh] relative flex items-center justify-center  ">
+        <div className="min-h-[70vh] relative flex items-center justify-center my-6 ">
             <div className=" absolute top-3 left-10">
                 <img src={howWeWork_image} className="md:w-[170px] w-[120px]" alt="" />
             </div>
