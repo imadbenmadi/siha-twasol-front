@@ -13,6 +13,8 @@ import service1_image from "../../../public/Home/service1.png";
 import service2_image from "../../../public/Home/service2.png";
 import service3_image from "../../../public/Home/service3.png";
 import whatsup_image from "../../../public/Home/whatup.png";
+import Logo from "../../../public/Logo.png";
+import NavBar from "./NavBar/NavBar";
 import React from "react";
 import { useState, useEffect } from "react";
 
@@ -68,7 +70,11 @@ function Home() {
             </div>
         );
     }
-    return <div>Home</div>;
+    return (
+        <div className="relative min-h-h-screen overflow-y-auto custom-overflow overflow-x-hidden">
+            <NavBar />
+        </div>
+    );
 }
 
 export default Home;
