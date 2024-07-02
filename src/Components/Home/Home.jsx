@@ -5,7 +5,7 @@ import benefits3_image from "../../../public/Home/benefits3.png";
 import benefits4_image from "../../../public/Home/benefits4.png";
 import fb_image from "../../../public/Home/Facebook.png";
 import Hero_image from "../../../public/Home/Hero.png";
-import howWeWorkImage_image from "../../../public/Home/how_we_work_image.png";
+import howWeWork_image2 from "../../../public/Home/how_we_work_image.png";
 import howWeWork_image from "../../../public/Home/how_we_work.png";
 import instagram_image from "../../../public/Home/Instagram.png";
 import linkedin_image from "../../../public/Home/linkedin.png";
@@ -37,7 +37,7 @@ function Home() {
                     benefits4_image,
                     fb_image,
                     Hero_image,
-                    howWeWorkImage_image,
+                    howWeWork_image2,
                     howWeWork_image,
                     instagram_image,
                     linkedin_image,
