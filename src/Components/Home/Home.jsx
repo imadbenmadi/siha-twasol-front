@@ -1,8 +1,8 @@
 import contact_image from "../../../public/Home/contact.png";
-import fawa1_image from "../../../public/Home/fawa1.png";
-import fawa2_image from "../../../public/Home/fawa2.png";
-import fawa3_image from "../../../public/Home/fawa3.png";
-import fawa4_image from "../../../public/Home/fawa4.png";
+import benefits1_image from "../../../public/Home/benefits1.png";
+import benefits2_image from "../../../public/Home/benefits2.png";
+import benefits3_image from "../../../public/Home/benefits3.png";
+import benefits4_image from "../../../public/Home/benefits4.png";
 import fb_image from "../../../public/Home/fb.png";
 import Hero_image from "../../../public/Home/Hero.png";
 import howWeWorkImage_image from "../../../public/Home/how_we_work_image.png";
@@ -27,10 +27,10 @@ function Home() {
             return new Promise((resolve, reject) => {
                 const images = [
                     contact_image,
-                    fawa1_image,
-                    fawa2_image,
-                    fawa3_image,
-                    fawa4_image,
+                    benefits1_image,
+                    benefits2_image,
+                    benefits3_image,
+                    benefits4_image,
                     fb_image,
                     Hero_image,
                     howWeWorkImage_image,
