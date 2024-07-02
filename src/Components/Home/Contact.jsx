@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import Contact_image from "../../../public/Home/contact.png"
+import Contact_image from "../../../public/Home/contact.png";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { useInView, motion } from "framer-motion";
@@ -39,42 +39,43 @@ function Contact() {
                 // title: "Oops...",
                 text: "Please enter a valid email address",
             });
-        }
-        setLoading(true);
-        fetch("https://dzidcom-back.skate.dz/Contact", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                message: message,
-            }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setLoading(false);
-                Swal.fire({
-                    icon: "success",
-                    // title: "Oops...",
-                    text: "Message sent successfully",
-                });
-
-                setfirstName("");
-                setlastName("");
-                setEmail("");
-                setMessage("");
+        } else {
+            setLoading(true);
+            fetch("http://localhost:3000/Contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    message: message,
+                }),
             })
-            .catch((error) => {
-                setLoading(false);
-                Swal.fire({
-                    icon: "error",
-                    // title: "Oops...",
-                    text: "Something went wrong",
+                .then((response) => response.json())
+                .then((data) => {
+                    setLoading(false);
+                    Swal.fire({
+                        icon: "success",
+                        // title: "Oops...",
+                        text: "Message sent successfully",
+                    });
+
+                    setfirstName("");
+                    setlastName("");
+                    setEmail("");
+                    setMessage("");
+                })
+                .catch((error) => {
+                    setLoading(false);
+                    Swal.fire({
+                        icon: "error",
+                        // title: "Oops...",
+                        text: "Something went wrong",
+                    });
                 });
-            });
+        }
     };
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
@@ -93,30 +94,28 @@ function Contact() {
             className=" flex  justify-center p-2  lg-h-screen minContact_us  items-center my-20 lg:min-h-fit  gap-6 lg:gap-24"
         >
             <div className=" w-[300px] md:w-[400px] dark:text-white text-black_text">
-                <div className=" text-base">Connect</div>
-                <div className=" text-3xl py-2">Contact Support</div>
-                <div className=" text-sm">
-                    Have a question? need assistance? get in touch with our
-                    support team
+                <div className=" text-3xl py-2 font-semibold">
+                    نحب أن نسمع منك، تواصل معنا
                 </div>
-                <div className=" w-full flex flex-col gap-4 items-center justify-center pt-6">
+                <div className=" text-sm">أرسل لنا رسالة</div>
+                <div className=" w-full flex flex-col gap-4 items-center justify-center pt-6 text-end">
                     <div>
                         <div className=" flex justify-center items-center gap-3 max-w-full text-sm ">
                             <input
-                                placeholder="First Name"
+                                placeholder="الاسم"
                                 type="text"
                                 value={firstName}
                                 name="firstName"
                                 onChange={(e) => handle_input_change(e)}
-                                className=" bg-zinc-100 py-2 px-4 rounded-md  w-[150px] md:w-[195px]"
+                                className=" bg-zinc-100 py-2 px-4 rounded-md  w-[150px] md:w-[195px] text-end"
                             />
                             <input
-                                placeholder="Last Name"
+                                placeholder="اللقب"
                                 type="text"
                                 value={lastName}
                                 name="lastName"
                                 onChange={(e) => handle_input_change(e)}
-                                className=" bg-zinc-100 py-2 px-4 rounded-md  w-[150px] md:w-[195px]"
+                                className=" bg-zinc-100 py-2 px-4 rounded-md  w-[150px] md:w-[195px] text-end"
                             />
                         </div>
                     </div>
@@ -125,20 +124,20 @@ function Contact() {
                         type="text"
                         name="email"
                         value={email}
-                        placeholder="Email"
+                        placeholder="الايمايل"
                         onChange={(e) => handle_input_change(e)}
-                        className=" bg-zinc-100 py-2 px-4 rounded-md w-full"
+                        className=" bg-zinc-100 py-2 px-4 rounded-md w-full text-end"
                     />
 
                     <div className=" w-full">
                         <textarea
-                            placeholder="Message"
+                            placeholder="الرسالة"
                             name="message"
                             value={message}
                             id=""
                             rows={4}
                             onChange={(e) => handle_input_change(e)}
-                            className=" bg-zinc-100 py-2 px-4 rounded-md w-full"
+                            className=" bg-zinc-100 py-2 px-4 rounded-md w-full text-end"
                         ></textarea>
                     </div>
                 </div>
@@ -149,20 +148,16 @@ function Contact() {
                 ) : (
                     <div className=" w-full flex justify-center items-center pt-3">
                         <button
-                            className=" bg-perpol_v text-white py-2 px-4 rounded-md"
+                            className=" bg-blue_v w-full font-bold text-white py-2 px-4 rounded-md"
                             onClick={handleSubmit}
                         >
-                            Submit
+                            ارسال
                         </button>
                     </div>
                 )}
             </div>
             <div className=" hidden md:block">
-                <img
-                    src={Contact_image}
-                    alt=""
-                    className=" w-[300px] h-[300px] "
-                />
+                <img src={Contact_image} alt="" className=" w-[300px] " />
             </div>
         </motion.div>
     );
