@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Logo from "../../../../public/Logo.png";
 function Laptop_Nav_Items() {
     return (
-        <div className="hidden  md:flex  items-center justify-between mx-2 lg:mx-12  md:text-md lg:text-lg  font-[500] dark:text-white text-black_text h-full p-2 ">
+        <div className="hidden  md:flex  items-center justify-between mx-2 lg:mx-12  md:text-md lg:text-lg  font-[500]  text-black_text h-full p-2 ">
             <div>
                 <Link to={"/"} className="select-none">
                     <img src={Logo} alt="Logo" className=" w-[50px]  " />
