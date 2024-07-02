@@ -93,11 +93,11 @@ function Contact() {
             animate={isInView ? "visible" : ""}
             className=" flex  justify-center p-2  lg-h-screen minContact_us  items-center my-20 lg:min-h-fit  gap-6 lg:gap-24"
         >
-            <div className=" w-[300px] md:w-[400px] dark:text-white text-black_text">
-                <div className=" text-3xl py-2 font-semibold">
+            <div className=" w-[300px] md:w-[400px] dark:text-white text-black">
+                <div className=" text-xl md:text-3xl py-2 font-semibold">
                     نحب أن نسمع منك، تواصل معنا
                 </div>
-                <div className=" text-sm">أرسل لنا رسالة</div>
+                <div className=" text-xs">أرسل لنا رسالة</div>
                 <div className=" w-full flex flex-col gap-4 items-center justify-center pt-6 text-end">
                     <div>
                         <div className=" flex justify-center items-center gap-3 max-w-full text-sm ">

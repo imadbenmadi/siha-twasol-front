@@ -23,7 +23,7 @@ function Footer() {
             variants={itemVariants}
             initial="hidden"
             animate={isInView ? "visible" : ""}
-            className=" bg-zinc-100 py-4 mt-10 dark:bg-black dark:text-white text-black_text "
+            className=" bg-zinc-100 py-4 mt-10 dark:bg-black dark:text-white text-black "
         >
             <div className="max-w-[1200px] mx-auto text-center">
                 <div>

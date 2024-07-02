@@ -19,7 +19,7 @@ function Login() {
                 />
             </div>
             <div className="w-full h-screen bg-white flex flex-col items-center justify-center ">
-                <div className=" w-[80%] text-black_text">
+                <div className=" w-[80%] text-black">
                     <div className=" pb-4 ">
                         <div className=" text-3xl font-semibold ">Log in</div>
                         <div>Sign in to get started.</div>
@@ -60,7 +60,7 @@ function Login() {
                             }}
                         >
                             {({ isSubmitting }) => (
-                                <Form className="  flex flex-col text-sm md:text-lg  gap-4 text-black_text">
+                                <Form className="  flex flex-col text-sm md:text-lg  gap-4 text-black">
                                     <div>
                                         <div className=" font-semibold text-sm pb-1">
                                             email{" "}

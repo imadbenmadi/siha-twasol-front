@@ -15,7 +15,7 @@ function Register() {
     return (
         <div className="flex">
             <div className="w-full h-screen overflow-y-auto py-12 bg-white flex flex-col items-center justify-center ">
-                <div className=" w-[80%] text-black_text">
+                <div className=" w-[80%] text-black">
                     <div className=" pb-4 pt-24 md:pt-0 ">
                         <div className=" text-3xl font-semibold ">
                             Create an account
@@ -72,7 +72,7 @@ function Register() {
                             }}
                         >
                             {({ isSubmitting, setFieldValue }) => (
-                                <Form className="  flex flex-col text-sm md:text-lg  gap-4 text-black_text">
+                                <Form className="  flex flex-col text-sm md:text-lg  gap-4 text-black">
                                     <div className="  flex items-center justify-center gap-4 md:gap-8 w-full text-gray_v">
                                         <div
                                             className={` cursor-pointer flex items-center justify-between gap-2  ${
