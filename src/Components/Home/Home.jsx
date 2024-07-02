@@ -17,7 +17,7 @@ import Logo from "../../../public/Logo.png";
 import NavBar from "./NavBar/NavBar";
 import React from "react";
 import { useState, useEffect } from "react";
-
+import Hero from "./Hero";
 function Home() {
     const [loading, setLoading] = useState(true);
 
@@ -73,6 +73,9 @@ function Home() {
     return (
         <div className="relative min-h-h-screen overflow-y-auto custom-overflow overflow-x-hidden">
             <NavBar />
+            <div className=" mt-[60px]">
+                <Hero />
+            </div>
         </div>
     );
 }

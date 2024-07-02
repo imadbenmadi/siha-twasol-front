@@ -97,7 +97,12 @@ function App() {
                 <span className="loader"></span>
             </div>
         );
-    } else return <Outlet />;
+    } else
+        return (
+            <div className=" text-right">
+                <Outlet />
+            </div>
+        );
 }
 
 export default App;
