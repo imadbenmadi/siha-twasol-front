@@ -3,22 +3,26 @@ import benefits1_image from "../../../public/Home/benefits1.png";
 import benefits2_image from "../../../public/Home/benefits2.png";
 import benefits3_image from "../../../public/Home/benefits3.png";
 import benefits4_image from "../../../public/Home/benefits4.png";
-import fb_image from "../../../public/Home/fb.png";
+import fb_image from "../../../public/Home/Facebook.png";
 import Hero_image from "../../../public/Home/Hero.png";
 import howWeWorkImage_image from "../../../public/Home/how_we_work_image.png";
 import howWeWork_image from "../../../public/Home/how_we_work.png";
-import instagram_image from "../../../public/Home/instgram.png";
+import instagram_image from "../../../public/Home/Instagram.png";
 import linkedin_image from "../../../public/Home/linkedin.png";
 import Feature1_image from "../../../public/Home/Feature1.png";
 import Feature2_image from "../../../public/Home/Feature2.png";
 import Feature3_image from "../../../public/Home/Feature3.png";
-import whatsup_image from "../../../public/Home/whatup.png";
+import whatsup_image from "../../../public/Home/Whatsup.png";
 import Logo from "../../../public/Logo.png";
 import NavBar from "./NavBar/NavBar";
 import React from "react";
 import { useState, useEffect } from "react";
 import Hero from "./Hero";
 import Features from "./Features";
+import Contact from "./Contact";
+import Benefits from "./Benefits";
+import HowWeWork from "./How_we_work";
+import Footer from "./Footer";
 function Home() {
     const [loading, setLoading] = useState(true);
 
@@ -77,6 +81,10 @@ function Home() {
             <div className=" mt-[60px]">
                 <Hero />
                 <Features />
+                <HowWeWork />
+                <Benefits />
+                <Contact />
+                <Footer />
             </div>
         </div>
     );
