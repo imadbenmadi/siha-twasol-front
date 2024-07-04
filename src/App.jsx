@@ -47,40 +47,61 @@ function App() {
             });
         };
 
-        const fetch_fonts = () => {
-            return new Promise((resolve, reject) => {
-                const fontURL =
-                    // "https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap";
-                    "https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap";
-                const loadFont = (url) => {
-                    return new Promise((resolve, reject) => {
-                        const link = document.createElement("link");
-                        link.href = url;
-                        link.rel = "stylesheet";
-                        link.onload = () => {
-                            resolve(); // Resolve promise when font is loaded
-                        };
-                        link.onerror = () => {
-                            document.getElementById("root").style.fontFamily =
-                                "sans-serif";
-                            resolve(); // Resolve even if font fails to load
-                        };
-                        document.head.appendChild(link);
-                        document.getElementById("root").style.fontFamily =
-                            "cairo";
-                    });
-                };
+        // const fetch_fonts = () => {
+        //     return new Promise((resolve, reject) => {
+        //         const fontURL =
+        //             // "https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap";
+        //             "https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap";
+        //         const loadFont = (url) => {
+        //             return new Promise((resolve, reject) => {
+        //                 const link = document.createElement("link");
+        //                 link.href = url;
+        //                 link.rel = "stylesheet";
+        //                 link.onload = () => {
+        //                     resolve(); // Resolve promise when font is loaded
+        //                 };
+        //                 link.onerror = () => {
+        //                     document.getElementById("root").style.fontFamily =
+        //                         "sans-serif";
+        //                     resolve(); // Resolve even if font fails to load
+        //                 };
+        //                 document.head.appendChild(link);
+        //                 document.getElementById("root").style.fontFamily =
+        //                     "cairo";
+        //             });
+        //         };
 
-                // Load the font
-                loadFont(fontURL)
-                    .then(resolve)
-                    .catch(() => {
-                        document.getElementById("root").style.fontFamily =
-                            "sans-serif";
-                        resolve();
-                    });
+        //         // Load the font
+        //         loadFont(fontURL)
+        //             .then(resolve)
+        //             .catch(() => {
+        //                 document.getElementById("root").style.fontFamily =
+        //                     "sans-serif";
+        //                 resolve();
+        //             });
+        //     });
+        // };
+        const fetch_fonts = () => {
+            return new Promise((resolve) => {
+                const fontURL =
+                    "https://fonts.googleapis.com/css2?family=Poppins:wght@100..900&display=swap";
+                const link = document.createElement("link");
+                link.href = fontURL;
+                link.rel = "stylesheet";
+                link.onload = () => {
+                    document.getElementById("root").style.fontFamily =
+                        "Poppins, sans-serif";
+                    resolve();
+                };
+                link.onerror = () => {
+                    document.getElementById("root").style.fontFamily =
+                        "sans-serif";
+                    resolve();
+                };
+                document.head.appendChild(link);
             });
         };
+
 
         Promise.all([fetch_fonts(), fetch_images(), fetchData()])
             .then(() => {
