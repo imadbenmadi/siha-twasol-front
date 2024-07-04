@@ -13,51 +13,52 @@ function Mobile_Nav_Items({ MobileNav_Open, Toogle_Menu_Bar }) {
             >
                 <div className="  h-screen text-xl  pt-8 overflow-y-auto ">
                     <div className=" flex flex-col justify-start items-center h-[80%]  ">
-                        <div className="flex flex-col gap-6 pb-6 justify-around w-[120px] text-center font-semibold ">
+                        <div className="flex flex-col gap-6 pb-6 justify-around 
+                        text-center font-semibold ">
                             <Link
                                 onClick={Toogle_Menu_Bar}
                                 to={"/Register"}
                                 className="select-none px-3 py-2 rounded-lg"
                             >
-                                Sign up
+                                حساب جديد
                             </Link>
                             <Link
                                 onClick={Toogle_Menu_Bar}
                                 to={"/Login"}
                                 className="select-none   px-3 py-2 rounded-lg "
                             >
-                                Log in
+                                تسجبل الدخول
                             </Link>
                         </div>
                         <div className=" w-full h-[2px] bg-gray_white "></div>
                         <div className="text-center flex flex-col gap-12 mt-10">
                             <a
                                 onClick={Toogle_Menu_Bar}
-                                href={"/Home#Hero"}
+                                href={"/Home#Features"}
                                 className="select-none   "
                             >
-                                How it works?
+                                ميزاتنا
                             </a>
                             <a
                                 onClick={Toogle_Menu_Bar}
-                                href={"/Home#Goal"}
+                                href={"/Home#How_we_work"}
                                 className="select-none    "
                             >
-                                Owr goal
+                                كيف نعمل
                             </a>
                             <a
                                 onClick={Toogle_Menu_Bar}
-                                href={"/Home#Our_features"}
+                                href={"/Home#Benefits"}
                                 className="select-none    "
                             >
-                                Our features
+                                فائدتنا
                             </a>
                             <a
                                 onClick={Toogle_Menu_Bar}
-                                href={"/Home#Contact_us"}
+                                href={"/Home#Contact"}
                                 className="select-none   "
                             >
-                                Contact us
+                                اتصل بنا
                             </a>
                         </div>
                     </div>

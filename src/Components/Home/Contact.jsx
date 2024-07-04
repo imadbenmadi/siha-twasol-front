@@ -92,6 +92,7 @@ function Contact() {
             initial="hidden"
             animate={isInView ? "visible" : ""}
             className=" flex  justify-center p-2  lg-h-screen minContact_us  items-center my-20 lg:min-h-fit  gap-6 lg:gap-24"
+            id="Contact"
         >
             <div className=" w-[300px] md:w-[400px] dark:text-white text-black">
                 <div className=" text-xl md:text-3xl py-2 font-semibold">

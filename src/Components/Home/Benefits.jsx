@@ -7,7 +7,7 @@ import Benefits_card from "./Benefits_card";
 function Benefits() {
     return (
         <div>
-            <div className=" text-center mt-24">
+            <div className=" text-center mt-24" id="Benefits">
                 <div className=" text-2xl font-semibold">الفوائد</div>
                 <div className=" text-sm pt-2">
                     استكشف فوائد منصتنا القوية المصممة لإبقائك على اتصال والتحكم

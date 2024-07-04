@@ -11,39 +11,39 @@ function Laptop_Nav_Items() {
             <div className="flex gap-6 lg:gap-12">
                 <div className=" md:hover:text-blue_v transition-all duration-150  cursor-pointer">
                     <a
-                        href={"/Home#Hero"}
+                        href={"/Home#Features"}
                         className={
                             " md:hover:text-blue_v transition-all duration-150 select-none"
                         }
                     >
-                        How it works?
+                        ميزاتنا
                     </a>
                 </div>
                 <div className=" md:hover:text-blue_v transition-all duration-150  cursor-pointer">
                     <a
-                        href={"/Home#Goal"}
+                        href={"/Home#How_we_work"}
                         className={
                             " md:hover:text-blue_v transition-all duration-150 select-none"
                         }
                     >
-                        Owr goal
+                        كيف نعمل
                     </a>
                 </div>
                 <div className=" md:hover:text-blue_v transition-all duration-150  cursor-pointer">
                     <a
-                        href={"/Home#Our_features"}
+                        href={"/Home#Benefits"}
                         className=" md:hover:text-blue_v transition-all duration-150 select-none"
                     >
-                        Our features
+                        فائدتنا
                     </a>
                 </div>
 
                 <div className=" md:hover:text-blue_v transition-all duration-150  cursor-pointer">
                     <a
-                        href={"/Home#Contact_us"}
+                        href={"/Home#Contact"}
                         className=" md:hover:text-blue_v transition-all duration-150 select-none"
                     >
-                        Contact us
+                        اتصل بنا
                     </a>
                 </div>
             </div>
@@ -51,13 +51,13 @@ function Laptop_Nav_Items() {
                 <div className=" flex items-center justify-center gap-3">
                     <span className="   text-md rounded-lg cursor-pointer">
                         <Link to={"/Login"} className="select-none">
-                            Login
+                            تسجبل الدخول
                         </Link>
                     </span>
                     <span className=" w-[2px] h-5  bg-white"></span>
                     <span className="bg-blue_v text-[#fff] px-3 py-2 text-md rounded-xl cursor-pointer">
                         <Link to={"/Register"} className="select-none">
-                            Sign up
+                            حساب جديد
                         </Link>
                     </span>
                 </div>

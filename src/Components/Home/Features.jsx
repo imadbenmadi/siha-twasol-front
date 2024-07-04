@@ -50,7 +50,10 @@ function Features() {
     ];
 
     return (
-        <div className="min-h-screen flex items-center justify-center">
+        <div
+            className="min-h-screen flex items-center justify-center"
+            id="Features"
+        >
             <div>
                 <div className="text-center mt-24">
                     <div className="text-2xl font-semibold">ميزاتنا</div>

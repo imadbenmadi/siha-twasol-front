@@ -11,7 +11,10 @@ function How_we_work() {
         visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 1 } },
     };
     return (
-        <div className="min-h-[70vh] relative flex items-center justify-center my-6 ">
+        <div
+            className="min-h-[70vh] relative flex items-center justify-center my-6 "
+            id="How_we_work"
+        >
             <div className=" absolute top-3 left-10">
                 <img
                     src={howWeWork_image}
