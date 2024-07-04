@@ -17,23 +17,23 @@ function Benefits() {
             <div className=" flex flex-col flex-wrap justify-center md:flex-row items-center gap-12  md:overflow-x-auto overflow-hidden custom-overflow px-12 py-12">
                 <Benefits_card
                     image={benefits1_image}
-                    title="تواصل مع الأطباء"
-                    description="تواصل مع الأطباء المختصين في مجالات متعددة واحصل على الاستشارات الطبية اللازمة"
-                />
-                <Benefits_card
-                    image={benefits2_image}
-                    title="متابعة الحالة الصحية"
-                    description="متابعة حالتك الصحية والتقارير الطبية الخاصة بك بشكل دوري"
+                    title="تواصل سهل وسريع مع الأطباء"
+                    description="استشارات طبية عبر الرسائل ومتابعة الحالة المرضية بشكل دوري مع طبيبك"
                 />
                 <Benefits_card
                     image={benefits3_image}
-                    title="تذكير بالأدوية"
-                    description="تلقي تذكيرات يومية بأوقات تناول الأدوية والجرعات المطلوبة"
+                    title="معلومات صحية موثوقة"
+                    description="مقالات ونصائح طبية موثوقة من أطباء متخصصين"
+                />
+                <Benefits_card
+                    image={benefits2_image}
+                    title="إشعارات وإعلانات"
+                    description="إشعارات وتوعية حول الأيام التحسيسية والحملات الصحية"
                 />
                 <Benefits_card
                     image={benefits4_image}
-                    title="متابعة اللقاحات"
-                    description="متابعة اللقاحات المطلوبة والتواريخ المحددة لها"
+                    title=" مشاركة آمنة للسجل الطبي"
+                    description="مشاركة سجلك الطبي مع الطبيب المختص بصورة آمنة"
                 />
             </div>
         </div>
