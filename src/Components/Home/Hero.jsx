@@ -6,7 +6,7 @@ function Hero() {
     return (
         <div>
             <div className=" flex flex-col md:flex-row justify-center items-center md:items-start
-              md:gap-6 md:mt-24 mt-20">
+              md:gap-12 md:mt-40 mt-20">
                 <img src={Hero_image} className=" w-[320px] shrink-0" alt="" />
                 <div className="h-full md:pt-12 max-w-[350px]">
                     <div className=" font-semibold text-2xl  ">
