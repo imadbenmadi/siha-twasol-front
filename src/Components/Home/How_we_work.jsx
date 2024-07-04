@@ -29,7 +29,7 @@ function How_we_work() {
                     className="  flex justify-center items-center gap-12 "
                 >
                     <div className=" ">
-                        <div className=" text-2xl font-semibold mb-6 mr-3">
+                        <div className=" text-2xl font-semibold mb-6 mt-6 md:mt-0 mr-3">
                             كيف نعمل ؟
                         </div>
                         <div className=" flex   flex-col gap-7">
