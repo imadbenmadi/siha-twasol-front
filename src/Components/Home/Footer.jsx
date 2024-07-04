@@ -54,7 +54,7 @@ function Footer() {
                             <img
                                 src={Logo}
                                 alt="Logo"
-                                className=" w-full w-[70px] "
+                                className="  w-[70px] "
                             />
                         </Link>
                         <a
