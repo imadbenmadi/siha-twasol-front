@@ -28,6 +28,27 @@ function Features() {
         }),
     };
 
+    const features = [
+        {
+            image: Feature1_image,
+            title: "تواصل سهل وسريع مع الاطباء",
+            description:
+                "استشارات طبية عبر الرسائل و متابعة الحالة المرضية بشكل دوري مع طبيبك و مشاركة سجلك الطبي مع الطبيب المختص بصورة آمنة",
+        },
+        {
+            image: Feature3_image,
+            title: "الاشعارات و الاعلانات  ",
+            description:
+                "اشعارات و إعلام المريض في الأيام التحسيسية والحملات التوعوية و كذا الإعلام عن كل مايخص العتاد الطبي و الخدمات الصيدلانية",
+        },
+        {
+            image: Feature2_image,
+            title: " معلومات صحية موثوقة",
+            description:
+                "مقالات و نصائح طبية موثوقة من أطباء متخصصين , معلومات عامة حول الأمراض و الأدوية ,نصائح و طرق الوقاية من الامراض ",
+        },
+    ];
+
     return (
         <div className="min-h-screen flex items-center justify-center">
             <div>
@@ -45,33 +66,30 @@ function Features() {
                     animate={isInView ? "visible" : ""}
                     className="flex flex-col flex-wrap justify-center md:flex-row items-center gap-12 md:overflow-x-auto overflow-hidden custom-overflow px-12 py-12"
                 >
-                    {[Feature1_image, Feature2_image, Feature3_image].map(
-                        (image, index) => (
-                            <motion.div
-                                key={index}
-                                custom={index}
-                                variants={itemVariants}
-                                className="w-[300px] md:h-[250px] shrink-0 border shadow-[#2a77f147] shadow-xl rounded-xl py-4"
-                            >
-                                <div>
-                                    <img
-                                        src={image}
-                                        className="mx-auto w-12 pb-3"
-                                        alt=""
-                                    />
+                    {features.map((feature, index) => (
+                        <motion.div
+                            key={index}
+                            custom={index}
+                            variants={itemVariants}
+                            className="w-[300px] md:h-[250px] shrink-0 border shadow-[#2a77f147] shadow-xl rounded-xl py-4 px-3"
+                        >
+                            <div>
+                                <img
+                                    src={feature.image}
+                                    className="mx-auto w-12 pb-3"
+                                    alt=""
+                                />
+                            </div>
+                            <div className="text-center">
+                                <div className="text-lg md:text-xl font-semibold mb-4">
+                                    {feature.title}
                                 </div>
-                                <div className="text-center">
-                                    <div className="text-lg md:text-xl font-semibold mb-4">
-                                        إشعارات الأدوية واللقاحات
-                                    </div>
-                                    <div className="text-sm md:text-base">
-                                        احصل على إشعارات بشأن الحملات الصحية
-                                        وأيام التوعية والخدمات الطبية المجانية.
-                                    </div>
+                                <div className="text-sm ">
+                                    {feature.description}
                                 </div>
-                            </motion.div>
-                        )
-                    )}
+                            </div>
+                        </motion.div>
+                    ))}
                 </motion.div>
             </div>
         </div>
