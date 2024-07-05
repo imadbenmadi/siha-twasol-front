@@ -13,19 +13,21 @@ function Mobile_Nav_Items({ MobileNav_Open, Toogle_Menu_Bar }) {
             >
                 <div className="  h-screen text-xl  pt-8 overflow-y-auto ">
                     <div className=" flex flex-col justify-start items-center h-[80%]  ">
-                        <div className="flex flex-col gap-6 pb-6 justify-around 
-                        text-center font-semibold ">
+                        <div
+                            className="flex flex-col gap-6 pb-6 justify-around 
+                        text-center font-semibold "
+                        >
                             <Link
                                 onClick={Toogle_Menu_Bar}
                                 to={"/Register"}
-                                className="select-none px-3 py-2 rounded-lg"
+                                className="select-none px-3 py-2 bg-blue_v text-white rounded-lg"
                             >
                                 حساب جديد
                             </Link>
                             <Link
                                 onClick={Toogle_Menu_Bar}
                                 to={"/Login"}
-                                className="select-none   px-3 py-2 rounded-lg "
+                                className="select-none    px-3 py-2 rounded-lg "
                             >
                                 تسجبل الدخول
                             </Link>
