@@ -94,12 +94,12 @@ function Contact() {
             className=" flex  justify-center p-2  lg-h-screen minContact_us  items-center my-20 lg:min-h-fit  gap-6 lg:gap-24"
             id="Contact"
         >
-            <div className=" w-[300px] md:w-[400px] dark:text-white text-black">
+            <div className=" w-[300px] md:w-[400px]  text-black">
                 <div className=" text-xl md:text-3xl py-2 font-semibold">
                     نحب أن نسمع منك، تواصل معنا
                 </div>
                 <div className=" text-xs">أرسل لنا رسالة</div>
-                <div className=" w-full flex flex-col gap-4 items-center justify-center pt-6 text-end">
+                <div className=" w-full flex flex-col gap-4 items-center justify-center pt-6 text-right">
                     <div>
                         <div className=" flex justify-center items-center gap-3 max-w-full text-sm ">
                             <input
@@ -108,7 +108,7 @@ function Contact() {
                                 value={firstName}
                                 name="firstName"
                                 onChange={(e) => handle_input_change(e)}
-                                className=" bg-zinc-100 py-2 px-4 rounded-md  w-[150px] md:w-[195px] text-end"
+                                className=" bg-zinc-100 py-2 px-4 rounded-md  w-[150px] md:w-[195px] text-right"
                             />
                             <input
                                 placeholder="اللقب"
@@ -116,7 +116,7 @@ function Contact() {
                                 value={lastName}
                                 name="lastName"
                                 onChange={(e) => handle_input_change(e)}
-                                className=" bg-zinc-100 py-2 px-4 rounded-md  w-[150px] md:w-[195px] text-end"
+                                className=" bg-zinc-100 py-2 px-4 rounded-md  w-[150px] md:w-[195px] text-right"
                             />
                         </div>
                     </div>
@@ -127,7 +127,7 @@ function Contact() {
                         value={email}
                         placeholder="الايمايل"
                         onChange={(e) => handle_input_change(e)}
-                        className=" bg-zinc-100 py-2 px-4 rounded-md w-full text-end"
+                        className=" bg-zinc-100 py-2 px-4 rounded-md w-full text-right"
                     />
 
                     <div className=" w-full">
@@ -138,7 +138,7 @@ function Contact() {
                             id=""
                             rows={4}
                             onChange={(e) => handle_input_change(e)}
-                            className=" bg-zinc-100 py-2 px-4 rounded-md w-full text-end"
+                            className=" bg-zinc-100 py-2 px-4 rounded-md w-full text-right"
                         ></textarea>
                     </div>
                 </div>

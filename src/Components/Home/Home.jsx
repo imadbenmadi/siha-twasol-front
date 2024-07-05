@@ -76,7 +76,7 @@ function Home() {
         );
     }
     return (
-        <div className="relative min-h-h-screen overflow-y-auto custom-overflow overflow-x-hidden">
+        <div className="   relative h-screen overflow-y-auto custom-overflow overflow-x-hidden ">
             <NavBar />
             <div className=" mt-[60px]">
                 <Hero />
@@ -87,6 +87,17 @@ function Home() {
                 <Footer />
             </div>
         </div>
+        // <div className="relative min--screen overflow-y-auto custom-overflow overflow-x-hidden">
+        //     <NavBar />
+        //     <div className=" mt-[60px]">
+        //         <Hero />
+        //         <Features />
+        //         <HowWeWork />
+        //         <Benefits />
+        //         <Contact />
+        //         <Footer />
+        //     </div>
+        // </div>
     );
 }
 

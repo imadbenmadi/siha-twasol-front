@@ -24,11 +24,11 @@ function Footer() {
             variants={itemVariants}
             initial="hidden"
             animate={isInView ? "visible" : ""}
-            className=" bg-zinc-100 py-4 mt-10 dark:bg-black dark:text-white text-black "
+            className=" bg-zinc-100 py-4 mt-10  text-black "
         >
             <div className="max-w-[1200px] mx-auto text-center">
                 <div>
-                    <div className=" font-semibold mb-6 flex justify-center items-center gap-12 w-full text-end">
+                    <div className=" font-semibold mb-6 flex justify-center items-center gap-12 w-full text-right">
                         <div
                             // to={"/"}
                             className="shrink-0 "
