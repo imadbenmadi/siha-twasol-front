@@ -29,14 +29,14 @@ function Laptop_Nav_Items() {
                         كيف نعمل
                     </a>
                 </div>
-                <div className=" md:hover:text-blue_v transition-all duration-150  cursor-pointer">
+                {/* <div className=" md:hover:text-blue_v transition-all duration-150  cursor-pointer">
                     <a
                         href={"/Home#Benefits"}
                         className=" md:hover:text-blue_v transition-all duration-150 select-none"
                     >
                         فائدتنا
                     </a>
-                </div>
+                </div> */}
 
                 <div className=" md:hover:text-blue_v transition-all duration-150  cursor-pointer">
                     <a

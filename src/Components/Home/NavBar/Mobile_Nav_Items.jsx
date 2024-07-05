@@ -46,13 +46,13 @@ function Mobile_Nav_Items({ MobileNav_Open, Toogle_Menu_Bar }) {
                             >
                                 كيف نعمل
                             </a>
-                            <a
+                            {/* <a
                                 onClick={Toogle_Menu_Bar}
                                 href={"/Home#Benefits"}
                                 className="select-none    "
                             >
                                 فائدتنا
-                            </a>
+                            </a> */}
                             <a
                                 onClick={Toogle_Menu_Bar}
                                 href={"/Home#Contact"}

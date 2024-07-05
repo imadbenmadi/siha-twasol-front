@@ -3,7 +3,8 @@ import Logo from "../../../public/Logo.png";
 import { Link } from "react-router-dom";
 import feacbook from "../../../public/Home/Facebook.png";
 import Instagram from "../../../public/Home/Instagram.png";
-import Whatsup from "../../../public/Home/Whatsup.png";
+// import Whatsup from "../../../public/Home/Whatsup.png";
+import linkedin from "../../../public/Home/linkedin.png";
 // import gmail_image from "../../../public/Home/Footer/gmail.png";
 import { motion, useInView } from "framer-motion";
 
@@ -27,37 +28,40 @@ function Footer() {
         >
             <div className="max-w-[1200px] mx-auto text-center">
                 <div>
-                    <div className="flex  content-center max-md:gap-4 max-md:flex-col justify-center items-center max-w-full text-sm font-bold leading-5  max-md:flex-wrap">
-                        <a
-                            href="#Hero"
-                            className="   w-fit max-md:w-fit  my-auto"
-                        >
-                            <div className="text-center  ">Why choose us</div>
-                        </a>
-                        <a
-                            href="#Goal"
-                            className="  w-[12%] max-md:w-fit  my-auto"
-                        >
-                            <div className="text-center">Our goals</div>
-                        </a>
-
-                        <a
-                            href="#Our_features"
-                            className=" w-[12%] my-auto max-md:w-fit "
-                        >
-                            Our services
-                        </a>
-                        <Link
-                            to={"/"}
-                            className="select-none  :w-[20%] max-md:order-first"
+                    <div className=" font-semibold mb-6 flex justify-center items-center gap-12 w-full text-end">
+                        <div
+                            // to={"/"}
+                            className="shrink-0 "
                         >
                             <img
                                 src={Logo}
                                 alt="Logo"
-                                className="  w-[70px] "
+                                className="  w-[70px] shrink-0 "
                             />
-                        </Link>
-                        <a
+                        </div>
+                        <div className=" flex justify-center items-center gap-6  flex-wrap  w-fut shrink-0">
+                            <a
+                                href="/Home#Features"
+                                className="   w-fit max-md:w-fit  my-auto"
+                            >
+                                <div className="text-center  ">ميزاتنا</div>
+                            </a>
+                            <a
+                                href="/Home#How_we_work"
+                                className="   max-md:w-fit  my-auto"
+                            >
+                                <div className="text-center"> كيف نعمل</div>
+                            </a>
+
+                            <a
+                                href="/Home#Contact"
+                                className=" my-auto max-md:w-fit "
+                            >
+                                اتصل بنا{" "}
+                            </a>
+                        </div>
+
+                        {/* <a
                             href="#Contact_us"
                             className=" w-[12%] max-md:w-fit    my-auto"
                         >
@@ -71,23 +75,27 @@ function Footer() {
                             className=" w-[12%] max-md:w-fit my-auto"
                         >
                             Privacy
-                        </Link>
+                        </Link> */}
                     </div>
                 </div>
-                <hr className="h-[2px] my-2 max-md:hidden bg-gray-300"></hr>
+                <hr className="h-[2px] my-2  bg-gray-300"></hr>
                 <div className="flex justify-center gap-6 items-center mx-auto  w-full  mt-12 max-md:mt-10">
-                    <a href="https://www.facebook.com/profile.php?id=61559810925193">
+                    <a href="https://www.facebook.com/profile.php?id=100074782714472&mibextid=ZbWKwL">
                         <img src={feacbook} className=" w-10 " />
                     </a>
-                    <a href="https://www.instagram.com/dzid_com/">
+                    <a href="https://www.instagram.com/yahiaoui_wissal?igsh=MTdyZjJnaW1hZnRtZA==">
                         <img src={Instagram} className=" w-10 " />
                     </a>
-                    <a href="https://www.instagram.com/dzid_com/">
-                        <img src={Whatsup} className=" w-10 " />
+                    <a href="https://www.linkedin.com/in/wissal-khadidja-yahiaoui-030620282?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
+                        <img src={linkedin} className=" w-10 " />
                     </a>{" "}
                 </div>
                 <div className="self-center mt-16 text-sm leading-5 text-center text-black max-md:mt-10">
-                    © {currentYear}
+                    {/* <div className=" block pb-4 font-semibold text-lg">
+                        {" "}
+                        imadbenmadi@gilmail.com
+                    </div> */}
+                    <div className="">© {currentYear}</div>
                 </div>
             </div>
         </motion.div>
