@@ -10,11 +10,11 @@ function Login() {
         setPrivacy(!Privacy);
     };
     return (
-        <div className="flex">
-            <div className=" max-w-[350px] lg:max-w-full hidden md:block   h-[calc(100vh)]">
+        <div className="flex text-right">
+            <div className=" w-[50vw] hidden md:block   h-[calc(100vh)]">
                 <img
                     src={Login_image}
-                    alt="Login"
+                    alt="تسجيل الدخول"
                     className=" w-full h-full object-cover "
                 />
             </div>
@@ -70,7 +70,7 @@ function Login() {
                                             type="email"
                                             name="email"
                                             disabled={isSubmitting}
-                                            className="border border-gray_white px-4 py-2 rounded-lg  text-sm  w-full"
+                                            className="border border-gray_white text-right px-4 py-2 rounded-lg  text-sm  w-full"
                                         />
                                         <ErrorMessage
                                             name="email"
@@ -88,7 +88,7 @@ function Login() {
                                                 type="text"
                                                 name="password"
                                                 disabled={isSubmitting}
-                                                className="border border-gray_white px-4 py-2  rounded-lg text-sm  w-full"
+                                                className="border border-gray_white px-4 text-right py-2  rounded-lg text-sm  w-full"
                                             />
                                         </div>
 

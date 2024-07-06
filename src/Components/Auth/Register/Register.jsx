@@ -151,7 +151,7 @@ function Register() {
                                                 الاسم الأول
                                             </div>
                                             <Field
-                                                // placeholder="Prénom"
+                                                placeholder="Prénom"
                                                 type="text"
                                                 name="firstName"
                                                 disabled={isSubmitting}
@@ -169,7 +169,7 @@ function Register() {
                                                 اسم العائلة
                                             </div>
                                             <Field
-                                                // placeholder="Nom de famille"
+                                                placeholder="Nom de famille"
                                                 type="text"
                                                 name="lastName"
                                                 disabled={isSubmitting}
@@ -189,7 +189,7 @@ function Register() {
                                             البريد الإلكتروني
                                         </div>
                                         <Field
-                                            // placeholder="example@gmail.com"
+                                            placeholder="example@gmail.com"
                                             type="email"
                                             name="email"
                                             disabled={isSubmitting}
@@ -208,7 +208,7 @@ function Register() {
                                         </div>
                                         <div className=" flex items-center">
                                             <Field
-                                                // placeholder="•••••••••••••••••••"
+                                                placeholder="•••••••••••••••••••"
                                                 type="text"
                                                 name="password"
                                                 disabled={isSubmitting}
