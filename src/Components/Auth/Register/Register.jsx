@@ -253,8 +253,9 @@ function Register() {
                                                 className=" bg-blue_v py-2 mt-4 rounded-2xl text-white font-semibold "
                                                 disabled={isSubmitting}
                                             >
-                                                ابدأ الآن
-                                            </button>
+ 
+                                                انشاء الحساب
+                                                </button>
                                         )
                                         //     : (
                                         // <button

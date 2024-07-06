@@ -4,11 +4,13 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import handleLogin from "./Post_Login";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+
 function Login() {
     const [Privacy, setPrivacy] = useState(true);
     const handleChangePrivacy = () => {
         setPrivacy(!Privacy);
     };
+
     return (
         <div className="flex text-right">
             <div className=" w-[50vw] hidden md:block   h-[calc(100vh)]">
@@ -21,8 +23,10 @@ function Login() {
             <div className="w-full h-screen bg-white flex flex-col items-center justify-center ">
                 <div className=" w-[80%] text-black">
                     <div className=" pb-4 ">
-                        <div className=" text-3xl font-semibold ">Log in</div>
-                        <div>Sign in to get started.</div>
+                        <div className=" text-3xl font-semibold ">
+                            تسجيل الدخول
+                        </div>
+                        <div>سجل الدخول للبدء.</div>
                     </div>
 
                     <div>
@@ -36,21 +40,22 @@ function Login() {
 
                                 // Validate email
                                 if (!values.email) {
-                                    errors.email = "email is Required";
+                                    errors.email = "البريد الإلكتروني مطلوب";
                                 } else if (
                                     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
                                         values.email
                                     )
                                 ) {
-                                    errors.email = "Invalid email address";
+                                    errors.email =
+                                        "عنوان البريد الإلكتروني غير صالح";
                                 }
 
                                 // Validate password
                                 if (!values.password) {
-                                    errors.password = "password is Required";
+                                    errors.password = "كلمة المرور مطلوبة";
                                 } else if (values.password.length < 8) {
                                     errors.password =
-                                        "password must be at least 8 characters long";
+                                        "يجب أن تكون كلمة المرور مكونة من 8 أحرف على الأقل";
                                 }
 
                                 return errors;
@@ -63,7 +68,7 @@ function Login() {
                                 <Form className="  flex flex-col text-sm md:text-lg  gap-4 text-black">
                                     <div>
                                         <div className=" font-semibold text-sm pb-1">
-                                            email{" "}
+                                            البريد الإلكتروني
                                         </div>
                                         <Field
                                             placeholder="example@gmail.com"
@@ -80,12 +85,12 @@ function Login() {
                                     </div>
                                     <div>
                                         <div className=" font-semibold text-sm pb-1">
-                                            password{" "}
+                                            كلمة المرور
                                         </div>
                                         <div className=" flex items-center">
                                             <Field
                                                 placeholder="•••••••••••••••••••"
-                                                type="text"
+                                                type="password"
                                                 name="password"
                                                 disabled={isSubmitting}
                                                 className="border border-gray_white px-4 text-right py-2  rounded-lg text-sm  w-full"
@@ -98,7 +103,7 @@ function Login() {
                                             style={errorInputMessage}
                                         />
                                     </div>
-                                    <div className=" flex gap-3 text-sm">
+                                    {/* <div className=" flex gap-3 text-sm">
                                         <input
                                             checked={Privacy}
                                             onClick={handleChangePrivacy}
@@ -106,48 +111,50 @@ function Login() {
                                             className={`w-4 h-4`}
                                         />
                                         <div>
-                                            By checking the box below, you
-                                            acknowledge that you have read,
-                                            understood, and agree to be bound by
-                                            these{" "}
+                                            بتحديد المربع أدناه، فإنك تقر بأنك
+                                            قد قرأت وفهمت وتوافق على الالتزام بـ{" "}
                                             <Link
                                                 to={"/Privacy?prev=Login"}
                                                 className=" font-semibold underline"
                                             >
-                                                Terms of Service.
+                                                شروط الخدمة.
                                             </Link>
                                         </div>
-                                    </div>
-                                    {isSubmitting ? (
-                                        <span className="small-loader my-5  w-full m-auto"></span>
-                                    ) : Privacy ? (
-                                        <button
-                                            type="submit"
-                                            className=" bg-blue_v py-2 mt-4 rounded-2xl text-white font-semibold "
-                                            disabled={isSubmitting}
-                                        >
-                                            Get Started
-                                        </button>
-                                    ) : (
-                                        <button
-                                            type="submit"
-                                            className=" bg-gray_white py-2 mt-4 rounded-2xl  text-gray-400 font-semibold "
-                                            disabled={true}
-                                        >
-                                            Get Started
-                                        </button>
-                                    )}
+                                    </div> */}
+                                    {
+                                        isSubmitting ? (
+                                            <span className="small-loader my-5  w-full m-auto"></span>
+                                        ) : (
+                                            // : Privacy ?
+                                            <button
+                                                type="submit"
+                                                className=" bg-blue_v py-2 mt-4 rounded-2xl text-white font-semibold "
+                                                disabled={isSubmitting}
+                                            >
+                                                تسجيل الدخول
+                                            </button>
+                                        )
+                                        // : (
+                                        //     <button
+                                        //         type="submit"
+                                        //         className=" bg-gray_white py-2 mt-4 rounded-2xl  text-gray-400 font-semibold "
+                                        //         disabled={true}
+                                        //     >
+                                        //         ابدأ
+                                        //     </button>
+                                        // )
+                                    }
                                 </Form>
                             )}
                         </Formik>
 
                         <div className="pt-6 text-sm font-semibold text-gray_v text-center ">
-                            Don’t have an account?{" "}
+                            ليس لديك حساب؟{" "}
                             <Link
                                 to={"/Register"}
                                 className=" underline text-blue_v"
                             >
-                                Sign up
+                                سجل حساب جديد
                             </Link>
                         </div>
                     </div>
@@ -156,8 +163,10 @@ function Login() {
         </div>
     );
 }
+
 const errorInputMessage = {
     fontSize: "12px",
     color: "red",
 };
+
 export default Login;
