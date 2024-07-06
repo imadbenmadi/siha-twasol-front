@@ -3,6 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import handleRegister from "./Post_Register";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Login_image from "../../../../public/Login.png";
+
 function Register() {
     const [Privacy, setPrivacy] = useState(true);
     const handleChangePrivacy = () => {
@@ -13,20 +15,27 @@ function Register() {
         setuserType_value(value);
     }
     return (
-        <div className="flex">
+        <div className="flex text-right">
+            <div className=" w-[50vw] hidden md:block   h-[calc(100vh)]">
+                <img
+                    src={Login_image}
+                    alt="تسجيل الدخول"
+                    className=" w-full h-full object-cover "
+                />
+            </div>
             <div className="w-full h-screen overflow-y-auto py-12 bg-white flex flex-col items-center justify-center ">
                 <div className=" w-[80%] text-black">
                     <div className=" pb-4 pt-24 md:pt-0 ">
                         <div className=" text-3xl font-semibold ">
-                            Create an account
+                            👋 SCS مرحبا بك في
                         </div>
-                        <div>Let’s get started your freelance journey.</div>
+                        <div>انشئ حسابك الخاص في منصتنا</div>
                     </div>
 
                     <div>
                         <Formik
                             initialValues={{
-                                userType: userType_value,
+                                // userType: userType_value,
                                 firstName: "",
                                 lastName: "",
                                 email: "",
@@ -36,33 +45,34 @@ function Register() {
                                 const errors = {};
 
                                 if (!values.firstName) {
-                                    errors.firstName = "First Name is Required";
+                                    errors.firstName = "الاسم الأول مطلوب";
                                 } else if (values.firstName.length < 3)
-                                    errors.firstName = " At least 3 chars";
+                                    errors.firstName = "الحد الأدنى 3 أحرف";
                                 else if (values.firstName.length > 30)
-                                    errors.firstName = " At most 30 chars";
+                                    errors.firstName = "الحد الأقصى 30 حرفًا";
                                 if (!values.lastName) {
-                                    errors.lastName = "Last Name is Required";
+                                    errors.lastName = "اسم العائلة مطلوب";
                                 } else if (values.lastName.length < 3)
-                                    errors.lastName = " At least 3 chars";
+                                    errors.lastName = "الحد الأدنى 3 أحرف";
                                 else if (values.lastName.length > 30)
-                                    errors.lastName = " At most 30 chars";
+                                    errors.lastName = "الحد الأقصى 30 حرفًا";
                                 if (!values.email) {
-                                    errors.email = "email is Required";
+                                    errors.email = "البريد الإلكتروني مطلوب";
                                 } else if (
                                     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
                                         values.email
                                     )
                                 ) {
-                                    errors.email = "Invalid email address";
+                                    errors.email =
+                                        "عنوان البريد الإلكتروني غير صالح";
                                 }
 
                                 // Validate password
                                 if (!values.password) {
-                                    errors.password = "password is Required";
+                                    errors.password = "كلمة المرور مطلوبة";
                                 } else if (values.password.length < 8) {
                                     errors.password =
-                                        "password must be at least 8 characters long";
+                                        "يجب أن تكون كلمة المرور مكونة من 8 أحرف على الأقل";
                                 }
 
                                 return errors;
@@ -73,7 +83,7 @@ function Register() {
                         >
                             {({ isSubmitting, setFieldValue }) => (
                                 <Form className="  flex flex-col text-sm md:text-lg  gap-4 text-black">
-                                    <div className="  flex items-center justify-center gap-4 md:gap-8 w-full text-gray_v">
+                                    {/* <div className="  flex items-center justify-center gap-4 md:gap-8 w-full text-gray_v">
                                         <div
                                             className={` cursor-pointer flex items-center justify-between gap-2  ${
                                                 userType_value == "freelancer"
@@ -103,7 +113,7 @@ function Register() {
                                                     <div className=" w-2 h-2 rounded-full bg-blue_v"></div>
                                                 )}
                                             </div>
-                                            <div>Freelancer</div>
+                                            <div>عامل حر</div>
                                         </div>
                                         <div
                                             className={` cursor-pointer flex items-center justify-between gap-2  ${
@@ -132,20 +142,21 @@ function Register() {
                                                     <div className=" w-2 h-2 rounded-full bg-blue_v"></div>
                                                 )}
                                             </div>
-                                            <div>Client</div>
+                                            <div>عميل</div>
                                         </div>
-                                    </div>
-                                    <div className=" flex flex-col md:flex-row items-center justify-center gap-6 md:gap-4 w-full pb-6 ">
+                                    </div> */}
+                                    <div className=" flex flex-col md:flex-row items-center justify-center gap-6 md:gap-4 w-full py-6 ">
                                         <div className="w-full  md:w-[50%]  relative">
                                             <div className="  font-semibold text-sm pb-1">
-                                                First Name
+                                                الاسم الأول
                                             </div>
                                             <Field
-                                                placeholder="Prénom"
+                                                // placeholder="Prénom"
                                                 type="text"
                                                 name="firstName"
                                                 disabled={isSubmitting}
-                                                className="w-full border border-gray_white px-4 py-2 rounded-lg  text-sm "
+                                                className="w-full border border-gray_white 
+                                                px-4 py-2 rounded-lg  text-sm text-right"
                                             />
                                             <ErrorMessage
                                                 name="firstName"
@@ -155,14 +166,15 @@ function Register() {
                                         </div>
                                         <div className="  w-full  md:w-[50%] relative">
                                             <div className="font-semibold text-sm pb-1">
-                                                Last Name
+                                                اسم العائلة
                                             </div>
                                             <Field
-                                                placeholder="Nom de famille"
+                                                // placeholder="Nom de famille"
                                                 type="text"
                                                 name="lastName"
                                                 disabled={isSubmitting}
-                                                className="border border-gray_white px-4 py-2 rounded-lg  text-sm  w-full"
+                                                className="border border-gray_white px-4 py-2 
+                                                rounded-lg  text-sm  w-full text-right"
                                             />
                                             <ErrorMessage
                                                 name="lastName"
@@ -174,14 +186,15 @@ function Register() {
 
                                     <div>
                                         <div className=" font-semibold text-sm pb-1">
-                                            email{" "}
+                                            البريد الإلكتروني
                                         </div>
                                         <Field
-                                            placeholder="example@gmail.com"
+                                            // placeholder="example@gmail.com"
                                             type="email"
                                             name="email"
                                             disabled={isSubmitting}
-                                            className="border border-gray_white px-4 py-2 rounded-lg  text-sm  w-full"
+                                            className="border border-gray_white px-4 py-2
+                                             rounded-lg  text-sm  w-full text-right"
                                         />
                                         <ErrorMessage
                                             name="email"
@@ -191,15 +204,16 @@ function Register() {
                                     </div>
                                     <div>
                                         <div className=" font-semibold text-sm pb-1">
-                                            password{" "}
+                                            كلمة المرور
                                         </div>
                                         <div className=" flex items-center">
                                             <Field
-                                                placeholder="•••••••••••••••••••"
+                                                // placeholder="•••••••••••••••••••"
                                                 type="text"
                                                 name="password"
                                                 disabled={isSubmitting}
-                                                className="border border-gray_white px-4 py-2  rounded-lg text-sm  w-full"
+                                                className="border  border-gray_white px-4 py-2
+                                                  rounded-lg text-sm  w-full text-right"
                                             />
                                         </div>
 
@@ -210,7 +224,7 @@ function Register() {
                                         />
                                     </div>
 
-                                    <div className=" flex gap-3 text-sm">
+                                    {/* <div className=" flex gap-3 text-sm">
                                         <input
                                             checked={Privacy}
                                             onClick={handleChangePrivacy}
@@ -218,47 +232,50 @@ function Register() {
                                             className={`w-4 h-4`}
                                         />
                                         <div>
-                                            By checking the box below, you
-                                            acknowledge that you have read,
-                                            understood, and agree to be bound by
-                                            these{" "}
+                                            بالضغط على المربع أدناه، فإنك تقر
+                                            بأنك قرأت وفهمت وتوافق على الالتزام
+                                            بهذه{" "}
                                             <Link
                                                 to={"/Privacy?prev=Register"}
                                                 className=" font-semibold underline"
                                             >
-                                                Terms of Service.
+                                                شروط الخدمة.
                                             </Link>
                                         </div>
-                                    </div>
-                                    {isSubmitting ? (
-                                        <span className="small-loader my-5  w-full m-auto"></span>
-                                    ) : Privacy ? (
-                                        <button
-                                            type="submit"
-                                            className=" bg-blue_v py-2 mt-4 rounded-2xl text-white font-semibold "
-                                            disabled={isSubmitting}
-                                        >
-                                            Get Started
-                                        </button>
-                                    ) : (
-                                        <button
-                                            type="submit"
-                                            className=" bg-gray_white py-2 mt-4 rounded-2xl  text-gray-400 font-semibold "
-                                            disabled={true}
-                                        >
-                                            Get Started
-                                        </button>
-                                    )}
+                                    </div> */}
+                                    {
+                                        isSubmitting ? (
+                                            <span className="small-loader my-5  w-full m-auto"></span>
+                                        ) : (
+                                            // : Privacy ? (
+                                            <button
+                                                type="submit"
+                                                className=" bg-blue_v py-2 mt-4 rounded-2xl text-white font-semibold "
+                                                disabled={isSubmitting}
+                                            >
+                                                ابدأ الآن
+                                            </button>
+                                        )
+                                        //     : (
+                                        // <button
+                                        //     type="submit"
+                                        //     className=" bg-gray_white py-2 mt-4 rounded-2xl  text-gray-400 font-semibold "
+                                        //     disabled={true}
+                                        // >
+                                        //     ابدأ الآن
+                                        // </button>
+                                        // )
+                                    }
                                 </Form>
                             )}
                         </Formik>
                         <div className="pt-6 text-sm font-semibold text-gray_v text-center">
-                            Already have an account?{" "}
+                            هل لديك حساب بالفعل؟{" "}
                             <Link
                                 to={"/Login"}
                                 className=" underline text-blue_v"
                             >
-                                Sign in
+                                تسجيل الدخول
                             </Link>
                         </div>
                     </div>
@@ -274,7 +291,7 @@ const errorInputMessage = {
 const names_errorInputMessage = {
     position: "absolute",
     bottom: "-22px",
-    left: "5px",
+    right: "5px",
     fontSize: "12px",
     color: "red",
 };
