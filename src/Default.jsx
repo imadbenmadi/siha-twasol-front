@@ -7,14 +7,24 @@ function Default() {
     const { isAuth, userType, userId } = useAppContext();
     const Navigate = useNavigate();
     useEffect(() => {
+        // else if (isAuth && userType == "Director") {
+        //     // Navigate(`/Director/${userId}`);
+        //     Navigate(`/Director`);
+        // } else if (isAuth && userType == "freelancer") {
+        //     // Navigate(`/Freelancer/${userId}`);
+        //     Navigate(`/Freelancer`);
+        // } else Navigate("/Home");
+
         if (!isAuth || !userType) Navigate("/Home");
-        else if (isAuth && userType == "client") {
-            // Navigate(`/Client/${userId}`);
-            Navigate(`/Client`);
-        } else if (isAuth && userType == "freelancer") {
-            // Navigate(`/Freelancer/${userId}`);
-            Navigate(`/Freelancer`);
-        } else Navigate("/Home");
+        if (isAuth && userType == "Director") {
+            Navigate(`/Director`);
+        } else if (isAuth && userType == "Malad") {
+            Navigate(`/Malad`);
+        } else if (isAuth && userType == "Medecin") {
+            Navigate(`/Medecin`);
+        } else if (isAuth && userType == "Worker") {
+            Navigate(`/Worker`);
+        } else Navigate(`/Home`);
     }, []);
 }
 export default Default;

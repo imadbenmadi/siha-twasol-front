@@ -9,10 +9,17 @@ import Default from "./Default";
 import Not_Found from "./Components/Not_Found";
 import Not_Finished from "./Components/Not_Finished";
 import ErrorElement from "./Components/ErrorElement";
+
+import Malad from "./Components/Profiles/Malad/Malad.jsx";
+import Medecin from "./Components/Profiles/Medecin/Medecin.jsx";
+import Director from "./Components/Profiles/Director/Director.jsx";
+import Worker from "./Components/Profiles/Worker/Worker.jsx";
+
 const routes = createBrowserRouter([
     {
         path: "/",
         element: <App />,
+        errorElement: <ErrorElement />,
         children: [
             {
                 index: true,
@@ -25,6 +32,26 @@ const routes = createBrowserRouter([
                 errorElement: <ErrorElement />,
             },
         ],
+    },
+    {
+        path: "/Malad",
+        element: <Malad />,
+        errorElement: <ErrorElement />,
+    },
+    {
+        path: "/Medecin",
+        element: <Medecin />,
+        errorElement: <ErrorElement />,
+    },
+    {
+        path: "/Director",
+        element: <Director />,
+        errorElement: <ErrorElement />,
+    },
+    {
+        path: "/Worker",
+        element: <Worker />,
+        errorElement: <ErrorElement />,
     },
     {
         path: "/Login",

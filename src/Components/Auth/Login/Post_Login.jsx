@@ -8,11 +8,15 @@ async function handleLogin(values, { setSubmitting }) {
         });
 
         if (response.status == 200) {
-            if (response.data.userType == "client") {
-                window.location.href = `/Client`;
-            } else if (response.data.userType == "freelancer") {
-                window.location.href = `/Freelancer`;
-            } else window.location.href = `/Home`;
+            if (response.data.userType == "Director") {
+                window.location.href = `/Director`;
+            } else if (response.data.userType == "Malad") {
+                window.location.href = `/Malad`;
+            } else if (response.data.userType == "Medecin") {
+                window.location.href = `/Medecin`;
+            } else if (response.data.userType == "Worker") {
+                window.location.href = `/Worker`;
+            } else window.location.href = `/`;
         } else if (response.status == 401) {
             setSubmitting(false);
             Swal.fire("Error!", "Username or Password isn't correct", "error");
