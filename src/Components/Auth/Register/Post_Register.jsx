@@ -21,13 +21,15 @@ async function handleRegister(values, { setSubmitting }) {
                     }
                 );
                 if (Login_response.status == 200) {
-                    if (Login_response.data.userType == "client") {
-                        window.location.href = `/Client`;
-                    } else if (Login_response.data.userType == "freelancer") {
-                        window.location.href = `/Freelancer`;
-                    } else {
-                        window.location.href = "/Login";
-                    }
+                    if (Login_response.data.userType == "Director") {
+                        window.location.href = `/Director`;
+                    } else if (Login_response.data.userType == "Malad") {
+                        window.location.href = `/Malad`;
+                    } else if (Login_response.data.userType == "Medecin") {
+                        window.location.href = `/Medecin`;
+                    } else if (Login_response.data.userType == "Worker") {
+                        window.location.href = `/Worker`;
+                    } else window.location.href = `/Login`;
                 } else {
                     window.location.href = "/Login";
                 }
