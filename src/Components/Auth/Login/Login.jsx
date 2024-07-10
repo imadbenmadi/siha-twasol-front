@@ -32,7 +32,7 @@ function Login() {
                     return;
                 }
                 set_Auth(true);
-                store_login(response.data.userType, response.data.userId);
+                store_login(response.data.userId, response.data.userType);
                 if (response.data.userType == "Director") {
                     Navigate(`/Director`);
                 } else if (response.data.userType == "Malad") {

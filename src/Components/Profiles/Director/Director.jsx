@@ -12,9 +12,11 @@ function Director() {
     const [loading, setLoading] = useState(true);
     const { userId, isAuth, set_user, userType, set_Auth, user, set_Messages } =
         useAppContext();
-
     useEffect(() => {
-        if (!isAuth || !userId || !userType || userType != "Director") {
+        console.log(userType);
+    }, [userType]);
+    useEffect(() => {
+        if (!isAuth || !userId) {
             set_Auth(false);
             Navigate("/Login");
         }
@@ -27,6 +29,8 @@ function Director() {
                         validateStatus: () => true,
                     }
                 );
+                console.log(response.status);
+                console.log(response.data);
                 if (response.status == 200) {
                     set_user(response.data.User);
                 } else {
