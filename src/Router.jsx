@@ -17,9 +17,14 @@ import Worker from "./Components/Profiles/Worker/Worker.jsx";
 
 // import Malad from "./Components/Profiles/Director/Director.jsx";
 import Director_default from "./Components/Profiles/Director/Director_Default.jsx";
+import Malad_default from "./Components/Profiles/Malad/Malad_Default.jsx";
+import Medecin_default from "./Components/Profiles/Medecin/Medecin_Default.jsx";
+import Worker_default from "./Components/Profiles/Worker/Worker_Default.jsx";
 
-// import Medecin from "./Components/Profiles/Director/Director.jsx";
-// import Worker from "./Components/Profiles/Director/Director.jsx";
+import Director_workers from "./Components/Profiles/Director/Director_workers.jsx";
+import Director_Blogs from "./Components/Profiles/Director/Director_Blogs.jsx";
+import Director_Events from "./Components/Profiles/Director/Director_Events.jsx";
+import Director_Medecins from "./Components/Profiles/Director/Director_Medecins.jsx";
 
 const routes = createBrowserRouter([
     {
@@ -59,22 +64,22 @@ const routes = createBrowserRouter([
                     },
                     {
                         path: "/Director/Workers",
-                        element: <Worker />,
+                        element: <Director_workers />,
                         errorElement: <ErrorElement />,
                     },
                     {
-                        path: "/Director/Workers",
-                        element: <Worker />,
+                        path: "/Director/Blogs",
+                        element: <Director_Blogs />,
                         errorElement: <ErrorElement />,
                     },
                     {
-                        path: "/Director/Workers",
-                        element: <Worker />,
+                        path: "/Director/Events",
+                        element: <Director_Events />,
                         errorElement: <ErrorElement />,
                     },
                     {
-                        path: "/Director/Workers",
-                        element: <Worker />,
+                        path: "/Director/Medecins",
+                        element: <Director_Medecins />,
                         errorElement: <ErrorElement />,
                     },
                 ],
