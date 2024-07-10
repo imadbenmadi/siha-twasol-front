@@ -1,11 +1,77 @@
 import React from "react";
 import Login_image from "../../../../public/Login.png";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import handleLogin from "./Post_Login";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
+import Swal from "sweetalert2";
+import Axios from "axios";
+import { useAppContext } from "../../../AppContext";
+import { useNavigate } from "react-router-dom";
 function Login() {
+    const Navigate = useNavigate();
+    const { set_Auth, store_login } = useAppContext();
+    async function handleLogin(values, { setSubmitting }) {
+        try {
+            let response = await Axios.post(
+                "http://localhost:3000/Login",
+                values,
+                {
+                    withCredentials: true,
+                    validateStatus: () => true,
+                }
+            );
+
+            if (response.status == 200) {
+                setSubmitting(false);
+                if (!response.data.userType || !response.data.userId) {
+                    Swal.fire(
+                        "Error!",
+                        `Something Went Wrong with your account , please contact the support team,`,
+                        "error"
+                    );
+                    return;
+                }
+                set_Auth(true);
+                store_login(response.data.userType, response.data.userId);
+                if (response.data.userType == "Director") {
+                    Navigate(`/Director`);
+                } else if (response.data.userType == "Malad") {
+                    Navigate(`/Malad`);
+                } else if (response.data.userType == "Medecin") {
+                    Navigate(`/Medecin`);
+                } else if (response.data.userType == "Worker") {
+                    Navigate(`/Worker`);
+                } else {
+                    Swal.fire(
+                        "Error!",
+                        `Something Went Wrong with your account , please contact the support team,`,
+                        "error"
+                    );
+                    return;
+                }
+            } else if (response.status == 401) {
+                setSubmitting(false);
+                Swal.fire(
+                    "Error!",
+                    "Username or Password isn't correct",
+                    "error"
+                );
+            } else if (response.status == 409) {
+                setSubmitting(false);
+                Swal.fire("Error!", `${response.data.message} `, "error");
+            } else if (response.status == 500) {
+                setSubmitting(false);
+                Swal.fire("Error!", `Internal Server Error   `, "error");
+            } else {
+                setSubmitting(false);
+                Swal.fire("Error!", `Something Went Wrong ,`, "error");
+            }
+        } catch (error) {
+            setSubmitting(false);
+            Swal.fire("Error!", `Something Went Wrong `, "error");
+        }
+        // setSubmitting(false);
+    }
     const [Privacy, setPrivacy] = useState(true);
     const handleChangePrivacy = () => {
         setPrivacy(!Privacy);

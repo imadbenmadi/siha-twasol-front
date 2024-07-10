@@ -9,7 +9,7 @@ function App() {
     const Navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     // const [userType, setUserType] = useState(null);
-    const { set_Auth, isAuth, store_login } = useAppContext();
+    const { set_Auth, store_login } = useAppContext();
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -21,9 +21,27 @@ function App() {
                     }
                 );
                 if (response.status == 200) {
-                    store_login(response.data.userId, response.data.userType);
+                    // store_login(response.data.userId, response.data.userType);
                     // setUserType(response.data.userType);
+                    if (!response.data.userType || !response.data.userId) {
+                        set_Auth(false);
+                        return;
+                    }
                     set_Auth(true);
+                    store_login(response.data.userType, response.data.userId);
+
+                    if (response.data.userType == "Director") {
+                        Navigate(`/Director`);
+                    } else if (response.data.userType == "Malad") {
+                        Navigate(`/Malad`);
+                    } else if (response.data.userType == "Medecin") {
+                        Navigate(`/Medecin`);
+                    } else if (response.data.userType == "Worker") {
+                        Navigate(`/Worker`);
+                    } else {
+                        set_Auth(false);
+                        return;
+                    }
                 } else {
                     set_Auth(false);
                 }
@@ -101,7 +119,6 @@ function App() {
                 document.head.appendChild(link);
             });
         };
-
 
         Promise.all([fetch_fonts(), fetch_images(), fetchData()])
             .then(() => {

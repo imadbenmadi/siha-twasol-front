@@ -83,68 +83,6 @@ function Register() {
                         >
                             {({ isSubmitting, setFieldValue }) => (
                                 <Form className="  flex flex-col text-sm md:text-lg  gap-4 text-black">
-                                    {/* <div className="  flex items-center justify-center gap-4 md:gap-8 w-full text-gray_v">
-                                        <div
-                                            className={` cursor-pointer flex items-center justify-between gap-2  ${
-                                                userType_value == "freelancer"
-                                                    ? "border-2 border-blue_v text-blue_v"
-                                                    : "border border-gray_white text-gray-400"
-                                            } rounded-lg  text-base py-1 font-semibold px-4`}
-                                            onClick={() => {
-                                                setFieldValue(
-                                                    "userType",
-                                                    "freelancer"
-                                                ),
-                                                    handle_change_UserType(
-                                                        "freelancer"
-                                                    );
-                                            }}
-                                        >
-                                            <div
-                                                className={` w-4 h-4 rounded-full border-2 ${
-                                                    userType_value ==
-                                                    "freelancer"
-                                                        ? "border-blue_v"
-                                                        : "border-gray_white"
-                                                } flex items-center justify-center`}
-                                            >
-                                                {userType_value ==
-                                                    "freelancer" && (
-                                                    <div className=" w-2 h-2 rounded-full bg-blue_v"></div>
-                                                )}
-                                            </div>
-                                            <div>عامل حر</div>
-                                        </div>
-                                        <div
-                                            className={` cursor-pointer flex items-center justify-between gap-2  ${
-                                                userType_value == "client"
-                                                    ? "border-2 border-blue_v text-blue_v"
-                                                    : "border border-gray_white text-gray-400"
-                                            } rounded-lg  text-base py-1 font-semibold px-4`}
-                                            onClick={() => {
-                                                setFieldValue(
-                                                    "userType",
-                                                    "client"
-                                                ),
-                                                    handle_change_UserType(
-                                                        "client"
-                                                    );
-                                            }}
-                                        >
-                                            <div
-                                                className={` w-4 h-4 rounded-full border-2 ${
-                                                    userType_value == "client"
-                                                        ? "border-blue_v"
-                                                        : "border-gray_white"
-                                                } flex items-center justify-center`}
-                                            >
-                                                {userType_value == "client" && (
-                                                    <div className=" w-2 h-2 rounded-full bg-blue_v"></div>
-                                                )}
-                                            </div>
-                                            <div>عميل</div>
-                                        </div>
-                                    </div> */}
                                     <div className=" flex flex-col md:flex-row items-center justify-center gap-6 md:gap-4 w-full py-6 ">
                                         <div className="w-full  md:w-[50%]  relative">
                                             <div className="  font-semibold text-sm pb-1">
@@ -253,9 +191,8 @@ function Register() {
                                                 className=" bg-blue_v py-2 mt-4 rounded-2xl text-white font-semibold "
                                                 disabled={isSubmitting}
                                             >
- 
                                                 انشاء الحساب
-                                                </button>
+                                            </button>
                                         )
                                         //     : (
                                         // <button
