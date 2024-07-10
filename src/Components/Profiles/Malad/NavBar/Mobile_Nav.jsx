@@ -57,24 +57,20 @@ function Mobile_Nav({
             >
                 <div>
                     <Link to={"/"} className="select-none">
-                        <img
-                            src={Logo}
-                            alt="Logo"
-                            className=" w-[110px] lg:w-[145px] "
-                        />
+                        <img src={Logo} alt="Logo" className="  w-[50px] " />
                     </Link>
                 </div>
                 <div className=" flex items-center justify-center gap-4 md:gap-6">
-                            {/* <div>
+                    {/* <div>
                                 <img src={message_icon} alt="" />
                             </div> */}
-                            <div>
-                                <img
-                                    src={notification_icon}
-                                    alt=""
-                                    onClick={toogleopen_Notifications}
-                                />
-                            </div>
+                    <div>
+                        <img
+                            src={notification_icon}
+                            alt=""
+                            onClick={toogleopen_Notifications}
+                        />
+                    </div>
                     <Menu_Toogler
                         MobileNav_Open={MobileNav_Open}
                         set_MobileNav_Open={set_MobileNav_Open}

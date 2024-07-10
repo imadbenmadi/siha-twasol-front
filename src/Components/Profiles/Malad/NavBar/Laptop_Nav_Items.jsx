@@ -45,11 +45,7 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
         <div className="hidden  md:flex  items-center justify-between mx-2 lg:mx-12  md:text-md lg:text-lg  font-[500] text-black_text h-full p-2 ">
             <div>
                 <Link to={"/Director"} className="select-none">
-                    <img
-                        src={Logo}
-                        alt="Logo"
-                        className=" w-[100px] lg:w-[135px] "
-                    />
+                    <img src={Logo} alt="Logo" className="  w-[50px]  " />
                 </Link>
             </div>
             <div className="flex gap-6 lg:gap-14">
@@ -93,23 +89,22 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                 </div>
             </div>
             <div className=" flex items center justify-center gap-5">
-                    <div className="flex items-center justify-center gap-6 ">
-                        {/* <div>
+                <div className="flex items-center justify-center gap-6 ">
+                    {/* <div>
                             <img src={message_icon} alt="" />
                         </div> */}
-                        <Link to={"/Malad/Messages"} className="relative">
-                            {Notifications?.length > 0 && (
-                                <div className=" w-2 h-2 rounded-full bg-red-500 absolute top-0 right-0 "></div>
-                            )}
-                            <img
-                                src={message_icon}
-                                alt=""
-                                className=" cursor-pointer"
-                                onClick={toogleopen_Notifications}
-                            />
-                        </Link>
-                    </div>
-                
+                    <Link to={"/Malad/Messages"} className="relative">
+                        {Notifications?.length > 0 && (
+                            <div className=" w-2 h-2 rounded-full bg-red-500 absolute top-0 right-0 "></div>
+                        )}
+                        <img
+                            src={message_icon}
+                            alt=""
+                            className=" cursor-pointer"
+                            onClick={toogleopen_Notifications}
+                        />
+                    </Link>
+                </div>
                 <div className=" relative">
                     {user?.profile_pic_link ? (
                         <img

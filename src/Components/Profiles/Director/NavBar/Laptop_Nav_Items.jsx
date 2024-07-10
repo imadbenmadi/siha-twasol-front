@@ -47,7 +47,7 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                     <img
                         src={Logo}
                         alt="Logo"
-                        className=" w-[100px] lg:w-[135px] "
+                        className=" w-[50px]  "
                     />
                 </Link>
             </div>

@@ -48,7 +48,7 @@ function Mobile_Nav({ Active_nav, handleLogout, LogoutClicked }) {
                         <img
                             src={Logo}
                             alt="Logo"
-                            className=" w-[110px] lg:w-[145px] "
+                            className=" w-[50px] "
                         />
                     </Link>
                 </div>
