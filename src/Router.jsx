@@ -15,6 +15,12 @@ import Medecin from "./Components/Profiles/Medecin/Medecin.jsx";
 import Director from "./Components/Profiles/Director/Director.jsx";
 import Worker from "./Components/Profiles/Worker/Worker.jsx";
 
+// import Malad from "./Components/Profiles/Director/Director.jsx";
+import Director_default from "./Components/Profiles/Director/Director_Default.jsx";
+
+// import Medecin from "./Components/Profiles/Director/Director.jsx";
+// import Worker from "./Components/Profiles/Director/Director.jsx";
+
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -31,47 +37,74 @@ const routes = createBrowserRouter([
                 element: <Home />,
                 errorElement: <ErrorElement />,
             },
-        ],
-    },
-    {
-        path: "/Malad",
-        element: <Malad />,
-        errorElement: <ErrorElement />,
-    },
-    {
-        path: "/Medecin",
-        element: <Medecin />,
-        errorElement: <ErrorElement />,
-    },
-    {
-        path: "/Director",
-        element: <Director />,
-        errorElement: <ErrorElement />,
-    },
-    {
-        path: "/Worker",
-        element: <Worker />,
-        errorElement: <ErrorElement />,
-    },
-    {
-        path: "/Login",
-        element: <Login />,
-        errorElement: <ErrorElement />,
-    },
-    {
-        path: "/Register",
-        element: <Register />,
-        errorElement: <ErrorElement />,
-    },
-    {
-        path: "/Register",
-        element: <Login />,
-        errorElement: <ErrorElement />,
-    },
+            {
+                path: "/Malad",
+                element: <Malad />,
+                errorElement: <ErrorElement />,
+            },
+            {
+                path: "/Medecin",
+                element: <Medecin />,
+                errorElement: <ErrorElement />,
+            },
+            {
+                path: "/Director",
+                element: <Director />,
+                errorElement: <ErrorElement />,
+                children: [
+                    {
+                        index: true,
+                        element: <Director_default />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Workers",
+                        element: <Worker />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Workers",
+                        element: <Worker />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Workers",
+                        element: <Worker />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Workers",
+                        element: <Worker />,
+                        errorElement: <ErrorElement />,
+                    },
+                ],
+            },
+            {
+                path: "/Worker",
+                element: <Worker />,
+                errorElement: <ErrorElement />,
+            },
+            {
+                path: "/Login",
+                element: <Login />,
+                errorElement: <ErrorElement />,
+            },
+            {
+                path: "/Register",
+                element: <Register />,
+                errorElement: <ErrorElement />,
+            },
+            {
+                path: "/Register",
+                element: <Login />,
+                errorElement: <ErrorElement />,
+            },
 
-    {
-        path: "*",
-        element: <Not_Found />,
+            {
+                path: "*",
+                element: <Not_Found />,
+            },
+        ],
     },
 ]);
 
