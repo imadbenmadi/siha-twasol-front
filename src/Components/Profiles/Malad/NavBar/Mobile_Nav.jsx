@@ -56,9 +56,7 @@ function Mobile_Nav({
             h-full bg-white border-b"
             >
                 <div>
-                    <Link to={"/"} className="select-none">
                         <img src={Logo} alt="Logo" className="  w-[50px] " />
-                    </Link>
                 </div>
                 <div className=" flex items-center justify-center gap-4 md:gap-6">
                     {/* <div>

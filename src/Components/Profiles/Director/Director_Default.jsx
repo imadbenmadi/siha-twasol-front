@@ -4,7 +4,7 @@ import { useEffect } from "react";
 function Director_Default() {
     const Navigate = useNavigate();
     useEffect(() => {
-        Navigate("/Director/Profile");
+        Navigate("/Director/Workers");
     }, []);
 }
 

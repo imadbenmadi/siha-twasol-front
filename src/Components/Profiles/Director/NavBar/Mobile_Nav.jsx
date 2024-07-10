@@ -19,24 +19,7 @@ function Mobile_Nav({ Active_nav, handleLogout, LogoutClicked }) {
         set_MobileNav_Open(!MobileNav_Open);
     }
     const { user, Notifications, set_Messages } = useAppContext();
-    const [open_Notifications, setopen_Notifications] = useState(false);
-    const toogleopen_Notifications = () => {
-        setopen_Notifications(!open_Notifications);
-    };
-    const Delete_Notification = (id) => {
-        const newNotifications = Notifications.filter(
-            (notification) => notification.id !== id
-        );
-        set_Messages(newNotifications);
-        axios.delete(
-            `http://localhost:3000/Directors/${user.id}/Notifications/${id}`,
 
-            {
-                withCredentials: true,
-                validateStatus: () => true,
-            }
-        );
-    };
     return (
         <div className=" md:hidden relative h-[60px] ">
             <div
@@ -44,13 +27,7 @@ function Mobile_Nav({ Active_nav, handleLogout, LogoutClicked }) {
             h-full bg-white border-b"
             >
                 <div>
-                    <Link to={"/"} className="select-none">
-                        <img
-                            src={Logo}
-                            alt="Logo"
-                            className=" w-[50px] "
-                        />
-                    </Link>
+                        <img src={Logo} alt="Logo" className=" w-[50px] " />
                 </div>
                 <div className=" flex items-center justify-center gap-4 md:gap-6">
                     <Menu_Toogler
