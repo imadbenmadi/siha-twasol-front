@@ -26,7 +26,7 @@ function Login() {
                 if (!response.data.userType || !response.data.userId) {
                     Swal.fire(
                         "Error!",
-                        `Something Went Wrong with your account , please contact the support team,`,
+                        `حدث خطأ ما في استقبال بيانتك الرجاء المحاولة مرة أخرى , اذا استمرت المشكلة الرجاء التواصل مع الدعم الفني`,
                         "error"
                     );
                     return;
@@ -44,7 +44,7 @@ function Login() {
                 } else {
                     Swal.fire(
                         "Error!",
-                        `Something Went Wrong with your account , please contact the support team,`,
+                        `حدث خطأ ما في استقبال بيانتك الرجاء المحاولة مرة أخرى , اذا استمرت المشكلة الرجاء التواصل مع الدعم الفني`,
                         "error"
                     );
                     return;
@@ -53,7 +53,7 @@ function Login() {
                 setSubmitting(false);
                 Swal.fire(
                     "Error!",
-                    "Username or Password isn't correct",
+                    " البريد الإلكتروني أو كلمة المرور غير صحيحة",
                     "error"
                 );
             } else if (response.status == 409) {
@@ -61,14 +61,26 @@ function Login() {
                 Swal.fire("Error!", `${response.data.message} `, "error");
             } else if (response.status == 500) {
                 setSubmitting(false);
-                Swal.fire("Error!", `Internal Server Error   `, "error");
+                Swal.fire(
+                    "Error!",
+                    `حدث خطا غبر متوقع الرجاء اعادة المحالة`,
+                    "error"
+                );
             } else {
                 setSubmitting(false);
-                Swal.fire("Error!", `Something Went Wrong ,`, "error");
+                Swal.fire(
+                    "Error!",
+                    `حدث خطا غبر متوقع الرجاء اعادة المحالة`,
+                    "error"
+                );
             }
         } catch (error) {
             setSubmitting(false);
-            Swal.fire("Error!", `Something Went Wrong `, "error");
+            Swal.fire(
+                "Error!",
+                `حدث خطا غبر متوقع الرجاء اعادة المحالة`,
+                "error"
+            );
         }
         // setSubmitting(false);
     }
