@@ -25,7 +25,7 @@ import Director_workers from "./Components/Profiles/Director/Director_workers.js
 import Director_Blogs from "./Components/Profiles/Director/Director_Blogs.jsx";
 import Director_Events from "./Components/Profiles/Director/Director_Events.jsx";
 import Director_Medecins from "./Components/Profiles/Director/Director_Medecins.jsx";
-
+import Director_Add_Worker from "./Components/Profiles/Director/Director_Add_workers.jsx";
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -65,6 +65,11 @@ const routes = createBrowserRouter([
                     {
                         path: "/Director/Workers",
                         element: <Director_workers />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Workers/Add",
+                        element: <Director_Add_Worker />,
                         errorElement: <ErrorElement />,
                     },
                     {
