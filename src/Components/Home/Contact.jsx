@@ -41,7 +41,7 @@ function Contact() {
             });
         } else {
             setLoading(true);
-            fetch("http://localhost:3000/Contact", {
+            fetch("https://api.scs-tawassolsihi.com/Contact", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

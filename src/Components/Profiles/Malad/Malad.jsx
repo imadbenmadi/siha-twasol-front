@@ -23,7 +23,7 @@ function Director() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/Malads/${userId}/Profile`,
+                    `https://api.scs-tawassolsihi.com/Malads/${userId}/Profile`,
                     {
                         withCredentials: true,
                         validateStatus: () => true,

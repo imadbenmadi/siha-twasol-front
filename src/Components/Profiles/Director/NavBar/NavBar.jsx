@@ -8,7 +8,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
 function NavBar() {
-    const Naviagte = useNavigate()
+    const Naviagte = useNavigate();
     const { set_Auth, store_logout } = useAppContext();
     const [Active_nav, setActive_nav] = useState("Home");
     const location = useLocation();
@@ -23,7 +23,7 @@ function NavBar() {
         try {
             // Send a request to the logout endpoint on the server
             const response = await axios.post(
-                "http://localhost:3000/Logout",
+                "https://api.scs-tawassolsihi.com/Logout",
                 {},
                 {
                     withCredentials: true,

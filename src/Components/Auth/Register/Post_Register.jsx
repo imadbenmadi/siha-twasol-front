@@ -3,7 +3,7 @@ import Axios from "axios";
 async function handleRegister(values, { setSubmitting }) {
     try {
         let response = await Axios.post(
-            "http://localhost:3000/Register",
+            "https://api.scs-tawassolsihi.com/Register",
             values,
             {
                 withCredentials: true,
@@ -13,7 +13,7 @@ async function handleRegister(values, { setSubmitting }) {
         if (response.status == 200) {
             try {
                 let Login_response = await Axios.post(
-                    "http://localhost:3000/Login",
+                    "https://api.scs-tawassolsihi.com/Login",
                     values,
                     {
                         withCredentials: true,

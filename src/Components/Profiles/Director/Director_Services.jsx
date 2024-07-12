@@ -23,7 +23,7 @@ function Users() {
         const fetchUsers = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Workers`,
+                    `https://api.scs-tawassolsihi.com/Directors/${user.id}/${user.companyId}/Workers`,
                     {
                         withCredentials: true,
                         validateStatus: () => true,
