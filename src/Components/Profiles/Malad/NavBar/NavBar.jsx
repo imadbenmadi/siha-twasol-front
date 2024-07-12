@@ -6,12 +6,15 @@ import { useEffect } from "react";
 import { useAppContext } from "../../../../AppContext";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 function NavBar() {
+    const Naviagte = useNavigate()
     const { set_Auth, store_logout } = useAppContext();
     const [Active_nav, setActive_nav] = useState("Home");
     const location = useLocation();
     useEffect(() => {
         setActive_nav(location.pathname.split("/")[2]);
+        console.log(location.pathname.split("/")[2]);
     }, [location.pathname]);
 
     const [LogoutClicked, setLogoutClicked] = useState(false);
@@ -31,6 +34,7 @@ function NavBar() {
                 // Successfully logged out, you may want to redirect to the login page or update the UI accordingly
                 store_logout();
                 set_Auth(false);
+                Naviagte("/");
                 // You can use state or context to handle the logout state in your application
             } else {
                 Swal.fire("Error!", `Something Went Wrong ,`, "error");

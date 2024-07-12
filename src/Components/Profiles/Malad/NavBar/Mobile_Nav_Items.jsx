@@ -23,56 +23,64 @@ function Mobile_Nav_Items({
                         <div className="text-center flex flex-col gap-8 my-8 ">
                             <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Director/Complete_Profile"}
+                                to={"/Malad/Workers"}
                                 className={`${
-                                    Active_nav == "Complete_Profile"
+                                    Active_nav == "Workers"
                                         ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none    `}
                             >
-                                <Link
-                                    to={"/Director/Complete_Profile"}
-                                    className={"select-none"}
-                                >
-                                    <span className=" relative">
-                                        Edite profile
-                                    </span>
-                                </Link>
+                                <div className={"select-none"}>
+                                    <span className=" relative">العمال </span>
+                                </div>
                             </Link>
                             <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Director/Profile"}
+                                to={"/Malad/Services"}
                                 className={`${
-                                    Active_nav == "Profile"
+                                    Active_nav == "Services"
                                         ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none   `}
                             >
-                                Profile
+                                الاقسام
+                            </Link>
+                            <Link
+                                onClick={Toogle_Menu_Bar}
+                                to={"/Malad/Doctores"}
+                                className={`${
+                                    Active_nav == "Doctores"
+                                        ? "text-blue_v"
+                                        : "text-black_text"
+                                } select-none    `}
+                            >
+                                <div className={"select-none"}>
+                                    <span className=" relative">الاطباء </span>
+                                </div>
+                            </Link>
+                            <Link
+                                onClick={Toogle_Menu_Bar}
+                                to={"/Malad/Blogs"}
+                                className={`${
+                                    Active_nav == "Blogs"
+                                        ? "text-blue_v"
+                                        : "text-black_text"
+                                } select-none   `}
+                            >
+                                المقالات
                             </Link>
 
                             <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Director/Projects"}
+                                to={"/Malad/Events"}
                                 className={`${
-                                    Active_nav == "Projects"
+                                    Active_nav == "Events"
                                         ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none   `}
                             >
-                                Projects
+                                الاحداث
                             </Link>
-                            {/* <Link
-                                        onClick={Toogle_Menu_Bar}
-                                        to={"/Director/Profile"}
-                                        className={`${
-                                            Active_nav == "Process"
-                                                ? "text-blue_v"
-                                                : "text-black_text"
-                                        } select-none   `}
-                                    >
-                                        Process
-                                    </Link> */}
                         </div>
                         <div className=" w-screen h-[2px] bg-gray_white "></div>
 

@@ -47,6 +47,17 @@ const routes = createBrowserRouter([
                 path: "/Malad",
                 element: <Malad />,
                 errorElement: <ErrorElement />,
+                children: [
+                    {
+                        index: true,
+                        element: <Malad_default />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "*",
+                        element: <Not_Finished />,
+                    },
+                ],
             },
             {
                 path: "/Medecin",

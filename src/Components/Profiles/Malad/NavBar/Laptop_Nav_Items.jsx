@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Logo from "../../../../../public/Logo.png";
-import message_icon from "../../../../../public/message.png";
 import user_default from "../../../../../public/user_default2.png";
 import { useEffect, useState } from "react";
 import { TbLogout2 } from "react-icons/tb";
@@ -21,90 +20,70 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
         setProfileClicked(!ProfileClicked);
     };
     const [open_Notifications, setopen_Notifications] = useState(false);
-    const toogleopen_Notifications = () => {
-        setProfileClicked(false);
-        setopen_Notifications(!open_Notifications);
-    };
-
-    const Delete_Notification = (id) => {
-        const newNotifications = Notifications.filter(
-            (notification) => notification.id !== id
-        );
-        set_Messages(newNotifications);
-        axios.delete(
-            `http://localhost:3000/Directors/${user.id}/Notifications/${id}`,
-
-            {
-                withCredentials: true,
-                validateStatus: () => true,
-            }
-        );
-    };
 
     return (
         <div className="hidden  md:flex  items-center justify-between mx-2 lg:mx-12  md:text-md lg:text-lg  font-[500] text-black_text h-full p-2 ">
             <div>
-                <Link to={"/Director"} className="select-none">
-                    <img src={Logo} alt="Logo" className="  w-[50px]  " />
-                </Link>
+                <img src={Logo} alt="Logo" className=" w-[50px]  " />
             </div>
             <div className="flex gap-6 lg:gap-14">
                 <div
                     className={` ${
-                        Active_nav == "Complete_Profile"
+                        Active_nav == "Workers"
                             ? "text-blue_v"
                             : "text-black_text"
                     } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
-                    <Link
-                        to={"/Director/Complete_Profile"}
-                        className={"select-none"}
-                    >
-                        <span className=" relative">Edite profile</span>
+                    <Link to={"/Malad/Workers"} className={"select-none"}>
+                        <span className=" relative">العمال</span>
                     </Link>
                 </div>
-
+                <Link
+                    className={` ${
+                        Active_nav == "Services"
+                            ? "text-blue_v"
+                            : "text-black_text"
+                    } md:hover:text-blue_v transition-all duration-150  cursor-pointer select-none`}
+                    to={"/Malad/Services"}
+                >
+                    <span className=" relative">الاقسام</span>
+                </Link>
                 <div
                     className={` ${
-                        Active_nav == "Profile"
+                        Active_nav == "Doctores"
                             ? "text-blue_v"
                             : "text-black_text"
                     } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
-                    <Link to={"/Director/Profile"} className={" select-none"}>
-                        Profil
+                    <Link to={"/Malad/Doctores"} className={" select-none"}>
+                        الاطباء{" "}
                     </Link>
                 </div>
-
                 <div
                     className={` ${
-                        Active_nav == "Projects"
+                        Active_nav == "Blogs"
                             ? "text-blue_v"
                             : "text-black_text"
                     } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
-                    <Link to={"/Director/Projects"} className=" select-none">
-                        Projects
+                    <Link to={"/Malad/Blogs"} className=" select-none">
+                        المقالات
+                    </Link>
+                </div>
+                <div
+                    className={` ${
+                        Active_nav == "Events"
+                            ? "text-blue_v"
+                            : "text-black_text"
+                    } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
+                >
+                    <Link to={"/Malad/Events"} className=" select-none">
+                        الاحداث
                     </Link>
                 </div>
             </div>
             <div className=" flex items center justify-center gap-5">
-                <div className="flex items-center justify-center gap-6 ">
-                    {/* <div>
-                            <img src={message_icon} alt="" />
-                        </div> */}
-                    <Link to={"/Malad/Messages"} className="relative">
-                        {Notifications?.length > 0 && (
-                            <div className=" w-2 h-2 rounded-full bg-red-500 absolute top-0 right-0 "></div>
-                        )}
-                        <img
-                            src={message_icon}
-                            alt=""
-                            className=" cursor-pointer"
-                            onClick={toogleopen_Notifications}
-                        />
-                    </Link>
-                </div>
+                <div className="flex items-center justify-center gap-6 "></div>
                 <div className=" relative">
                     {user?.profile_pic_link ? (
                         <img
@@ -131,24 +110,6 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                             className="absolute top-10 right-0 bg-white shadow border  
                     rounded-lg p-2 w-40 z-50 flex items-center  flex-col gap-3"
                         >
-                            <div
-                                className="text-black_text cursor-pointer w-[80px] "
-                                onClick={() => {
-                                    setProfileClicked(false);
-                                }}
-                            >
-                                <div
-                                    className=" select-none flex items-center gap-2 "
-                                    onClick={() => {
-                                        Navigate("/Director/Profile");
-                                        // window.location.href =
-                                        //     "/Director/Profile";
-                                    }}
-                                >
-                                    <FiUser className="  text-xl " />
-                                    Profil
-                                </div>
-                            </div>
                             <div className="">
                                 {LogoutClicked ? (
                                     <div className="w-full ">
