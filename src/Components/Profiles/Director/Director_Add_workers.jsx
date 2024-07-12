@@ -162,7 +162,12 @@ function Director_Addworkers() {
                                     return errors;
                                 }}
                                 onSubmit={(values, { setSubmitting }) => {
-                                    handleRegister(values, { setSubmitting });
+                                    // handleRegister(values, { setSubmitting });
+                                    Swal.fire(
+                                        "Not finished",
+                                        "this part is not finished yet",
+                                        "warning"
+                                    );
                                 }}
                             >
                                 {({ isSubmitting, setFieldValue }) => (
@@ -213,13 +218,15 @@ function Director_Addworkers() {
                                             {Services?.length == 0 ? (
                                                 <div className=" text-sm mx-auto flex items-center justify-center gap-3 ">
                                                     <Link
-                                                        to={"/Services/Add"}
+                                                        to={
+                                                            "/Director/Services/Add"
+                                                        }
                                                         className=" bg-blue_v text-white font-semibold px-4 py-2 rounded-lg"
                                                     >
-                                                        اضف خدمة
+                                                        اضف قسم
                                                     </Link>
                                                     <div className=" text-gray_v">
-                                                        لا توجد خدمة{" "}
+                                                        لا توجد اقسام{" "}
                                                     </div>
                                                 </div>
                                             ) : (
@@ -241,7 +248,7 @@ function Director_Addworkers() {
                                                 text-sm font-semibold text-end"
                                                     >
                                                         <option value="">
-                                                            اختر الخدمة
+                                                            اختر القسم
                                                         </option>
 
                                                         {Services?.map(
@@ -266,7 +273,7 @@ function Director_Addworkers() {
                                                         htmlFor="servicechoix"
                                                         className="block text-xs font-medium text-black_text"
                                                     >
-                                                        اختر الخدمة التي ينتمي
+                                                        اختر القسم التي ينتمي
                                                         اليها هذا العامل{" "}
                                                     </label>
                                                 </>

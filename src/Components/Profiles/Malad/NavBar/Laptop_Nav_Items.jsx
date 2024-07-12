@@ -52,9 +52,9 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                 <div
                     className={` ${
                         Active_nav == "Complete_Profile"
-                            ? "text-perpol_v"
+                            ? "text-blue_v"
                             : "text-black_text"
-                    } md:hover:text-perpol_v transition-all duration-150  cursor-pointer`}
+                    } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
                     <Link
                         to={"/Director/Complete_Profile"}
@@ -67,9 +67,9 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                 <div
                     className={` ${
                         Active_nav == "Profile"
-                            ? "text-perpol_v"
+                            ? "text-blue_v"
                             : "text-black_text"
-                    } md:hover:text-perpol_v transition-all duration-150  cursor-pointer`}
+                    } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
                     <Link to={"/Director/Profile"} className={" select-none"}>
                         Profil
@@ -79,9 +79,9 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                 <div
                     className={` ${
                         Active_nav == "Projects"
-                            ? "text-perpol_v"
+                            ? "text-blue_v"
                             : "text-black_text"
-                    } md:hover:text-perpol_v transition-all duration-150  cursor-pointer`}
+                    } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
                     <Link to={"/Director/Projects"} className=" select-none">
                         Projects

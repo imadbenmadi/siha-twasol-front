@@ -30,18 +30,18 @@ function App() {
                     set_Auth(true);
                     store_login(response.data.userId, response.data.userType);
 
-                    if (response.data.userType == "Director") {
-                        Navigate(`/Director`);
-                    } else if (response.data.userType == "Malad") {
-                        Navigate(`/Malad`);
-                    } else if (response.data.userType == "Medecin") {
-                        Navigate(`/Medecin`);
-                    } else if (response.data.userType == "Worker") {
-                        Navigate(`/Worker`);
-                    } else {
-                        set_Auth(false);
-                        return;
-                    }
+                    // if (response.data.userType == "Director") {
+                    //     Navigate(`/Director`);
+                    // } else if (response.data.userType == "Malad") {
+                    //     Navigate(`/Malad`);
+                    // } else if (response.data.userType == "Medecin") {
+                    //     Navigate(`/Medecin`);
+                    // } else if (response.data.userType == "Worker") {
+                    //     Navigate(`/Worker`);
+                    // } else {
+                    //     set_Auth(false);
+                    //     return;
+                    // }
                 } else {
                     set_Auth(false);
                 }

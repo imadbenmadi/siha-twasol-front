@@ -26,7 +26,7 @@ function Mobile_Nav_Items({
                                 to={"/Director/Complete_Profile"}
                                 className={`${
                                     Active_nav == "Complete_Profile"
-                                        ? "text-perpol_v"
+                                        ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none    `}
                             >
@@ -44,7 +44,7 @@ function Mobile_Nav_Items({
                                 to={"/Director/Profile"}
                                 className={`${
                                     Active_nav == "Profile"
-                                        ? "text-perpol_v"
+                                        ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none   `}
                             >
@@ -56,7 +56,7 @@ function Mobile_Nav_Items({
                                 to={"/Director/Projects"}
                                 className={`${
                                     Active_nav == "Projects"
-                                        ? "text-perpol_v"
+                                        ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none   `}
                             >
@@ -67,7 +67,7 @@ function Mobile_Nav_Items({
                                         to={"/Director/Profile"}
                                         className={`${
                                             Active_nav == "Process"
-                                                ? "text-perpol_v"
+                                                ? "text-blue_v"
                                                 : "text-black_text"
                                         } select-none   `}
                                     >

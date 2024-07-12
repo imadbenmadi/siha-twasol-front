@@ -26,7 +26,7 @@ function Mobile_Nav_Items({
                                 to={"/Director/Workers"}
                                 className={`${
                                     Active_nav == "Workers"
-                                        ? "text-perpol_v"
+                                        ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none    `}
                             >
@@ -39,7 +39,7 @@ function Mobile_Nav_Items({
                                 to={"/Director/Doctores"}
                                 className={`${
                                     Active_nav == "Doctores"
-                                        ? "text-perpol_v"
+                                        ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none    `}
                             >
@@ -52,7 +52,7 @@ function Mobile_Nav_Items({
                                 to={"/Director/Blogs"}
                                 className={`${
                                     Active_nav == "Blogs"
-                                        ? "text-perpol_v"
+                                        ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none   `}
                             >
@@ -64,7 +64,7 @@ function Mobile_Nav_Items({
                                 to={"/Director/Events"}
                                 className={`${
                                     Active_nav == "Events"
-                                        ? "text-perpol_v"
+                                        ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none   `}
                             >

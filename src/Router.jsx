@@ -25,6 +25,7 @@ import Director_workers from "./Components/Profiles/Director/Director_workers.js
 import Director_Blogs from "./Components/Profiles/Director/Director_Blogs.jsx";
 import Director_Events from "./Components/Profiles/Director/Director_Events.jsx";
 import Director_Medecins from "./Components/Profiles/Director/Director_Medecins.jsx";
+import Director_Services from "./Components/Profiles/Director/Director_Services.jsx";
 import Director_Add_Worker from "./Components/Profiles/Director/Director_Add_workers.jsx";
 const routes = createBrowserRouter([
     {
@@ -78,13 +79,38 @@ const routes = createBrowserRouter([
                         errorElement: <ErrorElement />,
                     },
                     {
+                        path: "/Director/Blogs/Add",
+                        element: <Not_Finished />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
                         path: "/Director/Events",
                         element: <Director_Events />,
                         errorElement: <ErrorElement />,
                     },
                     {
-                        path: "/Director/Medecins",
+                        path: "/Director/Events/Add",
+                        element: <Not_Finished />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Doctores",
                         element: <Director_Medecins />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Doctores/Add",
+                        element: <Not_Finished />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Services",
+                        element: <Director_Services />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Services/Add",
+                        element: <Not_Finished />,
                         errorElement: <ErrorElement />,
                     },
                 ],

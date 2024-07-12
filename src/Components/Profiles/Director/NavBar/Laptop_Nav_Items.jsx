@@ -30,21 +30,30 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                 <div
                     className={` ${
                         Active_nav == "Workers"
-                            ? "text-perpol_v"
+                            ? "text-blue_v"
                             : "text-black_text"
-                    } md:hover:text-perpol_v transition-all duration-150  cursor-pointer`}
+                    } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
                     <Link to={"/Director/Workers"} className={"select-none"}>
                         <span className=" relative">العمال</span>
                     </Link>
                 </div>
-
+                <Link
+                    className={` ${
+                        Active_nav == "Services"
+                            ? "text-blue_v"
+                            : "text-black_text"
+                    } md:hover:text-blue_v transition-all duration-150  cursor-pointer select-none`}
+                    to={"/Director/Services"}
+                >
+                    <span className=" relative">الاقسام</span>
+                </Link>
                 <div
                     className={` ${
                         Active_nav == "Doctores"
-                            ? "text-perpol_v"
+                            ? "text-blue_v"
                             : "text-black_text"
-                    } md:hover:text-perpol_v transition-all duration-150  cursor-pointer`}
+                    } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
                     <Link to={"/Director/Doctores"} className={" select-none"}>
                         الاطباء{" "}
@@ -53,9 +62,9 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                 <div
                     className={` ${
                         Active_nav == "Blogs"
-                            ? "text-perpol_v"
+                            ? "text-blue_v"
                             : "text-black_text"
-                    } md:hover:text-perpol_v transition-all duration-150  cursor-pointer`}
+                    } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
                     <Link to={"/Director/Blogs"} className=" select-none">
                         المقالات
@@ -64,9 +73,9 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                 <div
                     className={` ${
                         Active_nav == "Events"
-                            ? "text-perpol_v"
+                            ? "text-blue_v"
                             : "text-black_text"
-                    } md:hover:text-perpol_v transition-all duration-150  cursor-pointer`}
+                    } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
                     <Link to={"/Director/Events"} className=" select-none">
                         الاحداث

@@ -12,6 +12,7 @@ function NavBar() {
     const location = useLocation();
     useEffect(() => {
         setActive_nav(location.pathname.split("/")[2]);
+        console.log(location.pathname.split("/")[2]);
     }, [location.pathname]);
 
     const [LogoutClicked, setLogoutClicked] = useState(false);

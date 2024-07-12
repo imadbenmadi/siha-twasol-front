@@ -74,7 +74,7 @@ function Users() {
         return (
             <div className="py-6 px-4">
                 <div className="text-xl font-semibold  text-blue_v">
-                    الاحداث
+                    الااقسام
                 </div>
                 <div className="mt-4 flex flex-col md:flex-row gap-4 justify-center md:justify-start md:ml-6 md:gap-6 text-gray_v">
                     <div
@@ -84,7 +84,7 @@ function Users() {
                         <IoSearch className="w-fit shrink-0" />
                         <input
                             type="text"
-                            placeholder="ابحث عن الحدث"
+                            placeholder="ابحث عن القسم "
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className="w-full placeholder:text-end text-end"
@@ -94,72 +94,72 @@ function Users() {
                 {/* {filteredUsers?.length === 0 ? ( */}
                 <div className="flex justify-center items-center flex-col gap-6">
                     <div className="text-center font-semibold text-sm text-gray_v pt-12  ">
-                        لا يوجد احداث
+                        لا يوجد اقسام
                     </div>
                     <Link
-                        to={"/Director/Events/Add"}
+                        to={"/Director/Services/Add"}
                         className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
                     >
-                        اضافة حدث جديد
+                        اضافة قسم جديد
                     </Link>
                 </div>
-                {/* ) : ( 
-                     <table className="table-auto w-full mt-4 text-sm">
-                         <thead>
-                             <tr className="bg-gray_white font-normal">
-                                 <th className="px-4 py-2 rounded-tl-md">
-                                     Full Name
-                                 </th>
-                                 <th className="px-4 py-2 border-l border-white">
-                                     Email
-                                 </th>
-                                 <th className="px-4 py-2 border-l border-white">
-                                     Telephone
-                                 </th>
-                                 <th className="px-4 py-2 border-l border-white">
-                                     User Type
-                                 </th>
-                                 <th className="px-4 py-2 border-l border-white">
-                                     Created At
-                                 </th>
-                                  <th className="px-4 py-2 border-l border-white rounded-tr-md">
-                                     Action
-                                 </th> 
-                             </tr>
-                         </thead>
-                         <tbody className="text-xs text-center font-semibold">
-                             {filteredUsers?.map((user) => (
-                                 <tr key={user?.id}>
-                                     <td className="border px-4 py-2">{`${user.firstName} ${user.lastName}`}</td>
-                                     <td className="border px-4 py-2">
-                                         {user?.email}
-                                     </td>
-                                     <td className="border px-4 py-2">
-                                         {user?.telephone}
-                                     </td>
-                                     <td className="border px-4 py-2">
-                                         {user?.userType === "malad" ? (
-                                             "Malad"
-                                         ) : user?.userType === "medecin" ? (
-                                             "medecin"
-                                         ) : user?.userType === "worker" ? (
-                                             "Worker"
-                                         ) : (
-                                             <span className=" text-red-500">
-                                                 not set
-                                             </span>
-                                         )}
-                                     </td>
-                                     <td className="border px-4 py-2">
-                                         {dayjs(user?.createdAt).format(
-                                             "DD MMMM YYYY"
-                                         )}
-                                     </td>
-                                 </tr>
-                             ))}
-                         </tbody>
-                     </table>
-                 )}
+                {/* ) : (
+                    <table className="table-auto w-full mt-4 text-sm">
+                        <thead>
+                            <tr className="bg-gray_white font-normal">
+                                <th className="px-4 py-2 rounded-tl-md">
+                                    Full Name
+                                </th>
+                                <th className="px-4 py-2 border-l border-white">
+                                    Email
+                                </th>
+                                <th className="px-4 py-2 border-l border-white">
+                                    Telephone
+                                </th>
+                                <th className="px-4 py-2 border-l border-white">
+                                    User Type
+                                </th>
+                                <th className="px-4 py-2 border-l border-white">
+                                    Created At
+                                </th>
+                                <th className="px-4 py-2 border-l border-white rounded-tr-md">
+                                    Action
+                                </th> 
+                            </tr>
+                        </thead>
+                        <tbody className="text-xs text-center font-semibold">
+                            {filteredUsers?.map((user) => (
+                                <tr key={user?.id}>
+                                    <td className="border px-4 py-2">{`${user.firstName} ${user.lastName}`}</td>
+                                    <td className="border px-4 py-2">
+                                        {user?.email}
+                                    </td>
+                                    <td className="border px-4 py-2">
+                                        {user?.telephone}
+                                    </td>
+                                    <td className="border px-4 py-2">
+                                        {user?.userType === "malad" ? (
+                                            "Malad"
+                                        ) : user?.userType === "medecin" ? (
+                                            "medecin"
+                                        ) : user?.userType === "worker" ? (
+                                            "Worker"
+                                        ) : (
+                                            <span className=" text-red-500">
+                                                not set
+                                            </span>
+                                        )}
+                                    </td>
+                                    <td className="border px-4 py-2">
+                                        {dayjs(user?.createdAt).format(
+                                            "DD MMMM YYYY"
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                )}
                 */}
             </div>
         );
