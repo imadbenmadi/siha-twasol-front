@@ -7,6 +7,8 @@ import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../../../AppContext";
 import { useEffect } from "react";
+import { useLocation } from "react-router";
+
 import axios from "axios";
 function Director_Addworkers() {
     const Naviagte = useNavigate();
@@ -14,12 +16,15 @@ function Director_Addworkers() {
     const [Services, setServices] = useState([]);
     const [serviceChoice, setServiceChoice] = useState("");
     const [error, setError] = useState(false);
+    const location = useLocation();
+    const workerId = location.pathname.split("/")[3];
+    const [worker, setWorker] = useState(null);
 
     const { user } = useAppContext();
-    async function handle_add_service(values, { setSubmitting }) {
+    async function handle_edit_service(values, { setSubmitting }) {
         try {
-            let response = await Axios.post(
-                `http://localhost:3000/Directors/${user.id}/${user.companyId}/Workers`,
+            let response = await Axios.put(
+                `http://localhost:3000/Directors/${user.id}/${user.companyId}/Workers/${workerId}`,
                 values,
                 {
                     withCredentials: true,
@@ -28,7 +33,7 @@ function Director_Addworkers() {
             );
 
             if (response.status == 200) {
-                Naviagte("/Director/Workers");
+                Naviagte(`/Director/Workers/${workerId}`);
             } else if (response.status == 400) {
                 setSubmitting(false);
                 Swal.fire("Error", `${response.data.message} `, "error");
@@ -52,6 +57,32 @@ function Director_Addworkers() {
 
     useEffect(() => {
         setLoading(true);
+        const fetchWorker = async () => {
+            try {
+                const response = await axios.get(
+                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Workers/${workerId}`,
+                    {
+                        withCredentials: true,
+                        validateStatus: () => true,
+                    }
+                );
+                console.log("wroker profile : ", response);
+
+                if (response.status === 200) {
+                    setWorker(response.data.User);
+                    setServiceChoice(response.data.User.Service.id);
+                } else if (response.status === 401) {
+                    Swal.fire("خطأ", "يجب عليك تسجيل الدخول مرة أخرى", "error");
+                    navigate("/Login");
+                } else {
+                    setError(response.data);
+                }
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        };
         const fetch_services = async () => {
             try {
                 const response = await axios.get(
@@ -76,8 +107,7 @@ function Director_Addworkers() {
                 setLoading(false);
             }
         };
-
-        fetch_services();
+        fetchWorker().then(fetch_services());
     }, []);
     if (loading) {
         return (
@@ -108,12 +138,12 @@ function Director_Addworkers() {
                             <Formik
                                 initialValues={{
                                     // userType: userType_value,
-                                    firstName: "",
-                                    lastName: "",
-                                    email: "",
-                                    password: "",
-                                    companyId: user?.companyId,
-                                    serviceId: "",
+                                    firstName: worker?.firstName || "",
+                                    lastName: worker?.lastName || "",
+                                    email: worker?.email || "",
+                                    password: worker?.password || "",
+                                    companyId: worker?.companyId,
+                                    serviceId: worker?.Service?.id || "",
                                 }}
                                 validate={(values) => {
                                     const errors = {};
@@ -155,7 +185,20 @@ function Director_Addworkers() {
                                     return errors;
                                 }}
                                 onSubmit={(values, { setSubmitting }) => {
-                                    handle_add_service(values, {
+                                    if (!values.serviceId) {
+                                        Swal.fire(
+                                            "Error!",
+                                            "يجب اختيار القسم التي ينتمي اليها هذا العامل",
+                                            "error"
+                                        );
+                                    } else if (!values.companyId) {
+                                        Swal.fire(
+                                            "Error!",
+                                            "حدث خطأ ما, اعد تحميل الصفحة",
+                                            "error"
+                                        );
+                                    }
+                                    handle_edit_service(values, {
                                         setSubmitting,
                                     });
                                 }}
@@ -221,53 +264,9 @@ function Director_Addworkers() {
                                                 </div>
                                             ) : (
                                                 <>
-                                                    {/* <select
-                                                        value={serviceChoice}
-                                                        onChange={(e) => {
-                                                            setServiceChoice(
-                                                                e.target.value
-                                                            );
-                                                            setFieldValue(
-                                                                "serviceId",
-                                                                e.target.value
-                                                            );
-                                                        }}
-                                                        name="serviceId"
-                                                        id="servicechoix"
-                                                        className="border p-2 w-fit  rounded-md 
-                                                text-sm font-semibold text-end"
-                                                    >
-                                                        <option value="">
-                                                            اختر القسم
-                                                        </option>
-
-                                                        {Services?.map(
-                                                            (service) => (
-                                                                <option
-                                                                    key={
-                                                                        service.id
-                                                                    }
-                                                                    value={
-                                                                        service.id
-                                                                    }
-                                                                >
-                                                                    {
-                                                                        service.Name
-                                                                    }
-                                                                </option>
-                                                            )
-                                                        )}
-                                                    </select>
-
-                                                    <label
-                                                        htmlFor="servicechoix"
-                                                        className="block text-xs font-medium text-black_text"
-                                                    >
-                                                        اختر القسم التي ينتمي
-                                                        اليها هذا العامل{" "}
-                                                    </label> */}
                                                     <Field
                                                         as="select"
+                                                        id="servicechoix"
                                                         name="serviceId"
                                                         value={serviceChoice}
                                                         onChange={(e) => {
@@ -301,35 +300,15 @@ function Director_Addworkers() {
                                                             )
                                                         )}
                                                     </Field>
+                                                    <label
+                                                        htmlFor="servicechoix"
+                                                        className="block text-xs font-medium text-black_text"
+                                                    >
+                                                        اختر القسم التي ينتمي
+                                                        اليها هذا العامل{" "}
+                                                    </label>
                                                 </>
                                             )}
-                                            {/* <Field
-                                                as="select"
-                                                name="serviceId"
-                                                value={serviceChoice}
-                                                onChange={(e) => {
-                                                    setServiceChoice(
-                                                        e.target.value
-                                                    ); // Update local state
-                                                    setFieldValue(
-                                                        "serviceId",
-                                                        e.target.value
-                                                    ); // Update Formik state
-                                                }}
-                                                className="border p-2 w-fit  rounded-md text-sm font-semibold text-end"
-                                            >
-                                                <option value="">
-                                                    اختر القسم
-                                                </option>
-                                                {Services?.map((service) => (
-                                                    <option
-                                                        key={service.id}
-                                                        value={service.id}
-                                                    >
-                                                        {service.Name}
-                                                    </option>
-                                                ))}
-                                            </Field> */}
                                         </div>
                                         <div>
                                             <div className=" font-semibold text-sm pb-1">

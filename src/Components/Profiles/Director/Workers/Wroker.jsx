@@ -30,6 +30,7 @@ function Worker() {
                         validateStatus: () => true,
                     }
                 );
+                console.log(response);
 
                 if (response.status === 200) {
                     setWorker(response.data.User);

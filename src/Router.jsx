@@ -24,6 +24,7 @@ import Worker_default from "./Components/Profiles/Worker/Worker_Default.jsx";
 import Director_workers from "./Components/Profiles/Director/Workers/Director_workers.jsx";
 import Director_worker from "./Components/Profiles/Director/Workers/Wroker.jsx";
 import Director_Add_Worker from "./Components/Profiles/Director/Workers/Director_Add_workers.jsx";
+import Director_Edit_Worker from "./Components/Profiles/Director/Workers/Director_Edit_workers.jsx";
 
 import Director_Services from "./Components/Profiles/Director/Services/Director_Services.jsx";
 import Director_Services_add from "./Components/Profiles/Director/Services/Director_Add_service.jsx";
@@ -91,6 +92,11 @@ const routes = createBrowserRouter([
                     {
                         path: "/Director/Workers/:id",
                         element: <Director_worker />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Workers/:id/Edit",
+                        element: <Director_Edit_Worker />,
                         errorElement: <ErrorElement />,
                     },
                     {

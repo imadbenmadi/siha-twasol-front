@@ -155,6 +155,20 @@ function Director_Addworkers() {
                                     return errors;
                                 }}
                                 onSubmit={(values, { setSubmitting }) => {
+                                    if (!values.serviceId) {
+                                        Swal.fire(
+                                            "Error!",
+                                            "يجب اختيار القسم التي ينتمي اليها هذا العامل",
+                                            "error"
+                                        );
+                                    } else if (!values.companyId) {
+                                        Swal.fire(
+                                            "Error!",
+                                            "حدث خطأ ما, اعد تحميل الصفحة",
+                                            "error"
+                                        );
+                                    }
+
                                     handle_add_service(values, {
                                         setSubmitting,
                                     });
@@ -221,51 +235,6 @@ function Director_Addworkers() {
                                                 </div>
                                             ) : (
                                                 <>
-                                                    {/* <select
-                                                        value={serviceChoice}
-                                                        onChange={(e) => {
-                                                            setServiceChoice(
-                                                                e.target.value
-                                                            );
-                                                            setFieldValue(
-                                                                "serviceId",
-                                                                e.target.value
-                                                            );
-                                                        }}
-                                                        name="serviceId"
-                                                        id="servicechoix"
-                                                        className="border p-2 w-fit  rounded-md 
-                                                text-sm font-semibold text-end"
-                                                    >
-                                                        <option value="">
-                                                            اختر القسم
-                                                        </option>
-
-                                                        {Services?.map(
-                                                            (service) => (
-                                                                <option
-                                                                    key={
-                                                                        service.id
-                                                                    }
-                                                                    value={
-                                                                        service.id
-                                                                    }
-                                                                >
-                                                                    {
-                                                                        service.Name
-                                                                    }
-                                                                </option>
-                                                            )
-                                                        )}
-                                                    </select>
-
-                                                    <label
-                                                        htmlFor="servicechoix"
-                                                        className="block text-xs font-medium text-black_text"
-                                                    >
-                                                        اختر القسم التي ينتمي
-                                                        اليها هذا العامل{" "}
-                                                    </label> */}
                                                     <Field
                                                         as="select"
                                                         id="servicechoix"
@@ -311,33 +280,6 @@ function Director_Addworkers() {
                                                     </label>
                                                 </>
                                             )}
-                                            {/* <Field
-                                                as="select"
-                                                name="serviceId"
-                                                value={serviceChoice}
-                                                onChange={(e) => {
-                                                    setServiceChoice(
-                                                        e.target.value
-                                                    ); // Update local state
-                                                    setFieldValue(
-                                                        "serviceId",
-                                                        e.target.value
-                                                    ); // Update Formik state
-                                                }}
-                                                className="border p-2 w-fit  rounded-md text-sm font-semibold text-end"
-                                            >
-                                                <option value="">
-                                                    اختر القسم
-                                                </option>
-                                                {Services?.map((service) => (
-                                                    <option
-                                                        key={service.id}
-                                                        value={service.id}
-                                                    >
-                                                        {service.Name}
-                                                    </option>
-                                                ))}
-                                            </Field> */}
                                         </div>
                                         <div>
                                             <div className=" font-semibold text-sm pb-1">
