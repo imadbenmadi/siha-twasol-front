@@ -66,7 +66,6 @@ function Director_Addworkers() {
                         validateStatus: () => true,
                     }
                 );
-                console.log("wroker profile : ", response);
 
                 if (response.status === 200) {
                     setWorker(response.data.User);
@@ -92,7 +91,6 @@ function Director_Addworkers() {
                         validateStatus: () => true,
                     }
                 );
-                console.log(response.data);
                 if (response.status === 200) {
                     setServices(response.data.Services);
                 } else if (response.status === 401) {
@@ -121,6 +119,19 @@ function Director_Addworkers() {
                 <div className="text-red-600 font-semibold">
                     {error.message}
                 </div>
+            </div>
+        );
+    } else if (!worker) {
+        return (
+            <div className="w-[80vw] h-screen flex items-center justify-center">
+                <div className="text-red-600 font-semibold">
+                    لم يتم العثور على العامل
+                </div>
+                <Link to={"/Director/Workers"}>
+                    <button className="bg-blue_v py-2 px-4 mx-auto mt-4 rounded-2xl text-white font-semibold w-fit">
+                        الرجوع إلى القائمة
+                    </button>
+                </Link>
             </div>
         );
     } else {

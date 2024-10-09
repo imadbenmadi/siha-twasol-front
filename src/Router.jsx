@@ -28,6 +28,7 @@ import Director_Edit_Worker from "./Components/Profiles/Director/Workers/Directo
 
 import Director_Services from "./Components/Profiles/Director/Services/Director_Services.jsx";
 import Director_Services_add from "./Components/Profiles/Director/Services/Director_Add_service.jsx";
+import Director_Services_edit from "./Components/Profiles/Director/Services/Edit_Service.jsx";
 
 import Director_Blogs from "./Components/Profiles/Director/Director_Blogs.jsx";
 import Director_Events from "./Components/Profiles/Director/Director_Events.jsx";
@@ -137,6 +138,11 @@ const routes = createBrowserRouter([
                     {
                         path: "/Director/Services/Add",
                         element: <Director_Services_add />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Services/:id/Edit",
+                        element: <Director_Services_edit />,
                         errorElement: <ErrorElement />,
                     },
                 ],

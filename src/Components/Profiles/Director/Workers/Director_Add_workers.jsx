@@ -61,7 +61,6 @@ function Director_Addworkers() {
                         validateStatus: () => true,
                     }
                 );
-                console.log(response.data);
                 if (response.status === 200) {
                     setServices(response.data.Services);
                 } else if (response.status === 401) {

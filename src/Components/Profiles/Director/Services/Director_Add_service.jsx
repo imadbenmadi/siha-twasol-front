@@ -10,6 +10,9 @@ import { useEffect } from "react";
 import axios from "axios";
 function Director_Addworkers() {
     const Naviagte = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const [serviceChoice, setServiceChoice] = useState("");
+    const [error, setError] = useState(false);
     async function handle_add_service(values, { setSubmitting }) {
         try {
             let response = await Axios.post(
@@ -50,10 +53,6 @@ function Director_Addworkers() {
 
         // setSubmitting(false);
     }
-
-    const [loading, setLoading] = useState(false);
-    const [serviceChoice, setServiceChoice] = useState("");
-    const [error, setError] = useState(false);
 
     const { user } = useAppContext();
 
