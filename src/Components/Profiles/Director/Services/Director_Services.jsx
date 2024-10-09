@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-
+import { useLocation } from "react-router";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { IoSearch } from "react-icons/io5";
@@ -11,11 +11,13 @@ import { useAppContext } from "../../../../AppContext";
 dayjs.extend(customParseFormat);
 function Services() {
     const navigate = useNavigate();
-    const [users, setServices] = useState([]);
+    const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
-    const [userTypeFilter, setUserTypeFilter] = useState("");
+    const [serviceTypeFilter, setUserTypeFilter] = useState("");
+    const [deleteLoading, setDeleteLoading] = useState(false);
+    const location = useLocation();
 
     const { user } = useAppContext();
     useEffect(() => {
@@ -23,7 +25,7 @@ function Services() {
         const fetchServices = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Services`,
+                    `http://localhost:3000/Directors/${user?.id}/${user?.companyId}/Services`,
                     {
                         withCredentials: true,
                         validateStatus: () => true,
@@ -46,15 +48,51 @@ function Services() {
 
         fetchServices();
     }, []);
-
-    // const filteredServices = users.filter((user) => {
-    //     const fullName = `${user?.firstName} ${user?.lastName}`.toLowerCase();
-    //     const email = user?.email.toLowerCase();
-    //     return (
-    //         fullName.includes(searchQuery.toLowerCase()) ||
-    //         email.toLowerCase().includes(searchQuery.toLowerCase())
-    //     );
-    // });
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "هل أنت متأكد؟",
+            text: "لن تتمكن من استعادة هذا العنصر!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "نعم، احذفه!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                Swal.fire("تم الحذف!", "تم حذف العامل بنجاح.", "success");
+                setDeleteLoading(true);
+                await axios
+                    .delete(
+                        `http://localhost:3000/Directors/${user.id}/${user.companyId}/Services/${id}`,
+                        {
+                            withCredentials: true,
+                            validateStatus: () => true,
+                        }
+                    )
+                    .then((response) => {
+                        if (response.status === 200) {
+                            setServices((prevServices) =>
+                                prevServices.filter(
+                                    (service) => service.id !== id
+                                )
+                            );
+                        } else {
+                            Swal.fire("خطأ", response.data.message, "error");
+                        }
+                    })
+                    .catch((error) => {
+                        Swal.fire("خطأ", error.message, "error");
+                    })
+                    .finally(() => {
+                        setDeleteLoading(false);
+                    });
+            }
+        });
+    };
+    const filteredServices = services.filter((service) => {
+        const fullName = `${service?.Name}`.toLowerCase();
+        return fullName.includes(searchQuery.toLowerCase());
+    });
 
     if (loading) {
         return (
@@ -70,11 +108,27 @@ function Services() {
                 </div>
             </div>
         );
+    } else if (!services) {
+        return (
+            <div className="py-6 px-4">
+                <div className="flex justify-center items-center flex-col gap-6 mt-12">
+                    <div className="text-center font-semibold text-sm text-gray_v pt-12  ">
+                        لا يوجد اقسام
+                    </div>
+                    <Link
+                        to={"/Director/Services/Add"}
+                        className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
+                    >
+                        اضافة قسم جديد
+                    </Link>
+                </div>
+            </div>
+        );
     } else {
         return (
             <div className="py-6 px-4">
                 <div className="text-xl font-semibold  text-blue_v">
-                    الااقسام
+                    الاقسام
                 </div>
                 <div className="mt-4 flex flex-col md:flex-row gap-4 justify-center md:justify-start md:ml-6 md:gap-6 text-gray_v">
                     <div
@@ -90,67 +144,66 @@ function Services() {
                             className="w-full placeholder:text-end text-end"
                         />
                     </div>
-                </div>
-                {/* {filteredServices?.length === 0 ? ( */}
-                <div className="flex justify-center items-center flex-col gap-6">
-                    <div className="text-center font-semibold text-sm text-gray_v pt-12  ">
-                        لا يوجد اقسام
-                    </div>
                     <Link
                         to={"/Director/Services/Add"}
-                        className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
+                        className=" py-2 px-4 rounded text-center bg-blue_v text-white cursor-pointer font-semibold text-sm"
                     >
                         اضافة قسم جديد
                     </Link>
                 </div>
-                {/* ) : (
-                    <table className="table-auto w-full mt-4 text-sm">
+                {filteredServices?.length === 0 ? (
+                    <div className="flex justify-center items-center flex-col gap-6 mt-12">
+                        <div className="text-center font-semibold text-sm text-gray_v pt-12  ">
+                            لا يوجد قسم يطابق بحثك
+                        </div>
+                    </div>
+                ) : (
+                    <table className="table-auto   w-fit mx-auto mt-12 text-sm text-center overflow-auto">
                         <thead>
                             <tr className="bg-gray_white font-normal">
                                 <th className="px-4 py-2 rounded-tl-md">
-                                    Full Name
+                                    الاسم
                                 </th>
+
                                 <th className="px-4 py-2 border-l border-white">
-                                    Email
+                                    تاريخ الإنشاء
                                 </th>
-                                
-                                <th className="px-4 py-2 border-l border-white">
-                                    User Type
-                                </th>
-                                <th className="px-4 py-2 border-l border-white">
-                                    Created At
-                                </th>
-                                <th className="px-4 py-2 border-l border-white rounded-tr-md">
+                                <th className="px-4 py-2 border-l border-white"></th>
+                                {/* <th className="px-4 py-2 border-l border-white rounded-tr-md">
                                     Action
-                                </th> 
+                                </th> */}
                             </tr>
                         </thead>
                         <tbody className="text-xs text-center font-semibold">
-                            {filteredServices?.map((user) => (
-                                <tr key={user?.id}>
-                                    <td className="border px-4 py-2">{`${user.firstName} ${user.lastName}`}</td>
+                            {filteredServices?.map((service_item) => (
+                                <tr key={service_item?.id}>
+                                    <td className="border px-4 py-2">{`${service_item.Name}`}</td>
+
                                     <td className="border px-4 py-2">
-                                        {user?.email}
-                                    </td>
-                                    <td className="border px-4 py-2">
-                                        {user?.telephone}
-                                    </td>
-                                    <td className="border px-4 py-2">
-                                        {user?.userType === "malad" ? (
-                                            "Malad"
-                                        ) : user?.userType === "medecin" ? (
-                                            "medecin"
-                                        ) : user?.userType === "worker" ? (
-                                            "Worker"
-                                        ) : (
-                                            <span className=" text-red-500">
-                                                not set
-                                            </span>
+                                        {dayjs(service_item?.createdAt).format(
+                                            "DD MMMM YYYY"
                                         )}
                                     </td>
-                                    <td className="border px-4 py-2">
-                                        {dayjs(user?.createdAt).format(
-                                            "DD MMMM YYYY"
+                                    <td className="border px-4 py-2 flex gap-6 items-center justify-center">
+                                        <Link
+                                            to={`/Director/Services/${service_item.id}/Edit`}
+                                            className="bg-blue_v text-white px-4 py-1 rounded-md "
+                                        >
+                                            تعديل
+                                        </Link>
+                                        {deleteLoading ? (
+                                            <span className="small-loader"></span>
+                                        ) : (
+                                            <button
+                                                onClick={() =>
+                                                    handleDelete(
+                                                        service_item.id
+                                                    )
+                                                }
+                                                className="py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600"
+                                            >
+                                                حذف
+                                            </button>
                                         )}
                                     </td>
                                 </tr>
@@ -158,7 +211,6 @@ function Services() {
                         </tbody>
                     </table>
                 )}
-                */}
             </div>
         );
     }

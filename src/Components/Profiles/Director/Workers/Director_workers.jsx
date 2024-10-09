@@ -18,7 +18,7 @@ function Director_workers() {
     const { user } = useAppContext();
     useEffect(() => {
         setLoading(true);
-        const fetchUsers = async () => {
+        const fetch_workers = async () => {
             try {
                 const response = await axios.get(
                     `http://localhost:3000/Directors/${user.id}/${user.companyId}/Workers`,
@@ -42,7 +42,7 @@ function Director_workers() {
             }
         };
 
-        fetchUsers();
+        fetch_workers();
     }, []);
 
     const filteredUsers = users.filter((user) => {
