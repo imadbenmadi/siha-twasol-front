@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-
 import Swal from "sweetalert2";
 import axios from "axios";
-import { IoSearch } from "react-icons/io5";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useAppContext } from "../../../../AppContext";
 import { useLocation } from "react-router";
 dayjs.extend(customParseFormat);
-function Users() {
+
+function Worker() {
     const location = useLocation();
     const navigate = useNavigate();
     const [worker, setWorker] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const [searchQuery, setSearchQuery] = useState("");
-    const [userTypeFilter, setWorkerTypeFilter] = useState("");
     const workerId = location.pathname.split("/")[3];
     const { user } = useAppContext();
+    const [deleteLoading, setDeleteLoading] = useState(false);
+
     useEffect(() => {
         setLoading(true);
-        const fetchUsers = async () => {
+        const fetchWorker = async () => {
             try {
                 const response = await axios.get(
                     `http://localhost:3000/Directors/${user.id}/${user.companyId}/Workers/${workerId}`,
@@ -31,10 +30,11 @@ function Users() {
                         validateStatus: () => true,
                     }
                 );
+
                 if (response.status === 200) {
                     setWorker(response.data.User);
                 } else if (response.status === 401) {
-                    Swal.fire("Error", "You should login again", "error");
+                    Swal.fire("خطأ", "يجب عليك تسجيل الدخول مرة أخرى", "error");
                     navigate("/Login");
                 } else {
                     setError(response.data);
@@ -46,8 +46,46 @@ function Users() {
             }
         };
 
-        fetchUsers();
+        fetchWorker();
     }, []);
+
+    const handleDelete = () => {
+        Swal.fire({
+            title: "هل أنت متأكد؟",
+            text: "لن تتمكن من استعادة هذا العنصر!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "نعم، احذفه!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                Swal.fire("تم الحذف!", "تم حذف العامل بنجاح.", "success");
+                setDeleteLoading(true);
+                await axios
+                    .delete(
+                        `http://localhost:3000/Directors/${user.id}/${user.companyId}/Workers/${workerId}`,
+                        {
+                            withCredentials: true,
+                            validateStatus: () => true,
+                        }
+                    )
+                    .then((response) => {
+                        if (response.status === 200) {
+                            navigate("/Director/Workers");
+                        } else {
+                            Swal.fire("خطأ", response.data.message, "error");
+                        }
+                    })
+                    .catch((error) => {
+                        Swal.fire("خطأ", error.message, "error");
+                    })
+                    .finally(() => {
+                        setDeleteLoading(false);
+                    });
+            }
+        });
+    };
 
     if (loading) {
         return (
@@ -67,14 +105,14 @@ function Users() {
         return (
             <div className="py-6 px-4">
                 <div className="flex justify-center items-center flex-col gap-6 mt-12">
-                    <div className="text-center font-semibold text-sm text-red-500 pt-12  ">
-                        Worker Not Found
+                    <div className="text-center font-semibold text-sm text-red-500 pt-12">
+                        لم يتم العثور على العامل
                     </div>
                     <Link
-                        to={"/Director/Workers/Add"}
-                        className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
+                        to={"/Director/Workers"}
+                        className="py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
                     >
-                        اضافة عامل جديد
+                        الرجوع إلى قائمة العمال
                     </Link>
                 </div>
             </div>
@@ -82,90 +120,60 @@ function Users() {
     } else {
         return (
             <div className="py-6 px-4">
-                <div className="text-xl font-semibold  text-blue_v">العمال</div>
-                <div
-                    className="mt-4 flex flex-col md:flex-row gap-4 justify-center 
-                md:justify-between md:ml-6 md:gap-6 text-gray_v"
-                >
-                    <div
-                        className="border p-2 mr-4 rounded-md flex items-center justify-between gap-2 text-sm 
-                    font-semibold min-w-[300px]"
-                    >
-                        <IoSearch className="w-fit shrink-0" />
-                        <input
-                            type="text"
-                            placeholder="ابحث عن عامل بالاسم او البريد الالكتروني"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full placeholder:text-end text-end"
-                        />
-                    </div>
-                    <Link
-                        to={"/Director/Workers/Add"}
-                        className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
-                    >
-                        اضافة عامل جديد
-                    </Link>
+                <div className="text-xl font-semibold text-blue_v mb-6 text-center">
+                    معلومات العامل
                 </div>
-                {filteredUsers?.length === 0 ? (
-                    <div className="flex justify-center items-center flex-col gap-6 mt-12">
-                        <div className="text-center font-semibold text-sm text-gray_v pt-12  ">
-                            لا يوجد عامل يطابق بحثك
-                        </div>
-                        {/* <Link
-                            to={"/Director/Workers/Add"}
-                            className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
-                        >
-                            اضافة عامل جديد
-                        </Link> */}
+                <div className="border p-6 rounded-lg bg-gray-50 shadow-lg max-w-3xl mx-auto">
+                    <div className="mb-4">
+                        <h3 className="text-lg font-semibold mb-2">
+                            الاسم الكامل:
+                        </h3>
+                        <p className="text-gray-700">{`${worker.firstName} ${worker.lastName}`}</p>
                     </div>
-                ) : (
-                    <table className="table-auto w-full mt-4 text-sm text-center">
-                        <thead>
-                            <tr className="bg-gray_white font-normal">
-                                <th className="px-4 py-2 rounded-tl-md">
-                                    Full Name
-                                </th>
-                                <th className="px-4 py-2 border-l border-white">
-                                    Email
-                                </th>
-
-                                <th className="px-4 py-2 border-l border-white">
-                                    Service
-                                </th>
-                                <th className="px-4 py-2 border-l border-white">
-                                    Created At
-                                </th>
-                                {/* <th className="px-4 py-2 border-l border-white rounded-tr-md">
-                                    Action
-                                </th> */}
-                            </tr>
-                        </thead>
-                        <tbody className="text-xs text-center font-semibold">
-                            {filteredUsers?.map((user) => (
-                                <tr key={user?.id}>
-                                    <td className="border px-4 py-2">{`${user.firstName} ${user.lastName}`}</td>
-                                    <td className="border px-4 py-2">
-                                        {user?.email}
-                                    </td>
-
-                                    <td className="border px-4 py-2">
-                                        {user?.Service?.Name}
-                                    </td>
-
-                                    <td className="border px-4 py-2">
-                                        {dayjs(user?.createdAt).format(
-                                            "DD MMMM YYYY"
-                                        )}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                )}
+                    <div className="mb-4">
+                        <h3 className="text-lg font-semibold mb-2">
+                            البريد الإلكتروني:
+                        </h3>
+                        <p className="text-gray-700">{worker.email}</p>
+                    </div>
+                    <div className="mb-4">
+                        <h3 className="text-lg font-semibold mb-2">القسم :</h3>
+                        <p className="text-gray-700">{worker.Service?.Name}</p>
+                    </div>
+                    <div className="mb-4">
+                        <h3 className="text-lg font-semibold mb-2">
+                            تاريخ الإنشاء:
+                        </h3>
+                        <p className="text-gray-700">
+                            {dayjs(worker.createdAt).format("DD MMMM YYYY")}
+                        </p>
+                    </div>
+                    <div className="mb-4">
+                        <h3 className="text-lg font-semibold mb-2">المؤسسة:</h3>
+                        <p className="text-gray-700">{worker.Company?.Name}</p>
+                    </div>
+                    <div className="flex justify-end gap-4">
+                        <Link
+                            to={`/Director/Workers/${worker.id}/Edit`}
+                            className="py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600"
+                        >
+                            تعديل
+                        </Link>
+                        {deleteLoading ? (
+                            <span className="small-loader"></span>
+                        ) : (
+                            <button
+                                onClick={handleDelete}
+                                className="py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600"
+                            >
+                                حذف
+                            </button>
+                        )}
+                    </div>
+                </div>
             </div>
         );
     }
 }
 
-export default Users;
+export default Worker;

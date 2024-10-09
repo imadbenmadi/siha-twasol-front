@@ -22,6 +22,7 @@ import Medecin_default from "./Components/Profiles/Medecin/Medecin_Default.jsx";
 import Worker_default from "./Components/Profiles/Worker/Worker_Default.jsx";
 
 import Director_workers from "./Components/Profiles/Director/Workers/Director_workers.jsx";
+import Director_worker from "./Components/Profiles/Director/Workers/Wroker.jsx";
 import Director_Add_Worker from "./Components/Profiles/Director/Workers/Director_Add_workers.jsx";
 
 import Director_Services from "./Components/Profiles/Director/Services/Director_Services.jsx";
@@ -85,6 +86,11 @@ const routes = createBrowserRouter([
                     {
                         path: "/Director/Workers/Add",
                         element: <Director_Add_Worker />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Workers/:id",
+                        element: <Director_worker />,
                         errorElement: <ErrorElement />,
                     },
                     {

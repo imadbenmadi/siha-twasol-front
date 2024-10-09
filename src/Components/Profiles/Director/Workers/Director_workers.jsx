@@ -9,14 +9,12 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useAppContext } from "../../../../AppContext";
 dayjs.extend(customParseFormat);
-function Users() {
+function Director_workers() {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
-    const [userTypeFilter, setUserTypeFilter] = useState("");
-
     const { user } = useAppContext();
     useEffect(() => {
         setLoading(true);
@@ -88,19 +86,19 @@ function Users() {
         );
     } else {
         return (
-            <div className="py-6 px-4">
+            <div className="py-6 px-1 md:px-4">
                 <div className="text-xl font-semibold  text-blue_v mb-6">
                     العمال
                 </div>
                 <div
                     className="mt-4 flex flex-col md:flex-row  mb-6 gap-4 justify-center 
-                md:justify-between md:ml-6 md:gap-6 text-gray_v"
+                md:justify-start md:ml-6 md:gap-6 text-gray_v"
                 >
                     <div
                         className="border p-2 mr-4 rounded-md flex items-center justify-between gap-2 text-sm 
                     font-semibold min-w-[300px]"
                     >
-                        <IoSearch className="w-fit shrink-0" />
+                        <IoSearch className="w-fit md:shrink-0 " />
                         <input
                             type="text"
                             placeholder="ابحث عن عامل بالاسم او البريد الالكتروني"
@@ -111,70 +109,75 @@ function Users() {
                     </div>
                     <Link
                         to={"/Director/Workers/Add"}
-                        className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
+                        className=" py-2 px-4 rounded text-center bg-blue_v text-white cursor-pointer font-semibold text-sm"
                     >
                         اضافة عامل جديد
                     </Link>
                 </div>
-                {filteredUsers?.length === 0 ? (
-                    <div className="flex justify-center items-center flex-col gap-6 mt-12">
-                        <div className="text-center font-semibold text-sm text-gray_v pt-12  ">
-                            لا يوجد عامل يطابق بحثك
+                <div className=" overflow-auto">
+                    {filteredUsers?.length === 0 ? (
+                        <div className="flex justify-center items-center flex-col gap-6 mt-12">
+                            <div className="text-center font-semibold text-sm text-gray_v pt-12  ">
+                                لا يوجد عامل يطابق بحثك
+                            </div>
                         </div>
-                        {/* <Link
-                            to={"/Director/Workers/Add"}
-                            className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
-                        >
-                            اضافة عامل جديد
-                        </Link> */}
-                    </div>
-                ) : (
-                    <table className="table-auto w-full mt-4 text-sm text-center">
-                        <thead>
-                            <tr className="bg-gray_white font-normal">
-                                <th className="px-4 py-2 rounded-tl-md">
-                                    Full Name
-                                </th>
-                                <th className="px-4 py-2 border-l border-white">
-                                    Email
-                                </th>
+                    ) : (
+                        <table className="table-auto w-full mt-4 text-sm text-center overflow-auto">
+                            <thead>
+                                <tr className="bg-gray_white font-normal">
+                                    <th className="px-4 py-2 rounded-tl-md">
+                                        الاسم الكامل
+                                    </th>
+                                    <th className="px-4 py-2 border-l border-white">
+                                        البريد الإلكتروني
+                                    </th>
 
-                                <th className="px-4 py-2 border-l border-white">
-                                    Service
-                                </th>
-                                <th className="px-4 py-2 border-l border-white">
-                                    Created At
-                                </th>
-                                {/* <th className="px-4 py-2 border-l border-white rounded-tr-md">
+                                    <th className="px-4 py-2 border-l border-white">
+                                        القسم
+                                    </th>
+                                    <th className="px-4 py-2 border-l border-white">
+                                        تاريخ الإنشاء
+                                    </th>
+                                    <th className="px-4 py-2 border-l border-white"></th>
+                                    {/* <th className="px-4 py-2 border-l border-white rounded-tr-md">
                                     Action
                                 </th> */}
-                            </tr>
-                        </thead>
-                        <tbody className="text-xs text-center font-semibold">
-                            {filteredUsers?.map((user) => (
-                                <tr key={user?.id}>
-                                    <td className="border px-4 py-2">{`${user.firstName} ${user.lastName}`}</td>
-                                    <td className="border px-4 py-2">
-                                        {user?.email}
-                                    </td>
-
-                                    <td className="border px-4 py-2">
-                                        {user?.Service?.Name}
-                                    </td>
-
-                                    <td className="border px-4 py-2">
-                                        {dayjs(user?.createdAt).format(
-                                            "DD MMMM YYYY"
-                                        )}
-                                    </td>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                )}
+                            </thead>
+                            <tbody className="text-xs text-center font-semibold">
+                                {filteredUsers?.map((worker_item) => (
+                                    <tr key={worker_item?.id}>
+                                        <td className="border px-4 py-2">{`${worker_item.firstName} ${worker_item.lastName}`}</td>
+                                        <td className="border px-4 py-2">
+                                            {worker_item?.email}
+                                        </td>
+
+                                        <td className="border px-4 py-2">
+                                            {worker_item?.Service?.Name}
+                                        </td>
+
+                                        <td className="border px-4 py-2">
+                                            {dayjs(
+                                                worker_item?.createdAt
+                                            ).format("DD MMMM YYYY")}
+                                        </td>
+                                        <td className="border px-4 py-2">
+                                            <Link
+                                                to={`/Director/Workers/${worker_item.id}`}
+                                                className="bg-blue_v text-white px-4 py-1 rounded-md "
+                                            >
+                                                تفاصيل
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    )}
+                </div>
             </div>
         );
     }
 }
 
-export default Users;
+export default Director_workers;
