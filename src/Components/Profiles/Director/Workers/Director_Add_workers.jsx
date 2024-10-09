@@ -221,7 +221,7 @@ function Director_Addworkers() {
                                                 </div>
                                             ) : (
                                                 <>
-                                                    <select
+                                                    {/* <select
                                                         value={serviceChoice}
                                                         onChange={(e) => {
                                                             setServiceChoice(
@@ -252,7 +252,7 @@ function Director_Addworkers() {
                                                                     }
                                                                 >
                                                                     {
-                                                                        service.serviceName
+                                                                        service.Name
                                                                     }
                                                                 </option>
                                                             )
@@ -265,9 +265,71 @@ function Director_Addworkers() {
                                                     >
                                                         اختر القسم التي ينتمي
                                                         اليها هذا العامل{" "}
-                                                    </label>
+                                                    </label> */}
+                                                    <Field
+                                                        as="select"
+                                                        name="serviceId"
+                                                        value={serviceChoice}
+                                                        onChange={(e) => {
+                                                            setServiceChoice(
+                                                                e.target.value
+                                                            ); // Update local state
+                                                            setFieldValue(
+                                                                "serviceId",
+                                                                e.target.value
+                                                            ); // Update Formik state
+                                                        }}
+                                                        className="border p-2 w-fit  rounded-md text-sm font-semibold text-end"
+                                                    >
+                                                        <option value="">
+                                                            اختر القسم
+                                                        </option>
+                                                        {Services?.map(
+                                                            (service) => (
+                                                                <option
+                                                                    key={
+                                                                        service.id
+                                                                    }
+                                                                    value={
+                                                                        service.id
+                                                                    }
+                                                                >
+                                                                    {
+                                                                        service.Name
+                                                                    }
+                                                                </option>
+                                                            )
+                                                        )}
+                                                    </Field>
                                                 </>
                                             )}
+                                            {/* <Field
+                                                as="select"
+                                                name="serviceId"
+                                                value={serviceChoice}
+                                                onChange={(e) => {
+                                                    setServiceChoice(
+                                                        e.target.value
+                                                    ); // Update local state
+                                                    setFieldValue(
+                                                        "serviceId",
+                                                        e.target.value
+                                                    ); // Update Formik state
+                                                }}
+                                                className="border p-2 w-fit  rounded-md text-sm font-semibold text-end"
+                                            >
+                                                <option value="">
+                                                    اختر القسم
+                                                </option>
+                                                {Services?.map((service) => (
+                                                    <option
+                                                        key={service.id}
+                                                        value={service.id}
+                                                    >
+                                                        {service.Name}
+                                                    </option>
+                                                ))}
+                                            </Field> */}
                                         </div>
                                         <div>
                                             <div className=" font-semibold text-sm pb-1">

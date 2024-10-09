@@ -90,10 +90,10 @@ function Users() {
                     </div>
                 </div>
                 {filteredUsers?.length === 0 ? (
-                    <div className="flex justify-center items-center flex-col gap-6">
-                        <div className="text-center font-semibold text-sm text-gray_v pt-12  ">
-                            لا يوجد عمال
-                        </div>
+                    <div className="flex justify-center items-center flex-col gap-6 mt-12">
+                        {/* <div className="text-center font-semibold text-sm text-gray_v pt-12  ">
+                            لا يوجد عامل يطابق بحثك
+                        </div> */}
                         <Link
                             to={"/Director/Workers/Add"}
                             className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
@@ -102,7 +102,7 @@ function Users() {
                         </Link>
                     </div>
                 ) : (
-                    <table className="table-auto w-full mt-4 text-sm">
+                    <table className="table-auto w-full mt-4 text-sm text-center">
                         <thead>
                             <tr className="bg-gray_white font-normal">
                                 <th className="px-4 py-2 rounded-tl-md">
@@ -111,11 +111,9 @@ function Users() {
                                 <th className="px-4 py-2 border-l border-white">
                                     Email
                                 </th>
+                               
                                 <th className="px-4 py-2 border-l border-white">
-                                    Telephone
-                                </th>
-                                <th className="px-4 py-2 border-l border-white">
-                                    User Type
+                                    Service
                                 </th>
                                 <th className="px-4 py-2 border-l border-white">
                                     Created At
@@ -136,18 +134,9 @@ function Users() {
                                         {user?.telephone}
                                     </td>
                                     <td className="border px-4 py-2">
-                                        {user?.userType === "malad" ? (
-                                            "Malad"
-                                        ) : user?.userType === "medecin" ? (
-                                            "medecin"
-                                        ) : user?.userType === "worker" ? (
-                                            "Worker"
-                                        ) : (
-                                            <span className=" text-red-500">
-                                                not set
-                                            </span>
-                                        )}
+                                        {user?.Service?.Name}
                                     </td>
+                                   
                                     <td className="border px-4 py-2">
                                         {dayjs(user?.createdAt).format(
                                             "DD MMMM YYYY"
