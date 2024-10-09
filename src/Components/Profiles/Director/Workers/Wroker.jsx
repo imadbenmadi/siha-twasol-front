@@ -8,29 +8,31 @@ import { IoSearch } from "react-icons/io5";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useAppContext } from "../../../../AppContext";
+import { useLocation } from "react-router";
 dayjs.extend(customParseFormat);
 function Users() {
+    const location = useLocation();
     const navigate = useNavigate();
-    const [users, setUsers] = useState([]);
+    const [worker, setWorker] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
-    const [userTypeFilter, setUserTypeFilter] = useState("");
-
+    const [userTypeFilter, setWorkerTypeFilter] = useState("");
+    const workerId = location.pathname.split("/")[3];
     const { user } = useAppContext();
     useEffect(() => {
         setLoading(true);
         const fetchUsers = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Workers`,
+                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Workers/${workerId}`,
                     {
                         withCredentials: true,
                         validateStatus: () => true,
                     }
                 );
                 if (response.status === 200) {
-                    setUsers(response.data.Users);
+                    setWorker(response.data.User);
                 } else if (response.status === 401) {
                     Swal.fire("Error", "You should login again", "error");
                     navigate("/Login");
@@ -47,15 +49,6 @@ function Users() {
         fetchUsers();
     }, []);
 
-    const filteredUsers = users.filter((user) => {
-        const fullName = `${user?.firstName} ${user?.lastName}`.toLowerCase();
-        const email = user?.email.toLowerCase();
-        return (
-            fullName.includes(searchQuery.toLowerCase()) ||
-            email.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-    });
-
     if (loading) {
         return (
             <div className="w-[80vw] h-[80vh] flex flex-col items-center justify-center">
@@ -70,12 +63,12 @@ function Users() {
                 </div>
             </div>
         );
-    } else if (users.length === 0) {
+    } else if (!worker) {
         return (
             <div className="py-6 px-4">
                 <div className="flex justify-center items-center flex-col gap-6 mt-12">
-                    <div className="text-center font-semibold text-sm text-gray_v pt-12  ">
-                        لا يوجد عامل
+                    <div className="text-center font-semibold text-sm text-red-500 pt-12  ">
+                        Worker Not Found
                     </div>
                     <Link
                         to={"/Director/Workers/Add"}
@@ -89,11 +82,9 @@ function Users() {
     } else {
         return (
             <div className="py-6 px-4">
-                <div className="text-xl font-semibold  text-blue_v mb-6">
-                    العمال
-                </div>
+                <div className="text-xl font-semibold  text-blue_v">العمال</div>
                 <div
-                    className="mt-4 flex flex-col md:flex-row  mb-6 gap-4 justify-center 
+                    className="mt-4 flex flex-col md:flex-row gap-4 justify-center 
                 md:justify-between md:ml-6 md:gap-6 text-gray_v"
                 >
                     <div

@@ -268,7 +268,6 @@ function Director_Addworkers() {
                                                     </label> */}
                                                     <Field
                                                         as="select"
-                                                        id="servicechoix"
                                                         name="serviceId"
                                                         value={serviceChoice}
                                                         onChange={(e) => {
@@ -302,13 +301,6 @@ function Director_Addworkers() {
                                                             )
                                                         )}
                                                     </Field>
-                                                    <label
-                                                        htmlFor="servicechoix"
-                                                        className="block text-xs font-medium text-black_text"
-                                                    >
-                                                        اختر القسم التي ينتمي
-                                                        اليها هذا العامل{" "}
-                                                    </label>
                                                 </>
                                             )}
                                             {/* <Field
