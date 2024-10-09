@@ -7,11 +7,11 @@ import axios from "axios";
 import { IoSearch } from "react-icons/io5";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { useAppContext } from "../../../AppContext";
+import { useAppContext } from "../../../../AppContext";
 dayjs.extend(customParseFormat);
-function Users() {
+function Services() {
     const navigate = useNavigate();
-    const [users, setUsers] = useState([]);
+    const [users, setServices] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
@@ -20,17 +20,17 @@ function Users() {
     const { user } = useAppContext();
     useEffect(() => {
         setLoading(true);
-        const fetchUsers = async () => {
+        const fetchServices = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Workers`,
+                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Services`,
                     {
                         withCredentials: true,
                         validateStatus: () => true,
                     }
                 );
                 if (response.status === 200) {
-                    setUsers(response.data.Users);
+                    setServices(response.data.Services);
                 } else if (response.status === 401) {
                     Swal.fire("Error", "You should login again", "error");
                     navigate("/Login");
@@ -44,10 +44,10 @@ function Users() {
             }
         };
 
-        fetchUsers();
+        fetchServices();
     }, []);
 
-    const filteredUsers = users.filter((user) => {
+    const filteredServices = users.filter((user) => {
         const fullName = `${user?.firstName} ${user?.lastName}`.toLowerCase();
         const email = user?.email.toLowerCase();
         return (
@@ -73,7 +73,9 @@ function Users() {
     } else {
         return (
             <div className="py-6 px-4">
-                <div className="text-xl font-semibold  text-blue_v">العمال</div>
+                <div className="text-xl font-semibold  text-blue_v">
+                    الااقسام
+                </div>
                 <div className="mt-4 flex flex-col md:flex-row gap-4 justify-center md:justify-start md:ml-6 md:gap-6 text-gray_v">
                     <div
                         className="border p-2 mr-4 rounded-md flex items-center justify-between gap-2 text-sm 
@@ -82,26 +84,26 @@ function Users() {
                         <IoSearch className="w-fit shrink-0" />
                         <input
                             type="text"
-                            placeholder="ابحث عن عامل بالاسم او البريد الالكتروني"
+                            placeholder="ابحث عن القسم "
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className="w-full placeholder:text-end text-end"
                         />
                     </div>
                 </div>
-                {filteredUsers?.length === 0 ? (
-                    <div className="flex justify-center items-center flex-col gap-6">
-                        <div className="text-center font-semibold text-sm text-gray_v pt-12  ">
-                            لا يوجد عمال
-                        </div>
-                        <Link
-                            to={"/Director/Workers/Add"}
-                            className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
-                        >
-                            اضافة عامل جديد
-                        </Link>
+                {/* {filteredServices?.length === 0 ? ( */}
+                <div className="flex justify-center items-center flex-col gap-6">
+                    <div className="text-center font-semibold text-sm text-gray_v pt-12  ">
+                        لا يوجد اقسام
                     </div>
-                ) : (
+                    <Link
+                        to={"/Director/Services/Add"}
+                        className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
+                    >
+                        اضافة قسم جديد
+                    </Link>
+                </div>
+                {/* ) : (
                     <table className="table-auto w-full mt-4 text-sm">
                         <thead>
                             <tr className="bg-gray_white font-normal">
@@ -120,13 +122,13 @@ function Users() {
                                 <th className="px-4 py-2 border-l border-white">
                                     Created At
                                 </th>
-                                {/* <th className="px-4 py-2 border-l border-white rounded-tr-md">
+                                <th className="px-4 py-2 border-l border-white rounded-tr-md">
                                     Action
-                                </th> */}
+                                </th> 
                             </tr>
                         </thead>
                         <tbody className="text-xs text-center font-semibold">
-                            {filteredUsers?.map((user) => (
+                            {filteredServices?.map((user) => (
                                 <tr key={user?.id}>
                                     <td className="border px-4 py-2">{`${user.firstName} ${user.lastName}`}</td>
                                     <td className="border px-4 py-2">
@@ -158,9 +160,10 @@ function Users() {
                         </tbody>
                     </table>
                 )}
+                */}
             </div>
         );
     }
 }
 
-export default Users;
+export default Services;
