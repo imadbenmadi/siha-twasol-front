@@ -47,14 +47,14 @@ function Services() {
         fetchServices();
     }, []);
 
-    const filteredServices = users.filter((user) => {
-        const fullName = `${user?.firstName} ${user?.lastName}`.toLowerCase();
-        const email = user?.email.toLowerCase();
-        return (
-            fullName.includes(searchQuery.toLowerCase()) ||
-            email.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-    });
+    // const filteredServices = users.filter((user) => {
+    //     const fullName = `${user?.firstName} ${user?.lastName}`.toLowerCase();
+    //     const email = user?.email.toLowerCase();
+    //     return (
+    //         fullName.includes(searchQuery.toLowerCase()) ||
+    //         email.toLowerCase().includes(searchQuery.toLowerCase())
+    //     );
+    // });
 
     if (loading) {
         return (

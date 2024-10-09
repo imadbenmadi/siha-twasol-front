@@ -26,7 +26,7 @@ function Director_Addworkers() {
                     validateStatus: () => true,
                 }
             );
-            console.log(response);
+
             if (response.status == 200) {
                 Naviagte("/Director/Workers");
             } else if (response.status == 400) {
@@ -44,7 +44,7 @@ function Director_Addworkers() {
             }
         } catch (error) {
             setSubmitting(false);
-            Swal.fire("Error!", `${response.data.message} `, "error");
+            Swal.fire("Error!", "somthing went wrong", "error");
         }
 
         // setSubmitting(false);
@@ -158,11 +158,6 @@ function Director_Addworkers() {
                                     handle_add_service(values, {
                                         setSubmitting,
                                     });
-                                    Swal.fire(
-                                        "Not finished",
-                                        "this part is not finished yet",
-                                        "warning"
-                                    );
                                 }}
                             >
                                 {({ isSubmitting, setFieldValue }) => (
