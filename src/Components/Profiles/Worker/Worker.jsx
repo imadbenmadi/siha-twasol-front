@@ -23,7 +23,7 @@ function Worker() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `https://api.scs-tawassolsihi.com/Workers/${userId}/Profile`,
+                    `http://localhost:3000/Workers/${userId}/Profile`,
                     {
                         withCredentials: true,
                         validateStatus: () => true,

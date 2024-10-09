@@ -14,7 +14,7 @@ function App() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    "https://api.scs-tawassolsihi.com/Check_Auth",
+                    "http://localhost:3000/Check_Auth",
                     {
                         withCredentials: true,
                         validateStatus: () => true,

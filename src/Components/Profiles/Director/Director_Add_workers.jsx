@@ -13,7 +13,7 @@ function Director_Addworkers() {
     async function handleRegister(values, { setSubmitting }) {
         try {
             let response = await Axios.post(
-                "https://api.scs-tawassolsihi.com/Register",
+                "http://localhost:3000/Register",
                 values,
                 {
                     withCredentials: true,
@@ -62,7 +62,7 @@ function Director_Addworkers() {
         const fetch_services = async () => {
             try {
                 const response = await axios.get(
-                    `https://api.scs-tawassolsihi.com/Directors/${user.id}/${user.companyId}/Services`,
+                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Services`,
                     {
                         withCredentials: true,
                         validateStatus: () => true,

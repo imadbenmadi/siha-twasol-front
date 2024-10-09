@@ -23,7 +23,7 @@ function Medecin() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `https://api.scs-tawassolsihi.com/Medecins/${userId}/Profile`,
+                    `http://localhost:3000/Medecins/${userId}/Profile`,
                     {
                         withCredentials: true,
                         validateStatus: () => true,
