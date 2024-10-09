@@ -26,6 +26,7 @@ function Director_Addworkers() {
                     validateStatus: () => true,
                 }
             );
+            console.log(response);
             if (response.status == 200) {
                 Naviagte("/Director/Workers");
             } else if (response.status == 400) {
@@ -36,22 +37,14 @@ function Director_Addworkers() {
                 Swal.fire("Error!", `${response.data.message} `, "error");
             } else if (response.status == 500) {
                 setSubmitting(false);
-                Swal.fire("Error!", `Internal Server Error   `, "error");
+                Swal.fire("Error!", `${response.data.message} `, "error");
             } else {
                 setSubmitting(false);
-                Swal.fire(
-                    "Error!",
-                    `Something Went Wrong ,please trye again latter, ${response.data.message} `,
-                    "error"
-                );
+                Swal.fire("Error!", ` ${response.data.message} `, "error");
             }
         } catch (error) {
             setSubmitting(false);
-            Swal.fire(
-                "Error!",
-                `Something Went Wrong ,please trye again latter`,
-                "error"
-            );
+            Swal.fire("Error!", `${response.data.message} `, "error");
         }
 
         // setSubmitting(false);
