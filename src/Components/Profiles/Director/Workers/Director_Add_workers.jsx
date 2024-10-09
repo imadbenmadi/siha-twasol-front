@@ -10,10 +10,16 @@ import { useEffect } from "react";
 import axios from "axios";
 function Director_Addworkers() {
     const Naviagte = useNavigate();
-    async function handleRegister(values, { setSubmitting }) {
+    const [loading, setLoading] = useState(false);
+    const [Services, setServices] = useState([]);
+    const [serviceChoice, setServiceChoice] = useState("");
+    const [error, setError] = useState(false);
+
+    const { user } = useAppContext();
+    async function handle_add_service(values, { setSubmitting }) {
         try {
             let response = await Axios.post(
-                "http://localhost:3000/Register",
+                `http://localhost:3000/Directors/${user.id}/${user.companyId}/Workers`,
                 values,
                 {
                     withCredentials: true,
@@ -51,12 +57,6 @@ function Director_Addworkers() {
         // setSubmitting(false);
     }
 
-    const [loading, setLoading] = useState(false);
-    const [Services, setServices] = useState([]);
-    const [serviceChoice, setServiceChoice] = useState("");
-    const [error, setError] = useState(false);
-
-    const { user } = useAppContext();
     useEffect(() => {
         setLoading(true);
         const fetch_services = async () => {
@@ -162,7 +162,9 @@ function Director_Addworkers() {
                                     return errors;
                                 }}
                                 onSubmit={(values, { setSubmitting }) => {
-                                    // handleRegister(values, { setSubmitting });
+                                    handle_add_service(values, {
+                                        setSubmitting,
+                                    });
                                     Swal.fire(
                                         "Not finished",
                                         "this part is not finished yet",
@@ -340,7 +342,6 @@ function Director_Addworkers() {
         );
     }
 }
-
 const errorInputMessage = {
     fontSize: "12px",
     color: "red",
