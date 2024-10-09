@@ -9,26 +9,28 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useAppContext } from "../../../../AppContext";
 dayjs.extend(customParseFormat);
-function Director_workers() {
+function Doctores() {
     const navigate = useNavigate();
-    const [users, setUsers] = useState([]);
+    const [users, setDoctores] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
+    const [userTypeFilter, setUserTypeFilter] = useState("");
+
     const { user } = useAppContext();
     useEffect(() => {
         setLoading(true);
-        const fetch_workers = async () => {
+        const fetchDoctores = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Workers`,
+                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Doctores`,
                     {
                         withCredentials: true,
                         validateStatus: () => true,
                     }
                 );
                 if (response.status === 200) {
-                    setUsers(response.data.Users);
+                    setDoctores(response.data.Doctores);
                 } else if (response.status === 401) {
                     Swal.fire("Error", "You should login again", "error");
                     navigate("/Login");
@@ -42,10 +44,10 @@ function Director_workers() {
             }
         };
 
-        fetch_workers();
+        fetchDoctores();
     }, []);
 
-    const filteredUsers = users.filter((user) => {
+    const filteredDoctores = users.filter((user) => {
         const fullName = `${user?.firstName} ${user?.lastName}`.toLowerCase();
         const email = user?.email.toLowerCase();
         return (
@@ -73,52 +75,49 @@ function Director_workers() {
             <div className="py-6 px-4">
                 <div className="flex justify-center items-center flex-col gap-6 mt-12">
                     <div className="text-center font-semibold text-sm text-gray_v pt-12  ">
-                        لا يوجد عامل
+                        لا يوجد اطباء
                     </div>
                     <Link
                         to={"/Director/Workers/Add"}
                         className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
                     >
-                        اضافة عامل جديد
+                        اضافة طبيب جديد
                     </Link>
                 </div>
             </div>
         );
     } else {
         return (
-            <div className="py-6 px-1 md:px-4">
-                <div className="text-xl font-semibold  text-blue_v mb-6">
-                    العمال
+            <div className="py-6 px-4">
+                <div className="text-xl font-semibold  text-blue_v">
+                    الاطباء
                 </div>
-                <div
-                    className="mt-4 flex flex-col md:flex-row  mb-6 gap-4 justify-center 
-                md:justify-start md:ml-6 md:gap-6 text-gray_v"
-                >
+                <div className="mt-4 flex flex-col md:flex-row gap-4 justify-center md:justify-start md:ml-6 md:gap-6 text-gray_v">
                     <div
                         className="border p-2 mr-4 rounded-md flex items-center justify-between gap-2 text-sm 
                     font-semibold min-w-[300px]"
                     >
-                        <IoSearch className="w-fit md:shrink-0 " />
+                        <IoSearch className="w-fit shrink-0" />
                         <input
                             type="text"
-                            placeholder="ابحث عن عامل بالاسم او البريد الالكتروني"
+                            placeholder="ابحث عن الطبيب بالاسم او البريد الالكتروني"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             className="w-full placeholder:text-end text-end"
                         />
                     </div>
                     <Link
-                        to={"/Director/Workers/Add"}
-                        className=" py-2 px-4 rounded text-center bg-blue_v text-white cursor-pointer font-semibold text-sm"
+                        to={"/Director/Doctores/Add"}
+                        className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
                     >
-                        اضافة عامل جديد
+                        اضافة طبيب جديد
                     </Link>
                 </div>
                 <div className=" overflow-auto">
                     {filteredUsers?.length === 0 ? (
                         <div className="flex justify-center items-center flex-col gap-6 mt-12">
                             <div className="text-center font-semibold text-sm text-gray_v pt-12  ">
-                                لا يوجد عامل يطابق بحثك
+                                لا يوجد طبيب يطابق بحثك
                             </div>
                         </div>
                     ) : (
@@ -145,25 +144,25 @@ function Director_workers() {
                                 </tr>
                             </thead>
                             <tbody className="text-xs text-center font-semibold">
-                                {filteredUsers?.map((worker_item) => (
-                                    <tr key={worker_item?.id}>
-                                        <td className="border px-4 py-2">{`${worker_item.firstName} ${worker_item.lastName}`}</td>
+                                {filteredUsers?.map((doctore_item) => (
+                                    <tr key={doctore_item?.id}>
+                                        <td className="border px-4 py-2">{`${doctore_item.firstName} ${doctore_item.lastName}`}</td>
                                         <td className="border px-4 py-2">
-                                            {worker_item?.email}
+                                            {doctore_item?.email}
                                         </td>
 
                                         <td className="border px-4 py-2">
-                                            {worker_item?.Service?.Name}
+                                            {doctore_item?.Service?.Name}
                                         </td>
 
                                         <td className="border px-4 py-2">
                                             {dayjs(
-                                                worker_item?.createdAt
+                                                doctore_item?.createdAt
                                             ).format("DD MMMM YYYY")}
                                         </td>
                                         <td className="border px-4 py-2">
                                             <Link
-                                                to={`/Director/Workers/${worker_item.id}`}
+                                                to={`/Director/Doctores/${doctore_item.id}`}
                                                 className="bg-blue_v text-white px-4 py-1 rounded-md "
                                             >
                                                 تفاصيل
@@ -180,4 +179,4 @@ function Director_workers() {
     }
 }
 
-export default Director_workers;
+export default Doctores;

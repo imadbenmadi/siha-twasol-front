@@ -32,7 +32,7 @@ import Director_Services_edit from "./Components/Profiles/Director/Services/Edit
 
 import Director_Blogs from "./Components/Profiles/Director/Director_Blogs.jsx";
 import Director_Events from "./Components/Profiles/Director/Director_Events.jsx";
-import Director_Medecins from "./Components/Profiles/Director/Director_Medecins.jsx";
+import Director_Medecins from "./Components/Profiles/Director/Doctores/Director_Doctores.jsx";
 const routes = createBrowserRouter([
     {
         path: "/",
