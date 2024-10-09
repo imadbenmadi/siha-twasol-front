@@ -20,8 +20,8 @@ function Director_Addworkers() {
     const { user } = useAppContext();
     async function handle_add_service(values, { setSubmitting }) {
         try {
-            let response = await Axios.post(
-                `http://localhost:3000/Directors/${user.id}/${user.companyId}/Services`,
+            let response = await Axios.put(
+                `http://localhost:3000/Directors/${user.id}/${user.companyId}/Services/${serviceId}`,
                 values,
                 {
                     withCredentials: true,
@@ -70,9 +70,8 @@ function Director_Addworkers() {
                         validateStatus: () => true,
                     }
                 );
-
                 if (response.status === 200) {
-                    setService(response.data.User);
+                    setService(response.data.Service);
                 } else if (response.status === 401) {
                     Swal.fire("خطأ", "يجب عليك تسجيل الدخول مرة أخرى", "error");
                     Naviagte("/Login");
@@ -110,7 +109,7 @@ function Director_Addworkers() {
                 </div>
                 <Link to={"/Director/Services"}>
                     <button className="bg-blue_v py-2 px-4 mx-auto mt-4 rounded-2xl text-white font-semibold w-fit">
-                        الرجوع إلى القائمة 
+                        الرجوع إلى القائمة
                     </button>
                 </Link>
             </div>
@@ -130,7 +129,7 @@ function Director_Addworkers() {
                             <Formik
                                 initialValues={{
                                     // userType: userType_value,
-                                    Name: "",
+                                    Name: service?.Name || "",
                                     companyId: user?.companyId,
                                 }}
                                 validate={(values) => {
