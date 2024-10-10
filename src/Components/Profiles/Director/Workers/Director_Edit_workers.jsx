@@ -141,7 +141,7 @@ function Director_Addworkers() {
                     <div className=" w-[80%] text-black">
                         <div className=" pb-4 pt-24 md:pt-0 ">
                             <div className=" text-3xl font-semibold ">
-                                صفحة اضافة عمال جدد
+                                صفحة تعديل بيانات العامل
                             </div>
                         </div>
 

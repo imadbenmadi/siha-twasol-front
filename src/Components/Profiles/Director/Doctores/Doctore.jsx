@@ -60,7 +60,7 @@ function Doctore() {
             confirmButtonText: "نعم، احذفه!",
         }).then(async (result) => {
             if (result.isConfirmed) {
-                Swal.fire("تم الحذف!", "تم حذف العامل بنجاح.", "success");
+                Swal.fire("تم الحذف!", "تم حذف الطبيب بنجاح.", "success");
                 setDeleteLoading(true);
                 await axios
                     .delete(
@@ -106,13 +106,13 @@ function Doctore() {
             <div className="py-6 px-4">
                 <div className="flex justify-center items-center flex-col gap-6 mt-12">
                     <div className="text-center font-semibold text-sm text-red-500 pt-12">
-                        لم يتم العثور على العامل
+                        لم يتم العثور على الطبيب
                     </div>
                     <Link
                         to={"/Director/Doctores"}
                         className="py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
                     >
-                        الرجوع إلى قائمة العمال
+                        الرجوع إلى قائمة الاطباء
                     </Link>
                 </div>
             </div>
@@ -121,7 +121,7 @@ function Doctore() {
         return (
             <div className="py-6 px-4">
                 <div className="text-xl font-semibold text-blue_v mb-6 text-center">
-                    معلومات العامل
+                    معلومات الطبيب
                 </div>
                 <div className="border p-6 rounded-lg bg-gray-50 shadow-lg max-w-3xl mx-auto">
                     <div className="mb-4">
