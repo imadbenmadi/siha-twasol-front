@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-
 import Swal from "sweetalert2";
 import axios from "axios";
 import { IoSearch } from "react-icons/io5";
@@ -9,6 +8,7 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useAppContext } from "../../../../AppContext";
 dayjs.extend(customParseFormat);
+
 function Doctores() {
     const navigate = useNavigate();
     const [users, setDoctores] = useState([]);
@@ -18,6 +18,7 @@ function Doctores() {
     const [userTypeFilter, setUserTypeFilter] = useState("");
 
     const { user } = useAppContext();
+
     useEffect(() => {
         setLoading(true);
         const fetchDoctores = async () => {
@@ -74,7 +75,7 @@ function Doctores() {
         return (
             <div className="py-6 px-4">
                 <div className="flex justify-center items-center flex-col gap-6 mt-12">
-                    <div className="text-center font-semibold text-sm text-gray_v pt-12  ">
+                    <div className="text-center font-semibold text-sm text-gray_v pt-12">
                         لا يوجد اطباء
                     </div>
                     <Link
@@ -89,14 +90,9 @@ function Doctores() {
     } else {
         return (
             <div className="py-6 px-4">
-                <div className="text-xl font-semibold  text-blue_v">
-                    الاطباء
-                </div>
+                <div className="text-xl font-semibold text-blue_v">الاطباء</div>
                 <div className="mt-4 flex flex-col md:flex-row gap-4 justify-center md:justify-start md:ml-6 md:gap-6 text-gray_v">
-                    <div
-                        className="border p-2 mr-4 rounded-md flex items-center justify-between gap-2 text-sm 
-                    font-semibold min-w-[300px]"
-                    >
+                    <div className="border p-2 mr-4 rounded-md flex items-center justify-between gap-2 text-sm font-semibold min-w-[300px]">
                         <IoSearch className="w-fit shrink-0" />
                         <input
                             type="text"
@@ -114,9 +110,9 @@ function Doctores() {
                     </Link>
                 </div>
                 <div className=" overflow-auto">
-                    {filteredUsers?.length === 0 ? (
+                    {filteredDoctores?.length === 0 ? (
                         <div className="flex justify-center items-center flex-col gap-6 mt-12">
-                            <div className="text-center font-semibold text-sm text-gray_v pt-12  ">
+                            <div className="text-center font-semibold text-sm text-gray_v pt-12">
                                 لا يوجد طبيب يطابق بحثك
                             </div>
                         </div>
@@ -130,7 +126,12 @@ function Doctores() {
                                     <th className="px-4 py-2 border-l border-white">
                                         البريد الإلكتروني
                                     </th>
-
+                                    <th className="px-4 py-2 border-l border-white">
+                                        التخصص
+                                    </th>
+                                    <th className="px-4 py-2 border-l border-white">
+                                        الهاتف
+                                    </th>
                                     <th className="px-4 py-2 border-l border-white">
                                         القسم
                                     </th>
@@ -138,23 +139,24 @@ function Doctores() {
                                         تاريخ الإنشاء
                                     </th>
                                     <th className="px-4 py-2 border-l border-white"></th>
-                                    {/* <th className="px-4 py-2 border-l border-white rounded-tr-md">
-                                    Action
-                                </th> */}
                                 </tr>
                             </thead>
                             <tbody className="text-xs text-center font-semibold">
-                                {filteredUsers?.map((doctore_item) => (
+                                {filteredDoctores?.map((doctore_item) => (
                                     <tr key={doctore_item?.id}>
                                         <td className="border px-4 py-2">{`${doctore_item.firstName} ${doctore_item.lastName}`}</td>
                                         <td className="border px-4 py-2">
                                             {doctore_item?.email}
                                         </td>
-
+                                        <td className="border px-4 py-2">
+                                            {doctore_item?.speciality}
+                                        </td>
+                                        <td className="border px-4 py-2">
+                                            {doctore_item?.telephone}
+                                        </td>
                                         <td className="border px-4 py-2">
                                             {doctore_item?.Service?.Name}
                                         </td>
-
                                         <td className="border px-4 py-2">
                                             {dayjs(
                                                 doctore_item?.createdAt
