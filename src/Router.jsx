@@ -30,9 +30,13 @@ import Director_Services from "./Components/Profiles/Director/Services/Director_
 import Director_Services_add from "./Components/Profiles/Director/Services/Director_Add_service.jsx";
 import Director_Services_edit from "./Components/Profiles/Director/Services/Edit_Service.jsx";
 
+import Director_Medecins from "./Components/Profiles/Director/Doctores/Director_Midcens.jsx";
+import Director_Medecins_add from "./Components/Profiles/Director/Doctores/Add_doctore.jsx";
+import Director_doctore from "./Components/Profiles/Director/Doctores/Doctore.jsx";
+import Director_Edit_doctore from "./Components/Profiles/Director/Doctores/Edit_doctore.jsx";
+
 import Director_Blogs from "./Components/Profiles/Director/Director_Blogs.jsx";
 import Director_Events from "./Components/Profiles/Director/Director_Events.jsx";
-import Director_Medecins from "./Components/Profiles/Director/Doctores/Director_Doctores.jsx";
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -100,6 +104,28 @@ const routes = createBrowserRouter([
                         element: <Director_Edit_Worker />,
                         errorElement: <ErrorElement />,
                     },
+                    // ______________________________________________________
+                    {
+                        path: "/Director/Doctores",
+                        element: <Director_Medecins />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Doctores/Add",
+                        element: <Director_Medecins_add />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Doctores/:id",
+                        element: <Director_doctore />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Doctores/:id/Edit",
+                        element: <Director_Edit_doctore />,
+                        errorElement: <ErrorElement />,
+                    },
+                    // ______________________________________________________
                     {
                         path: "/Director/Blogs",
                         element: <Director_Blogs />,
@@ -110,6 +136,7 @@ const routes = createBrowserRouter([
                         element: <Not_Finished />,
                         errorElement: <ErrorElement />,
                     },
+                    // ______________________________________________________
                     {
                         path: "/Director/Events",
                         element: <Director_Events />,
@@ -120,16 +147,7 @@ const routes = createBrowserRouter([
                         element: <Not_Finished />,
                         errorElement: <ErrorElement />,
                     },
-                    {
-                        path: "/Director/Doctores",
-                        element: <Director_Medecins />,
-                        errorElement: <ErrorElement />,
-                    },
-                    {
-                        path: "/Director/Doctores/Add",
-                        element: <Not_Finished />,
-                        errorElement: <ErrorElement />,
-                    },
+                    // ______________________________________________________
                     {
                         path: "/Director/Services",
                         element: <Director_Services />,

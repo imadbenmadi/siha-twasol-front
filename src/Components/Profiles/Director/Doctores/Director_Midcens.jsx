@@ -30,7 +30,7 @@ function Doctores() {
                     }
                 );
                 if (response.status === 200) {
-                    setDoctores(response.data.Doctores);
+                    setDoctores(response.data.Users);
                 } else if (response.status === 401) {
                     Swal.fire("Error", "You should login again", "error");
                     navigate("/Login");
@@ -78,7 +78,7 @@ function Doctores() {
                         لا يوجد اطباء
                     </div>
                     <Link
-                        to={"/Director/Workers/Add"}
+                        to={"/Director/Doctores/Add"}
                         className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
                     >
                         اضافة طبيب جديد
