@@ -24,7 +24,7 @@ function Director_Addevents() {
     async function handle_edit_service(values, { setSubmitting }) {
         try {
             let response = await Axios.put(
-                `http://localhost:3000/Directors/${user.id}/${user.companyId}/Eventss/${eventId}`,
+                `http://localhost:3000/Directors/${user.id}/${user.companyId}/Events/${eventId}`,
                 values,
                 {
                     withCredentials: true,
@@ -33,7 +33,7 @@ function Director_Addevents() {
             );
 
             if (response.status == 200) {
-                Naviagte(`/Director/Eventss/${eventId}`);
+                Naviagte(`/Director/Events/${eventId}`);
             } else if (response.status == 400) {
                 setSubmitting(false);
                 Swal.fire("Error", `${response.data.message} `, "error");
@@ -60,19 +60,18 @@ function Director_Addevents() {
         const fetchEvents = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Eventss/${eventId}`,
+                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Events/${eventId}`,
                     {
                         withCredentials: true,
                         validateStatus: () => true,
                     }
                 );
-
                 if (response.status === 200) {
                     setEvents(response.data.User);
                     setServiceChoice(response.data.User.Service.id);
                 } else if (response.status === 401) {
                     Swal.fire("خطأ", "يجب عليك تسجيل الدخول مرة أخرى", "error");
-                    navigate("/Login");
+                    Naviagte("/Login");
                 } else {
                     setError(response.data);
                 }
@@ -105,8 +104,10 @@ function Director_Addevents() {
                 setLoading(false);
             }
         };
-        fetchEvents().then(fetch_services());
+        fetchEvents();
+        fetch_services();
     }, []);
+
     if (loading) {
         return (
             <div className="w-[80vw] h-[80vh] flex flex-col items-center justify-center">
@@ -127,7 +128,7 @@ function Director_Addevents() {
                 <div className="text-red-600 font-semibold">
                     لم يتم العثور على العامل
                 </div>
-                <Link to={"/Director/Eventss"}>
+                <Link to={"/Director/Events"}>
                     <button className="bg-blue_v py-2 px-4 mx-auto mt-4 rounded-2xl text-white font-semibold w-fit">
                         الرجوع إلى القائمة
                     </button>
