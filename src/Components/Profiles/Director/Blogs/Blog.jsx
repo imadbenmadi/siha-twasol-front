@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useAppContext } from "../../../../AppContext";
 import { useLocation } from "react-router";
+import { FaRegImage } from "react-icons/fa";
 
 dayjs.extend(customParseFormat);
 
@@ -136,11 +137,15 @@ function Blog() {
             <div className="max-w-3xl mx-auto border rounded-lg shadow-lg overflow-hidden bg-white">
                 {/* Blog Image */}
                 <div className="w-full h-64 bg-gray-300 flex items-center justify-center">
-                    <img
-                        src="https://via.placeholder.com/600x400" // Placeholder image
-                        alt="Blog Image"
-                        className="w-full h-full object-cover"
-                    />
+                    {blog.image_link ? (
+                        <img
+                            src={blog.image_link}
+                            alt="Blog Image"
+                            className="w-full h-full object-cover"
+                        />
+                    ) : (
+                        <FaRegImage className="text-6xl text-gray-400" />
+                    )}
                 </div>
 
                 {/* Blog Content */}
@@ -182,7 +187,6 @@ function Blog() {
                 {/* Footer with Edit and Delete buttons */}
                 <div className="flex justify-between items-center p-6 border-t bg-gray-50">
                     <div className="text-gray-500 text-sm">
-                        <p>القسم: {blog.Service?.Name || "غير محدد"}</p>
                         <p>المؤسسة: {blog.Company?.Name || "غير محدد"}</p>
                     </div>
                     <div className="flex gap-4">
