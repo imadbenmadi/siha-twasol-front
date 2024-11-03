@@ -4,7 +4,7 @@ import { useEffect } from "react";
 function Worker_Default() {
     const Navigate = useNavigate();
     useEffect(() => {
-        Navigate("/Worker/Workers");
+        Navigate("/Worker/Profile");
     }, []);
 }
 

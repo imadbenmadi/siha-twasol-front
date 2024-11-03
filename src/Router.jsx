@@ -47,9 +47,10 @@ import Director_Edit_Events from "./Components/Profiles/Director/Events/Director
 // ______________________________________________________
 
 import Worker_blog from "./Components/Profiles/Worker/Blogs/Blog.jsx";
-import Worker_blogs from "./Components/Profiles/Worker/Blogs/";
+import Worker_Blogs from "./Components/Profiles/Worker/Blogs/Worker_Blogs.jsx";
+import Worker_Add_Blogs from "./Components/Profiles/Worker/Blogs/Worker_Add_Blogs.jsx";
+import Worker_Edit_Blogs from "./Components/Profiles/Worker/Blogs/Worker_Edit_Blogs.jsx";
 
-    
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -206,6 +207,26 @@ const routes = createBrowserRouter([
                     {
                         index: true,
                         element: <Worker_default />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Worker/Blogs",
+                        element: <Worker_Blogs />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Worker/Blogs/Add",
+                        element: <Worker_Add_Blogs />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Worker/Blogs/:id",
+                        element: <Worker_blog />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Worker/Blogs/:id/Edit",
+                        element: <Worker_Edit_Blogs />,
                         errorElement: <ErrorElement />,
                     },
                 ],
