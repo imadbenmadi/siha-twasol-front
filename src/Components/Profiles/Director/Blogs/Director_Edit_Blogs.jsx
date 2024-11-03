@@ -12,82 +12,87 @@ function EditBlog() {
     const { user } = useAppContext();
 
     const [loading, setLoading] = useState(false);
-    const [services, setServices] = useState([]);
-    const [serviceChoice, setServiceChoice] = useState("");
     const [error, setError] = useState(null);
     const [blog, setBlog] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
 
     useEffect(() => {
         setLoading(true);
 
-        const fetchBlogAndServices = async () => {
+        const fetchBlog = async () => {
             try {
                 const blogResponse = await axios.get(
                     `http://localhost:3000/Directors/${user.id}/${user.companyId}/Blogs/${blogId}`,
                     { withCredentials: true, validateStatus: () => true }
                 );
-                
-                console.log(blogResponse);
-                
+
                 if (blogResponse.status === 200) {
-                    setBlog(blogResponse.data.User);
-                    setServiceChoice(blogResponse.data.User.Service?.id || "");
+                    setBlog(blogResponse.data.blog);
+                    setImagePreview(
+                        blogResponse.data.blog.image_link
+                            ? `http://localhost:3000${blogResponse.data.blog.image_link}`
+                            : null
+                    );
                 } else if (blogResponse.status === 401) {
-                    Swal.fire("Error", "Please log in again", "error");
+                    Swal.fire("خطأ", "يرجى تسجيل الدخول مرة أخرى", "error");
                     navigate("/Login");
                 } else {
                     setError(blogResponse.data.message);
                 }
-
-                const servicesResponse = await axios.get(
-                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Services`,
-                    { withCredentials: true }
-                );
-
-                if (servicesResponse.status === 200) {
-                    setServices(servicesResponse.data.Services);
-                } else if (servicesResponse.status === 401) {
-                    Swal.fire("Error", "Please log in again", "error");
-                    navigate("/Login");
-                } else {
-                    setError(servicesResponse.data.message);
-                }
             } catch (fetchError) {
-                setError("Failed to fetch data. Please try again.");
+                setError("فشل في جلب البيانات. حاول مرة أخرى.");
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchBlogAndServices();
+        fetchBlog();
     }, [user.id, user.companyId, blogId, navigate]);
 
     const handleEditBlog = async (values, { setSubmitting }) => {
+        const formData = new FormData();
+        formData.append("Title", values.Title);
+        formData.append("Description", values.Description);
+        formData.append("ownerId", user.id);
+        formData.append("ownerType", "Director");
+        formData.append("companyId", user.companyId);
+
+        if (values.image) {
+            formData.append("image", values.image);
+        }
+
         try {
             const response = await axios.put(
                 `http://localhost:3000/Directors/${user.id}/${user.companyId}/Blogs/${blogId}`,
-                values,
-                { withCredentials: true }
+                formData,
+                {
+                    withCredentials: true,
+                    headers: { "Content-Type": "multipart/form-data" },
+                    validateStatus: () => true,
+                }
             );
-
+            console.log(response);
+            
             if (response.status === 200) {
-                Swal.fire("Success", "Blog updated successfully", "success");
+                Swal.fire("نجاح", "تم تحديث المقال بنجاح", "success");
                 navigate(`/Director/Blogs/${blogId}`);
             } else {
-                Swal.fire(
-                    "Error",
-                    response.data.message || "An error occurred",
-                    "error"
-                );
+                Swal.fire("خطأ", response.data.message || "حدث خطأ", "error");
             }
         } catch (error) {
-            Swal.fire(
-                "Error",
-                "Something went wrong. Please try again.",
-                "error"
-            );
+            Swal.fire("خطأ", "حدث خطأ. حاول مرة أخرى.", "error");
         } finally {
             setSubmitting(false);
+        }
+    };
+
+    const handleImageChange = (e, setFieldValue) => {
+        const file = e.target.files[0];
+        if (file) {
+            setFieldValue("image", file);
+            const reader = new FileReader();
+            reader.onloadend = () => setImagePreview(reader.result);
+            reader.readAsDataURL(file);
         }
     };
 
@@ -110,10 +115,12 @@ function EditBlog() {
     if (!blog) {
         return (
             <div className="w-[80vw] h-screen flex items-center justify-center">
-                <div className="text-red-600 font-semibold">Blog not found</div>
+                <div className="text-red-600 font-semibold">
+                    لم يتم العثور على المقال
+                </div>
                 <Link to="/Director/Blogs">
                     <button className="bg-blue_v py-2 px-4 mt-4 rounded-2xl text-white font-semibold">
-                        Return to Blog List
+                        العودة إلى قائمة المقالات
                     </button>
                 </Link>
             </div>
@@ -124,42 +131,34 @@ function EditBlog() {
         <div className="flex text-right">
             <div className="w-full overflow-y-auto py-12 bg-white flex flex-col items-center justify-center">
                 <div className="w-[80%] text-black">
-                    <h2 className="text-3xl font-semibold mb-6">Edit Blog</h2>
+                    <h2 className="text-3xl font-semibold mb-6">
+                        تعديل المقال
+                    </h2>
                     <Formik
                         initialValues={{
                             Title: blog.Title || "",
                             Description: blog.Description || "",
-                            ownerId: blog.ownerId || user.id,
-                            ownerType: blog.ownerType || "Director", // Assuming ownerType is "Director"; adjust if necessary
-                            companyId: blog.companyId || user.companyId,
-                            serviceId: blog.Service?.id || "",
+                            image: null,
                         }}
                         validate={(values) => {
                             const errors = {};
-                            if (!values.Title)
-                                errors.Title = "Title is required";
-                            if (!values.ownerId)
-                                errors.ownerId = "Owner ID is required";
-                            if (!values.ownerType)
-                                errors.ownerType = "Owner Type is required";
-                            if (!values.companyId)
-                                errors.companyId = "Company ID is required";
+                            if (!values.Title) errors.Title = "العنوان مطلوب";
+                            if (!values.Description)
+                                errors.Description = "الوصف مطلوب";
                             return errors;
                         }}
-                        onSubmit={(values, { setSubmitting }) => {
-                            handleEditBlog(values, { setSubmitting });
-                        }}
+                        onSubmit={handleEditBlog}
                     >
                         {({ isSubmitting, setFieldValue }) => (
                             <Form className="flex flex-col gap-4">
                                 <div>
                                     <label className="font-semibold text-sm">
-                                        Title
+                                        العنوان
                                     </label>
                                     <Field
                                         type="text"
                                         name="Title"
-                                        placeholder="Blog Title"
+                                        placeholder="أدخل عنوان المقال"
                                         disabled={isSubmitting}
                                         className="w-full border px-4 py-2 rounded-lg text-sm"
                                     />
@@ -169,14 +168,15 @@ function EditBlog() {
                                         style={errorInputMessage}
                                     />
                                 </div>
+
                                 <div>
                                     <label className="font-semibold text-sm">
-                                        Description
+                                        الوصف
                                     </label>
                                     <Field
                                         as="textarea"
                                         name="Description"
-                                        placeholder="Blog Description"
+                                        placeholder="أدخل وصف المقال"
                                         disabled={isSubmitting}
                                         className="w-full border px-4 py-2 rounded-lg text-sm"
                                     />
@@ -186,57 +186,40 @@ function EditBlog() {
                                         style={errorInputMessage}
                                     />
                                 </div>
-                                <div className="flex gap-4 items-center">
-                                    {services.length === 0 ? (
-                                        <div className="text-center">
-                                            <Link
-                                                to="/Director/Services/Add"
-                                                className="bg-blue_v text-white px-4 py-2 rounded-lg"
-                                            >
-                                                Add Service
-                                            </Link>
-                                            <p className="text-gray_v mt-2">
-                                                No services available
-                                            </p>
-                                        </div>
+
+                                <div className="flex flex-col gap-2">
+                                    <label className="font-semibold text-sm">
+                                        الصورة
+                                    </label>
+                                    {imagePreview ? (
+                                        <img
+                                            src={imagePreview}
+                                            alt="معاينة الصورة"
+                                            className="w-fit h-48 object-cover rounded-lg shadow-md mb-4"
+                                        />
                                     ) : (
-                                        <Field
-                                            as="select"
-                                            name="serviceId"
-                                            value={serviceChoice}
-                                            onChange={(e) => {
-                                                setServiceChoice(
-                                                    e.target.value
-                                                );
-                                                setFieldValue(
-                                                    "serviceId",
-                                                    e.target.value
-                                                );
-                                            }}
-                                            className="border p-2 rounded-md text-sm"
-                                        >
-                                            <option value="">
-                                                Select Service
-                                            </option>
-                                            {services.map((service) => (
-                                                <option
-                                                    key={service.id}
-                                                    value={service.id}
-                                                >
-                                                    {service.Name}
-                                                </option>
-                                            ))}
-                                        </Field>
+                                        <p className="text-gray-500 text-sm">
+                                            لم يتم اختيار صورة
+                                        </p>
                                     )}
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={(e) =>
+                                            handleImageChange(e, setFieldValue)
+                                        }
+                                        className="w-full border px-4 py-2 rounded-lg text-sm"
+                                    />
                                 </div>
+
                                 <button
                                     type="submit"
                                     className="bg-blue_v py-2 mt-4 rounded-2xl text-white font-semibold"
                                     disabled={isSubmitting}
                                 >
                                     {isSubmitting
-                                        ? "Updating..."
-                                        : "Update Blog"}
+                                        ? "جارٍ التحديث..."
+                                        : "تحديث المقال"}
                                 </button>
                             </Form>
                         )}

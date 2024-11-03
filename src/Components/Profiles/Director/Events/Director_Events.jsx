@@ -10,12 +10,13 @@ import { useAppContext } from "../../../../AppContext";
 
 dayjs.extend(customParseFormat);
 
-function Director_events() {
+function Events() {
     const navigate = useNavigate();
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
+
     const { user } = useAppContext();
 
     useEffect(() => {
@@ -30,135 +31,140 @@ function Director_events() {
                     }
                 );
                 if (response.status === 200) {
-                    setEvents(response.data.Events);
+                    setEvents(response.data.events || []);
                 } else if (response.status === 401) {
-                    Swal.fire("Error", "You should log in again", "error");
+                    Swal.fire("خطأ", "يجب عليك تسجيل الدخول مرة أخرى", "error");
                     navigate("/Login");
                 } else {
-                    setError(response.data);
+                    setError(response.data.message || "حدث خطأ ما.");
                 }
             } catch (error) {
-                setError(error);
+                setError("فشل في جلب الأحداث. يرجى المحاولة مرة أخرى لاحقًا.");
             } finally {
                 setLoading(false);
             }
         };
 
         fetchEvents();
-    }, []);
+    }, [navigate, user.id, user.companyId]);
 
-    const filteredEvents = events.filter((event) =>
-        event?.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const filteredEvents = events.filter((event) => {
+        const title = event?.Title.toLowerCase();
+        const description = event?.Description?.toLowerCase() || "";
+        return (
+            title.includes(searchQuery.toLowerCase()) ||
+            description.includes(searchQuery.toLowerCase())
+        );
+    });
 
     if (loading) {
         return (
-            <div className="w-[80vw] h-[80vh] flex flex-col items-center justify-center">
+            <div className="w-[80vw] h-[80vh] flex items-center justify-center">
                 <span className="loader"></span>
             </div>
         );
-    } else if (error) {
+    }
+
+    if (error) {
         return (
             <div className="w-[80vw] h-screen flex items-center justify-center">
-                <div className="text-red-600 font-semibold">
-                    {error.message}
-                </div>
+                <div className="text-red-600 font-semibold">{error}</div>
             </div>
         );
-    } else if (!events || events.length === 0) {
+    }
+
+    if (!events || events.length === 0) {
         return (
             <div className="py-6 px-4">
                 <div className="flex justify-center items-center flex-col gap-6 mt-12">
                     <div className="text-center font-semibold text-sm text-gray_v pt-12">
-                        No events found
+                        لا توجد أحداث متاحة
                     </div>
                     <Link
-                        to={"/Director/Events/Add"}
-                        className="py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
+                        to="/Director/Events/Add"
+                        className="py-2 px-4 rounded bg-blue_v text-white font-semibold text-sm"
                     >
-                        Add New Event
+                        إضافة حدث جديد
                     </Link>
-                </div>
-            </div>
-        );
-    } else {
-        return (
-            <div className="py-6 px-1 md:px-4">
-                <div className="text-xl font-semibold text-blue_v mb-6">
-                    Events
-                </div>
-                <div className="mt-4 flex flex-col md:flex-row mb-6 gap-4 justify-center md:justify-start md:ml-6 md:gap-6 text-gray_v">
-                    <div className="border p-2 mr-4 rounded-md flex items-center justify-between gap-2 text-sm font-semibold min-w-[300px]">
-                        <IoSearch className="w-fit md:shrink-0" />
-                        <input
-                            type="text"
-                            placeholder="Search by event name"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full placeholder:text-end text-end"
-                        />
-                    </div>
-                    <Link
-                        to={"/Director/Events/Add"}
-                        className="py-2 px-4 rounded text-center bg-blue_v text-white cursor-pointer font-semibold text-sm"
-                    >
-                        Add New Event
-                    </Link>
-                </div>
-                <div className="overflow-auto">
-                    {filteredEvents.length === 0 ? (
-                        <div className="flex justify-center items-center flex-col gap-6 mt-12">
-                            <div className="text-center font-semibold text-sm text-gray_v pt-12">
-                                No matching events found
-                            </div>
-                        </div>
-                    ) : (
-                        <table className="table-auto w-full mt-4 text-sm text-center overflow-auto">
-                            <thead>
-                                <tr className="bg-gray_white font-normal">
-                                    <th className="px-4 py-2 rounded-tl-md">
-                                        Event Name
-                                    </th>
-                                    <th className="px-4 py-2 border-l border-white">
-                                        Location
-                                    </th>
-                                    <th className="px-4 py-2 border-l border-white">
-                                        Date
-                                    </th>
-                                    <th className="px-4 py-2 border-l border-white"></th>
-                                </tr>
-                            </thead>
-                            <tbody className="text-xs text-center font-semibold">
-                                {filteredEvents.map((event) => (
-                                    <tr key={event?.id}>
-                                        <td className="border px-4 py-2">
-                                            {event.name}
-                                        </td>
-                                        <td className="border px-4 py-2">
-                                            {event?.location || "N/A"}
-                                        </td>
-                                        <td className="border px-4 py-2">
-                                            {dayjs(event?.date).format(
-                                                "DD MMMM YYYY"
-                                            )}
-                                        </td>
-                                        <td className="border px-4 py-2">
-                                            <Link
-                                                to={`/Director/Events/${event.id}`}
-                                                className="bg-blue_v text-white px-4 py-1 rounded-md"
-                                            >
-                                                Details
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    )}
                 </div>
             </div>
         );
     }
+
+    return (
+        <div className="py-6 px-4">
+            <div className="text-xl font-semibold text-blue_v">الأحداث</div>
+
+            <div className="mt-4 flex flex-col md:flex-row gap-4 justify-center md:justify-start md:ml-6 md:gap-6 text-gray_v">
+                <div className="border p-2 mr-4 rounded-md flex items-center gap-2 text-sm font-semibold min-w-[300px]">
+                    <IoSearch className="w-fit shrink-0" />
+                    <input
+                        type="text"
+                        placeholder="ابحث عن الحدث"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full placeholder:text-end text-end"
+                    />
+                </div>
+                <Link
+                    to="/Director/Events/Add"
+                    className="py-2 px-4 rounded bg-blue_v text-white font-semibold text-sm"
+                >
+                    إضافة حدث جديد
+                </Link>
+            </div>
+
+            {filteredEvents.length === 0 ? (
+                <div className="flex justify-center items-center flex-col gap-6 mt-12">
+                    <div className="text-center font-semibold text-sm text-gray_v">
+                        لا توجد أحداث تطابق بحثك
+                    </div>
+                </div>
+            ) : (
+                <table className="table-auto w-full mt-4 text-sm text-center overflow-auto">
+                    <thead>
+                        <tr className="bg-gray_white font-normal">
+                            <th className="px-4 py-2 rounded-tl-md">العنوان</th>
+                            <th className="px-4 py-2 border-l border-white">
+                                الوصف
+                            </th>
+                            <th className="px-4 py-2 border-l border-white">
+                                تاريخ النشر
+                            </th>
+                            <th className="px-4 py-2 border-l border-white rounded-tr-md">
+                                العمليات
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody className="text-xs text-center font-semibold">
+                        {filteredEvents.map((event) => (
+                            <tr key={event.id}>
+                                <td className="border px-4 py-2">
+                                    {event.Title}
+                                </td>
+                                <td className="border px-4 py-2">
+                                    {event.Description || "لا يوجد وصف"}
+                                </td>
+                                <td className="border px-4 py-2">
+                                    {dayjs(event.createdAt).format(
+                                        "DD MMMM YYYY"
+                                    )}
+                                </td>
+                                <td className="border px-4 py-2">
+                                    <Link
+                                        to={`/Director/Events/${event.id}`}
+                                        className="bg-blue_v text-white px-4 py-1 rounded-md"
+                                    >
+                                        تفاصيل
+                                    </Link>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
+        </div>
+    );
 }
 
-export default Director_events;
+export default Events;

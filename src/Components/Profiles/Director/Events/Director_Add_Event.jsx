@@ -1,237 +1,186 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
-import dayjs from "dayjs";
 import { useAppContext } from "../../../../AppContext";
 
-function Director_AddEvent() {
+function AddEvent() {
     const navigate = useNavigate();
     const { user } = useAppContext();
-    const [loading, setLoading] = useState(false);
-    const [services, setServices] = useState([]);
-    const [error, setError] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
 
-    async function handleAddEvent(values, { setSubmitting }) {
+    const handleAddEvent = async (values, { setSubmitting, resetForm }) => {
+        const formData = new FormData();
+        formData.append("Title", values.Title);
+        formData.append("Description", values.Description);
+        formData.append("ownerId", user.id);
+        formData.append("ownerType", "Director");
+        formData.append("companyId", user.companyId);
+
+        if (values.image) {
+            formData.append("image", values.image);
+        }
+
         try {
             const response = await axios.post(
                 `http://localhost:3000/Directors/${user.id}/${user.companyId}/Events`,
-                values,
-                { withCredentials: true, validateStatus: () => true }
+                formData,
+                {
+                    withCredentials: true,
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                    validateStatus: () => true,
+                }
             );
 
-            if (response.status === 200) {
+            if (response.status === 201) {
+                Swal.fire("نجاح", "تم إضافة الحدث بنجاح", "success");
                 navigate("/Director/Events");
+                resetForm();
+                setImagePreview(null);
             } else {
-                setSubmitting(false);
-                Swal.fire("Error", response.data.message, "error");
+                Swal.fire(
+                    "خطأ",
+                    response.data.message || "فشل في إضافة الحدث",
+                    "error"
+                );
             }
         } catch (error) {
+            Swal.fire("خطأ", "حدث خطأ ما. حاول مرة أخرى.", "error");
+        } finally {
             setSubmitting(false);
-            Swal.fire("Error!", "Something went wrong", "error");
         }
-    }
+    };
 
-    useEffect(() => {
-        setLoading(true);
-        const fetchServices = async () => {
-            try {
-                const response = await axios.get(
-                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Services`,
-                    { withCredentials: true, validateStatus: () => true }
-                );
-                if (response.status === 200) {
-                    setServices(response.data.Services);
-                } else {
-                    setError(response.data);
-                }
-            } catch (error) {
-                setError(error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchServices();
-    }, []);
+    const handleImageChange = (e, setFieldValue) => {
+        const file = e.target.files[0];
+        if (file) {
+            setFieldValue("image", file);
+            const reader = new FileReader();
+            reader.onloadend = () => setImagePreview(reader.result);
+            reader.readAsDataURL(file);
+        }
+    };
 
-    if (loading) {
-        return (
-            <div className="w-[80vw] h-[80vh] flex items-center justify-center">
-                <span className="loader"></span>
-            </div>
-        );
-    } else if (error) {
-        return (
-            <div className="w-[80vw] h-screen flex items-center justify-center">
-                <div className="text-red-600 font-semibold">
-                    {error.message}
-                </div>
-            </div>
-        );
-    } else {
-        return (
-            <div className="flex text-right">
-                <div className="w-full py-12 bg-white flex flex-col items-center justify-center">
-                    <div className="w-[80%] text-black">
-                        <div className="pb-4 pt-24 md:pt-0">
-                            <div className="text-3xl font-semibold">
-                                إضافة حدث جديد
+    return (
+        <div className="flex justify-center items-center min-h-screen bg-gray-100">
+            <div className="w-full max-w-lg py-12 px-8 bg-white shadow-lg rounded-lg text-right">
+                <h2 className="text-3xl font-semibold mb-6 text-gray-800">
+                    إضافة حدث جديد
+                </h2>
+
+                <Formik
+                    initialValues={{
+                        Title: "",
+                        Description: "",
+                        image: null,
+                    }}
+                    validate={(values) => {
+                        const errors = {};
+                        if (!values.Title) errors.Title = "العنوان مطلوب";
+                        if (!values.Description)
+                            errors.Description = "الوصف مطلوب";
+                        return errors;
+                    }}
+                    onSubmit={handleAddEvent}
+                >
+                    {({ isSubmitting, setFieldValue }) => (
+                        <Form className="flex flex-col gap-4">
+                            <div>
+                                <label className="font-semibold text-sm pb-1 text-gray-700">
+                                    العنوان
+                                </label>
+                                <Field
+                                    type="text"
+                                    name="Title"
+                                    placeholder="أدخل عنوان الحدث"
+                                    disabled={isSubmitting}
+                                    className="w-full border border-gray-300 px-4 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <ErrorMessage
+                                    name="Title"
+                                    component="div"
+                                    style={errorInputMessage}
+                                />
                             </div>
-                        </div>
-                        <Formik
-                            initialValues={{
-                                eventName: "",
-                                date: "",
-                                location: "",
-                                serviceId: "",
-                            }}
-                            validate={(values) => {
-                                const errors = {};
-                                if (!values.eventName) {
-                                    errors.eventName = "اسم الحدث مطلوب";
-                                } else if (values.eventName.length < 3) {
-                                    errors.eventName = "الحد الأدنى 3 أحرف";
-                                }
-                                if (!values.date) {
-                                    errors.date = "تاريخ الحدث مطلوب";
-                                }
-                                if (!values.location) {
-                                    errors.location = "موقع الحدث مطلوب";
-                                }
-                                return errors;
-                            }}
-                            onSubmit={(values, { setSubmitting }) => {
-                                if (!values.serviceId) {
-                                    Swal.fire(
-                                        "Error!",
-                                        "يجب اختيار القسم المرتبط بالحدث",
-                                        "error"
-                                    );
-                                } else {
-                                    handleAddEvent(values, { setSubmitting });
-                                }
-                            }}
-                        >
-                            {({ isSubmitting, setFieldValue }) => (
-                                <Form className="flex flex-col text-sm md:text-lg gap-4 text-black">
-                                    <div className="flex flex-col gap-6 w-full py-6">
-                                        <div className="w-full relative">
-                                            <div className="font-semibold text-sm pb-1">
-                                                اسم الحدث
-                                            </div>
-                                            <Field
-                                                type="text"
-                                                name="eventName"
-                                                placeholder="اسم الحدث"
-                                                disabled={isSubmitting}
-                                                className="w-full border border-gray_white px-4 py-2 rounded-lg text-sm text-right"
-                                            />
-                                            <ErrorMessage
-                                                name="eventName"
-                                                component="div"
-                                                style={errorInputMessage}
-                                            />
-                                        </div>
-                                        <div className="w-full relative">
-                                            <div className="font-semibold text-sm pb-1">
-                                                تاريخ الحدث
-                                            </div>
-                                            <Field
-                                                type="date"
-                                                name="date"
-                                                disabled={isSubmitting}
-                                                className="w-full border border-gray_white px-4 py-2 rounded-lg text-sm text-right"
-                                            />
-                                            <ErrorMessage
-                                                name="date"
-                                                component="div"
-                                                style={errorInputMessage}
-                                            />
-                                        </div>
-                                        <div className="w-full relative">
-                                            <div className="font-semibold text-sm pb-1">
-                                                موقع الحدث
-                                            </div>
-                                            <Field
-                                                type="text"
-                                                name="location"
-                                                placeholder="الموقع"
-                                                disabled={isSubmitting}
-                                                className="w-full border border-gray_white px-4 py-2 rounded-lg text-sm text-right"
-                                            />
-                                            <ErrorMessage
-                                                name="location"
-                                                component="div"
-                                                style={errorInputMessage}
-                                            />
-                                        </div>
-                                    </div>
 
-                                    <div className="flex justify-end items-center gap-4 flex-wrap">
-                                        {services.length === 0 ? (
-                                            <div className="text-sm mx-auto flex items-center gap-3">
-                                                <Link
-                                                    to="/Director/Services/Add"
-                                                    className="bg-blue_v text-white font-semibold px-4 py-2 rounded-lg"
-                                                >
-                                                    اضف قسم
-                                                </Link>
-                                                <div className="text-gray_v">
-                                                    لا توجد اقسام
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <Field
-                                                as="select"
-                                                name="serviceId"
-                                                onChange={(e) => {
-                                                    setFieldValue(
-                                                        "serviceId",
-                                                        e.target.value
-                                                    );
-                                                }}
-                                                className="border p-2 rounded-md text-sm font-semibold text-end"
-                                            >
-                                                <option value="">
-                                                    اختر القسم
-                                                </option>
-                                                {services.map((service) => (
-                                                    <option
-                                                        key={service.id}
-                                                        value={service.id}
-                                                    >
-                                                        {service.Name}
-                                                    </option>
-                                                ))}
-                                            </Field>
-                                        )}
-                                    </div>
+                            <div>
+                                <label className="font-semibold text-sm pb-1 text-gray-700">
+                                    الوصف
+                                </label>
+                                <Field
+                                    as="textarea"
+                                    name="Description"
+                                    placeholder="أدخل وصف الحدث"
+                                    disabled={isSubmitting}
+                                    className="w-full border border-gray-300 px-4 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <ErrorMessage
+                                    name="Description"
+                                    component="div"
+                                    style={errorInputMessage}
+                                />
+                            </div>
 
-                                    {isSubmitting ? (
-                                        <span className="small-loader my-5 w-full m-auto"></span>
-                                    ) : (
-                                        <button
-                                            type="submit"
-                                            className="bg-blue_v py-2 mt-4 rounded-2xl text-white font-semibold"
-                                            disabled={isSubmitting}
-                                        >
-                                            إضافة الحدث
-                                        </button>
-                                    )}
-                                </Form>
+                            <div>
+                                <label className="font-semibold text-sm pb-1 text-gray-700">
+                                    صورة الحدث
+                                </label>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) =>
+                                        handleImageChange(e, setFieldValue)
+                                    }
+                                    className="w-full border border-gray-300 px-4 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <ErrorMessage
+                                    name="image"
+                                    component="div"
+                                    style={errorInputMessage}
+                                />
+                            </div>
+
+                            {imagePreview && (
+                                <div className="mt-4">
+                                    <img
+                                        src={imagePreview}
+                                        alt="معاينة الصورة"
+                                        className="w-fit h-48 object-cover rounded-lg shadow-md"
+                                    />
+                                </div>
                             )}
-                        </Formik>
-                    </div>
-                </div>
+
+                            <button
+                                type="submit"
+                                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold mt-4 transition duration-200"
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting
+                                    ? "جارٍ الإضافة..."
+                                    : "إضافة الحدث"}
+                            </button>
+
+                            <Link
+                                to="/Director/Events"
+                                className="text-blue-500 hover:underline mt-4 text-sm"
+                            >
+                                الرجوع إلى قائمة الأحداث
+                            </Link>
+                        </Form>
+                    )}
+                </Formik>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 const errorInputMessage = {
     fontSize: "12px",
     color: "red",
+    marginTop: "4px",
 };
 
-export default Director_AddEvent;
+export default AddEvent;

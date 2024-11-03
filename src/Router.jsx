@@ -41,6 +41,10 @@ import Director_Add_Blogs from "./Components/Profiles/Director/Blogs/Director_Ad
 import Director_Edit_Blogs from "./Components/Profiles/Director/Blogs/Director_Edit_Blogs.jsx";
 
 import Director_Events from "./Components/Profiles/Director/Events/Director_Events.jsx";
+import Director_Event from "./Components/Profiles/Director/Events/Event.jsx";
+import Director_Add_Events from "./Components/Profiles/Director/Events/Director_Add_Event.jsx";
+import Director_Edit_Events from "./Components/Profiles/Director/Events/Director_Edit_Events.jsx";
+
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -158,7 +162,17 @@ const routes = createBrowserRouter([
                     },
                     {
                         path: "/Director/Events/Add",
-                        element: <Not_Finished />,
+                        element: <Director_Add_Events />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Events/:id",
+                        element: <Director_Event />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Events/:id/Edit",
+                        element: <Director_Edit_Events />,
                         errorElement: <ErrorElement />,
                     },
                     // ______________________________________________________

@@ -148,7 +148,7 @@ function AddBlog() {
                                     <img
                                         src={imagePreview}
                                         alt="معاينة الصورة"
-                                        className="w-full h-48 object-cover rounded-lg shadow-md"
+                                        className="w-fit h-48 object-cover rounded-lg shadow-md"
                                     />
                                 </div>
                             )}
