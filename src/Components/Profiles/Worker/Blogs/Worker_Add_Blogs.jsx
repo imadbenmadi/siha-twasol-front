@@ -33,7 +33,7 @@ function AddBlog() {
                     },
                     validateStatus: () => true,
                 }
-            );
+            );            
 
             if (response.status === 201) {
                 Swal.fire("نجاح", "تم إضافة المقال بنجاح", "success");

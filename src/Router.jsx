@@ -15,6 +15,8 @@ import Medecin from "./Components/Profiles/Medecin/Medecin.jsx";
 import Director from "./Components/Profiles/Director/Director.jsx";
 import Worker from "./Components/Profiles/Worker/Worker.jsx";
 
+import Worker_Profile from "./Components/Profiles/Worker/Profile/Profile.jsx";
+
 // import Malad from "./Components/Profiles/Director/Director.jsx";
 import Director_default from "./Components/Profiles/Director/Director_Default.jsx";
 import Malad_default from "./Components/Profiles/Malad/Malad_Default.jsx";
@@ -47,11 +49,14 @@ import Director_Edit_Events from "./Components/Profiles/Director/Events/Director
 // ______________________________________________________
 
 import Worker_blog from "./Components/Profiles/Worker/Blogs/Blog.jsx";
-import Worker_Profile from "./Components/Profiles/Worker/Profile/Profile.jsx";
 import Worker_Blogs from "./Components/Profiles/Worker/Blogs/Worker_Blogs.jsx";
 import Worker_Add_Blogs from "./Components/Profiles/Worker/Blogs/Worker_Add_Blogs.jsx";
 import Worker_Edit_Blogs from "./Components/Profiles/Worker/Blogs/Worker_Edit_Blogs.jsx";
 
+import Worker_event from "./Components/Profiles/Worker/Events/Event.jsx";
+import Worker_Events from "./Components/Profiles/Worker/Events/Worker_Events.jsx";
+import Worker_Add_Events from "./Components/Profiles/Worker/Events/Worker_Add_Event.jsx";
+import Worker_Edit_Events from "./Components/Profiles/Worker/Events/Worker_Edit_Events.jsx";
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -233,6 +238,26 @@ const routes = createBrowserRouter([
                     {
                         path: "/Worker/Blogs/:id/Edit",
                         element: <Worker_Edit_Blogs />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Worker/Events",
+                        element: <Worker_Events />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Worker/Events/Add",
+                        element: <Worker_Add_Events />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Worker/Events/:id",
+                        element: <Worker_event />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Worker/Events/:id/Edit",
+                        element: <Worker_Edit_Events />,
                         errorElement: <ErrorElement />,
                     },
                 ],
