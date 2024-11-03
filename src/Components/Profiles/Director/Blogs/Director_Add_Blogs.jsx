@@ -8,17 +8,38 @@ import { useAppContext } from "../../../../AppContext";
 function AddBlog() {
     const navigate = useNavigate();
     const { user } = useAppContext();
+    const [imagePreview, setImagePreview] = useState(null); // For displaying image preview
 
-    const handleAddBlog = async (values, { setSubmitting }) => {
+    const handleAddBlog = async (values, { setSubmitting, resetForm }) => {
+        const formData = new FormData();
+        formData.append("Title", values.Title);
+        formData.append("Description", values.Description);
+        formData.append("ownerId", user.id);
+        formData.append("ownerType", "Director");
+        formData.append("companyId", user.companyId);
+
+        if (values.image) {
+            formData.append("image", values.image);
+        }
+
         try {
             const response = await axios.post(
                 `http://localhost:3000/Directors/${user.id}/${user.companyId}/Blogs`,
-                values,
-                { withCredentials: true, validateStatus: () => true }
+                formData,
+                {
+                    withCredentials: true,
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                    validateStatus: () => true,
+                }
             );
+
             if (response.status === 201) {
                 Swal.fire("نجاح", "تم إضافة المقال بنجاح", "success");
                 navigate("/Director/Blogs");
+                resetForm();
+                setImagePreview(null);
             } else {
                 Swal.fire(
                     "خطأ",
@@ -33,6 +54,16 @@ function AddBlog() {
         }
     };
 
+    const handleImageChange = (e, setFieldValue) => {
+        const file = e.target.files[0];
+        if (file) {
+            setFieldValue("image", file);
+            const reader = new FileReader();
+            reader.onloadend = () => setImagePreview(reader.result);
+            reader.readAsDataURL(file);
+        }
+    };
+
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
             <div className="w-full max-w-lg py-12 px-8 bg-white shadow-lg rounded-lg text-right">
@@ -44,9 +75,7 @@ function AddBlog() {
                     initialValues={{
                         Title: "",
                         Description: "",
-                        ownerId: user.id,
-                        ownerType: "Director",
-                        companyId: user.companyId,
+                        image: null,
                     }}
                     validate={(values) => {
                         const errors = {};
@@ -55,11 +84,9 @@ function AddBlog() {
                             errors.Description = "الوصف مطلوب";
                         return errors;
                     }}
-                    onSubmit={(values, { setSubmitting }) => {
-                        handleAddBlog(values, { setSubmitting });
-                    }}
+                    onSubmit={handleAddBlog}
                 >
-                    {({ isSubmitting }) => (
+                    {({ isSubmitting, setFieldValue }) => (
                         <Form className="flex flex-col gap-4">
                             <div>
                                 <label className="font-semibold text-sm pb-1 text-gray-700">
@@ -96,6 +123,35 @@ function AddBlog() {
                                     style={errorInputMessage}
                                 />
                             </div>
+
+                            <div>
+                                <label className="font-semibold text-sm pb-1 text-gray-700">
+                                    صورة المقال
+                                </label>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) =>
+                                        handleImageChange(e, setFieldValue)
+                                    }
+                                    className="w-full border border-gray-300 px-4 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                />
+                                <ErrorMessage
+                                    name="image"
+                                    component="div"
+                                    style={errorInputMessage}
+                                />
+                            </div>
+
+                            {imagePreview && (
+                                <div className="mt-4">
+                                    <img
+                                        src={imagePreview}
+                                        alt="معاينة الصورة"
+                                        className="w-full h-48 object-cover rounded-lg shadow-md"
+                                    />
+                                </div>
+                            )}
 
                             <button
                                 type="submit"
