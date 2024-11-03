@@ -34,7 +34,7 @@ function Blogs() {
                     setBlogs(response.data.blogs || []);
                 } else if (response.status === 401) {
                     Swal.fire("Error", "You should login again", "error");
-                    navigate("/Login");
+                    // navigate("/Login");
                 } else {
                     setError(response.data.message || "An error occurred.");
                 }

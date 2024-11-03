@@ -23,7 +23,7 @@ function Mobile_Nav_Items({
                         <div className="text-center flex flex-col gap-8 my-8 ">
                             <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Director/Profile"}
+                                to={"/Worker/Profile"}
                                 className={`${
                                     Active_nav == "Profile"
                                         ? "text-blue_v"
@@ -36,7 +36,7 @@ function Mobile_Nav_Items({
                             </Link>
                             {/* <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Director/Doctores"}
+                                to={"/Worker/Doctores"}
                                 className={`${
                                     Active_nav == "Doctores"
                                         ? "text-blue_v"
@@ -49,7 +49,7 @@ function Mobile_Nav_Items({
                             </Link> */}
                             <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Director/Blogs"}
+                                to={"/Worker/Blogs"}
                                 className={`${
                                     Active_nav == "Blogs"
                                         ? "text-blue_v"
@@ -61,7 +61,7 @@ function Mobile_Nav_Items({
 
                             <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Director/Events"}
+                                to={"/Worker/Events"}
                                 className={`${
                                     Active_nav == "Events"
                                         ? "text-blue_v"

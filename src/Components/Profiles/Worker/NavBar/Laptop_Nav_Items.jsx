@@ -34,7 +34,7 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                             : "text-black_text"
                     } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
-                    <Link to={"/Director/Profile"} className={"select-none"}>
+                    <Link to={"/Worker/Profile"} className={"select-none"}>
                         <span className=" relative">الحساب</span>
                     </Link>
                 </div>
@@ -46,7 +46,7 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                             : "text-black_text"
                     } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
-                    <Link to={"/Director/Doctores"} className={" select-none"}>
+                    <Link to={"/Worker/Doctores"} className={" select-none"}>
                         الاطباء{" "}
                     </Link>
                 </div> */}
@@ -57,7 +57,7 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                             : "text-black_text"
                     } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
-                    <Link to={"/Director/Blogs"} className=" select-none">
+                    <Link to={"/Worker/Blogs"} className=" select-none">
                         المقالات
                     </Link>
                 </div>
@@ -68,7 +68,7 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                             : "text-black_text"
                     } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
-                    <Link to={"/Director/Events"} className=" select-none">
+                    <Link to={"/Worker/Events"} className=" select-none">
                         الاحداث
                     </Link>
                 </div>
