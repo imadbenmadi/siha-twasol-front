@@ -29,17 +29,17 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
             <div className="flex gap-6 lg:gap-14">
                 <div
                     className={` ${
-                        Active_nav == "Workers"
+                        Active_nav == "Profile"
                             ? "text-blue_v"
                             : "text-black_text"
                     } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
-                    <Link to={"/Director/Workers"} className={"select-none"}>
-                        <span className=" relative">العمال</span>
+                    <Link to={"/Director/Profile"} className={"select-none"}>
+                        <span className=" relative">الحساب</span>
                     </Link>
                 </div>
 
-                <div
+                {/* <div
                     className={` ${
                         Active_nav == "Doctores"
                             ? "text-blue_v"
@@ -49,7 +49,7 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                     <Link to={"/Director/Doctores"} className={" select-none"}>
                         الاطباء{" "}
                     </Link>
-                </div>
+                </div> */}
                 <div
                     className={` ${
                         Active_nav == "Blogs"

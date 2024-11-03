@@ -23,18 +23,18 @@ function Mobile_Nav_Items({
                         <div className="text-center flex flex-col gap-8 my-8 ">
                             <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Director/Workers"}
+                                to={"/Director/Profile"}
                                 className={`${
-                                    Active_nav == "Workers"
+                                    Active_nav == "Profile"
                                         ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none    `}
                             >
                                 <div className={"select-none"}>
-                                    <span className=" relative">العمال </span>
+                                    <span className=" relative">الحساب </span>
                                 </div>
                             </Link>
-                            <Link
+                            {/* <Link
                                 onClick={Toogle_Menu_Bar}
                                 to={"/Director/Doctores"}
                                 className={`${
@@ -46,7 +46,7 @@ function Mobile_Nav_Items({
                                 <div className={"select-none"}>
                                     <span className=" relative">الاطباء </span>
                                 </div>
-                            </Link>
+                            </Link> */}
                             <Link
                                 onClick={Toogle_Menu_Bar}
                                 to={"/Director/Blogs"}
