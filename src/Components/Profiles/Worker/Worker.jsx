@@ -12,7 +12,7 @@ function Worker() {
     const [loading, setLoading] = useState(true);
     const { userId, isAuth, set_user, userType, set_Auth, user, set_Messages } =
         useAppContext();
-    
+
     useEffect(() => {
         if (!isAuth || !userId) {
             set_Auth(false);
@@ -27,8 +27,8 @@ function Worker() {
                         validateStatus: () => true,
                     }
                 );
-                    console.log(response);
-                    
+                console.log(response);
+
                 if (response.status == 200) {
                     set_user(response.data.User);
                 } else {

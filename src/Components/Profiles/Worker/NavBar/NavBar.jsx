@@ -38,6 +38,7 @@ function NavBar() {
         } catch (error) {
             Swal.fire("Error!", `Something Went Wrong `, "error");
         }
+        window.location.href = "/home";
         setLogoutClicked(false);
     };
     return (

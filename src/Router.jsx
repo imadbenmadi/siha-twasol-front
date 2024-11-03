@@ -47,6 +47,7 @@ import Director_Edit_Events from "./Components/Profiles/Director/Events/Director
 // ______________________________________________________
 
 import Worker_blog from "./Components/Profiles/Worker/Blogs/Blog.jsx";
+import Worker_Profile from "./Components/Profiles/Worker/Profile/Profile.jsx";
 import Worker_Blogs from "./Components/Profiles/Worker/Blogs/Worker_Blogs.jsx";
 import Worker_Add_Blogs from "./Components/Profiles/Worker/Blogs/Worker_Add_Blogs.jsx";
 import Worker_Edit_Blogs from "./Components/Profiles/Worker/Blogs/Worker_Edit_Blogs.jsx";
@@ -207,6 +208,11 @@ const routes = createBrowserRouter([
                     {
                         index: true,
                         element: <Worker_default />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Worker/Profile",
+                        element: <Worker_Profile />,
                         errorElement: <ErrorElement />,
                     },
                     {

@@ -12,7 +12,7 @@ function Director() {
     const [loading, setLoading] = useState(true);
     const { userId, isAuth, set_user, userType, set_Auth, user, set_Messages } =
         useAppContext();
-    
+
     useEffect(() => {
         if (!isAuth || !userId) {
             set_Auth(false);
@@ -27,7 +27,7 @@ function Director() {
                         validateStatus: () => true,
                     }
                 );
-                
+
                 if (response.status == 200) {
                     set_user(response.data.User);
                 } else {
@@ -38,6 +38,7 @@ function Director() {
                 set_Auth(false);
                 Navigate("/Login");
             }
+            window.location.href = "/home";
         };
         fetchData().then(() => {
             setLoading(false);
