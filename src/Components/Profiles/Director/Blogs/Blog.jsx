@@ -7,28 +7,26 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useAppContext } from "../../../../AppContext";
 import { useLocation } from "react-router";
+
 dayjs.extend(customParseFormat);
 
 function Blog() {
     const location = useLocation();
     const navigate = useNavigate();
-    const [blog, setBlog] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
-    const blogId = location.pathname.split("/")[3];
     const { user } = useAppContext();
+
+    const [blog, setBlog] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [deleteLoading, setDeleteLoading] = useState(false);
+    const blogId = location.pathname.split("/")[3];
 
     useEffect(() => {
-        setLoading(true);
         const fetchBlog = async () => {
             try {
                 const response = await axios.get(
                     `http://localhost:3000/Directors/${user.id}/${user.companyId}/Blogs/${blogId}`,
-                    {
-                        withCredentials: true,
-                        validateStatus: () => true,
-                    }
+                    { withCredentials: true, validateStatus: () => true }
                 );
 
                 if (response.status === 200) {
@@ -37,17 +35,19 @@ function Blog() {
                     Swal.fire("خطأ", "يجب عليك تسجيل الدخول مرة أخرى", "error");
                     navigate("/Login");
                 } else {
-                    setError(response.data);
+                    setError(
+                        response.data.message || "Error fetching blog data."
+                    );
                 }
-            } catch (error) {
-                setError(error);
+            } catch (fetchError) {
+                setError("Failed to fetch blog. Please try again.");
             } finally {
                 setLoading(false);
             }
         };
 
         fetchBlog();
-    }, []);
+    }, [blogId, user.id, user.companyId, navigate]);
 
     const handleDelete = () => {
         Swal.fire({
@@ -60,120 +60,134 @@ function Blog() {
             confirmButtonText: "نعم، احذفه!",
         }).then(async (result) => {
             if (result.isConfirmed) {
-                Swal.fire("تم الحذف!", "تم حذف العامل بنجاح.", "success");
                 setDeleteLoading(true);
-                await axios
-                    .delete(
+                try {
+                    const response = await axios.delete(
                         `http://localhost:3000/Directors/${user.id}/${user.companyId}/Blogs/${blogId}`,
-                        {
-                            withCredentials: true,
-                            validateStatus: () => true,
-                        }
-                    )
-                    .then((response) => {
-                        if (response.status === 200) {
-                            navigate("/Director/Blogs");
-                        } else {
-                            Swal.fire("خطأ", response.data.message, "error");
-                        }
-                    })
-                    .catch((error) => {
-                        Swal.fire("خطأ", error.message, "error");
-                    })
-                    .finally(() => {
-                        setDeleteLoading(false);
-                    });
+                        { withCredentials: true, validateStatus: () => true }
+                    );
+
+                    if (response.status === 200) {
+                        Swal.fire(
+                            "تم الحذف!",
+                            "تم حذف العامل بنجاح.",
+                            "success"
+                        );
+                        navigate("/Director/Blogs");
+                    } else {
+                        Swal.fire(
+                            "خطأ",
+                            response.data.message || "Failed to delete blog.",
+                            "error"
+                        );
+                    }
+                } catch (deleteError) {
+                    Swal.fire(
+                        "خطأ",
+                        deleteError.message || "Failed to delete blog.",
+                        "error"
+                    );
+                } finally {
+                    setDeleteLoading(false);
+                }
             }
         });
     };
 
     if (loading) {
         return (
-            <div className="w-[80vw] h-[80vh] flex flex-col items-center justify-center">
+            <div className="w-[80vw] h-[80vh] flex items-center justify-center">
                 <span className="loader"></span>
             </div>
         );
-    } else if (error) {
+    }
+
+    if (error) {
         return (
             <div className="w-[80vw] h-screen flex items-center justify-center">
-                <div className="text-red-600 font-semibold">
-                    {error.message}
-                </div>
+                <div className="text-red-600 font-semibold">{error}</div>
             </div>
         );
-    } else if (!blog) {
+    }
+
+    if (!blog) {
         return (
             <div className="py-6 px-4">
-                <div className="flex justify-center items-center flex-col gap-6 mt-12">
-                    <div className="text-center font-semibold text-sm text-red-500 pt-12">
+                <div className="flex flex-col items-center gap-6 mt-12">
+                    <p className="text-center font-semibold text-sm text-red-500 pt-12">
                         لم يتم العثور على العامل
-                    </div>
+                    </p>
                     <Link
-                        to={"/Director/Blogs"}
-                        className="py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
+                        to="/Director/Blogs"
+                        className="py-2 px-4 bg-blue_v text-white rounded-md font-semibold text-sm"
                     >
                         الرجوع إلى قائمة العمال
                     </Link>
                 </div>
             </div>
         );
-    } else {
-        return (
-            <div className="py-6 px-4">
-                <div className="text-xl font-semibold text-blue_v mb-6 text-center">
-                    معلومات العامل
+    }
+
+    return (
+        <div className="py-6 px-4">
+            <h2 className="text-xl font-semibold text-blue_v mb-6 text-center">
+                معلومات العامل
+            </h2>
+            <div className="border p-6 rounded-lg bg-gray-50 shadow-lg max-w-3xl mx-auto">
+                <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-2">
+                        الاسم الكامل:
+                    </h3>
+                    <p className="text-gray-700">{`${blog.firstName} ${blog.lastName}`}</p>
                 </div>
-                <div className="border p-6 rounded-lg bg-gray-50 shadow-lg max-w-3xl mx-auto">
-                    <div className="mb-4">
-                        <h3 className="text-lg font-semibold mb-2">
-                            الاسم الكامل:
-                        </h3>
-                        <p className="text-gray-700">{`${blog.firstName} ${blog.lastName}`}</p>
-                    </div>
-                    <div className="mb-4">
-                        <h3 className="text-lg font-semibold mb-2">
-                            البريد الإلكتروني:
-                        </h3>
-                        <p className="text-gray-700">{blog.email}</p>
-                    </div>
-                    <div className="mb-4">
-                        <h3 className="text-lg font-semibold mb-2">القسم :</h3>
-                        <p className="text-gray-700">{blog.Service?.Name}</p>
-                    </div>
-                    <div className="mb-4">
-                        <h3 className="text-lg font-semibold mb-2">
-                            تاريخ الإنشاء:
-                        </h3>
-                        <p className="text-gray-700">
-                            {dayjs(blog.createdAt).format("DD MMMM YYYY")}
-                        </p>
-                    </div>
-                    <div className="mb-4">
-                        <h3 className="text-lg font-semibold mb-2">المؤسسة:</h3>
-                        <p className="text-gray-700">{blog.Company?.Name}</p>
-                    </div>
-                    <div className="flex justify-end gap-4">
-                        <Link
-                            to={`/Director/Blogs/${blog.id}/Edit`}
-                            className="py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600"
-                        >
-                            تعديل
-                        </Link>
-                        {deleteLoading ? (
-                            <span className="small-loader"></span>
-                        ) : (
-                            <button
-                                onClick={handleDelete}
-                                className="py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600"
-                            >
-                                حذف
-                            </button>
-                        )}
-                    </div>
+                <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-2">
+                        البريد الإلكتروني:
+                    </h3>
+                    <p className="text-gray-700">{blog.email}</p>
+                </div>
+                <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-2">القسم:</h3>
+                    <p className="text-gray-700">
+                        {blog.Service?.Name || "غير محدد"}
+                    </p>
+                </div>
+                <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-2">
+                        تاريخ الإنشاء:
+                    </h3>
+                    <p className="text-gray-700">
+                        {dayjs(blog.createdAt).format("DD MMMM YYYY")}
+                    </p>
+                </div>
+                <div className="mb-4">
+                    <h3 className="text-lg font-semibold mb-2">المؤسسة:</h3>
+                    <p className="text-gray-700">
+                        {blog.Company?.Name || "غير محدد"}
+                    </p>
+                </div>
+                <div className="flex justify-end gap-4 mt-4">
+                    <Link
+                        to={`/Director/Blogs/${blog.id}/Edit`}
+                        className="py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600"
+                    >
+                        تعديل
+                    </Link>
+                    <button
+                        onClick={handleDelete}
+                        disabled={deleteLoading}
+                        className={`py-2 px-4 rounded-md text-white ${
+                            deleteLoading
+                                ? "bg-gray-400"
+                                : "bg-red-500 hover:bg-red-600"
+                        }`}
+                    >
+                        {deleteLoading ? "جاري الحذف..." : "حذف"}
+                    </button>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default Blog;

@@ -35,8 +35,12 @@ import Director_Medecins_add from "./Components/Profiles/Director/Doctores/Add_d
 import Director_doctore from "./Components/Profiles/Director/Doctores/Doctore.jsx";
 import Director_Edit_doctore from "./Components/Profiles/Director/Doctores/Edit_doctore.jsx";
 
-import Director_Blogs from "./Components/Profiles/Director/Director_Blogs.jsx";
-import Director_Events from "./Components/Profiles/Director/Director_Events.jsx";
+import Director_Blogs from "./Components/Profiles/Director/Blogs/Director_Blogs.jsx";
+import Director_Blog from "./Components/Profiles/Director/Blogs/Blog.jsx";
+import Director_Add_Blogs from "./Components/Profiles/Director/Blogs/Director_Add_Blogs.jsx";
+import Director_Edit_Blogs from "./Components/Profiles/Director/Blogs/Director_Edit_Blogs.jsx";
+
+import Director_Events from "./Components/Profiles/Director/Events/Director_Events.jsx";
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -133,7 +137,17 @@ const routes = createBrowserRouter([
                     },
                     {
                         path: "/Director/Blogs/Add",
-                        element: <Not_Finished />,
+                        element: <Director_Add_Blogs />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Blogs/:id",
+                        element: <Director_Blog />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Director/Blogs/:id/Edit",
+                        element: <Director_Edit_Blogs />,
                         errorElement: <ErrorElement />,
                     },
                     // ______________________________________________________
