@@ -121,47 +121,51 @@ function Events() {
                     </div>
                 </div>
             ) : (
-                <table className="table-auto w-full mt-4 text-sm text-center overflow-auto">
-                    <thead>
-                        <tr className="bg-gray_white font-normal">
-                            <th className="px-4 py-2 rounded-tl-md">العنوان</th>
-                            <th className="px-4 py-2 border-l border-white">
-                                الوصف
-                            </th>
-                            <th className="px-4 py-2 border-l border-white">
-                                تاريخ النشر
-                            </th>
-                            <th className="px-4 py-2 border-l border-white rounded-tr-md">
-                                العمليات
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody className="text-xs text-center font-semibold">
-                        {filteredEvents.map((event) => (
-                            <tr key={event.id}>
-                                <td className="border px-4 py-2">
-                                    {event.Title}
-                                </td>
-                                <td className="border px-4 py-2">
-                                    {event.Description || "لا يوجد وصف"}
-                                </td>
-                                <td className="border px-4 py-2">
-                                    {dayjs(event.createdAt).format(
-                                        "DD MMMM YYYY"
-                                    )}
-                                </td>
-                                <td className="border px-4 py-2">
-                                    <Link
-                                        to={`/Worker/Events/${event.id}`}
-                                        className="bg-blue_v text-white px-4 py-1 rounded-md"
-                                    >
-                                        تفاصيل
-                                    </Link>
-                                </td>
+                <div className="overflow-x-auto mt-4">
+                    <table className="table-auto w-full mt-4 text-sm text-center overflow-auto">
+                        <thead>
+                            <tr className="bg-gray_white font-normal">
+                                <th className="px-4 py-2 rounded-tl-md">
+                                    العنوان
+                                </th>
+                                <th className="px-4 py-2 border-l border-white">
+                                    الوصف
+                                </th>
+                                <th className="px-4 py-2 border-l border-white">
+                                    تاريخ النشر
+                                </th>
+                                <th className="px-4 py-2 border-l border-white rounded-tr-md">
+                                    العمليات
+                                </th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody className="text-xs text-center font-semibold">
+                            {filteredEvents.map((event) => (
+                                <tr key={event.id}>
+                                    <td className="border px-4 py-2">
+                                        {event.Title}
+                                    </td>
+                                    <td className="border px-4 py-2">
+                                        {event.Description || "لا يوجد وصف"}
+                                    </td>
+                                    <td className="border px-4 py-2">
+                                        {dayjs(event.createdAt).format(
+                                            "DD MMMM YYYY"
+                                        )}
+                                    </td>
+                                    <td className="border px-4 py-2">
+                                        <Link
+                                            to={`/Worker/Events/${event.id}`}
+                                            className="bg-blue_v text-white px-4 py-1 rounded-md"
+                                        >
+                                            تفاصيل
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             )}
         </div>
     );

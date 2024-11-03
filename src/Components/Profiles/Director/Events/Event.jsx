@@ -187,8 +187,8 @@ function Event() {
                 </div>
 
                 {/* Footer with Edit and Delete buttons */}
-                <div className="flex justify-between items-center p-6 border-t bg-gray-50">
-                    <div className="text-gray-500 text-sm">
+                <div className="flex flex-col md:flex-row justify-between items-center p-6 border-t bg-gray-50">
+                    <div className="text-gray-500 mb-3 text-sm">
                         <p>المؤسسة: {event.Company?.Name || "غير محدد"}</p>
                     </div>
                     <div className="flex gap-4">

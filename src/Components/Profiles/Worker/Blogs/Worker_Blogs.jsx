@@ -29,12 +29,11 @@ function Blogs() {
                         withCredentials: true,
                         validateStatus: () => true,
                     }
-                );                
+                );
                 if (response.status === 200) {
                     setBlogs(response.data.blogs || []);
                 } else if (response.status === 401) {
                     Swal.fire("Error", "You should login again", "error");
-                    // navigate("/Login");
                 } else {
                     setError(response.data.message || "An error occurred.");
                 }
@@ -94,7 +93,7 @@ function Blogs() {
             <div className="text-xl font-semibold text-blue_v">المقالات</div>
 
             <div className="mt-4 flex flex-col md:flex-row gap-4 justify-center md:justify-start md:ml-6 md:gap-6 text-gray_v">
-                <div className="border p-2 mr-4 rounded-md flex items-center gap-2 text-sm font-semibold min-w-[300px]">
+                <div className="border p-2 rounded-md flex items-center gap-2 text-sm font-semibold min-w-[300px]">
                     <IoSearch className="w-fit shrink-0" />
                     <input
                         type="text"
@@ -117,57 +116,54 @@ function Blogs() {
                     <div className="text-center font-semibold text-sm text-gray_v">
                         لا يوجد مقالات تطابق بحثك
                     </div>
-                    {/* <Link
-                        to={"/Worker/Blogs/Add"}
-                        className="py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
-                    >
-                        اضافة مقال جديد
-                    </Link> */}
                 </div>
             ) : (
-                <table className="table-auto w-full mt-4 text-sm text-center overflow-auto">
-                    <thead>
-                        <tr className="bg-gray_white font-normal">
-                            <th className="px-4 py-2 rounded-tl-md">Title</th>
-                            <th className="px-4 py-2 border-l border-white">
-                                الوصف
-                            </th>
-                            <th className="px-4 py-2 border-l border-white">
-                                تم النشر في
-                            </th>
-                            <th className="px-4 py-2 border-l border-white rounded-tr-md">
-                                العمليات
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody className="text-xs text-center font-semibold">
-                        {filteredBlogs.map((blog) => (
-                            <tr key={blog.id}>
-                                <td className="border px-4 py-2">
-                                    {blog.Title}
-                                </td>
-                                <td className="border px-4 py-2">
-                                    {blog.Description || "No Description"}
-                                </td>
-                                <td className="border px-4 py-2">
-                                    {dayjs(blog.createdAt).format(
-                                        "DD MMMM YYYY"
-                                    )}
-                                </td>
-                                <td className="border px-4 py-2">
-                                    {/* Add any specific action buttons here */}
-
-                                    <Link
-                                        to={`/Worker/Blogs/${blog.id}`}
-                                        className="bg-blue_v text-white px-4 py-1 rounded-md "
-                                    >
-                                        تفاصيل
-                                    </Link>
-                                </td>
+                <div className="overflow-x-auto mt-4">
+                    <table className="table-auto w-full text-sm text-center border border-gray-200 rounded-lg">
+                        <thead>
+                            <tr className="bg-gray-100 font-normal">
+                                <th className="px-4 py-2 rounded-tl-lg">
+                                    العنوان
+                                </th>
+                                <th className="px-4 py-2 border-l border-gray-200">
+                                    الوصف
+                                </th>
+                                <th className="px-4 py-2 border-l border-gray-200">
+                                    تم النشر في
+                                </th>
+                                <th className="px-4 py-2 border-l border-gray-200 rounded-tr-lg">
+                                    العمليات
+                                </th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody className="text-xs text-center font-semibold">
+                            {filteredBlogs.map((blog) => (
+                                <tr
+                                    key={blog.id}
+                                    className="border-t border-gray-200"
+                                >
+                                    <td className="px-4 py-2">{blog.Title}</td>
+                                    <td className="px-4 py-2">
+                                        {blog.Description || "لا يوجد وصف"}
+                                    </td>
+                                    <td className="px-4 py-2">
+                                        {dayjs(blog.createdAt).format(
+                                            "DD MMMM YYYY"
+                                        )}
+                                    </td>
+                                    <td className="px-4 py-2">
+                                        <Link
+                                            to={`/Worker/Blogs/${blog.id}`}
+                                            className="bg-blue_v text-white px-4 py-1 rounded-md"
+                                        >
+                                            تفاصيل
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             )}
         </div>
     );

@@ -125,49 +125,53 @@ function Blogs() {
                     </Link> */}
                 </div>
             ) : (
-                <table className="table-auto w-full mt-4 text-sm text-center overflow-auto">
-                    <thead>
-                        <tr className="bg-gray_white font-normal">
-                            <th className="px-4 py-2 rounded-tl-md">Title</th>
-                            <th className="px-4 py-2 border-l border-white">
-                                الوصف
-                            </th>
-                            <th className="px-4 py-2 border-l border-white">
-                                تم النشر في
-                            </th>
-                            <th className="px-4 py-2 border-l border-white rounded-tr-md">
-                                العمليات
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody className="text-xs text-center font-semibold">
-                        {filteredBlogs.map((blog) => (
-                            <tr key={blog.id}>
-                                <td className="border px-4 py-2">
-                                    {blog.Title}
-                                </td>
-                                <td className="border px-4 py-2">
-                                    {blog.Description || "No Description"}
-                                </td>
-                                <td className="border px-4 py-2">
-                                    {dayjs(blog.createdAt).format(
-                                        "DD MMMM YYYY"
-                                    )}
-                                </td>
-                                <td className="border px-4 py-2">
-                                    {/* Add any specific action buttons here */}
-
-                                    <Link
-                                        to={`/Director/Blogs/${blog.id}`}
-                                        className="bg-blue_v text-white px-4 py-1 rounded-md "
-                                    >
-                                        تفاصيل
-                                    </Link>
-                                </td>
+                <div className="overflow-x-auto mt-4">
+                    <table className="table-auto w-full mt-4 text-sm text-center overflow-auto">
+                        <thead>
+                            <tr className="bg-gray_white font-normal">
+                                <th className="px-4 py-2 rounded-tl-md">
+                                    Title
+                                </th>
+                                <th className="px-4 py-2 border-l border-white">
+                                    الوصف
+                                </th>
+                                <th className="px-4 py-2 border-l border-white">
+                                    تم النشر في
+                                </th>
+                                <th className="px-4 py-2 border-l border-white rounded-tr-md">
+                                    العمليات
+                                </th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody className="text-xs text-center font-semibold">
+                            {filteredBlogs.map((blog) => (
+                                <tr key={blog.id}>
+                                    <td className="border px-4 py-2">
+                                        {blog.Title}
+                                    </td>
+                                    <td className="border px-4 py-2">
+                                        {blog.Description || "No Description"}
+                                    </td>
+                                    <td className="border px-4 py-2">
+                                        {dayjs(blog.createdAt).format(
+                                            "DD MMMM YYYY"
+                                        )}
+                                    </td>
+                                    <td className="border px-4 py-2">
+                                        {/* Add any specific action buttons here */}
+
+                                        <Link
+                                            to={`/Director/Blogs/${blog.id}`}
+                                            className="bg-blue_v text-white px-4 py-1 rounded-md "
+                                        >
+                                            تفاصيل
+                                        </Link>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             )}
         </div>
     );

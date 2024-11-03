@@ -185,8 +185,8 @@ function Blog() {
                 </div>
 
                 {/* Footer with Edit and Delete buttons */}
-                <div className="flex justify-between items-center p-6 border-t bg-gray-50">
-                    <div className="text-gray-500 text-sm">
+                <div className="flex flex-col md:flex-row  justify-between items-center p-6 border-t bg-gray-50">
+                    <div className="text-gray-500 text-sm mb-3">
                         <p>المؤسسة: {blog.Company?.Name || "غير محدد"}</p>
                     </div>
                     <div className="flex gap-4">
