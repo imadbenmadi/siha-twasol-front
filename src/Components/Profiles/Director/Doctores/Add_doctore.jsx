@@ -26,7 +26,6 @@ function add_doctore() {
                     validateStatus: () => true,
                 }
             );
-            console.log(response);
 
             if (response.status == 200) {
                 Naviagte("/Director/Doctores");

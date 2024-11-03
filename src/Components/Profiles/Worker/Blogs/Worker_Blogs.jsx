@@ -29,7 +29,7 @@ function Blogs() {
                         withCredentials: true,
                         validateStatus: () => true,
                     }
-                );
+                );                
                 if (response.status === 200) {
                     setBlogs(response.data.blogs || []);
                 } else if (response.status === 401) {

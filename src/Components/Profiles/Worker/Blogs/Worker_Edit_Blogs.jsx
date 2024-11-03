@@ -71,7 +71,6 @@ function EditBlog() {
                     validateStatus: () => true,
                 }
             );
-            console.log(response);
             
             if (response.status === 200) {
                 Swal.fire("نجاح", "تم تحديث المقال بنجاح", "success");

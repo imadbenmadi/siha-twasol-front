@@ -20,7 +20,6 @@ function App() {
                         validateStatus: () => true,
                     }
                 );
-                console.log(response);
                 
                 if (response.status == 200) {
                     // store_login(response.data.userId, response.data.userType);

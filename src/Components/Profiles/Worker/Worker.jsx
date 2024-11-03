@@ -27,7 +27,6 @@ function Worker() {
                         validateStatus: () => true,
                     }
                 );
-                console.log(response);
 
                 if (response.status == 200) {
                     set_user(response.data.User);
