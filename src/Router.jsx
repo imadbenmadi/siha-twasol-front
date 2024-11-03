@@ -44,7 +44,12 @@ import Director_Events from "./Components/Profiles/Director/Events/Director_Even
 import Director_Event from "./Components/Profiles/Director/Events/Event.jsx";
 import Director_Add_Events from "./Components/Profiles/Director/Events/Director_Add_Event.jsx";
 import Director_Edit_Events from "./Components/Profiles/Director/Events/Director_Edit_Events.jsx";
+// ______________________________________________________
 
+import Worker_blog from "./Components/Profiles/Worker/Blogs/Blog.jsx";
+import Worker_blogs from "./Components/Profiles/Worker/Blogs/";
+
+    
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -197,6 +202,13 @@ const routes = createBrowserRouter([
                 path: "/Worker",
                 element: <Worker />,
                 errorElement: <ErrorElement />,
+                children: [
+                    {
+                        index: true,
+                        element: <Worker_default />,
+                        errorElement: <ErrorElement />,
+                    },
+                ],
             },
             {
                 path: "/Login",
