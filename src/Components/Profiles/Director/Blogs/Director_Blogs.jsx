@@ -46,7 +46,7 @@ function Blogs() {
         };
 
         fetchBlogs();
-    }, [user.id, user.companyId, navigate]);
+    }, []);
 
     const filteredBlogs = blogs.filter((blog) => {
         const title = blog?.Title.toLowerCase();
@@ -72,7 +72,23 @@ function Blogs() {
             </div>
         );
     }
-
+    if (!blogs || blogs.length === 0) {
+        return (
+            <div className="py-6 px-4">
+                <div className="flex justify-center items-center flex-col gap-6 mt-12">
+                    <div className="text-center font-semibold text-sm text-gray_v pt-12">
+                        لا يوجد مقالات
+                    </div>
+                    <Link
+                        to={"/Director/Blogs/Add"}
+                        className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
+                    >
+                        اضافة مقال جديد
+                    </Link>
+                </div>
+            </div>
+        );
+    }
     return (
         <div className="py-6 px-4">
             <div className="text-xl font-semibold text-blue_v">المقالات</div>
@@ -88,33 +104,39 @@ function Blogs() {
                         className="w-full placeholder:text-end text-end"
                     />
                 </div>
+                <Link
+                    to={"/Director/blogs/Add"}
+                    className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
+                >
+                    اضافة مقال جديد
+                </Link>
             </div>
 
             {filteredBlogs.length === 0 ? (
                 <div className="flex justify-center items-center flex-col gap-6 mt-12">
                     <div className="text-center font-semibold text-sm text-gray_v">
-                        لا يوجد مقالات
+                        لا يوجد مقالات تطابق بحثك
                     </div>
-                    <Link
+                    {/* <Link
                         to={"/Director/Blogs/Add"}
                         className="py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
                     >
                         اضافة مقال جديد
-                    </Link>
+                    </Link> */}
                 </div>
             ) : (
-                <table className="table-auto w-full mt-4 text-sm">
+                <table className="table-auto w-full mt-4 text-sm text-center overflow-auto">
                     <thead>
                         <tr className="bg-gray_white font-normal">
                             <th className="px-4 py-2 rounded-tl-md">Title</th>
                             <th className="px-4 py-2 border-l border-white">
-                                Description
+                                الوصف
                             </th>
                             <th className="px-4 py-2 border-l border-white">
-                                Created At
+                                تم النشر في
                             </th>
                             <th className="px-4 py-2 border-l border-white rounded-tr-md">
-                                Action
+                                العمليات
                             </th>
                         </tr>
                     </thead>
@@ -134,11 +156,12 @@ function Blogs() {
                                 </td>
                                 <td className="border px-4 py-2">
                                     {/* Add any specific action buttons here */}
+
                                     <Link
-                                        to={`/Director/Blogs/${blog.id}/Edit`}
-                                        className="text-blue-500 hover:underline"
+                                        to={`/Director/Blogs/${blog.id}`}
+                                        className="bg-blue_v text-white px-4 py-1 rounded-md "
                                     >
-                                        Edit
+                                        تفاصيل
                                     </Link>
                                 </td>
                             </tr>

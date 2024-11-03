@@ -19,6 +19,7 @@ function Blog() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [deleteLoading, setDeleteLoading] = useState(false);
+    const [showFullDescription, setShowFullDescription] = useState(false); // Toggle for "Read More"
     const blogId = location.pathname.split("/")[3];
 
     useEffect(() => {
@@ -30,7 +31,7 @@ function Blog() {
                 );
 
                 if (response.status === 200) {
-                    setBlog(response.data.User);
+                    setBlog(response.data.blog);
                 } else if (response.status === 401) {
                     Swal.fire("خطأ", "يجب عليك تسجيل الدخول مرة أخرى", "error");
                     navigate("/Login");
@@ -70,7 +71,7 @@ function Blog() {
                     if (response.status === 200) {
                         Swal.fire(
                             "تم الحذف!",
-                            "تم حذف العامل بنجاح.",
+                            "تم حذف المقال بنجاح.",
                             "success"
                         );
                         navigate("/Director/Blogs");
@@ -115,75 +116,94 @@ function Blog() {
             <div className="py-6 px-4">
                 <div className="flex flex-col items-center gap-6 mt-12">
                     <p className="text-center font-semibold text-sm text-red-500 pt-12">
-                        لم يتم العثور على العامل
+                        لم يتم العثور على المقال
                     </p>
                     <Link
                         to="/Director/Blogs"
                         className="py-2 px-4 bg-blue_v text-white rounded-md font-semibold text-sm"
                     >
-                        الرجوع إلى قائمة العمال
+                        الرجوع إلى قائمة المقالات
                     </Link>
                 </div>
             </div>
         );
     }
 
+    const descriptionLimit = 100; // Character limit for the truncated description
+
     return (
         <div className="py-6 px-4">
-            <h2 className="text-xl font-semibold text-blue_v mb-6 text-center">
-                معلومات العامل
-            </h2>
-            <div className="border p-6 rounded-lg bg-gray-50 shadow-lg max-w-3xl mx-auto">
-                <div className="mb-4">
-                    <h3 className="text-lg font-semibold mb-2">
-                        الاسم الكامل:
-                    </h3>
-                    <p className="text-gray-700">{`${blog.firstName} ${blog.lastName}`}</p>
+            <div className="max-w-3xl mx-auto border rounded-lg shadow-lg overflow-hidden bg-white">
+                {/* Blog Image */}
+                <div className="w-full h-64 bg-gray-300 flex items-center justify-center">
+                    <img
+                        src="https://via.placeholder.com/600x400" // Placeholder image
+                        alt="Blog Image"
+                        className="w-full h-full object-cover"
+                    />
                 </div>
-                <div className="mb-4">
-                    <h3 className="text-lg font-semibold mb-2">
-                        البريد الإلكتروني:
-                    </h3>
-                    <p className="text-gray-700">{blog.email}</p>
-                </div>
-                <div className="mb-4">
-                    <h3 className="text-lg font-semibold mb-2">القسم:</h3>
-                    <p className="text-gray-700">
-                        {blog.Service?.Name || "غير محدد"}
-                    </p>
-                </div>
-                <div className="mb-4">
-                    <h3 className="text-lg font-semibold mb-2">
-                        تاريخ الإنشاء:
-                    </h3>
-                    <p className="text-gray-700">
+
+                {/* Blog Content */}
+                <div className="p-6">
+                    {/* Title */}
+                    <h1 className="text-2xl font-bold text-gray-800 mb-2">
+                        {blog.Title}
+                    </h1>
+
+                    {/* Date */}
+                    <p className="text-gray-500 text-sm mb-4">
                         {dayjs(blog.createdAt).format("DD MMMM YYYY")}
                     </p>
-                </div>
-                <div className="mb-4">
-                    <h3 className="text-lg font-semibold mb-2">المؤسسة:</h3>
-                    <p className="text-gray-700">
-                        {blog.Company?.Name || "غير محدد"}
+
+                    {/* Description */}
+                    <p className="text-gray-700 mb-4">
+                        {showFullDescription ||
+                        blog.Description.length <= descriptionLimit
+                            ? blog.Description
+                            : `${blog.Description.slice(
+                                  0,
+                                  descriptionLimit
+                              )}...`}
                     </p>
+
+                    {/* Read More / Show Less Toggle */}
+                    {blog.Description.length > descriptionLimit && (
+                        <button
+                            onClick={() =>
+                                setShowFullDescription(!showFullDescription)
+                            }
+                            className="text-blue-500 hover:underline font-semibold"
+                        >
+                            {showFullDescription ? "إظهار أقل" : "قراءة المزيد"}
+                        </button>
+                    )}
                 </div>
-                <div className="flex justify-end gap-4 mt-4">
-                    <Link
-                        to={`/Director/Blogs/${blog.id}/Edit`}
-                        className="py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600"
-                    >
-                        تعديل
-                    </Link>
-                    <button
-                        onClick={handleDelete}
-                        disabled={deleteLoading}
-                        className={`py-2 px-4 rounded-md text-white ${
-                            deleteLoading
-                                ? "bg-gray-400"
-                                : "bg-red-500 hover:bg-red-600"
-                        }`}
-                    >
-                        {deleteLoading ? "جاري الحذف..." : "حذف"}
-                    </button>
+
+                {/* Footer with Edit and Delete buttons */}
+                <div className="flex justify-between items-center p-6 border-t bg-gray-50">
+                    <div className="text-gray-500 text-sm">
+                        <p>القسم: {blog.Service?.Name || "غير محدد"}</p>
+                        <p>المؤسسة: {blog.Company?.Name || "غير محدد"}</p>
+                    </div>
+                    <div className="flex gap-4">
+                        <Link
+                            to={`/Director/Blogs/${blog.id}/Edit`}
+                            className="py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600"
+                        >
+                            تعديل
+                        </Link>
+                        <button
+                            onClick={handleDelete}
+                            disabled={deleteLoading}
+                            className={`py-2 px-4 rounded-md text-white ${
+                                deleteLoading
+                                    ? "bg-gray-400"
+                                    : "bg-red-500 hover:bg-red-600"
+                            }`}
+                        >
+                            {deleteLoading ? "جاري الحذف..." : "حذف"}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
