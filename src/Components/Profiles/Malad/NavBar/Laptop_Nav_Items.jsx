@@ -62,11 +62,11 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                 </div>
                 <Link
                     className={` ${
-                        Active_nav == "Organisations"
+                        Active_nav == "Companies"
                             ? "text-blue_v"
                             : "text-black_text"
                     } md:hover:text-blue_v transition-all duration-150  cursor-pointer select-none`}
-                    to={"/Malad/Organisations"}
+                    to={"/Malad/Companies"}
                 >
                     <span className=" relative">المؤسسات الاستشفائية</span>
                 </Link>

@@ -60,6 +60,8 @@ import Worker_Add_Events from "./Components/Profiles/Worker/Events/Worker_Add_Ev
 import Worker_Edit_Events from "./Components/Profiles/Worker/Events/Worker_Edit_Events.jsx";
 // ______________________________________________________
 import Malad_Edit_Profile from "./Components/Profiles/Malad/Profile/Edit_Profile.jsx";
+import Malad_Companies from "./Components/Profiles/Malad/Companies/Companies.jsx";
+
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -94,6 +96,11 @@ const routes = createBrowserRouter([
                     {
                         path: "/Malad/Profile/Edit",
                         element: <Malad_Edit_Profile />,
+                    },
+                    {
+                        path: "/Malad/Companies",
+                        element: <Malad_Companies />,
+                        errorElement: <ErrorElement />,
                     },
                     {
                         path: "*",

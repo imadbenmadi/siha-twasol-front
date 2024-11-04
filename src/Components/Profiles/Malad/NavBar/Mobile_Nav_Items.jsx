@@ -36,9 +36,9 @@ function Mobile_Nav_Items({
                             </Link>
                             <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Malad/Organisations"}
+                                to={"/Malad/Companies"}
                                 className={`${
-                                    Active_nav == "Organisations"
+                                    Active_nav == "Companies"
                                         ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none   `}
