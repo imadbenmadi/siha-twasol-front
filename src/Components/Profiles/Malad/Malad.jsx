@@ -27,18 +27,20 @@ function Director() {
                         validateStatus: () => true,
                     }
                 );
+                // console.log(response);
 
                 if (response.status == 200) {
                     set_user(response.data.User);
                 } else {
                     set_Auth(false);
                     Navigate("/Login");
+                    window.location.href = "/home";
                 }
             } catch (error) {
                 set_Auth(false);
                 Navigate("/Login");
+                window.location.href = "/home";
             }
-            window.location.href = "/home";
         };
         fetchData().then(() => {
             setLoading(false);

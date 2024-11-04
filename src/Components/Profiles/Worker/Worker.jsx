@@ -31,8 +31,8 @@ function Worker() {
                 if (response.status == 200) {
                     set_user(response.data.User);
                 } else {
-                    // set_Auth(false);
-                    // Navigate("/Login");
+                    set_Auth(false);
+                    Navigate("/Login");
                 }
             } catch (error) {
                 set_Auth(false);

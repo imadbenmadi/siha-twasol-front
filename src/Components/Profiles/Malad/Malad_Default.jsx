@@ -4,7 +4,7 @@ import { useEffect } from "react";
 function Malad_Default() {
     const Navigate = useNavigate();
     useEffect(() => {
-        Navigate("/Malad/Blogs");
+        Navigate("/Malad");
     }, []);
 }
 
