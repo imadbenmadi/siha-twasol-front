@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useAppContext } from "../../../../AppContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 function EditProfile() {
-    const { user } = useAppContext();
+    const { user, set_user } = useAppContext();
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -48,7 +49,14 @@ function EditProfile() {
 
         const data = new FormData();
         Object.keys(formData).forEach((key) => {
-            data.append(key, formData[key]);
+            if (key === "birthDate" && formData.birthDate) {
+                const formattedDate = new Date(formData.birthDate)
+                    .toISOString()
+                    .split("T")[0];
+                data.append("birthDate", formattedDate);
+            } else {
+                data.append(key, formData[key]);
+            }
         });
 
         if (profilePic) {
@@ -56,15 +64,34 @@ function EditProfile() {
         }
 
         try {
-            await axios.post("http://localhost:3000/api/profile/edit", data, {
-                headers: { "Content-Type": "multipart/form-data" },
-                withCredentials: true,
-            });
-            navigate("/Malad/Profile"); // Redirect back to profile page after successful edit
+            const response = await axios.put(
+                `http://localhost:3000/Malads/${user.id}/Profile`,
+                data,
+                {
+                    headers: { "Content-Type": "multipart/form-data" },
+                    withCredentials: true,
+                }
+            );
+
+            if (response.status === 200) {
+                // Update user context with the latest data, including the new profile image URL
+                set_user({
+                    ...user,
+                    ...formData,
+                    profile_pic_link: response.data.user.profile_pic_link,
+                });
+                navigate("/Malad/Profile"); // Redirect back to profile page after successful edit
+            }
         } catch (error) {
             console.error("Profile update failed:", error);
+            Swal.fire({
+                icon: "error",
+                title: "حدث خطأ ما!",
+                text: "تعذر تحديث الحساب الشخصي.",
+            });
         }
     };
+
 
     return (
         <div className="max-w-lg mx-auto p-6 mt-6 bg-white shadow-lg rounded-lg border border-gray-200">

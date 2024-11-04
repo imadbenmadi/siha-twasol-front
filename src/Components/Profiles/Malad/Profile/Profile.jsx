@@ -19,9 +19,9 @@ function Profile() {
                 </h3>
                 {user?.profile_pic_link ? (
                     <img
-                        src={user.profile_pic_link}
+                        src={`http://localhost:3000/${user.profile_pic_link}`}
                         alt="Profile"
-                        className="w-32 h-32 rounded-full mx-auto"
+                        className="w-32 h-32 rounded-full mx-auto object-cover"
                     />
                 ) : (
                     <p className="text-gray-600 text-center">لا توجد صورة</p>
