@@ -6,6 +6,8 @@ import { TbLogout2 } from "react-icons/tb";
 import { FiUser } from "react-icons/fi";
 import { useAppContext } from "../../../../AppContext";
 import { useNavigate } from "react-router-dom";
+import { IoMdNotificationsOutline } from "react-icons/io";
+import notification_icon from "../../../../../public/Notification.png";
 
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -13,13 +15,33 @@ dayjs.extend(customParseFormat);
 import axios from "axios";
 function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
     const Navigate = useNavigate();
-    const { user, Notifications, set_Messages } = useAppContext();
+    const { user, Notifications, set_Messages, set_Notifications } =
+        useAppContext();
     const [ProfileClicked, setProfileClicked] = useState(false);
+    const [open_Notifications, setopen_Notifications] = useState(false);
+    // const [Notifications_, set_Notifications] = useState([]);
     const toogleProfile = () => {
         setopen_Notifications(false);
         setProfileClicked(!ProfileClicked);
     };
-    const [open_Notifications, setopen_Notifications] = useState(false);
+    const toogleopen_Notifications = () => {
+        setProfileClicked(false);
+        setopen_Notifications(!open_Notifications);
+    };
+    const Delete_Notification = (id) => {
+        const newNotifications = Notifications.filter(
+            (notification) => notification.id !== id
+        );
+        set_Notifications(newNotifications);
+        axios.delete(
+            `http://localhost:3000/Teachers/${user?.id}/Notifications/${id}`,
+
+            {
+                withCredentials: true,
+                validateStatus: () => true,
+            }
+        );
+    };
 
     return (
         <div className="hidden  md:flex  items-center justify-between mx-2 lg:mx-12  md:text-md lg:text-lg  font-[500] text-black_text h-full p-2 ">
@@ -29,34 +51,34 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
             <div className="flex gap-6 lg:gap-14">
                 <div
                     className={` ${
-                        Active_nav == "Workers"
+                        Active_nav == "Profile"
                             ? "text-blue_v"
                             : "text-black_text"
                     } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
-                    <Link to={"/Malad/Workers"} className={"select-none"}>
-                        <span className=" relative">العمال</span>
+                    <Link to={"/Malad/Profile"} className={"select-none"}>
+                        <span className=" relative">الحساب</span>
                     </Link>
                 </div>
                 <Link
                     className={` ${
-                        Active_nav == "Services"
+                        Active_nav == "Organisations"
                             ? "text-blue_v"
                             : "text-black_text"
                     } md:hover:text-blue_v transition-all duration-150  cursor-pointer select-none`}
-                    to={"/Malad/Services"}
+                    to={"/Malad/Organisations"}
                 >
-                    <span className=" relative">الاقسام</span>
+                    <span className=" relative">المؤسسات الاستشفائية</span>
                 </Link>
                 <div
                     className={` ${
-                        Active_nav == "Doctores"
+                        Active_nav == "ChatRooms"
                             ? "text-blue_v"
                             : "text-black_text"
                     } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
-                    <Link to={"/Malad/Doctores"} className={" select-none"}>
-                        الاطباء{" "}
+                    <Link to={"/Malad/ChatRooms"} className={" select-none"}>
+                        المراسلة{" "}
                     </Link>
                 </div>
                 <div
@@ -83,7 +105,21 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                 </div>
             </div>
             <div className=" flex items center justify-center gap-5">
-                <div className="flex items-center justify-center gap-6 "></div>
+                <div className="flex items-center justify-center gap-6 ">
+                    <div className="flex items-center justify-center gap-6 relative">
+                        <div className="relative">
+                            {Notifications?.length > 0 && (
+                                <div className=" w-2 h-2 rounded-full bg-red-500 absolute top-0 right-0 "></div>
+                            )}
+                            <img
+                                src={notification_icon}
+                                alt=""
+                                className=" cursor-pointer shrink-0 w-full"
+                                onClick={toogleopen_Notifications}
+                            />
+                        </div>
+                    </div>
+                </div>
                 <div className=" relative">
                     {user?.profile_pic_link ? (
                         <img
@@ -125,6 +161,62 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                                     >
                                         <TbLogout2 className="  text-xl" />
                                         Logout
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    ) : null}
+                    {open_Notifications ? (
+                        <div
+                            className="absolute top-10 right-0 bg-white shadow border  
+                             rounded-lg   z-50   min-w-[500px] h-[calc(100vh-100px)] overflow-y-auto
+                             custom-overflow
+                             "
+                        >
+                            <div className=" text-gray_v py-2 px-7 text-md font-semibold border-b">
+                                Notifications
+                            </div>
+                            <div>
+                                {Notifications?.length > 0 ? (
+                                    Notifications.map((notification) => (
+                                        <div
+                                            onClick={() => {
+                                                Delete_Notification(
+                                                    notification.id
+                                                );
+                                                Navigate(notification.link);
+                                                setopen_Notifications(false);
+                                                setProfileClicked(false);
+                                            }}
+                                            key={notification.id}
+                                            className="flex items-center gap-3 py-1 px-3 border-b cursor-pointer hover:bg-gray-100"
+                                        >
+                                            <div className=" flex gap-2 ">
+                                                <IoMdNotificationsOutline className="shrink-0 mt-2" />
+                                                <div>
+                                                    <div className="text-black_text font-semibold">
+                                                        {notification?.title}
+                                                    </div>
+                                                    <div className="text-gray_v text-sm">
+                                                        {notification?.text}
+                                                    </div>
+                                                    <div className="text-gray_v text-xs pt-1">
+                                                        {/* {new Date(
+                                                            notification?.createdAt
+                                                        ).toLocaleDateString()} */}
+                                                        {dayjs(
+                                                            notification?.createdAt
+                                                        ).format(
+                                                            "DD MMMM YYYY"
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="text-center text-gray_v pt-6 flex-gap-2 ">
+                                        No Notifications
                                     </div>
                                 )}
                             </div>

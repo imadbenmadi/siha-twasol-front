@@ -23,39 +23,39 @@ function Mobile_Nav_Items({
                         <div className="text-center flex flex-col gap-8 my-8 ">
                             <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Malad/Workers"}
+                                to={"/Malad/Profile"}
                                 className={`${
-                                    Active_nav == "Workers"
+                                    Active_nav == "Profile"
                                         ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none    `}
                             >
                                 <div className={"select-none"}>
-                                    <span className=" relative">العمال </span>
+                                    <span className=" relative">الحساب </span>
                                 </div>
                             </Link>
                             <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Malad/Services"}
+                                to={"/Malad/Organisations"}
                                 className={`${
-                                    Active_nav == "Services"
+                                    Active_nav == "Organisations"
                                         ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none   `}
                             >
-                                الاقسام
+                                المؤسسات الاستشفائية
                             </Link>
                             <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Malad/Doctores"}
+                                to={"/Malad/ChatRooms"}
                                 className={`${
-                                    Active_nav == "Doctores"
+                                    Active_nav == "ChatRooms"
                                         ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none    `}
                             >
                                 <div className={"select-none"}>
-                                    <span className=" relative">الاطباء </span>
+                                    <span className=" relative">المراسلة </span>
                                 </div>
                             </Link>
                             <Link

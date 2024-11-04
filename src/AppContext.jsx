@@ -41,6 +41,11 @@ const reducer = (state, action) => {
                 ...state,
                 Notifications: action.payload,
             };
+        case "SET_NOTIFICATIONS":
+            return {
+                ...state,
+                Notifications: action.payload,
+            };
         default:
             return state;
     }
@@ -73,6 +78,12 @@ export const AppProvider = ({ children }) => {
             payload: Notifications,
         });
     };
+    const set_Notifications = (Notifications) => {
+        dispatch({
+            type: "SET_NOTIFICATIONS",
+            payload: Notifications,
+        });
+    };
     const AppContextValue = {
         ...state,
         store_logout,
@@ -80,6 +91,7 @@ export const AppProvider = ({ children }) => {
         store_login,
         set_user,
         set_Messages,
+        set_Notifications,
     };
     return (
         <AppContext.Provider value={AppContextValue}>
