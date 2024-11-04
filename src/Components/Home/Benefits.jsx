@@ -14,7 +14,10 @@ function Benefits() {
                     في صحتك
                 </div>
             </div>
-            <div className=" flex flex-col flex-wrap justify-center md:flex-row items-center gap-12  md:overflow-x-auto overflow-hidden custom-overflow px-12 py-12">
+            <div
+                className=" flex flex-col flex-wrap justify-center md:flex-row items-center gap-12  
+            md:overflow-x-auto overflow-hidden custom-overflow md:px-12 px-2 md:py-12 py-4"
+            >
                 <Benefits_card
                     image={benefits1_image}
                     title="تواصل سهل وسريع مع الأطباء"

@@ -51,15 +51,15 @@ function Features() {
 
     return (
         <div
-            className="min-h-screen flex items-center justify-center"
+            className="min-h-screen flex items-center justify-center "
             id="Features"
         >
             <div>
                 <div className="text-center mt-24">
                     <div className="text-2xl font-semibold">ميزاتنا</div>
-                    <div className="text-sm pt-2">
-                        استكشف ميزات منصتنا القوية المصممة لإبقائك على اتصال
-                        والتحكم في صحتك
+                    <div className="text-sm pt-2 ">
+                        استكشف ميزات منصتنا القوية المصممة <br />لإبقائك على اتصال
+                        وتحكم في صحتك
                     </div>
                 </div>
                 <motion.div

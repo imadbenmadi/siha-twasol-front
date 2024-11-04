@@ -23,7 +23,7 @@ function How_we_work() {
                 />
             </div>
 
-            <div className=" w-full bg-[#F5FAFE] min-h-[50vh] ">
+            <div className=" w-full px-4 bg-[#F5FAFE] min-h-[50vh] ">
                 <motion.div
                     ref={ref}
                     variants={itemVariants}
@@ -36,7 +36,7 @@ function How_we_work() {
                             كيف نعمل ؟
                         </div>
                         <div className=" flex   flex-col gap-7">
-                            <div className=" flex justify-center items-center gap-3">
+                            <div className=" flex justify-center items-center gap-1 md:gap-3">
                                 <div className=" text-sm">
                                     قم بالتسجيل وإنشاء ملف التعريف الخاص بك
                                 </div>
@@ -44,17 +44,19 @@ function How_we_work() {
                                     1
                                 </div>
                             </div>
-                            <div className=" flex justify-center items-center gap-3">
+                            <div className=" flex justify-center items-center gap-1 md:gap-3">
                                 <div className=" text-sm">
-                                    قم بالتسجيل وإنشاء ملف التعريف الخاص بك
+                                    ابحث عن المؤسسة الاستشفائية التي تريها لرؤية
+                                    اطباءها و التواصل معهم{" "}
                                 </div>
                                 <div className="  w-6 h-6 rounded shadow border flex items-center justify-center  bg-white text-md  font-semibold text-black_text">
                                     2
                                 </div>
                             </div>
-                            <div className=" flex justify-center items-center gap-3">
+                            <div className=" flex justify-center items-center gap-1 md:gap-3">
                                 <div className=" text-sm">
-                                    قم بالتسجيل وإنشاء ملف التعريف الخاص بك
+                                    ستتلقى اشعارات عن احداث ة مقالات الاطباء و
+                                    المؤسسة الاستشفائية
                                 </div>
                                 <div className="  w-6 h-6 rounded shadow border flex items-center justify-center  bg-white text-md  font-semibold text-black_text">
                                     3
