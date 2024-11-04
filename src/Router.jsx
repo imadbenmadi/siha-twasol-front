@@ -66,6 +66,7 @@ import Malad_Companiy_doctors from "./Components/Profiles/Malad/Companies/Compan
 import Malad_Companiy_blogs from "./Components/Profiles/Malad/Companies/Company_Components/BlogsSection.jsx";
 import Malad_Companiy_events from "./Components/Profiles/Malad/Companies/Company_Components/EventsSection.jsx";
 import Malad_Companiy_informations from "./Components/Profiles/Malad/Companies/Company_Components/info.jsx";
+import Default_Malad_company from "./Components/Profiles/Malad/Companies/Company_Components/Default.jsx";
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -111,6 +112,11 @@ const routes = createBrowserRouter([
                         element: <Malad_Companiy />,
                         errorElement: <ErrorElement />,
                         children: [
+                            {
+                                index: true,
+                                element: <Default_Malad_company />,
+                                errorElement: <ErrorElement />,
+                            },
                             {
                                 path: "/Malad/Companies/:id/Events",
                                 element: <Malad_Companiy_events />,
