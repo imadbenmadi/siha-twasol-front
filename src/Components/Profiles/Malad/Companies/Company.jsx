@@ -96,24 +96,8 @@ function Company() {
 
             {/* Main Content */}
             <main className="w-4/5 p-8 bg-white shadow-lg rounded-lg mx-6 my-6">
-                <h1 className="text-3xl font-bold mb-6 text-gray-800">
-                    {company?.Name}
-                </h1>
-                <div className="mb-8">
-                    <p className="text-gray-600">
-                        <span className="font-semibold">الموقع:</span>{" "}
-                        {company?.Location}
-                    </p>
-                    <p className="text-gray-600">
-                        <span className="font-semibold">الولاية:</span>{" "}
-                        {company?.Wilaya}
-                    </p>
-                    <p className="text-gray-600">
-                        <span className="font-semibold">النوع:</span>{" "}
-                        {company?.Type}
-                    </p>
-                </div>
-                <Outlet /> {/* This renders the selected child component */}
+                <Outlet context={company} />{" "}
+                {/* This renders the selected child component */}
             </main>
         </div>
     );

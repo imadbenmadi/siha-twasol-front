@@ -1,6 +1,7 @@
 import React from "react";
-
-function info({ company }) {
+import { useOutletContext } from "react-router";
+function info() {
+    const { company } = useOutletContext();
     return (
         <div>
             <h2 className="text-xl font-semibold mb-6">تفاصيل الشركة</h2>
