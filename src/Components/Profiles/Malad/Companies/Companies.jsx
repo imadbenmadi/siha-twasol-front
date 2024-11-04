@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { IoSearch } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAppContext } from "../../../../AppContext";
 
 function CompaniesTable() {
     const { user } = useAppContext();
-    const navigate = useNavigate();
     const [companies, setCompanies] = useState([]);
     const [filteredCompanies, setFilteredCompanies] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -73,10 +72,6 @@ function CompaniesTable() {
 
         setFilteredCompanies(filtered);
     }, [searchQuery, typeFilter, locationFilter, companies]);
-
-    const handleViewClick = (companyId) => {
-        navigate(`/${companyId}`);
-    };
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div className="text-red-600">{error}</div>;
@@ -168,14 +163,12 @@ function CompaniesTable() {
                                         {company.Type}
                                     </td>
                                     <td className="px-6 py-4">
-                                        <button
-                                            onClick={() =>
-                                                handleViewClick(company.id)
-                                            }
+                                        <Link
+                                            to={`/Malad/Companies/${company.id}`}
                                             className="py-1 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200"
                                         >
                                             عرض
-                                        </button>
+                                        </Link>
                                     </td>
                                 </tr>
                             ))

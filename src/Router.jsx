@@ -61,6 +61,7 @@ import Worker_Edit_Events from "./Components/Profiles/Worker/Events/Worker_Edit_
 // ______________________________________________________
 import Malad_Edit_Profile from "./Components/Profiles/Malad/Profile/Edit_Profile.jsx";
 import Malad_Companies from "./Components/Profiles/Malad/Companies/Companies.jsx";
+import Malad_Companiy from "./Components/Profiles/Malad/Companies/Company.jsx";
 
 const routes = createBrowserRouter([
     {
@@ -100,6 +101,11 @@ const routes = createBrowserRouter([
                     {
                         path: "/Malad/Companies",
                         element: <Malad_Companies />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Malad/Companies/:id",
+                        element: <Malad_Companiy />,
                         errorElement: <ErrorElement />,
                     },
                     {
