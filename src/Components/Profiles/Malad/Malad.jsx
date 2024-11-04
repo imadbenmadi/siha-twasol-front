@@ -12,7 +12,9 @@ function Director() {
     const [loading, setLoading] = useState(true);
     const { userId, isAuth, set_user, userType, set_Auth, user, set_Messages } =
         useAppContext();
-
+    useEffect(() => {
+        console.log("Malad : ", user);
+    }, []);
     useEffect(() => {
         if (!isAuth || !userId) {
             set_Auth(false);

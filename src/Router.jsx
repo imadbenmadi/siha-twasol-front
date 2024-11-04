@@ -16,6 +16,7 @@ import Director from "./Components/Profiles/Director/Director.jsx";
 import Worker from "./Components/Profiles/Worker/Worker.jsx";
 
 import Worker_Profile from "./Components/Profiles/Worker/Profile/Profile.jsx";
+import Malad_Profile from "./Components/Profiles/Malad/Profile/Profile.jsx";
 
 // import Malad from "./Components/Profiles/Director/Director.jsx";
 import Director_default from "./Components/Profiles/Director/Director_Default.jsx";
@@ -57,6 +58,8 @@ import Worker_event from "./Components/Profiles/Worker/Events/Event.jsx";
 import Worker_Events from "./Components/Profiles/Worker/Events/Worker_Events.jsx";
 import Worker_Add_Events from "./Components/Profiles/Worker/Events/Worker_Add_Event.jsx";
 import Worker_Edit_Events from "./Components/Profiles/Worker/Events/Worker_Edit_Events.jsx";
+// ______________________________________________________
+import Malad_Edit_Profile from "./Components/Profiles/Malad/Profile/Edit_Profile.jsx";
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -82,6 +85,15 @@ const routes = createBrowserRouter([
                         index: true,
                         element: <Malad_default />,
                         errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Malad/Profile",
+                        element: <Malad_Profile />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Malad/Profile/Edit",
+                        element: <Malad_Edit_Profile />,
                     },
                     {
                         path: "*",
