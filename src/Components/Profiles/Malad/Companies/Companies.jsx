@@ -33,7 +33,7 @@ function CompaniesTable() {
                     // Extract unique locations for filter options
                     const uniqueLocations = [
                         ...new Set(
-                            response.data.map((company) => company.Location)
+                            response.data.map((company) => company?.Location)
                         ),
                     ];
                     setLocations(uniqueLocations);
@@ -59,11 +59,13 @@ function CompaniesTable() {
     // Static filtering logic applied to `filteredCompanies` based on search query, type, and location
     useEffect(() => {
         const filtered = companies.filter((company) => {
-            const matchesType = typeFilter ? company.Type === typeFilter : true;
-            const matchesLocation = locationFilter
-                ? company.Location === locationFilter
+            const matchesType = typeFilter
+                ? company?.Type === typeFilter
                 : true;
-            const matchesSearch = company.Name.toLowerCase().includes(
+            const matchesLocation = locationFilter
+                ? company?.Location === locationFilter
+                : true;
+            const matchesSearch = company?.Name.toLowerCase().includes(
                 searchQuery.toLowerCase()
             );
 
@@ -138,6 +140,9 @@ function CompaniesTable() {
                                 نوع الشركة
                             </th>
                             <th className="px-6 py-4 border-l border-gray-200">
+                                عدد الاطباء
+                            </th>
+                            <th className="px-6 py-4 border-l border-gray-200">
                                 عرض
                             </th>
                         </tr>
@@ -147,24 +152,27 @@ function CompaniesTable() {
                         filteredCompanies.length > 0 ? (
                             filteredCompanies.map((company) => (
                                 <tr
-                                    key={company.id}
+                                    key={company?.id}
                                     className="border-t border-gray-200 hover:bg-gray-50"
                                 >
                                     <td className="px-6 py-4 font-semibold text-gray-700">
-                                        {company.Name}
+                                        {company?.Name}
                                     </td>
                                     <td className="px-6 py-4 text-gray-600">
-                                        {company.Location}
+                                        {company?.Location}
                                     </td>
                                     <td className="px-6 py-4 text-gray-600">
-                                        {company.Wilaya}
+                                        {company?.Wilaya}
                                     </td>
                                     <td className="px-6 py-4 text-gray-600">
-                                        {company.Type}
+                                        {company?.Type}
+                                    </td>
+                                    <td className="px-6 py-4 text-gray-600">
+                                        {company?.Medecins.length}
                                     </td>
                                     <td className="px-6 py-4">
                                         <Link
-                                            to={`/Malad/Companies/${company.id}`}
+                                            to={`/Malad/Companies/${company?.id}`}
                                             className="py-1 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200"
                                         >
                                             عرض
