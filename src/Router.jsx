@@ -62,7 +62,10 @@ import Worker_Edit_Events from "./Components/Profiles/Worker/Events/Worker_Edit_
 import Malad_Edit_Profile from "./Components/Profiles/Malad/Profile/Edit_Profile.jsx";
 import Malad_Companies from "./Components/Profiles/Malad/Companies/Companies.jsx";
 import Malad_Companiy from "./Components/Profiles/Malad/Companies/Company.jsx";
-
+import Malad_Companiy_doctors from "./Components/Profiles/Malad/Companies/Company_Components/DoctorsSection.jsx";
+import Malad_Companiy_blogs from "./Components/Profiles/Malad/Companies/Company_Components/BlogsSection.jsx";
+import Malad_Companiy_events from "./Components/Profiles/Malad/Companies/Company_Components/EventsSection.jsx";
+import Malad_Companiy_informations from "./Components/Profiles/Malad/Companies/Company_Components/info.jsx";
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -107,7 +110,30 @@ const routes = createBrowserRouter([
                         path: "/Malad/Companies/:id",
                         element: <Malad_Companiy />,
                         errorElement: <ErrorElement />,
+                        children: [
+                            {
+                                path: "/Malad/Companies/:id/Events",
+                                element: <Malad_Companiy_events />,
+                                errorElement: <ErrorElement />,
+                            },
+                            {
+                                path: "/Malad/Companies/:id/Blogs",
+                                element: <Malad_Companiy_blogs />,
+                                errorElement: <ErrorElement />,
+                            },
+                            {
+                                path: "/Malad/Companies/:id/Doctors",
+                                element: <Malad_Companiy_doctors />,
+                                errorElement: <ErrorElement />,
+                            },
+                            {
+                                path: "/Malad/Companies/:id/Info",
+                                element: <Malad_Companiy_informations />,
+                                errorElement: <ErrorElement />,
+                            },
+                        ],
                     },
+
                     {
                         path: "*",
                         element: <Not_Finished />,
