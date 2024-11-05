@@ -19,7 +19,6 @@ function Event() {
     const [event, setEvent] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [deleteLoading, setDeleteLoading] = useState(false);
     const [showFullDescription, setShowFullDescription] = useState(false); // Toggle for "Read More"
     const eventId = location.pathname.split("/")[3];
 
@@ -27,7 +26,7 @@ function Event() {
         const fetchEvent = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/Workers/${user.id}/${user.companyId}/Events/${eventId}`,
+                    `http://localhost:3000/Malads/${user.id}/Events/${eventId}`,
                     { withCredentials: true, validateStatus: () => true }
                 );
 
@@ -52,51 +51,6 @@ function Event() {
 
         fetchEvent();
     }, [eventId, user.id, user.companyId, navigate]);
-
-    const handleDelete = () => {
-        Swal.fire({
-            title: "هل أنت متأكد؟",
-            text: "لن تتمكن من استعادة هذا العنصر!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "نعم، احذفه!",
-        }).then(async (result) => {
-            if (result.isConfirmed) {
-                setDeleteLoading(true);
-                try {
-                    const response = await axios.delete(
-                        `http://localhost:3000/Workers/${user.id}/${user.companyId}/Events/${eventId}`,
-                        { withCredentials: true, validateStatus: () => true }
-                    );
-
-                    if (response.status === 200) {
-                        Swal.fire(
-                            "تم الحذف!",
-                            "تم حذف الحدث بنجاح.",
-                            "success"
-                        );
-                        navigate("/Worker/Events");
-                    } else {
-                        Swal.fire(
-                            "خطأ",
-                            response.data.message || "فشل في حذف الحدث.",
-                            "error"
-                        );
-                    }
-                } catch (deleteError) {
-                    Swal.fire(
-                        "خطأ",
-                        deleteError.message || "فشل في حذف الحدث.",
-                        "error"
-                    );
-                } finally {
-                    setDeleteLoading(false);
-                }
-            }
-        });
-    };
 
     if (loading) {
         return (
@@ -184,32 +138,6 @@ function Event() {
                             {showFullDescription ? "إظهار أقل" : "قراءة المزيد"}
                         </button>
                     )}
-                </div>
-
-                {/* Footer with Edit and Delete buttons */}
-                <div className="flex flex-col md:flex-row justify-between items-center p-6 border-t bg-gray-50">
-                    <div className="text-gray-500 text-sm mb-3">
-                        <p>المؤسسة: {event.Company?.Name || "غير محدد"}</p>
-                    </div>
-                    <div className="flex gap-4">
-                        <Link
-                            to={`/Worker/Events/${event.id}/Edit`}
-                            className="py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600"
-                        >
-                            تعديل
-                        </Link>
-                        <button
-                            onClick={handleDelete}
-                            disabled={deleteLoading}
-                            className={`py-2 px-4 rounded-md text-white ${
-                                deleteLoading
-                                    ? "bg-gray-400"
-                                    : "bg-red-500 hover:bg-red-600"
-                            }`}
-                        >
-                            {deleteLoading ? "جاري الحذف..." : "حذف"}
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>

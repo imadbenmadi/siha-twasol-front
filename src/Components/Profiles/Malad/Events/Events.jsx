@@ -10,9 +10,9 @@ import { useAppContext } from "../../../../AppContext";
 
 dayjs.extend(customParseFormat);
 
-function Blogs() {
+function Events() {
     const navigate = useNavigate();
-    const [blogs, setBlogs] = useState([]);
+    const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
@@ -21,35 +21,36 @@ function Blogs() {
 
     useEffect(() => {
         setLoading(true);
-        const fetchBlogs = async () => {
+        const fetchEvents = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/Workers/${user.id}/${user.companyId}/Blogs`,
+                    `http://localhost:3000/Malads/${user.id}/Events`,
                     {
                         withCredentials: true,
                         validateStatus: () => true,
                     }
                 );
                 if (response.status === 200) {
-                    setBlogs(response.data.blogs || []);
+                    setEvents(response.data.events || []);
                 } else if (response.status === 401) {
-                    Swal.fire("Error", "You should login again", "error");
+                    Swal.fire("خطأ", "يجب عليك تسجيل الدخول مرة أخرى", "error");
+                    navigate("/Login");
                 } else {
-                    setError(response.data.message || "An error occurred.");
+                    setError(response.data.message || "حدث خطأ ما.");
                 }
             } catch (error) {
-                setError("Failed to fetch blogs. Please try again later.");
+                setError("فشل في جلب الأحداث. يرجى المحاولة مرة أخرى لاحقًا.");
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchBlogs();
-    }, []);
+        fetchEvents();
+    }, [navigate, user.id, user.companyId]);
 
-    const filteredBlogs = blogs.filter((blog) => {
-        const title = blog?.Title.toLowerCase();
-        const description = blog?.Description?.toLowerCase() || "";
+    const filteredEvents = events.filter((event) => {
+        const title = event?.Title.toLowerCase();
+        const description = event?.Description?.toLowerCase() || "";
         return (
             title.includes(searchQuery.toLowerCase()) ||
             description.includes(searchQuery.toLowerCase())
@@ -58,7 +59,7 @@ function Blogs() {
 
     if (loading) {
         return (
-            <div className="w-[80vw] h-[80vh] flex flex-col items-center justify-center">
+            <div className="w-[80vw] h-[80vh] flex items-center justify-center">
                 <span className="loader"></span>
             </div>
         );
@@ -71,89 +72,78 @@ function Blogs() {
             </div>
         );
     }
-    if (!blogs || blogs.length === 0) {
+
+    if (!events || events.length === 0) {
         return (
             <div className="py-6 px-4">
                 <div className="flex justify-center items-center flex-col gap-6 mt-12">
                     <div className="text-center font-semibold text-sm text-gray_v pt-12">
-                        لا يوجد مقالات
+                        لا توجد أحداث متاحة
                     </div>
-                    <Link
-                        to={"/Worker/Blogs/Add"}
-                        className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
-                    >
-                        اضافة مقال جديد
-                    </Link>
                 </div>
             </div>
         );
     }
+
     return (
         <div className="py-6 px-4">
-            <div className="text-xl font-semibold text-blue_v">المقالات</div>
+            <div className="text-xl font-semibold text-blue_v">الأحداث</div>
 
             <div className="mt-4 flex flex-col md:flex-row gap-4 justify-center md:justify-start md:ml-6 md:gap-6 text-gray_v">
-                <div className="border p-2 rounded-md flex items-center gap-2 text-sm font-semibold min-w-[300px]">
+                <div className="border p-2 mr-4 rounded-md flex items-center gap-2 text-sm font-semibold min-w-[300px]">
                     <IoSearch className="w-fit shrink-0" />
                     <input
                         type="text"
-                        placeholder="ابحث عن المقال"
+                        placeholder="ابحث عن الحدث"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         className="w-full placeholder:text-end text-end"
                     />
                 </div>
-                <Link
-                    to={"/Worker/blogs/Add"}
-                    className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
-                >
-                    اضافة مقال جديد
-                </Link>
             </div>
 
-            {filteredBlogs.length === 0 ? (
+            {filteredEvents.length === 0 ? (
                 <div className="flex justify-center items-center flex-col gap-6 mt-12">
                     <div className="text-center font-semibold text-sm text-gray_v">
-                        لا يوجد مقالات تطابق بحثك
+                        لا توجد أحداث تطابق بحثك
                     </div>
                 </div>
             ) : (
                 <div className="overflow-x-auto mt-4">
-                    <table className="table-auto w-full text-sm text-center border border-gray-200 rounded-lg">
+                    <table className="table-auto w-full mt-4 text-sm text-center overflow-auto">
                         <thead>
-                            <tr className="bg-gray-100 font-normal">
-                                <th className="px-4 py-2 rounded-tl-lg">
+                            <tr className="bg-gray_white font-normal">
+                                <th className="px-4 py-2 rounded-tl-md">
                                     العنوان
                                 </th>
-                                <th className="px-4 py-2 border-l border-gray-200">
+                                <th className="px-4 py-2 border-l border-white">
                                     الوصف
                                 </th>
-                                <th className="px-4 py-2 border-l border-gray-200">
-                                    تم النشر في
+                                <th className="px-4 py-2 border-l border-white">
+                                    تاريخ النشر
                                 </th>
-                                <th className="px-4 py-2 border-l border-gray-200 rounded-tr-lg">
+                                <th className="px-4 py-2 border-l border-white rounded-tr-md">
                                     العمليات
                                 </th>
                             </tr>
                         </thead>
                         <tbody className="text-xs text-center font-semibold">
-                            {filteredBlogs.map((blog) => (
-                                <tr
-                                    key={blog.id}
-                                    className="border-t border-gray-200"
-                                >
-                                    <td className="px-4 py-2">{blog.Title}</td>
-                                    <td className="px-4 py-2">
-                                        {blog.Description || "لا يوجد وصف"}
+                            {filteredEvents.map((event) => (
+                                <tr key={event.id}>
+                                    <td className="border px-4 py-2">
+                                        {event.Title}
                                     </td>
-                                    <td className="px-4 py-2">
-                                        {dayjs(blog.createdAt).format(
+                                    <td className="border px-4 py-2">
+                                        {event.Description || "لا يوجد وصف"}
+                                    </td>
+                                    <td className="border px-4 py-2">
+                                        {dayjs(event.createdAt).format(
                                             "DD MMMM YYYY"
                                         )}
                                     </td>
-                                    <td className="px-4 py-2">
+                                    <td className="border px-4 py-2">
                                         <Link
-                                            to={`/Worker/Blogs/${blog.id}`}
+                                            to={`/Worker/Events/${event.id}`}
                                             className="bg-blue_v text-white px-4 py-1 rounded-md"
                                         >
                                             تفاصيل
@@ -169,4 +159,4 @@ function Blogs() {
     );
 }
 
-export default Blogs;
+export default Events;

@@ -69,6 +69,12 @@ import Malad_Companiy_events from "./Components/Profiles/Malad/Companies/Company
 import Malad_Companiy_event from "./Components/Profiles/Malad/Companies/Company_Components/Events/Event.jsx";
 import Malad_Companiy_informations from "./Components/Profiles/Malad/Companies/Company_Components/info.jsx";
 import Default_Malad_company from "./Components/Profiles/Malad/Companies/Company_Components/Default.jsx";
+
+import Malad_Events from "./Components/Profiles/Malad/Events/Events.jsx";
+import Malad_Event from "./Components/Profiles/Malad/Events/Event.jsx";
+import Malad_Blogs from "./Components/Profiles/Malad/Blogs/Blogs.jsx";
+import Malad_Blog from "./Components/Profiles/Malad/Blogs/Blog.jsx";
+
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -151,10 +157,25 @@ const routes = createBrowserRouter([
                             },
                         ],
                     },
-
+                    {
+                        path: "/Malad/Events",
+                        element: <Malad_Events />,
+                    },
+                    {
+                        path: "/Malad/Events/:id",
+                        element: <Malad_Event />,
+                    },
+                    {
+                        path: "/Malad/Blogs",
+                        element: <Malad_Blogs />,
+                    },
+                    {
+                        path: "/Malad/Blogs/:id",
+                        element: <Malad_Blog />,
+                    },
                     {
                         path: "*",
-                        element: <Not_Finished />,
+                        element: <Not_Found />,
                     },
                 ],
             },
@@ -272,6 +293,10 @@ const routes = createBrowserRouter([
                         element: <Director_Services_edit />,
                         errorElement: <ErrorElement />,
                     },
+                    {
+                        path: "*",
+                        element: <Not_Found />,
+                    },
                 ],
             },
             {
@@ -328,6 +353,10 @@ const routes = createBrowserRouter([
                         path: "/Worker/Events/:id/Edit",
                         element: <Worker_Edit_Events />,
                         errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "*",
+                        element: <Not_Found />,
                     },
                 ],
             },
