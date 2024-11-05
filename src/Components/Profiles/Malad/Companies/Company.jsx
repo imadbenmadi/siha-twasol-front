@@ -21,7 +21,6 @@ function Company() {
                 setCompany(response.data);
                 setLoading(false);
             } catch (error) {
-                console.error("Error fetching company data:", error);
                 setError("حدث خطأ أثناء تحميل بيانات الشركة.");
                 setLoading(false);
             }

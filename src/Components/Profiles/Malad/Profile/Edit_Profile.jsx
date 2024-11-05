@@ -83,7 +83,6 @@ function EditProfile() {
                 navigate("/Malad/Profile"); // Redirect back to profile page after successful edit
             }
         } catch (error) {
-            console.error("Profile update failed:", error);
             Swal.fire({
                 icon: "error",
                 title: "حدث خطأ ما!",

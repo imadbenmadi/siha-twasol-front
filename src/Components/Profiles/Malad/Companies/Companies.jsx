@@ -38,15 +38,11 @@ function CompaniesTable() {
                     ];
                     setLocations(uniqueLocations);
                 } else {
-                    console.error(
-                        "Expected an array but received:",
-                        response.data
-                    );
+                    
                     setCompanies([]);
                     setFilteredCompanies([]);
                 }
             } catch (error) {
-                console.log("Fetch error:", error);
                 setError("Failed to fetch companies. Please try again later.");
             } finally {
                 setLoading(false);

@@ -13,7 +13,6 @@ function Director() {
     const { userId, isAuth, set_user, userType, set_Auth, user, set_Messages } =
         useAppContext();
     useEffect(() => {
-        console.log("Malad : ", user);
     }, []);
     useEffect(() => {
         if (!isAuth || !userId) {
@@ -29,7 +28,6 @@ function Director() {
                         validateStatus: () => true,
                     }
                 );
-                // console.log(response);
 
                 if (response.status == 200) {
                     set_user(response.data.User);
