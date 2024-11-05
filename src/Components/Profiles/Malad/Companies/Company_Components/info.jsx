@@ -1,42 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 function Info() {
     const { company } = useOutletContext();
-    const handle_follow = async () => {
+    const [followLoading, setFollowLoading] = useState(false);
+
+    const handleFollow = async () => {
+        setFollowLoading(true);
         try {
-            let response = await Axios.post(
-                `http://localhost:3000/Malads/${user.id}/${user.companyId}/Follow`,
-                values,
+            const response = await axios.post(
+                `http://localhost:3000/Malads/${company?.id}/Companies/${company?.id}/Follow`,
+                {},
                 {
                     withCredentials: true,
                     validateStatus: () => true,
                 }
             );
 
-            if (response.status == 200) {
-                Naviagte("/Director/Doctors");
-            } else if (response.status == 400) {
-                setSubmitting(false);
-                Swal.fire("Error", `${response.data.message} `, "error");
-            } else if (response.status == 409) {
-                setSubmitting(false);
-                Swal.fire("Error!", `${response.data.message} `, "error");
-            } else if (response.status == 500) {
-                setSubmitting(false);
-                Swal.fire("Error!", `${response.data.message} `, "error");
-            } else {
-                setSubmitting(false);
-                Swal.fire("Error!", ` ${response.data.message} `, "error");
+            if (response.status === 200) {
+                Swal.fire("نجاح!", "أنت الآن تتابع هذه الشركة", "success");
             }
         } catch (error) {
-            setSubmitting(false);
-            Swal.fire("Error!", "somthing went wrong", "error");
+            Swal.fire("خطأ!", "حدث خطأ ما. حاول مرة أخرى", "error");
+        } finally {
+            setFollowLoading(false);
         }
     };
-    const handle_unfollow = async () => {
-        // Implement the unfollow company feature
+
+    const handleUnfollow = async () => {
+        setFollowLoading(true);
+        try {
+            const response = await axios.post(
+                `http://localhost:3000/Malads/${company?.id}/Companies/${company?.id}/Unfollow`,
+                {},
+                {
+                    withCredentials: true,
+                    validateStatus: () => true,
+                }
+            );
+
+            if (response.status === 200) {
+                Swal.fire("نجاح!", "لقد توقفت عن متابعة هذه الشركة", "success");
+            }
+        } catch (error) {
+            Swal.fire("خطأ!", "حدث خطأ ما. حاول مرة أخرى", "error");
+        } finally {
+            setFollowLoading(false);
+        }
     };
+
     return (
         <div className="p-6 bg-white rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-6 text-blue-800">
@@ -105,6 +119,24 @@ function Info() {
                         {company?.Services?.length || 0}
                     </p>
                 </div>
+            </div>
+
+            {/* Follow/Unfollow Buttons */}
+            <div className="flex space-x-4">
+                <button
+                    onClick={handleFollow}
+                    disabled={followLoading}
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none"
+                >
+                    {followLoading ? "متابعة..." : "متابعة"}
+                </button>
+                <button
+                    onClick={handleUnfollow}
+                    disabled={followLoading}
+                    className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 focus:outline-none"
+                >
+                    {followLoading ? "إلغاء المتابعة..." : "إلغاء المتابعة"}
+                </button>
             </div>
         </div>
     );
