@@ -1,50 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useOutletContext } from "react-router-dom";
-import axios from "axios";
 
 function EventsSection() {
     const { company } = useOutletContext();
     const [events, setEvents] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchEvents = async () => {
-            setLoading(true);
-            setError(null);
-            try {
-                const response = await axios.get(
-                    `http://localhost:3000/Malads/${company.id}/Events`
-                );
-                setEvents(response.data.events);
-            } catch (error) {
-                setError("Failed to load events. Please try again later.");
-                console.error("Error fetching events:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        if (company?.id) {
-            fetchEvents();
-        }
+        setEvents(company.Events);
     }, [company]);
-
-    if (loading) {
-        return (
-            <div className="w-screen h-screen flex flex-col items-center justify-center">
-                <span className="loader"></span>
-            </div>
-        );
-    }
-
-    if (error) {
-        return (
-            <div className="w-[80vw] h-screen flex items-center justify-center">
-                <div className="text-red-600 font-semibold">{error}</div>
-            </div>
-        );
-    }
 
     if (!events || events.length === 0) {
         return (

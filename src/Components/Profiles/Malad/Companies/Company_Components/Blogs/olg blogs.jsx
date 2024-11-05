@@ -1,12 +1,50 @@
 import React, { useState, useEffect } from "react";
 import { Link, useOutletContext } from "react-router-dom";
-
+import axios from "axios";
+import { useAppContext } from "../../../../../../AppContext";
 function BlogsSection() {
     const { company } = useOutletContext();
     const [blogs, setBlogs] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const { user } = useAppContext();
     useEffect(() => {
-        setBlogs(company.Blogs);
+        const fetchBlogs = async () => {
+            setLoading(true);
+            setError(null);
+            try {
+                const response = await axios.get(
+                    `http://localhost:3000/Malads/${user.id}/Companies/${company.id}/Blogs`
+                );
+                setBlogs(response.data.blogs);
+            } catch (error) {
+                setError("Failed to load blogs. Please try again later.");
+                console.error("Error fetching blogs:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (company?.id) {
+            fetchBlogs();
+        }
     }, [company]);
+
+    if (loading) {
+        return (
+            <div className="w-screen h-screen flex flex-col items-center justify-center">
+                <span className="loader"></span>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="w-[80vw] h-screen flex items-center justify-center">
+                <div className="text-red-600 font-semibold">{error}</div>
+            </div>
+        );
+    }
 
     if (!blogs || blogs.length === 0) {
         return (
