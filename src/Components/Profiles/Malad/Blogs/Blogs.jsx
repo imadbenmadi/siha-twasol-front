@@ -31,7 +31,7 @@ function Blogs() {
                     }
                 );
                 console.log(response);
-                
+
                 if (response.status === 200) {
                     setBlogs(response.data.blogs || []);
                 } else if (response.status === 401) {
@@ -108,55 +108,55 @@ function Blogs() {
                     </div>
                 </div>
             ) : (
-                <div className="overflow-x-auto mt-4">
-                    <table className="table-auto w-full text-sm text-center border border-gray-200 rounded-lg">
-                        <thead>
-                            <tr className="bg-gray-100 font-normal">
-                                <th className="px-4 py-2 rounded-tl-lg">
-                                    العنوان
-                                </th>
-                                <th className="px-4 py-2 border-l border-gray-200">
-                                    الوصف
-                                </th>
-                                <th className="px-4 py-2 border-l border-gray-200">
-                                    تم النشر في
-                                </th>
-                                <th className="px-4 py-2 border-l border-gray-200 rounded-tr-lg">
-                                    العمليات
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody className="text-xs text-center font-semibold">
-                            {filteredBlogs.map((blog) => (
-                                <tr
-                                    key={blog.id}
-                                    className="border-t border-gray-200"
-                                >
-                                    <td className="px-4 py-2">{blog.Title}</td>
-                                    <td className="px-4 py-2">
-                                        {blog.Description || "لا يوجد وصف"}
-                                    </td>
-                                    <td className="px-4 py-2">
-                                        {dayjs(blog.createdAt).format(
-                                            "DD MMMM YYYY"
-                                        )}
-                                    </td>
-                                    <td className="px-4 py-2">
-                                        <Link
-                                            to={`/Worker/Blogs/${blog.id}`}
-                                            className="bg-blue_v text-white px-4 py-1 rounded-md"
-                                        >
-                                            تفاصيل
-                                        </Link>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                <ul className=" my-6  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {blogs.map((blog) => (
+                        <BlogCard key={blog.id} blog={blog} />
+                    ))}
+                </ul>
             )}
         </div>
     );
 }
 
+function BlogCard({ blog }) {
+    return (
+        <li className="border rounded-lg shadow-md bg-white hover:shadow-lg transition-shadow duration-300">
+            {/* Blog Image */}
+            {blog.image_link && (
+                <img
+                    src={`http://localhost:3000/${blog.image_link}`}
+                    alt={blog.Title}
+                    className="w-full h-48 object-cover rounded-t-lg"
+                />
+            )}
+
+            <div className="p-4">
+                {/* Blog Title */}
+                <h4 className="text-lg font-semibold text-blue-700 mb-2">
+                    {blog.Title}
+                </h4>
+
+                {/* Blog Date */}
+                <p className="text-sm text-gray-500 mb-2">
+                    التاريخ: {new Date(blog.createdAt).toLocaleDateString()}
+                </p>
+
+                {/* Blog Description */}
+                <p className="text-gray-700 mb-4">
+                    {blog.Description?.substring(0, 100)}...
+                </p>
+
+                {/* Link to Blog Detail */}
+                <Link
+                    to={`/Malad/Blogs/${blog.id}`}
+                    className="inline-block mt-4"
+                >
+                    <div className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm font-medium text-center">
+                        اقرأ المزيد
+                    </div>
+                </Link>
+            </div>
+        </li>
+    );
+}
 export default Blogs;

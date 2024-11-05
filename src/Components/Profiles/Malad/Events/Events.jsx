@@ -109,54 +109,55 @@ function Events() {
                     </div>
                 </div>
             ) : (
-                <div className="overflow-x-auto mt-4">
-                    <table className="table-auto w-full mt-4 text-sm text-center overflow-auto">
-                        <thead>
-                            <tr className="bg-gray_white font-normal">
-                                <th className="px-4 py-2 rounded-tl-md">
-                                    العنوان
-                                </th>
-                                <th className="px-4 py-2 border-l border-white">
-                                    الوصف
-                                </th>
-                                <th className="px-4 py-2 border-l border-white">
-                                    تاريخ النشر
-                                </th>
-                                <th className="px-4 py-2 border-l border-white rounded-tr-md">
-                                    العمليات
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody className="text-xs text-center font-semibold">
-                            {filteredEvents.map((event) => (
-                                <tr key={event.id}>
-                                    <td className="border px-4 py-2">
-                                        {event.Title}
-                                    </td>
-                                    <td className="border px-4 py-2">
-                                        {event.Description || "لا يوجد وصف"}
-                                    </td>
-                                    <td className="border px-4 py-2">
-                                        {dayjs(event.createdAt).format(
-                                            "DD MMMM YYYY"
-                                        )}
-                                    </td>
-                                    <td className="border px-4 py-2">
-                                        <Link
-                                            to={`/Worker/Events/${event.id}`}
-                                            className="bg-blue_v text-white px-4 py-1 rounded-md"
-                                        >
-                                            تفاصيل
-                                        </Link>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                <ul className="my-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {events.map((event) => (
+                        <EventCard key={event.id} event={event} />
+                    ))}
+                </ul>
             )}
         </div>
     );
 }
 
+function EventCard({ event }) {
+    return (
+        <li className="border rounded-lg shadow-md bg-white hover:shadow-lg transition-shadow duration-300">
+            {/* Event Image */}
+            {event.image_link && (
+                <img
+                    src={`http://localhost:3000/${event.image_link}`}
+                    alt={event.Title}
+                    className="w-full h-48 object-cover rounded-t-lg"
+                />
+            )}
+
+            <div className="p-4">
+                {/* Event Title */}
+                <h4 className="text-lg font-semibold text-blue-700 mb-2">
+                    {event.Title}
+                </h4>
+
+                {/* Event Date */}
+                <p className="text-sm text-gray-500 mb-2">
+                    التاريخ: {new Date(event.createdAt).toLocaleDateString()}
+                </p>
+
+                {/* Event Description */}
+                <p className="text-gray-700 mb-4">
+                    {event.Description?.substring(0, 100)}...
+                </p>
+
+                {/* Link to Event Detail */}
+                <Link
+                    to={`/Malad/Events/${event.id}`}
+                    className="inline-block mt-4"
+                >
+                    <div className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm font-medium text-center">
+                        اقرأ المزيد
+                    </div>
+                </Link>
+            </div>
+        </li>
+    );
+}
 export default Events;
