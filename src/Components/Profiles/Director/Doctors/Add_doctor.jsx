@@ -7,24 +7,19 @@ import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../../../../AppContext";
 import { useEffect } from "react";
-import { useLocation } from "react-router";
-
 import axios from "axios";
-function edit_doctore() {
+function add_doctor() {
     const Naviagte = useNavigate();
     const [loading, setLoading] = useState(false);
     const [Services, setServices] = useState([]);
     const [serviceChoice, setServiceChoice] = useState("");
     const [error, setError] = useState(false);
-    const location = useLocation();
-    const doctoreId = location.pathname.split("/")[3];
-    const [doctore, setWorker] = useState(null);
 
     const { user } = useAppContext();
-    async function handle_edit_service(values, { setSubmitting }) {
+    async function handle_add_service(values, { setSubmitting }) {
         try {
-            let response = await Axios.put(
-                `http://localhost:3000/Directors/${user.id}/${user.companyId}/Doctores/${doctoreId}`,
+            let response = await Axios.post(
+                `http://localhost:3000/Directors/${user.id}/${user.companyId}/Doctors`,
                 values,
                 {
                     withCredentials: true,
@@ -33,7 +28,7 @@ function edit_doctore() {
             );
 
             if (response.status == 200) {
-                Naviagte(`/Director/Doctores/${doctoreId}`);
+                Naviagte("/Director/Doctors");
             } else if (response.status == 400) {
                 setSubmitting(false);
                 Swal.fire("Error", `${response.data.message} `, "error");
@@ -57,31 +52,6 @@ function edit_doctore() {
 
     useEffect(() => {
         setLoading(true);
-        const fetchWorker = async () => {
-            try {
-                const response = await axios.get(
-                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Doctores/${doctoreId}`,
-                    {
-                        withCredentials: true,
-                        validateStatus: () => true,
-                    }
-                );
-
-                if (response.status === 200) {
-                    setWorker(response.data.User);
-                    setServiceChoice(response.data.User.Service.id);
-                } else if (response.status === 401) {
-                    Swal.fire("خطأ", "يجب عليك تسجيل الدخول مرة أخرى", "error");
-                    Naviagte("/Login");
-                } else {
-                    setError(response.data);
-                }
-            } catch (error) {
-                setError(error);
-            } finally {
-                setLoading(false);
-            }
-        };
         const fetch_services = async () => {
             try {
                 const response = await axios.get(
@@ -105,7 +75,8 @@ function edit_doctore() {
                 setLoading(false);
             }
         };
-        fetchWorker().then(fetch_services());
+
+        fetch_services();
     }, []);
     if (loading) {
         return (
@@ -121,19 +92,6 @@ function edit_doctore() {
                 </div>
             </div>
         );
-    } else if (!doctore) {
-        return (
-            <div className="w-[80vw] h-screen flex items-center justify-center">
-                <div className="text-red-600 font-semibold">
-                    لم يتم العثور على العامل
-                </div>
-                <Link to={"/Director/Doctores"}>
-                    <button className="bg-blue_v py-2 px-4 mx-auto mt-4 rounded-2xl text-white font-semibold w-fit">
-                        الرجوع إلى القائمة
-                    </button>
-                </Link>
-            </div>
-        );
     } else {
         return (
             <div className="flex text-right">
@@ -141,7 +99,7 @@ function edit_doctore() {
                     <div className=" w-[80%] text-black">
                         <div className=" pb-4 pt-24 md:pt-0 ">
                             <div className=" text-3xl font-semibold ">
-                                صفحة اضافة عمال جدد
+                                صفحة اضافة طبيب جديد
                             </div>
                         </div>
 
@@ -149,14 +107,14 @@ function edit_doctore() {
                             <Formik
                                 initialValues={{
                                     // userType: userType_value,
-                                    firstName: doctore?.firstName || "",
-                                    lastName: doctore?.lastName || "",
-                                    email: doctore?.email || "",
-                                    password: doctore?.password || "",
-                                    companyId: doctore?.companyId,
-                                    serviceId: doctore?.Service?.id || "",
-                                    telephone: doctore?.telephone || "",
-                                    speciality: doctore?.speciality || "",
+                                    firstName: "",
+                                    lastName: "",
+                                    email: "",
+                                    password: "",
+                                    companyId: user?.companyId,
+                                    serviceId: "",
+                                    telephone: "",
+                                    speciality: "",
                                 }}
                                 validate={(values) => {
                                     const errors = {};
@@ -194,6 +152,7 @@ function edit_doctore() {
                                         errors.password =
                                             "يجب أن تكون كلمة المرور مكونة من 8 أحرف على الأقل";
                                     }
+
                                     if (!values.telephone) {
                                         errors.telephone = "رقم الهاتف مطلوب";
                                     } else if (isNaN(values.telephone)) {
@@ -222,7 +181,8 @@ function edit_doctore() {
                                             "error"
                                         );
                                     }
-                                    handle_edit_service(values, {
+
+                                    handle_add_service(values, {
                                         setSubmitting,
                                     });
                                 }}
@@ -415,6 +375,7 @@ function edit_doctore() {
                                                 style={errorInputMessage}
                                             />
                                         </div>
+
                                         {isSubmitting ? (
                                             <span className="small-loader my-5  w-full m-auto"></span>
                                         ) : (
@@ -447,4 +408,4 @@ const names_errorInputMessage = {
     fontSize: "12px",
     color: "red",
 };
-export default edit_doctore;
+export default add_doctor;

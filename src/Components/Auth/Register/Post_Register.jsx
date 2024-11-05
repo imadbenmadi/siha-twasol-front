@@ -25,8 +25,8 @@ async function handleRegister(values, { setSubmitting }) {
                         window.location.href = `/Director`;
                     } else if (Login_response.data.userType == "Malad") {
                         window.location.href = `/Malad`;
-                    } else if (Login_response.data.userType == "Medecin") {
-                        window.location.href = `/Medecin`;
+                    } else if (Login_response.data.userType == "Doctor") {
+                        window.location.href = `/Doctor`;
                     } else if (Login_response.data.userType == "Worker") {
                         window.location.href = `/Worker`;
                     } else window.location.href = `/Login`;

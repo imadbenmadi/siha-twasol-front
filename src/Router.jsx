@@ -11,7 +11,7 @@ import Not_Finished from "./Components/Not_Finished";
 import ErrorElement from "./Components/ErrorElement";
 
 import Malad from "./Components/Profiles/Malad/Malad.jsx";
-import Medecin from "./Components/Profiles/Medecin/Medecin.jsx";
+import Doctor from "./Components/Profiles/Doctor/Doctor.jsx";
 import Director from "./Components/Profiles/Director/Director.jsx";
 import Worker from "./Components/Profiles/Worker/Worker.jsx";
 
@@ -21,7 +21,7 @@ import Malad_Profile from "./Components/Profiles/Malad/Profile/Profile.jsx";
 // import Malad from "./Components/Profiles/Director/Director.jsx";
 import Director_default from "./Components/Profiles/Director/Director_Default.jsx";
 import Malad_default from "./Components/Profiles/Malad/Malad_Default.jsx";
-import Medecin_default from "./Components/Profiles/Medecin/Medecin_Default.jsx";
+import Doctor_default from "./Components/Profiles/Doctor/Doctor_Default.jsx";
 import Worker_default from "./Components/Profiles/Worker/Worker_Default.jsx";
 
 import Director_workers from "./Components/Profiles/Director/Workers/Director_workers.jsx";
@@ -33,10 +33,10 @@ import Director_Services from "./Components/Profiles/Director/Services/Director_
 import Director_Services_add from "./Components/Profiles/Director/Services/Director_Add_service.jsx";
 import Director_Services_edit from "./Components/Profiles/Director/Services/Edit_Service.jsx";
 
-import Director_Medecins from "./Components/Profiles/Director/Doctores/Director_Midcens.jsx";
-import Director_Medecins_add from "./Components/Profiles/Director/Doctores/Add_doctore.jsx";
-import Director_doctore from "./Components/Profiles/Director/Doctores/Doctore.jsx";
-import Director_Edit_doctore from "./Components/Profiles/Director/Doctores/Edit_doctore.jsx";
+import Director_Doctors from "./Components/Profiles/Director/Doctors/Director_Doctors.jsx";
+import Director_Doctors_add from "./Components/Profiles/Director/Doctors/Add_doctor.jsx";
+import Director_doctor from "./Components/Profiles/Director/Doctors/Doctor.jsx";
+import Director_Edit_doctor from "./Components/Profiles/Director/Doctors/Edit_doctor.jsx";
 
 import Director_Blogs from "./Components/Profiles/Director/Blogs/Director_Blogs.jsx";
 import Director_Blog from "./Components/Profiles/Director/Blogs/Blog.jsx";
@@ -64,7 +64,8 @@ import Malad_Companies from "./Components/Profiles/Malad/Companies/Companies.jsx
 import Malad_Companiy from "./Components/Profiles/Malad/Companies/Company.jsx";
 import Malad_Companiy_doctors from "./Components/Profiles/Malad/Companies/Company_Components/DoctorsSection.jsx";
 import Malad_Companiy_blogs from "./Components/Profiles/Malad/Companies/Company_Components/BlogsSection.jsx";
-import Malad_Companiy_events from "./Components/Profiles/Malad/Companies/Company_Components/EventsSection.jsx";
+import Malad_Companiy_events from "./Components/Profiles/Malad/Companies/Company_Components/Events/EventsSection.jsx";
+import Malad_Companiy_event from "./Components/Profiles/Malad/Companies/Company_Components/Events/Event.jsx";
 import Malad_Companiy_informations from "./Components/Profiles/Malad/Companies/Company_Components/info.jsx";
 import Default_Malad_company from "./Components/Profiles/Malad/Companies/Company_Components/Default.jsx";
 const routes = createBrowserRouter([
@@ -123,6 +124,11 @@ const routes = createBrowserRouter([
                                 errorElement: <ErrorElement />,
                             },
                             {
+                                path: "/Malad/Companies/:id/Events/:id",
+                                element: <Malad_Companiy_event />,
+                                errorElement: <ErrorElement />,
+                            },
+                            {
                                 path: "/Malad/Companies/:id/Blogs",
                                 element: <Malad_Companiy_blogs />,
                                 errorElement: <ErrorElement />,
@@ -147,8 +153,8 @@ const routes = createBrowserRouter([
                 ],
             },
             {
-                path: "/Medecin",
-                element: <Medecin />,
+                path: "/Doctor",
+                element: <Doctor />,
                 errorElement: <ErrorElement />,
             },
             {
@@ -183,23 +189,23 @@ const routes = createBrowserRouter([
                     },
                     // ______________________________________________________
                     {
-                        path: "/Director/Doctores",
-                        element: <Director_Medecins />,
+                        path: "/Director/Doctors",
+                        element: <Director_Doctors />,
                         errorElement: <ErrorElement />,
                     },
                     {
-                        path: "/Director/Doctores/Add",
-                        element: <Director_Medecins_add />,
+                        path: "/Director/Doctors/Add",
+                        element: <Director_Doctors_add />,
                         errorElement: <ErrorElement />,
                     },
                     {
-                        path: "/Director/Doctores/:id",
-                        element: <Director_doctore />,
+                        path: "/Director/Doctors/:id",
+                        element: <Director_doctor />,
                         errorElement: <ErrorElement />,
                     },
                     {
-                        path: "/Director/Doctores/:id/Edit",
-                        element: <Director_Edit_doctore />,
+                        path: "/Director/Doctors/:id/Edit",
+                        element: <Director_Edit_doctor />,
                         errorElement: <ErrorElement />,
                     },
                     // ______________________________________________________

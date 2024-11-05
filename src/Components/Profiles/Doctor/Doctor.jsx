@@ -7,12 +7,12 @@ import { Outlet } from "react-router";
 import NavBar from "./NavBar/NavBar";
 import Logo from "../../../../public/Logo.png";
 
-function Medecin() {
+function Doctor() {
     const Navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const { userId, isAuth, set_user, userType, set_Auth, user, set_Messages } =
         useAppContext();
-    
+
     useEffect(() => {
         if (!isAuth || !userId) {
             set_Auth(false);
@@ -21,13 +21,13 @@ function Medecin() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/Medecins/${userId}/Profile`,
+                    `http://localhost:3000/Doctors/${userId}/Profile`,
                     {
                         withCredentials: true,
                         validateStatus: () => true,
                     }
                 );
-               
+
                 if (response.status == 200) {
                     set_user(response.data.User);
                 } else {
@@ -61,4 +61,4 @@ function Medecin() {
         );
 }
 
-export default Medecin;
+export default Doctor;

@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 
-function Medecin_Default() {
+function Doctor_Default() {
     const Navigate = useNavigate();
     useEffect(() => {
-        Navigate("/Medecin/Workers");
+        Navigate("/Doctor/Workers");
     }, []);
 }
 
-export default Medecin_Default;
+export default Doctor_Default;

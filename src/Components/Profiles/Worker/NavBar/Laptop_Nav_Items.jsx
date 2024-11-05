@@ -41,12 +41,12 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
 
                 {/* <div
                     className={` ${
-                        Active_nav == "Doctores"
+                        Active_nav == "Doctors"
                             ? "text-blue_v"
                             : "text-black_text"
                     } md:hover:text-blue_v transition-all duration-150  cursor-pointer`}
                 >
-                    <Link to={"/Worker/Doctores"} className={" select-none"}>
+                    <Link to={"/Worker/Doctors"} className={" select-none"}>
                         الاطباء{" "}
                     </Link>
                 </div> */}

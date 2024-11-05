@@ -9,10 +9,10 @@ import { useAppContext } from "../../../../AppContext";
 import { useLocation } from "react-router";
 dayjs.extend(customParseFormat);
 
-function Doctore() {
+function Doctor() {
     const location = useLocation();
     const navigate = useNavigate();
-    const [doctor, setDoctore] = useState(null);
+    const [doctor, setDoctor] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const doctorId = location.pathname.split("/")[3];
@@ -21,10 +21,10 @@ function Doctore() {
 
     useEffect(() => {
         setLoading(true);
-        const fetchDoctore = async () => {
+        const fetchDoctor = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Doctores/${doctorId}`,
+                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Doctors/${doctorId}`,
                     {
                         withCredentials: true,
                         validateStatus: () => true,
@@ -32,7 +32,7 @@ function Doctore() {
                 );
 
                 if (response.status === 200) {
-                    setDoctore(response.data.User);
+                    setDoctor(response.data.User);
                 } else if (response.status === 401) {
                     Swal.fire("خطأ", "يجب عليك تسجيل الدخول مرة أخرى", "error");
                     navigate("/Login");
@@ -46,7 +46,7 @@ function Doctore() {
             }
         };
 
-        fetchDoctore();
+        fetchDoctor();
     }, []);
 
     const handleDelete = () => {
@@ -64,7 +64,7 @@ function Doctore() {
                 setDeleteLoading(true);
                 await axios
                     .delete(
-                        `http://localhost:3000/Directors/${user.id}/${user.companyId}/Doctores/${doctorId}`,
+                        `http://localhost:3000/Directors/${user.id}/${user.companyId}/Doctors/${doctorId}`,
                         {
                             withCredentials: true,
                             validateStatus: () => true,
@@ -72,7 +72,7 @@ function Doctore() {
                     )
                     .then((response) => {
                         if (response.status === 200) {
-                            navigate("/Director/Doctores");
+                            navigate("/Director/Doctors");
                         } else {
                             Swal.fire("خطأ", response.data.message, "error");
                         }
@@ -109,7 +109,7 @@ function Doctore() {
                         لم يتم العثور على الطبيب
                     </div>
                     <Link
-                        to={"/Director/Doctores"}
+                        to={"/Director/Doctors"}
                         className="py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
                     >
                         الرجوع إلى قائمة الاطباء
@@ -162,7 +162,7 @@ function Doctore() {
                     </div>
                     <div className="flex justify-end gap-4">
                         <Link
-                            to={`/Director/Doctores/${doctor.id}/Edit`}
+                            to={`/Director/Doctors/${doctor.id}/Edit`}
                             className="py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600"
                         >
                             تعديل
@@ -184,4 +184,4 @@ function Doctore() {
     }
 }
 
-export default Doctore;
+export default Doctor;

@@ -9,9 +9,9 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useAppContext } from "../../../../AppContext";
 dayjs.extend(customParseFormat);
 
-function Doctores() {
+function Doctors() {
     const navigate = useNavigate();
-    const [users, setDoctores] = useState([]);
+    const [users, setDoctors] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
@@ -21,17 +21,17 @@ function Doctores() {
 
     useEffect(() => {
         setLoading(true);
-        const fetchDoctores = async () => {
+        const fetchDoctors = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Doctores`,
+                    `http://localhost:3000/Directors/${user.id}/${user.companyId}/Doctors`,
                     {
                         withCredentials: true,
                         validateStatus: () => true,
                     }
                 );
                 if (response.status === 200) {
-                    setDoctores(response.data.Users);
+                    setDoctors(response.data.Users);
                 } else if (response.status === 401) {
                     Swal.fire("Error", "You should login again", "error");
                     navigate("/Login");
@@ -45,10 +45,10 @@ function Doctores() {
             }
         };
 
-        fetchDoctores();
+        fetchDoctors();
     }, []);
 
-    const filteredDoctores = users.filter((user) => {
+    const filteredDoctors = users.filter((user) => {
         const fullName = `${user?.firstName} ${user?.lastName}`.toLowerCase();
         const email = user?.email.toLowerCase();
         return (
@@ -79,7 +79,7 @@ function Doctores() {
                         لا يوجد اطباء
                     </div>
                     <Link
-                        to={"/Director/Doctores/Add"}
+                        to={"/Director/Doctors/Add"}
                         className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
                     >
                         اضافة طبيب جديد
@@ -103,14 +103,14 @@ function Doctores() {
                         />
                     </div>
                     <Link
-                        to={"/Director/Doctores/Add"}
+                        to={"/Director/Doctors/Add"}
                         className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
                     >
                         اضافة طبيب جديد
                     </Link>
                 </div>
                 <div className=" overflow-auto">
-                    {filteredDoctores?.length === 0 ? (
+                    {filteredDoctors?.length === 0 ? (
                         <div className="flex justify-center items-center flex-col gap-6 mt-12">
                             <div className="text-center font-semibold text-sm text-gray_v pt-12">
                                 لا يوجد طبيب يطابق بحثك
@@ -142,29 +142,29 @@ function Doctores() {
                                 </tr>
                             </thead>
                             <tbody className="text-xs text-center font-semibold">
-                                {filteredDoctores?.map((doctore_item) => (
-                                    <tr key={doctore_item?.id}>
-                                        <td className="border px-4 py-2">{`${doctore_item.firstName} ${doctore_item.lastName}`}</td>
+                                {filteredDoctors?.map((doctor_item) => (
+                                    <tr key={doctor_item?.id}>
+                                        <td className="border px-4 py-2">{`${doctor_item.firstName} ${doctor_item.lastName}`}</td>
                                         <td className="border px-4 py-2">
-                                            {doctore_item?.email}
+                                            {doctor_item?.email}
                                         </td>
                                         <td className="border px-4 py-2">
-                                            {doctore_item?.speciality}
+                                            {doctor_item?.speciality}
                                         </td>
                                         <td className="border px-4 py-2">
-                                            {doctore_item?.telephone}
+                                            {doctor_item?.telephone}
                                         </td>
                                         <td className="border px-4 py-2">
-                                            {doctore_item?.Service?.Name}
+                                            {doctor_item?.Service?.Name}
                                         </td>
                                         <td className="border px-4 py-2">
                                             {dayjs(
-                                                doctore_item?.createdAt
+                                                doctor_item?.createdAt
                                             ).format("DD MMMM YYYY")}
                                         </td>
                                         <td className="border px-4 py-2">
                                             <Link
-                                                to={`/Director/Doctores/${doctore_item.id}`}
+                                                to={`/Director/Doctors/${doctor_item.id}`}
                                                 className="bg-blue_v text-white px-4 py-1 rounded-md "
                                             >
                                                 تفاصيل
@@ -181,4 +181,4 @@ function Doctores() {
     }
 }
 
-export default Doctores;
+export default Doctors;

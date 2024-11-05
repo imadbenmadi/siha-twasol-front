@@ -38,7 +38,6 @@ function CompaniesTable() {
                     ];
                     setLocations(uniqueLocations);
                 } else {
-                    
                     setCompanies([]);
                     setFilteredCompanies([]);
                 }
@@ -164,7 +163,7 @@ function CompaniesTable() {
                                         {company?.Type}
                                     </td>
                                     <td className="px-6 py-4 text-gray-600">
-                                        {company?.Medecins.length}
+                                        {company?.Doctors.length}
                                     </td>
                                     <td className="px-6 py-4">
                                         <Link

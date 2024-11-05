@@ -20,7 +20,7 @@ function App() {
                         validateStatus: () => true,
                     }
                 );
-                
+
                 if (response.status == 200) {
                     // store_login(response.data.userId, response.data.userType);
                     // setUserType(response.data.userType);
@@ -35,8 +35,8 @@ function App() {
                     //     Navigate(`/Director`);
                     // } else if (response.data.userType == "Malad") {
                     //     Navigate(`/Malad`);
-                    // } else if (response.data.userType == "Medecin") {
-                    //     Navigate(`/Medecin`);
+                    // } else if (response.data.userType == "Doctor") {
+                    //     Navigate(`/Doctor`);
                     // } else if (response.data.userType == "Worker") {
                     //     Navigate(`/Worker`);
                     // } else {

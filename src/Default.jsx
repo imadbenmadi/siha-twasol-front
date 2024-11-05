@@ -20,8 +20,8 @@ function Default() {
             Navigate(`/Director`);
         } else if (isAuth && userType == "Malad") {
             Navigate(`/Malad`);
-        } else if (isAuth && userType == "Medecin") {
-            Navigate(`/Medecin`);
+        } else if (isAuth && userType == "Doctor") {
+            Navigate(`/Doctor`);
         } else if (isAuth && userType == "Worker") {
             Navigate(`/Worker`);
         } else Navigate(`/Home`);

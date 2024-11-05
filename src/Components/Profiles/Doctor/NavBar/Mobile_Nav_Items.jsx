@@ -36,9 +36,9 @@ function Mobile_Nav_Items({
                             </Link>
                             <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Director/Doctores"}
+                                to={"/Director/Doctors"}
                                 className={`${
-                                    Active_nav == "Doctores"
+                                    Active_nav == "Doctors"
                                         ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none    `}
