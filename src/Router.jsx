@@ -188,6 +188,13 @@ const routes = createBrowserRouter([
                 path: "/Doctor",
                 element: <Doctor />,
                 errorElement: <ErrorElement />,
+                children: [
+                    {
+                        index: true,
+                        element: <Not_Finished />,
+                        errorElement: <ErrorElement />,
+                    },
+                ],
             },
             {
                 path: "/Director",
