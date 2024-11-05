@@ -49,6 +49,17 @@ function Mobile_Nav_Items({
                             </Link>
                             <Link
                                 onClick={Toogle_Menu_Bar}
+                                to={"/Director/ChatRooms"}
+                                className={`${
+                                    Active_nav == "ChatRooms"
+                                        ? "text-blue_v"
+                                        : "text-black_text"
+                                } select-none   `}
+                            >
+                                المراسلة
+                            </Link>
+                            <Link
+                                onClick={Toogle_Menu_Bar}
                                 to={"/Director/Blogs"}
                                 className={`${
                                     Active_nav == "Blogs"

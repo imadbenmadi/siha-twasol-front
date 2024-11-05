@@ -34,19 +34,19 @@ function Mobile_Nav_Items({
                                     <span className=" relative">الحساب </span>
                                 </div>
                             </Link>
-                            {/* <Link
+                            <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Worker/Doctors"}
+                                to={"/Worker/ChatRooms"}
                                 className={`${
-                                    Active_nav == "Doctors"
+                                    Active_nav == "ChatRooms"
                                         ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none    `}
                             >
                                 <div className={"select-none"}>
-                                    <span className=" relative">الاطباء </span>
+                                    <span className=" relative">المراسلة </span>
                                 </div>
-                            </Link> */}
+                            </Link>
                             <Link
                                 onClick={Toogle_Menu_Bar}
                                 to={"/Worker/Blogs"}
