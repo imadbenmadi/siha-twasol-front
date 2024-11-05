@@ -19,7 +19,6 @@ function Company() {
                     `http://localhost:3000/Malads/${user.id}/Companies/${id}`,
                     { withCredentials: true, validateStatus: () => true }
                 );
-                console.log(response.data);
                 
                 setCompany(response.data);
                 setLoading(false);

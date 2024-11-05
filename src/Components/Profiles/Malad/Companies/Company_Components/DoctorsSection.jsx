@@ -7,7 +7,6 @@ function DoctorsSection() {
     const [doctors, setDoctors] = useState(company?.Doctors);
     useEffect(() => {
         setDoctors(company?.Doctors);
-        console.log(doctors);
     }, [company]);
     if (!doctors || doctors.length === 0) {
         return <div>No doctors available for this company</div>;

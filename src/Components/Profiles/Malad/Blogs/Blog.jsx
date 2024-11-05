@@ -22,8 +22,7 @@ function BlogDetail() {
                         validateStatus: () => true,
                     }
                 );
-                console.log(response);
-                
+
                 if (response.status === 200) {
                     setBlog(response.data);
                 } else if (response.status === 401) {
@@ -86,6 +85,12 @@ function BlogDetail() {
             <div className="text-gray-700 leading-relaxed mb-6">
                 <p>{blog?.Description}</p>
             </div>
+            <div className="text-gray-700 leading-relaxed mb-6">
+                <p>
+                    تاريخ النشر:{" "}
+                    {new Date(blog?.createdAt).toLocaleDateString()}
+                </p>
+            </div>
 
             {/* Additional Information */}
             <div className="p-4 rounded-lg">
@@ -103,6 +108,18 @@ function BlogDetail() {
                     </Link>
                 ) : null}
             </div>
+            <Link
+                to={`/Malad/Companies/${blog?.Company.id}`}
+                className="text-gray-600"
+            >
+                <span className="font-semibold text-gray-700">
+                    {" "}
+                    اسم الشركة :
+                </span>{" "}
+                <span className=" text-blue-500 underline">
+                    {blog?.Company?.Name}
+                </span>
+            </Link>
         </div>
     );
 }
