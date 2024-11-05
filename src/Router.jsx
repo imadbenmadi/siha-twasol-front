@@ -174,6 +174,11 @@ const routes = createBrowserRouter([
                         element: <Malad_Blog />,
                     },
                     {
+                        path: "/Malad/ChatRooms",
+                        element: <Not_Finished />,
+                    },
+
+                    {
                         path: "*",
                         element: <Not_Found />,
                     },
@@ -353,6 +358,10 @@ const routes = createBrowserRouter([
                         path: "/Worker/Events/:id/Edit",
                         element: <Worker_Edit_Events />,
                         errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Worker/ChatRooms",
+                        element: <Not_Finished />,
                     },
                     {
                         path: "*",
