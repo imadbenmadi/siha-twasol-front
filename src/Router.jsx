@@ -63,7 +63,8 @@ import Malad_Edit_Profile from "./Components/Profiles/Malad/Profile/Edit_Profile
 import Malad_Companies from "./Components/Profiles/Malad/Companies/Companies.jsx";
 import Malad_Companiy from "./Components/Profiles/Malad/Companies/Company.jsx";
 import Malad_Companiy_doctors from "./Components/Profiles/Malad/Companies/Company_Components/DoctorsSection.jsx";
-import Malad_Companiy_blogs from "./Components/Profiles/Malad/Companies/Company_Components/BlogsSection.jsx";
+import Malad_Companiy_blogs from "./Components/Profiles/Malad/Companies/Company_Components/Blogs/BlogsSection.jsx";
+import Malad_Companiy_blog from "./Components/Profiles/Malad/Companies/Company_Components/Blogs/Blog.jsx";
 import Malad_Companiy_events from "./Components/Profiles/Malad/Companies/Company_Components/Events/EventsSection.jsx";
 import Malad_Companiy_event from "./Components/Profiles/Malad/Companies/Company_Components/Events/Event.jsx";
 import Malad_Companiy_informations from "./Components/Profiles/Malad/Companies/Company_Components/info.jsx";
@@ -131,6 +132,11 @@ const routes = createBrowserRouter([
                             {
                                 path: "/Malad/Companies/:id/Blogs",
                                 element: <Malad_Companiy_blogs />,
+                                errorElement: <ErrorElement />,
+                            },
+                            {
+                                path: "/Malad/Companies/:id/Blogs/:id",
+                                element: <Malad_Companiy_blog />,
                                 errorElement: <ErrorElement />,
                             },
                             {
