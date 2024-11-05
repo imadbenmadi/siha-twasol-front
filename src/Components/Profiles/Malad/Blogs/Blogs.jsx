@@ -30,6 +30,8 @@ function Blogs() {
                         validateStatus: () => true,
                     }
                 );
+                console.log(response);
+                
                 if (response.status === 200) {
                     setBlogs(response.data.blogs || []);
                 } else if (response.status === 401) {

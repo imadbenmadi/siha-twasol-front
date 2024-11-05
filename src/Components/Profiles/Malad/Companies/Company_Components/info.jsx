@@ -3,7 +3,40 @@ import { useOutletContext } from "react-router-dom";
 
 function Info() {
     const { company } = useOutletContext();
+    const handle_follow = async () => {
+        try {
+            let response = await Axios.post(
+                `http://localhost:3000/Malads/${user.id}/${user.companyId}/Follow`,
+                values,
+                {
+                    withCredentials: true,
+                    validateStatus: () => true,
+                }
+            );
 
+            if (response.status == 200) {
+                Naviagte("/Director/Doctors");
+            } else if (response.status == 400) {
+                setSubmitting(false);
+                Swal.fire("Error", `${response.data.message} `, "error");
+            } else if (response.status == 409) {
+                setSubmitting(false);
+                Swal.fire("Error!", `${response.data.message} `, "error");
+            } else if (response.status == 500) {
+                setSubmitting(false);
+                Swal.fire("Error!", `${response.data.message} `, "error");
+            } else {
+                setSubmitting(false);
+                Swal.fire("Error!", ` ${response.data.message} `, "error");
+            }
+        } catch (error) {
+            setSubmitting(false);
+            Swal.fire("Error!", "somthing went wrong", "error");
+        }
+    };
+    const handle_unfollow = async () => {
+        // Implement the unfollow company feature
+    };
     return (
         <div className="p-6 bg-white rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-6 text-blue-800">
