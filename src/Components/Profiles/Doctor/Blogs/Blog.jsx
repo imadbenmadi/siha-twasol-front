@@ -189,24 +189,28 @@ function Blog() {
                     <div className="text-gray-500 text-sm mb-3">
                         <p>المؤسسة: {blog.Company?.Name || "غير محدد"}</p>
                     </div>
-                    <div className="flex gap-4">
-                        <Link
-                            to={`/Doctor/Blogs/${blog.id}/Edit`}
-                            className="py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600"
-                        >
-                            تعديل
-                        </Link>
-                        <button
-                            onClick={handleDelete}
-                            disabled={deleteLoading}
-                            className={`py-2 px-4 rounded-md text-white ${
-                                deleteLoading
-                                    ? "bg-gray-400"
-                                    : "bg-red-500 hover:bg-red-600"
-                            }`}
-                        >
-                            {deleteLoading ? "جاري الحذف..." : "حذف"}
-                        </button>
+                    <div>
+                        {blog?.ownerType === "Doctor" && (
+                            <div className="flex gap-4">
+                                <Link
+                                    to={`/Doctor/Blogs/${blog.id}/Edit`}
+                                    className="py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600"
+                                >
+                                    تعديل
+                                </Link>
+                                <button
+                                    onClick={handleDelete}
+                                    disabled={deleteLoading}
+                                    className={`py-2 px-4 rounded-md text-white ${
+                                        deleteLoading
+                                            ? "bg-gray-400"
+                                            : "bg-red-500 hover:bg-red-600"
+                                    }`}
+                                >
+                                    {deleteLoading ? "جاري الحذف..." : "حذف"}
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
