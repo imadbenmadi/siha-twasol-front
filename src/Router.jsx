@@ -266,7 +266,7 @@ const routes = createBrowserRouter([
                     },
                     {
                         path: "/Doctor/Malads",
-                        element: <Doctor_Malads />,
+                        element: <Not_Finished />,
                         errorElement: <ErrorElement />,
                     },
                     {
