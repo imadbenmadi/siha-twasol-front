@@ -23,33 +23,33 @@ function Mobile_Nav_Items({
                         <div className="text-center flex flex-col gap-8 my-8 ">
                             <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Director/Workers"}
+                                to={"/Doctor/Profile"}
                                 className={`${
-                                    Active_nav == "Workers"
+                                    Active_nav == "Profile"
                                         ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none    `}
                             >
                                 <div className={"select-none"}>
-                                    <span className=" relative">العمال </span>
+                                    <span className=" relative">الحساب </span>
                                 </div>
                             </Link>
                             <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Director/Doctors"}
+                                to={"/Doctor/Malads"}
                                 className={`${
-                                    Active_nav == "Doctors"
+                                    Active_nav == "Malads"
                                         ? "text-blue_v"
                                         : "text-black_text"
                                 } select-none    `}
                             >
                                 <div className={"select-none"}>
-                                    <span className=" relative">الاطباء </span>
+                                    <span className=" relative">المرضى </span>
                                 </div>
                             </Link>
                             <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Director/ChatRooms"}
+                                to={"/Doctor/ChatRooms"}
                                 className={`${
                                     Active_nav == "ChatRooms"
                                         ? "text-blue_v"
@@ -60,7 +60,7 @@ function Mobile_Nav_Items({
                             </Link>
                             <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Director/Blogs"}
+                                to={"/Doctor/Blogs"}
                                 className={`${
                                     Active_nav == "Blogs"
                                         ? "text-blue_v"
@@ -72,7 +72,7 @@ function Mobile_Nav_Items({
 
                             <Link
                                 onClick={Toogle_Menu_Bar}
-                                to={"/Director/Events"}
+                                to={"/Doctor/Events"}
                                 className={`${
                                     Active_nav == "Events"
                                         ? "text-blue_v"

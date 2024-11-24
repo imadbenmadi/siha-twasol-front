@@ -87,13 +87,13 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                 <div className=" relative">
                     {user?.profile_pic_link ? (
                         <img
-                            src={user.profile_pic_link}
+                            src={`http://localhost:3000/${user.profile_pic_link}`}
                             onError={(e) => {
                                 e.target.onerror = null;
                                 e.target.src = user_default;
                             }}
                             alt="pic"
-                            className=" w-8 cursor-pointer"
+                            className=" w-8 cursor-pointer rounded-full object-cover"
                             onClick={toogleProfile}
                         />
                     ) : (
