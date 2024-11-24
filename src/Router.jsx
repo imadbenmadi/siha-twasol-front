@@ -75,7 +75,20 @@ import Malad_Events from "./Components/Profiles/Malad/Events/Events.jsx";
 import Malad_Event from "./Components/Profiles/Malad/Events/Event.jsx";
 import Malad_Blogs from "./Components/Profiles/Malad/Blogs/Blogs.jsx";
 import Malad_Blog from "./Components/Profiles/Malad/Blogs/Blog.jsx";
+// ______________________________________________________
+import Doctor_Edit_Profile from "./Components/Profiles/Doctor/Profile/Edit_Profile.jsx";
+import Doctor_Profile from "./Components/Profiles/Doctor/Profile/Profile.jsx";
 
+import Doctor_blog from "./Components/Profiles/Doctor/Blogs/Blog.jsx";
+import Doctor_Blogs from "./Components/Profiles/Doctor/Blogs/Blogs.jsx";
+import Doctor_Add_Blogs from "./Components/Profiles/Doctor/Blogs/Add_Blogs.jsx";
+import Doctor_Edit_Blogs from "./Components/Profiles/Doctor/Blogs/Edit_Blogs.jsx";
+
+import Doctor_event from "./Components/Profiles/Doctor/Events/Event.jsx";
+import Doctor_Events from "./Components/Profiles/Doctor/Events/Events.jsx";
+import Doctor_Add_Events from "./Components/Profiles/Doctor/Events/Add_Event.jsx";
+import Doctor_Edit_Events from "./Components/Profiles/Doctor/Events/Edit_Events.jsx";
+import Doctor_Malads from "./Components/Profiles/Doctor/Malads/Malads.jsx";
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -197,8 +210,73 @@ const routes = createBrowserRouter([
                 children: [
                     {
                         index: true,
-                        element: <Not_Finished />,
+                        element: <Doctor_default />,
                         errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Doctor/Profile",
+                        element: <Doctor_Profile />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Doctor/Profile/Edit",
+                        element: <Doctor_Edit_Profile />,
+                        errorElement: <ErrorElement />,
+                    },
+
+                    {
+                        path: "/Doctor/Blogs",
+                        element: <Doctor_Blogs />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Doctor/Blogs/Add",
+                        element: <Doctor_Add_Blogs />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Doctor/Blogs/:id",
+                        element: <Doctor_blog />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Doctor/Blogs/:id/Edit",
+                        element: <Doctor_Edit_Blogs />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Doctor/Events",
+                        element: <Doctor_Events />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Doctor/Events/Add",
+                        element: <Doctor_Add_Events />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Doctor/Events/:id",
+                        element: <Doctor_event />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Doctor/Events/:id/Edit",
+                        element: <Doctor_Edit_Events />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Doctor/Malads",
+                        element: <Doctor_Malads />,
+                        errorElement: <ErrorElement />,
+                    },
+                    {
+                        path: "/Doctor/ChatRooms",
+                        element: <Not_Finished />,
+                    },
+                    
+                    {
+                        path: "*",
+                        element: <Not_Found />,
                     },
                 ],
             },
