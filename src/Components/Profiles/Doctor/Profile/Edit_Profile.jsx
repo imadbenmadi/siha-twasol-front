@@ -82,7 +82,7 @@ function EditProfile() {
                     ...formData,
                     profile_pic_link: response.data.user.profile_pic_link,
                 });
-                navigate("/Malad/Profile"); // Redirect back to profile page after successful edit
+                navigate("/Doctor/Profile"); // Redirect back to profile page after successful edit
             }
         } catch (error) {
             Swal.fire({
