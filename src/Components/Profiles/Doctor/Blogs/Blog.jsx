@@ -27,7 +27,7 @@ function Blog() {
         const fetchBlog = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/Doctor/${user.id}/${user.companyId}/Blogs/${blogId}`,
+                    `http://localhost:3000/Doctors/${user.id}/${user.companyId}/Blogs/${blogId}`,
                     { withCredentials: true, validateStatus: () => true }
                 );
 
@@ -65,7 +65,7 @@ function Blog() {
                 setDeleteLoading(true);
                 try {
                     const response = await axios.delete(
-                        `http://localhost:3000/Doctor/${user.id}/${user.companyId}/Blogs/${blogId}`,
+                        `http://localhost:3000/Doctors/${user.id}/${user.companyId}/Blogs/${blogId}`,
                         { withCredentials: true, validateStatus: () => true }
                     );
 
@@ -75,7 +75,7 @@ function Blog() {
                             "تم حذف المقال بنجاح.",
                             "success"
                         );
-                        navigate("/Worker/Blogs");
+                        navigate("/Doctor/Blogs");
                     } else {
                         Swal.fire(
                             "خطأ",
@@ -120,7 +120,7 @@ function Blog() {
                         لم يتم العثور على المقال
                     </p>
                     <Link
-                        to="/Worker/Blogs"
+                        to="/Doctor/Blogs"
                         className="py-2 px-4 bg-blue_v text-white rounded-md font-semibold text-sm"
                     >
                         الرجوع إلى قائمة المقالات
@@ -191,7 +191,7 @@ function Blog() {
                     </div>
                     <div className="flex gap-4">
                         <Link
-                            to={`/Worker/Blogs/${blog.id}/Edit`}
+                            to={`/Doctor/Blogs/${blog.id}/Edit`}
                             className="py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600"
                         >
                             تعديل

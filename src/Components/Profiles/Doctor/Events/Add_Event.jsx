@@ -15,7 +15,7 @@ function AddEvent() {
         formData.append("Title", values.Title);
         formData.append("Description", values.Description);
         formData.append("ownerId", user.id);
-        formData.append("ownerType", "Worker");
+        formData.append("ownerType", "Doctor");
         formData.append("companyId", user.companyId);
 
         if (values.image) {
@@ -24,7 +24,7 @@ function AddEvent() {
 
         try {
             const response = await axios.post(
-                `http://localhost:3000/Doctor/${user.id}/${user.companyId}/Events`,
+                `http://localhost:3000/Doctors/${user.id}/${user.companyId}/Events`,
                 formData,
                 {
                     withCredentials: true,
@@ -37,7 +37,7 @@ function AddEvent() {
 
             if (response.status === 201) {
                 Swal.fire("نجاح", "تم إضافة الحدث بنجاح", "success");
-                navigate("/Worker/Events");
+                navigate("/Doctor/Events");
                 resetForm();
                 setImagePreview(null);
             } else {
@@ -164,7 +164,7 @@ function AddEvent() {
                             </button>
 
                             <Link
-                                to="/Worker/Events"
+                                to="/Doctor/Events"
                                 className="text-blue-500 hover:underline mt-4 text-sm"
                             >
                                 الرجوع إلى قائمة الأحداث

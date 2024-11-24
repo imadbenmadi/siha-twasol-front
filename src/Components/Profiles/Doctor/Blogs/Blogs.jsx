@@ -24,7 +24,7 @@ function Blogs() {
         const fetchBlogs = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/Doctor/${user.id}/${user.companyId}/Blogs`,
+                    `http://localhost:3000/Doctors/${user.id}/${user.companyId}/Blogs`,
                     {
                         withCredentials: true,
                         validateStatus: () => true,
@@ -79,7 +79,7 @@ function Blogs() {
                         لا يوجد مقالات
                     </div>
                     <Link
-                        to={"/Worker/Blogs/Add"}
+                        to={"/Doctor/Blogs/Add"}
                         className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
                     >
                         اضافة مقال جديد
@@ -104,7 +104,7 @@ function Blogs() {
                     />
                 </div>
                 <Link
-                    to={"/Worker/blogs/Add"}
+                    to={"/Doctor/blogs/Add"}
                     className=" py-2 px-4 rounded bg-blue_v text-white cursor-pointer font-semibold text-sm"
                 >
                     اضافة مقال جديد
@@ -153,7 +153,7 @@ function Blogs() {
                                     </td>
                                     <td className="px-4 py-2">
                                         <Link
-                                            to={`/Worker/Blogs/${blog.id}`}
+                                            to={`/Doctor/Blogs/${blog.id}`}
                                             className="bg-blue_v text-white px-4 py-1 rounded-md"
                                         >
                                             تفاصيل

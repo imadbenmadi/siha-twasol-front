@@ -27,7 +27,7 @@ function Event() {
         const fetchEvent = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/Doctor/${user.id}/${user.companyId}/Events/${eventId}`,
+                    `http://localhost:3000/Doctors/${user.id}/${user.companyId}/Events/${eventId}`,
                     { withCredentials: true, validateStatus: () => true }
                 );
 
@@ -67,7 +67,7 @@ function Event() {
                 setDeleteLoading(true);
                 try {
                     const response = await axios.delete(
-                        `http://localhost:3000/Doctor/${user.id}/${user.companyId}/Events/${eventId}`,
+                        `http://localhost:3000/Doctors/${user.id}/${user.companyId}/Events/${eventId}`,
                         { withCredentials: true, validateStatus: () => true }
                     );
 
@@ -77,7 +77,7 @@ function Event() {
                             "تم حذف الحدث بنجاح.",
                             "success"
                         );
-                        navigate("/Worker/Events");
+                        navigate("/Doctor/Events");
                     } else {
                         Swal.fire(
                             "خطأ",
@@ -122,7 +122,7 @@ function Event() {
                         لم يتم العثور على الحدث
                     </p>
                     <Link
-                        to="/Worker/Events"
+                        to="/Doctor/Events"
                         className="py-2 px-4 bg-blue_v text-white rounded-md font-semibold text-sm"
                     >
                         الرجوع إلى قائمة الأحداث
@@ -193,7 +193,7 @@ function Event() {
                     </div>
                     <div className="flex gap-4">
                         <Link
-                            to={`/Worker/Events/${event.id}/Edit`}
+                            to={`/Doctor/Events/${event.id}/Edit`}
                             className="py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600"
                         >
                             تعديل

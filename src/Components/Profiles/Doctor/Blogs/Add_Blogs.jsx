@@ -15,7 +15,7 @@ function AddBlog() {
         formData.append("Title", values.Title);
         formData.append("Description", values.Description);
         formData.append("ownerId", user.id);
-        formData.append("ownerType", "Worker");
+        formData.append("ownerType", "Doctor");
         formData.append("companyId", user.companyId);
 
         if (values.image) {
@@ -24,7 +24,7 @@ function AddBlog() {
 
         try {
             const response = await axios.post(
-                `http://localhost:3000/Doctor/${user.id}/${user.companyId}/Blogs`,
+                `http://localhost:3000/Doctors/${user.id}/${user.companyId}/Blogs`,
                 formData,
                 {
                     withCredentials: true,
@@ -33,11 +33,11 @@ function AddBlog() {
                     },
                     validateStatus: () => true,
                 }
-            );            
+            );
 
             if (response.status === 201) {
                 Swal.fire("نجاح", "تم إضافة المقال بنجاح", "success");
-                navigate("/Worker/Blogs");
+                navigate("/Doctor/Blogs");
                 resetForm();
                 setImagePreview(null);
             } else {
@@ -164,7 +164,7 @@ function AddBlog() {
                             </button>
 
                             <Link
-                                to="/Worker/Blogs"
+                                to="/Doctor/Blogs"
                                 className="text-blue-500 hover:underline mt-4 text-sm"
                             >
                                 الرجوع إلى قائمة المقالات

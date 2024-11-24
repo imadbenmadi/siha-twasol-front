@@ -22,7 +22,7 @@ function EditBlog() {
         const fetchBlog = async () => {
             try {
                 const blogResponse = await axios.get(
-                    `http://localhost:3000/Doctor/${user.id}/${user.companyId}/Blogs/${blogId}`,
+                    `http://localhost:3000/Doctors/${user.id}/${user.companyId}/Blogs/${blogId}`,
                     { withCredentials: true, validateStatus: () => true }
                 );
 
@@ -54,7 +54,7 @@ function EditBlog() {
         formData.append("Title", values.Title);
         formData.append("Description", values.Description);
         formData.append("ownerId", user.id);
-        formData.append("ownerType", "Worker");
+        formData.append("ownerType", "Doctor");
         formData.append("companyId", user.companyId);
 
         if (values.image) {
@@ -63,7 +63,7 @@ function EditBlog() {
 
         try {
             const response = await axios.put(
-                `http://localhost:3000/Doctor/${user.id}/${user.companyId}/Blogs/${blogId}`,
+                `http://localhost:3000/Doctors/${user.id}/${user.companyId}/Blogs/${blogId}`,
                 formData,
                 {
                     withCredentials: true,
@@ -71,10 +71,10 @@ function EditBlog() {
                     validateStatus: () => true,
                 }
             );
-            
+
             if (response.status === 200) {
                 Swal.fire("نجاح", "تم تحديث المقال بنجاح", "success");
-                navigate(`/Worker/Blogs/${blogId}`);
+                navigate(`/Doctor/Blogs/${blogId}`);
             } else {
                 Swal.fire("خطأ", response.data.message || "حدث خطأ", "error");
             }
@@ -117,7 +117,7 @@ function EditBlog() {
                 <div className="text-red-600 font-semibold">
                     لم يتم العثور على المقال
                 </div>
-                <Link to="/Worker/Blogs">
+                <Link to="/Doctor/Blogs">
                     <button className="bg-blue_v py-2 px-4 mt-4 rounded-2xl text-white font-semibold">
                         العودة إلى قائمة المقالات
                     </button>

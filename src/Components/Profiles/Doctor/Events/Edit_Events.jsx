@@ -22,7 +22,7 @@ function EditEvent() {
         const fetchEvent = async () => {
             try {
                 const eventResponse = await axios.get(
-                    `http://localhost:3000/Doctor/${user.id}/${user.companyId}/Events/${eventId}`,
+                    `http://localhost:3000/Doctors/${user.id}/${user.companyId}/Events/${eventId}`,
                     { withCredentials: true, validateStatus: () => true }
                 );
 
@@ -54,7 +54,7 @@ function EditEvent() {
         formData.append("Title", values.Title);
         formData.append("Description", values.Description);
         formData.append("ownerId", user.id);
-        formData.append("ownerType", "Worker");
+        formData.append("ownerType", "Doctor");
         formData.append("companyId", user.companyId);
 
         if (values.image) {
@@ -63,7 +63,7 @@ function EditEvent() {
 
         try {
             const response = await axios.put(
-                `http://localhost:3000/Doctor/${user.id}/${user.companyId}/Events/${eventId}`,
+                `http://localhost:3000/Doctors/${user.id}/${user.companyId}/Events/${eventId}`,
                 formData,
                 {
                     withCredentials: true,
@@ -74,7 +74,7 @@ function EditEvent() {
 
             if (response.status === 200) {
                 Swal.fire("نجاح", "تم تحديث الحدث بنجاح", "success");
-                navigate(`/Worker/Events/${eventId}`);
+                navigate(`/Doctor/Events/${eventId}`);
             } else {
                 Swal.fire("خطأ", response.data.message || "حدث خطأ", "error");
             }
@@ -117,7 +117,7 @@ function EditEvent() {
                 <div className="text-red-600 font-semibold">
                     لم يتم العثور على الحدث
                 </div>
-                <Link to="/Worker/Events">
+                <Link to="/Doctor/Events">
                     <button className="bg-blue_v py-2 px-4 mt-4 rounded-2xl text-white font-semibold">
                         العودة إلى قائمة الأحداث
                     </button>

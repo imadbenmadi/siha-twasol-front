@@ -24,7 +24,7 @@ function Events() {
         const fetchEvents = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/Doctor/${user.id}/${user.companyId}/Events`,
+                    `http://localhost:3000/Doctors/${user.id}/${user.companyId}/Events`,
                     {
                         withCredentials: true,
                         validateStatus: () => true,
@@ -81,7 +81,7 @@ function Events() {
                         لا توجد أحداث متاحة
                     </div>
                     <Link
-                        to="/Worker/Events/Add"
+                        to="/Doctor/Events/Add"
                         className="py-2 px-4 rounded bg-blue_v text-white font-semibold text-sm"
                     >
                         إضافة حدث جديد
@@ -107,7 +107,7 @@ function Events() {
                     />
                 </div>
                 <Link
-                    to="/Worker/Events/Add"
+                    to="/Doctor/Events/Add"
                     className="py-2 px-4 rounded bg-blue_v text-white font-semibold text-sm"
                 >
                     إضافة حدث جديد
@@ -155,7 +155,7 @@ function Events() {
                                     </td>
                                     <td className="border px-4 py-2">
                                         <Link
-                                            to={`/Worker/Events/${event.id}`}
+                                            to={`/Doctor/Events/${event.id}`}
                                             className="bg-blue_v text-white px-4 py-1 rounded-md"
                                         >
                                             تفاصيل
