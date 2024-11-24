@@ -65,13 +65,15 @@ function EditProfile() {
 
         try {
             const response = await axios.put(
-                `http://localhost:3000/Doctor/${user.id}/Profile`,
+                `http://localhost:3000/Doctors/${user.id}/Profile`,
                 data,
                 {
                     headers: { "Content-Type": "multipart/form-data" },
                     withCredentials: true,
                 }
             );
+            console.log(response);
+            
 
             if (response.status === 200) {
                 // Update user context with the latest data, including the new profile image URL
