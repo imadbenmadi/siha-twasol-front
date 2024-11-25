@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useAppContext } from "../../../../AppContext";
-
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 function Malad() {
     const location = useLocation();
     const { user } = useAppContext();
@@ -10,6 +11,32 @@ function Malad() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [malad, setMalad] = useState(null);
+    const [addLoading, setAddLoading] = useState(false);
+    const Navigate = useNavigate();
+    const [is_in_list, setIs_in_list] = useState(false);
+    const handleAddtoList = async (maladId) => {
+        setAddLoading(true);
+        try {
+            const response = await axios.post(
+                `http://localhost:3000/Doctors/${user.id}/Malads/Own/${maladId}`,
+                {},
+                { withCredentials: true }
+            );
+            Swal.fire({
+                icon: "success",
+                title: "تمت العملية بنجاح",
+                text: "تمت إضافة المريض إلى قائمتك بنجاح.",
+                showConfirmButton: true,
+                confirmButtonText: "حسنًا",
+                confirmButtonColor: "#2563EB",
+            });
+            Navigate("/Doctor/Malads/List");
+            setAddLoading(false);
+        } catch (error) {
+            console.log(error);
+            setAddLoading(false);
+        }
+    };
     useEffect(() => {
         const fetchMalad = async () => {
             try {
@@ -18,7 +45,7 @@ function Malad() {
                     { withCredentials: true }
                 );
                 console.log(response.data);
-
+                setIs_in_list(response.data.is_in_list);
                 setMalad(response.data.malad);
                 setLoading(false);
             } catch (error) {
@@ -40,9 +67,8 @@ function Malad() {
             dir="rtl"
         >
             <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
-                الحساب الشخصي
+                الحساب الشخصي للمريض
             </h2>
-
             <div className="border-b pb-4 mb-4">
                 <h3 className="text-xl font-semibold text-gray-700 mb-2">
                     الصورة الشخصية
@@ -57,7 +83,6 @@ function Malad() {
                     <p className="text-gray-600 text-center">لا توجد صورة</p>
                 )}
             </div>
-
             <div className="border-b pb-4 mb-4">
                 <h3 className="text-xl font-semibold text-gray-700 mb-2">
                     المعلومات الشخصية
@@ -93,7 +118,6 @@ function Malad() {
                     {malad?.about || "غير متوفر"}
                 </p>
             </div>
-
             <div className="border-b pb-4 mb-4 text-gray-600">
                 <p>
                     <span className="font-medium">تاريخ إنشاء الحساب:</span>{" "}
@@ -108,15 +132,20 @@ function Malad() {
                         : "غير متوفر"}
                 </p>
             </div>
-
-            <div className="flex justify-center mt-6">
-                <Link
-                    to={`/Malad/Profile/Edit`}
-                    className="py-2 px-6 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-200"
-                >
-                    تعديل
-                </Link>
-            </div>
+            {!is_in_list && (
+                <div className="flex justify-center mt-6 gap-4">
+                    {addLoading ? (
+                        <span className="small-loader"></span>
+                    ) : (
+                        <button
+                            onClick={() => handleAddtoList(malad.id)}
+                            className="py-2 px-6 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-200"
+                        >
+                            اضافةالى لائحة المرضى
+                        </button>
+                    )}
+                </div>
+            )}
         </div>
     );
 }

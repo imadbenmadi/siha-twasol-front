@@ -17,7 +17,6 @@ function Malad() {
                     `http://localhost:3000/Doctors/${malad?.id}/Malads/Own/${id}`,
                     { withCredentials: true}
                 );
-                console.log(response.data);
                 
                 setMalad(response.data.malad);
                 setLoading(false);
@@ -40,7 +39,7 @@ function Malad() {
             dir="rtl"
         >
             <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
-                الحساب الشخصي
+                الحساب الشخصي للمريض
             </h2>
 
             <div className="border-b pb-4 mb-4">
