@@ -3,134 +3,122 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useAppContext } from "../../../../AppContext";
 
-function Company() {
-    const { user } = useAppContext();
+function Malad() {
     const location = useLocation();
-    const id = location.pathname.split("/")[3];
-    const [company, setCompany] = useState(null);
+    const { user } = useAppContext();
+    const id = location.pathname.split("/")[4];
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+    const [malad, setMalad] = useState(null);
     useEffect(() => {
-        const fetchCompany = async () => {
+        const fetchMalad = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/Doctors/${user.id}/Malads/${id}`,
+                    `http://localhost:3000/Doctors/${malad?.id}/Malads/${id}`,
                     { withCredentials: true, validateStatus: () => true }
                 );
+                console.log(response.data);
 
-                setCompany(response.data);
+                setMalad(response.data.malad);
                 setLoading(false);
             } catch (error) {
-                setError("حدث خطأ أثناء تحميل بيانات الشركة.");
+                console.log(error);
+
+                setError("حدث خطأ أثناء تحميل بيانات المريض.");
                 setLoading(false);
             }
         };
-        fetchCompany();
-    }, [id, user.id]);
+        fetchMalad();
+    }, []);
 
     if (loading) return <div>جاري التحميل...</div>;
     if (error) return <div className="text-red-600">{error}</div>;
 
-    // Define the base path for easier reference
-    const basePath = `/Malad/Companies/${id}`;
-
     return (
-        <div className="flex bg-gray-50 min-h-screen relative">
-            {/* Mobile Sidebar Toggle Button */}
-            <button
-                className="md:hidden  text-blue-600 font-bold mt-12 px-2 py-1 focus:outline-none fixed top-4 left-4 z-30 
-                rounded-lg bg-white shadow-lg"
-                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            >
-                ☰
-            </button>
+        <div
+            className="max-w-lg mx-auto p-6 mt-6 bg-white shadow-lg rounded-lg border border-gray-200"
+            dir="rtl"
+        >
+            <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+                الحساب الشخصي
+            </h2>
 
-            {/* Sidebar Navigation */}
-            <aside
-                className={`w-64 bg-white p-6 shadow-md min-h-screen border-r fixed z-20 top-0 left-0 transform ${
-                    isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-                } transition-transform duration-300 ease-in-out md:translate-x-0`}
-            >
-                <h2 className="text-xl font-semibold mb-4 text-gray-800">
-                    تفاصيل الشركة
-                </h2>
-                <ul className="space-y-4">
-                    <li>
-                        <Link
-                            to={`${basePath}/Info`}
-                            className={`font-medium ${
-                                location.pathname === `${basePath}/Info`
-                                    ? "text-blue-600 font-bold"
-                                    : "text-gray-600 hover:text-blue-600"
-                            }`}
-                            onClick={() => setIsSidebarOpen(false)}
-                        >
-                            معلومات عامة
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to={`${basePath}/Doctors`}
-                            className={`font-medium ${
-                                location.pathname === `${basePath}/Doctors`
-                                    ? "text-blue-600 font-bold"
-                                    : "text-gray-600 hover:text-blue-600"
-                            }`}
-                            onClick={() => setIsSidebarOpen(false)}
-                        >
-                            الأطباء
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to={`${basePath}/Blogs`}
-                            className={`font-medium ${
-                                location.pathname === `${basePath}/Blogs`
-                                    ? "text-blue-600 font-bold"
-                                    : "text-gray-600 hover:text-blue-600"
-                            }`}
-                            onClick={() => setIsSidebarOpen(false)}
-                        >
-                            المقالات
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to={`${basePath}/Events`}
-                            className={`font-medium ${
-                                location.pathname === `${basePath}/Events`
-                                    ? "text-blue-600 font-bold"
-                                    : "text-gray-600 hover:text-blue-600"
-                            }`}
-                            onClick={() => setIsSidebarOpen(false)}
-                        >
-                            الأحداث
-                        </Link>
-                    </li>
-                </ul>
-            </aside>
+            <div className="border-b pb-4 mb-4">
+                <h3 className="text-xl font-semibold text-gray-700 mb-2">
+                    الصورة الشخصية
+                </h3>
+                {malad?.profile_pic_link ? (
+                    <img
+                        src={`http://localhost:3000/${malad?.profile_pic_link}`}
+                        alt="Profile"
+                        className="w-32 h-32 rounded-full mx-auto object-cover"
+                    />
+                ) : (
+                    <p className="text-gray-600 text-center">لا توجد صورة</p>
+                )}
+            </div>
 
-            {/* Overlay for Sidebar on Mobile */}
-            {isSidebarOpen && (
-                <div
-                    className="fixed inset-0 bg-black opacity-50 z-10 md:hidden"
-                    onClick={() => setIsSidebarOpen(false)}
-                ></div>
-            )}
+            <div className="border-b pb-4 mb-4">
+                <h3 className="text-xl font-semibold text-gray-700 mb-2">
+                    المعلومات الشخصية
+                </h3>
+                <p className="text-gray-600">
+                    <span className="font-medium">الاسم الكامل:</span>{" "}
+                    {malad?.firstName || "غير متوفر"} {malad?.lastName || ""}
+                </p>
+                <p className="text-gray-600">
+                    <span className="font-medium">البريد الإلكتروني:</span>{" "}
+                    {malad?.email || "غير متوفر"}
+                </p>
+                <p className="text-gray-600">
+                    <span className="font-medium">رقم الهاتف:</span>{" "}
+                    {malad?.telephone || "غير متوفر"}
+                </p>
+                <p className="text-gray-600">
+                    <span className="font-medium">تاريخ الميلاد:</span>{" "}
+                    {malad?.birthDate
+                        ? new Date(malad?.birthDate).toLocaleDateString("ar")
+                        : "غير متوفر"}
+                </p>
+                <p className="text-gray-600">
+                    <span className="font-medium">العنوان:</span>{" "}
+                    {malad?.adress || "غير متوفر"}
+                </p>
+                <p className="text-gray-600">
+                    <span className="font-medium">الجنس:</span>{" "}
+                    {malad?.gender || "غير متوفر"}
+                </p>
+                <p className="text-gray-600">
+                    <span className="font-medium">نبذة:</span>{" "}
+                    {malad?.about || "غير متوفر"}
+                </p>
+            </div>
 
-            {/* Main Content */}
-            <main
-                className={`flex-1 p-8 bg-white shadow-lg rounded-lg transition-all duration-300 ${
-                    isSidebarOpen ? "ml-64" : "ml-0"
-                } md:ml-64`}
-            >
-                <Outlet context={{ company }} />
-                {/* This renders the selected child component */}
-            </main>
+            <div className="border-b pb-4 mb-4 text-gray-600">
+                <p>
+                    <span className="font-medium">تاريخ إنشاء الحساب:</span>{" "}
+                    {malad?.createdAt
+                        ? new Date(malad?.createdAt).toLocaleDateString("ar")
+                        : "غير متوفر"}
+                </p>
+                <p>
+                    <span className="font-medium">آخر تحديث:</span>{" "}
+                    {malad?.updatedAt
+                        ? new Date(malad?.updatedAt).toLocaleDateString("ar")
+                        : "غير متوفر"}
+                </p>
+            </div>
+
+            <div className="flex justify-center mt-6">
+                <Link
+                    to={`/Malad/Profile/Edit`}
+                    className="py-2 px-6 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-200"
+                >
+                    تعديل
+                </Link>
+            </div>
         </div>
     );
 }
 
-export default Company;
+export default Malad;

@@ -166,7 +166,7 @@ function List() {
                                     {/* Action: View */}
                                     <td className="px-6 py-4">
                                         <Link
-                                            to={`/Doctor/Malads/${malad?.id}`}
+                                            to={`/Doctor/Malads/List/${malad?.id}`}
                                             className="py-1 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200"
                                         >
                                             عرض
