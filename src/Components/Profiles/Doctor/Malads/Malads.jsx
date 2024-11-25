@@ -3,7 +3,9 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 
 function Malads() {
     // Define the base path for easier reference
-    const basePath = `/Doctor/Malads/`;
+    const basePath = `/Doctor/Malads`;
+    const location = useLocation();
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     return (
         <div className="flex bg-gray-50 min-h-screen relative">
@@ -28,9 +30,9 @@ function Malads() {
                 <ul className="space-y-4">
                     <li>
                         <Link
-                            to={`${basePath}/add`}
+                            to={`${basePath}/List`}
                             className={`font-medium ${
-                                location.pathname === `${basePath}/add`
+                                location.pathname === `${basePath}/List`
                                     ? "text-blue-600 font-bold"
                                     : "text-gray-600 hover:text-blue-600"
                             }`}
@@ -41,9 +43,9 @@ function Malads() {
                     </li>
                     <li>
                         <Link
-                            to={`${basePath}/MyMalads`}
+                            to={`${basePath}/Own`}
                             className={`font-medium ${
-                                location.pathname === `${basePath}/MyMalads`
+                                location.pathname === `${basePath}/Own`
                                     ? "text-blue-600 font-bold"
                                     : "text-gray-600 hover:text-blue-600"
                             }`}
