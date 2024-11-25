@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-
-const MaladReview = ({ userId, courseId }) => {
+import Swal from "sweetalert2";
+const MaladReview = ({ userId, maladId }) => {
     const [rating, setRating] = useState(0);
     const [review, setReview] = useState("");
     const [loading, setLoading] = useState(false);
@@ -25,17 +25,23 @@ const MaladReview = ({ userId, courseId }) => {
         }
 
         try {
+            console.log(userId, maladId, rating, review);
+            
             const response = await axios.post(
-                `http://localhost:3000/Doctores/${userId}/Malads/${courseId}/Rate`,
+                `http://localhost:3000/Doctors/${userId}/Malads/${maladId}/Rate`,
                 {
                     rating,
                     review,
                 },
                 { withCredentials: true }
             );
+            console.log(response.data);
+            
             setSuccess("Review submitted successfully!");
             window.location.reload();
         } catch (err) {
+            console.log(err);
+            
             setError("Failed to submit the review?.");
         } finally {
             setLoading(false);

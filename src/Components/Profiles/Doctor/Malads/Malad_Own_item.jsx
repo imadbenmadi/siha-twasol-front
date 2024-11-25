@@ -11,6 +11,8 @@ function Malad() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [malad, setMalad] = useState(null);
+    const [maladrates, setMaladrates] = useState([]);
+    const [is_rated, setIs_rated] = useState(false);
     useEffect(() => {
         const fetchMalad = async () => {
             try {
@@ -18,7 +20,8 @@ function Malad() {
                     `http://localhost:3000/Doctors/${user.id}/Malads/Own/${id}`,
                     { withCredentials: true }
                 );
-
+                setIs_rated(response.data.is_rated);
+                setMaladrates(response.data.maladrates);
                 setMalad(response.data.malad.Malad);
                 setLoading(false);
             } catch (error) {
@@ -128,22 +131,24 @@ function Malad() {
                 </div>
             </div>
             <div className=" mt-6">
-                <div>
-                    <Rate />
-                </div>
+                {!is_rated && (
+                    <div className="">
+                        <Rate userId={user.id} maladId={id} />
+                    </div>
+                )}
+
                 <div>
                     <div className=" max-w-[80vw] pl-6 py-10">
                         <h2 className="text-2xl font-bold text-gray-600 mb-4 text-center">
                             التقييمات
                         </h2>
 
-                        {!malad?.maladrates ||
-                        malad?.maladrates?.lenght == 0 ? (
+                        {!maladrates || maladrates?.lenght == 0 ? (
                             <div className=" text-center font-semibold text-sm text-gray-400">
                                 لا يوجد تقييمات حاليا
                             </div>
                         ) : (
-                            malad?.maladrates?.map((review) => (
+                            maladrates?.map((review) => (
                                 <ReviewCard key={review?.id} review={review} />
                             ))
                         )}

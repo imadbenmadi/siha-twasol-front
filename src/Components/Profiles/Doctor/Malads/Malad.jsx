@@ -170,12 +170,12 @@ function Malad() {
                         التقييمات
                     </h2>
 
-                    {!malad?.maladrates || malad?.maladrates?.lenght == 0 ? (
+                    {!maladrates || maladrates?.lenght == 0 ? (
                         <div className=" text-center font-semibold text-sm text-gray-400">
                             لا يوجد تقييمات حاليا
                         </div>
                     ) : (
-                        malad?.maladrates?.map((review) => (
+                        maladrates?.map((review) => (
                             <ReviewCard key={review?.id} review={review} />
                         ))
                     )}
