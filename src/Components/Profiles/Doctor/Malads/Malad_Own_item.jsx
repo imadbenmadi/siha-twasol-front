@@ -19,7 +19,7 @@ function Malad() {
                     { withCredentials: true }
                 );
 
-                setMalad(response.data.malad);
+                setMalad(response.data.malad.Malad);
                 setLoading(false);
             } catch (error) {
                 console.log(error);
