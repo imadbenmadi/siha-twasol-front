@@ -15,7 +15,7 @@ function Malad() {
             try {
                 const response = await axios.get(
                     `http://localhost:3000/Doctors/${malad?.id}/Malads/${id}`,
-                    { withCredentials: true, validateStatus: () => true }
+                    { withCredentials: true }
                 );
                 console.log(response.data);
 

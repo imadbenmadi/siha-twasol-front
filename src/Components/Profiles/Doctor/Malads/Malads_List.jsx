@@ -21,7 +21,7 @@ function List() {
             try {
                 const response = await axios.get(
                     `http://localhost:3000/Doctors/${user.id}/Malads`,
-                    { withCredentials: true, validateStatus: () => true }
+                    { withCredentials: true }
                 );
                 console.log(response.data);
 
