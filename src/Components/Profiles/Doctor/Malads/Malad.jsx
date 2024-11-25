@@ -4,6 +4,7 @@ import axios from "axios";
 import { useAppContext } from "../../../../AppContext";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import ReviewCard from "./Rate_Card";
 function Malad() {
     const location = useLocation();
     const { user } = useAppContext();
@@ -14,6 +15,7 @@ function Malad() {
     const [addLoading, setAddLoading] = useState(false);
     const Navigate = useNavigate();
     const [is_in_list, setIs_in_list] = useState(false);
+    const [maladrates, setMaladrates] = useState([]);
     const handleAddtoList = async (maladId) => {
         setAddLoading(true);
         try {
@@ -22,6 +24,8 @@ function Malad() {
                 {},
                 { withCredentials: true }
             );
+            console.log(response.data);
+            
             Swal.fire({
                 icon: "success",
                 title: "تمت العملية بنجاح",
@@ -44,7 +48,8 @@ function Malad() {
                     `http://localhost:3000/Doctors/${malad?.id}/Malads/${id}`,
                     { withCredentials: true }
                 );
-                console.log(response.data);
+                // console.log(response.data);
+                setMaladrates(response.data.maladrates);
                 setIs_in_list(response.data.is_in_list);
                 setMalad(response.data.malad);
                 setLoading(false);
@@ -62,91 +67,119 @@ function Malad() {
     if (error) return <div className="text-red-600">{error}</div>;
 
     return (
-        <div
-            className="max-w-lg mx-auto p-6 mt-6 bg-white shadow-lg rounded-lg border border-gray-200"
-            dir="rtl"
-        >
-            <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
-                الحساب الشخصي للمريض
-            </h2>
-            <div className="border-b pb-4 mb-4">
-                <h3 className="text-xl font-semibold text-gray-700 mb-2">
-                    الصورة الشخصية
-                </h3>
-                {malad?.profile_pic_link ? (
-                    <img
-                        src={`http://localhost:3000/${malad?.profile_pic_link}`}
-                        alt="Profile"
-                        className="w-32 h-32 rounded-full mx-auto object-cover"
-                    />
-                ) : (
-                    <p className="text-gray-600 text-center">لا توجد صورة</p>
-                )}
-            </div>
-            <div className="border-b pb-4 mb-4">
-                <h3 className="text-xl font-semibold text-gray-700 mb-2">
-                    المعلومات الشخصية
-                </h3>
-                <p className="text-gray-600">
-                    <span className="font-medium">الاسم الكامل:</span>{" "}
-                    {malad?.firstName || "غير متوفر"} {malad?.lastName || ""}
-                </p>
-                <p className="text-gray-600">
-                    <span className="font-medium">البريد الإلكتروني:</span>{" "}
-                    {malad?.email || "غير متوفر"}
-                </p>
-                <p className="text-gray-600">
-                    <span className="font-medium">رقم الهاتف:</span>{" "}
-                    {malad?.telephone || "غير متوفر"}
-                </p>
-                <p className="text-gray-600">
-                    <span className="font-medium">تاريخ الميلاد:</span>{" "}
-                    {malad?.birthDate
-                        ? new Date(malad?.birthDate).toLocaleDateString("ar")
-                        : "غير متوفر"}
-                </p>
-                <p className="text-gray-600">
-                    <span className="font-medium">العنوان:</span>{" "}
-                    {malad?.adress || "غير متوفر"}
-                </p>
-                <p className="text-gray-600">
-                    <span className="font-medium">الجنس:</span>{" "}
-                    {malad?.gender || "غير متوفر"}
-                </p>
-                <p className="text-gray-600">
-                    <span className="font-medium">نبذة:</span>{" "}
-                    {malad?.about || "غير متوفر"}
-                </p>
-            </div>
-            <div className="border-b pb-4 mb-4 text-gray-600">
-                <p>
-                    <span className="font-medium">تاريخ إنشاء الحساب:</span>{" "}
-                    {malad?.createdAt
-                        ? new Date(malad?.createdAt).toLocaleDateString("ar")
-                        : "غير متوفر"}
-                </p>
-                <p>
-                    <span className="font-medium">آخر تحديث:</span>{" "}
-                    {malad?.updatedAt
-                        ? new Date(malad?.updatedAt).toLocaleDateString("ar")
-                        : "غير متوفر"}
-                </p>
-            </div>
-            {!is_in_list && (
-                <div className="flex justify-center mt-6 gap-4">
-                    {addLoading ? (
-                        <span className="small-loader"></span>
+        <>
+            <div
+                className="max-w-lg mx-auto p-6 mt-6 bg-white shadow-lg rounded-lg border border-gray-200"
+                dir="rtl"
+            >
+                <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+                    الحساب الشخصي للمريض
+                </h2>
+                <div className="border-b pb-4 mb-4">
+                    <h3 className="text-xl font-semibold text-gray-700 mb-2">
+                        الصورة الشخصية
+                    </h3>
+                    {malad?.profile_pic_link ? (
+                        <img
+                            src={`http://localhost:3000/${malad?.profile_pic_link}`}
+                            alt="Profile"
+                            className="w-32 h-32 rounded-full mx-auto object-cover"
+                        />
                     ) : (
-                        <button
-                            onClick={() => handleAddtoList(malad.id)}
-                            className="py-2 px-6 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-200"
-                        >
-                            اضافةالى لائحة المرضى
-                        </button>
+                        <p className="text-gray-600 text-center">
+                            لا توجد صورة
+                        </p>
                     )}
                 </div>
-            )}
-        </div>
+                <div className="border-b pb-4 mb-4">
+                    <h3 className="text-xl font-semibold text-gray-700 mb-2">
+                        المعلومات الشخصية
+                    </h3>
+                    <p className="text-gray-600">
+                        <span className="font-medium">الاسم الكامل:</span>{" "}
+                        {malad?.firstName || "غير متوفر"}{" "}
+                        {malad?.lastName || ""}
+                    </p>
+                    <p className="text-gray-600">
+                        <span className="font-medium">البريد الإلكتروني:</span>{" "}
+                        {malad?.email || "غير متوفر"}
+                    </p>
+                    <p className="text-gray-600">
+                        <span className="font-medium">رقم الهاتف:</span>{" "}
+                        {malad?.telephone || "غير متوفر"}
+                    </p>
+                    <p className="text-gray-600">
+                        <span className="font-medium">تاريخ الميلاد:</span>{" "}
+                        {malad?.birthDate
+                            ? new Date(malad?.birthDate).toLocaleDateString(
+                                  "ar"
+                              )
+                            : "غير متوفر"}
+                    </p>
+                    <p className="text-gray-600">
+                        <span className="font-medium">العنوان:</span>{" "}
+                        {malad?.adress || "غير متوفر"}
+                    </p>
+                    <p className="text-gray-600">
+                        <span className="font-medium">الجنس:</span>{" "}
+                        {malad?.gender || "غير متوفر"}
+                    </p>
+                    <p className="text-gray-600">
+                        <span className="font-medium">نبذة:</span>{" "}
+                        {malad?.about || "غير متوفر"}
+                    </p>
+                </div>
+                <div className="border-b pb-4 mb-4 text-gray-600">
+                    <p>
+                        <span className="font-medium">تاريخ إنشاء الحساب:</span>{" "}
+                        {malad?.createdAt
+                            ? new Date(malad?.createdAt).toLocaleDateString(
+                                  "ar"
+                              )
+                            : "غير متوفر"}
+                    </p>
+                    <p>
+                        <span className="font-medium">آخر تحديث:</span>{" "}
+                        {malad?.updatedAt
+                            ? new Date(malad?.updatedAt).toLocaleDateString(
+                                  "ar"
+                              )
+                            : "غير متوفر"}
+                    </p>
+                </div>
+                {!is_in_list && (
+                    <div className="flex justify-center mt-6 gap-4">
+                        {addLoading ? (
+                            <span className="small-loader"></span>
+                        ) : (
+                            <button
+                                onClick={() => handleAddtoList(malad.id)}
+                                className="py-2 px-6 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-200"
+                            >
+                                اضافةالى لائحة المرضى
+                            </button>
+                        )}
+                    </div>
+                )}
+            </div>
+            <div>
+                <div className=" max-w-[80vw] pl-6 py-10">
+                    <h2 className="text-2xl font-bold text-gray-600 mb-4 text-center">
+                        التقييمات
+                    </h2>
+
+                    {!malad?.maladrates || malad?.maladrates?.lenght == 0 ? (
+                        <div className=" text-center font-semibold text-sm text-gray-400">
+                            لا يوجد تقييمات حاليا
+                        </div>
+                    ) : (
+                        malad?.maladrates?.map((review) => (
+                            <ReviewCard key={review?.id} review={review} />
+                        ))
+                    )}
+                </div>
+            </div>
+        </>
     );
 }
 
