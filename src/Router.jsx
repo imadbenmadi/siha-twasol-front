@@ -88,7 +88,12 @@ import Doctor_event from "./Components/Profiles/Doctor/Events/Event.jsx";
 import Doctor_Events from "./Components/Profiles/Doctor/Events/Events.jsx";
 import Doctor_Add_Events from "./Components/Profiles/Doctor/Events/Add_Event.jsx";
 import Doctor_Edit_Events from "./Components/Profiles/Doctor/Events/Edit_Events.jsx";
+
 import Doctor_Malads from "./Components/Profiles/Doctor/Malads/Malads.jsx";
+import Doctor_Malads_Default from "./Components/Profiles/Doctor/Malads/Default.jsx";
+import Doctor_Malads_List from "./Components/Profiles/Doctor/Malads/Malads_List.jsx";
+import Doctor_Malads_Owned from "./Components/Profiles/Doctor/Malads/Own_Malads.jsx";
+import Doctor_Malads_List_item from "./Components/Profiles/Doctor/Malads/Malad.jsx";
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -266,14 +271,33 @@ const routes = createBrowserRouter([
                     },
                     {
                         path: "/Doctor/Malads",
-                        element: <Not_Finished />,
+                        element: <Doctor_Malads />,
                         errorElement: <ErrorElement />,
+                        children: [
+                            {
+                                index: true,
+                                element: <Doctor_Malads_Default />,
+                                errorElement: <ErrorElement />,
+                            },
+                            {
+                                path: "/Doctor/Malads/List",
+                                element: <Doctor_Malads_List />,
+                            },
+                            {
+                                path: "/Doctor/Malads/List/:id",
+                                element: <Doctor_Malads_List_item />,
+                            },
+                            {
+                                path: "/Doctor/Malads/Own",
+                                element: <Doctor_Malads_Owned />,
+                            },
+                        ],
                     },
                     {
                         path: "/Doctor/ChatRooms",
                         element: <Not_Finished />,
                     },
-                    
+
                     {
                         path: "*",
                         element: <Not_Found />,
