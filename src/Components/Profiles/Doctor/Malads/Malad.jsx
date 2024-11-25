@@ -20,12 +20,12 @@ function Malad() {
         setAddLoading(true);
         try {
             const response = await axios.post(
-                `http://localhost:3000/Doctors/${user.id}/Malads/Own/${maladId}`,
+                `http://localhost:3000/Doctors/${user.id}/Malads/${maladId}/Add`,
                 {},
                 { withCredentials: true }
             );
             console.log(response.data);
-            
+
             Swal.fire({
                 icon: "success",
                 title: "تمت العملية بنجاح",
@@ -38,6 +38,8 @@ function Malad() {
             setAddLoading(false);
         } catch (error) {
             console.log(error);
+            setAddLoading(false);
+        } finally {
             setAddLoading(false);
         }
     };

@@ -15,7 +15,9 @@ function List() {
 
     // Filters
     const [searchQuery, setSearchQuery] = useState("");
-
+    useEffect(() => {
+        console.log("filteredMalads : ", filteredMalads);
+    }, [filteredMalads]);
     useEffect(() => {
         const fetchMalads = async () => {
             try {
@@ -23,7 +25,7 @@ function List() {
                     `http://localhost:3000/Doctors/${user.id}/Malads/Own`,
                     { withCredentials: true }
                 );
-                console.log(response.data);
+                console.log("response : ", response.data);
 
                 setMalads(response.data.malads);
                 setFilteredMalads(response.data.malads);
@@ -41,16 +43,17 @@ function List() {
     useEffect(() => {
         if (malads) {
             const filtered = malads.filter((malad) => {
-                // const matchesType = typeFilter
-                //     ? malad?.Type === typeFilter
-                //     : true;
-                // const matchesLocation = locationFilter
-                //     ? malad?.Location === locationFilter
-                //     : true;
-                if (!malad) return false;
-                const matchesSearch = malad?.firstName
-                    ?.toLowerCase()
-                    .includes(searchQuery.toLowerCase());
+                if (!malad) return false; // Safeguard
+                const matchesSearch =
+                    (malad?.firstName?.toLowerCase() ?? "").includes(
+                        searchQuery.toLowerCase()
+                    ) ||
+                    (malad?.lastName?.toLowerCase() ?? "").includes(
+                        searchQuery.toLowerCase()
+                    ) ||
+                    (malad?.email?.toLowerCase() ?? "").includes(
+                        searchQuery.toLowerCase()
+                    );
 
                 return matchesSearch;
             });
