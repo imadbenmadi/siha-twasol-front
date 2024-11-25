@@ -34,7 +34,7 @@ function Info() {
                 { withCredentials: true }
             );
 
-            if (response.status === 201) {
+            if (response.status === 200) {
                 Swal.fire("نجاح!", "أنت الآن تتابع هذه المؤسسة", "success");
                 setIsFollowing(true); // Immediately update state
             }

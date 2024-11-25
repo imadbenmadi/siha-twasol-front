@@ -35,7 +35,7 @@ function AddBlog() {
                 }
             );
 
-            if (response.status === 201) {
+            if (response.status === 200) {
                 Swal.fire("نجاح", "تم إضافة المقال بنجاح", "success");
                 navigate("/Doctor/Blogs");
                 resetForm();

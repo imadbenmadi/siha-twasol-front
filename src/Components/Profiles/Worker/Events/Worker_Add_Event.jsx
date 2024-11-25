@@ -35,7 +35,7 @@ function AddEvent() {
                 }
             );
 
-            if (response.status === 201) {
+            if (response.status === 200) {
                 Swal.fire("نجاح", "تم إضافة الحدث بنجاح", "success");
                 navigate("/Worker/Events");
                 resetForm();

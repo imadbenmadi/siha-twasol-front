@@ -33,9 +33,9 @@ function AddBlog() {
                     },
                     validateStatus: () => true,
                 }
-            );            
+            );
 
-            if (response.status === 201) {
+            if (response.status === 200) {
                 Swal.fire("نجاح", "تم إضافة المقال بنجاح", "success");
                 navigate("/Worker/Blogs");
                 resetForm();
