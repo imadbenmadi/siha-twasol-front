@@ -1,8 +1,11 @@
 import React from "react";
 import { useAppContext } from "../../../../AppContext";
 import { Link } from "react-router-dom";
-
+import { useEffect } from "react";
 function Profile() {
+    useEffect(() => {
+        console.log(user);
+    }, []);
     const { user } = useAppContext();
     return (
         <div
@@ -45,25 +48,37 @@ function Profile() {
                     {user?.telephone || "غير متوفر"}
                 </p>
                 <p className="text-gray-600">
+                    <span className="font-medium">التخصص :</span>{" "}
+                    {user?.speciality || "غير متوفر"}
+                </p>
+                {/* <p className="text-gray-600">
                     <span className="font-medium">تاريخ الميلاد:</span>{" "}
                     {user?.birthDate
                         ? new Date(user?.birthDate).toLocaleDateString("ar")
                         : "غير متوفر"}
+                </p> */}
+            </div>
+            <div className="border-b pb-4 mb-4">
+                <h3 className="text-xl font-semibold text-gray-700 mb-2">
+                    معلومات الشركة
+                </h3>
+                <p className="text-gray-600">
+                    <span className="font-medium">اسم الشركة:</span>{" "}
+                    {user?.Company.Name}
                 </p>
                 <p className="text-gray-600">
-                    <span className="font-medium">العنوان:</span>{" "}
-                    {user?.adress || "غير متوفر"}
+                    <span className="font-medium">الموقع:</span>{" "}
+                    {user?.Company.Location}
                 </p>
                 <p className="text-gray-600">
-                    <span className="font-medium">الجنس:</span>{" "}
-                    {user?.gender || "غير متوفر"}
+                    <span className="font-medium">الولاية:</span>{" "}
+                    {user?.Company.Wilaya}
                 </p>
                 <p className="text-gray-600">
-                    <span className="font-medium">نبذة:</span>{" "}
-                    {user?.about || "غير متوفر"}
+                    <span className="font-medium">نوع المؤسسة:</span>{" "}
+                    {user?.Company.Type}
                 </p>
             </div>
-
             <div className="border-b pb-4 mb-4 text-gray-600">
                 <p>
                     <span className="font-medium">تاريخ إنشاء الحساب:</span>{" "}
