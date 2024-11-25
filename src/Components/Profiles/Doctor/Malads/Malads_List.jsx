@@ -24,7 +24,7 @@ function List() {
                     { withCredentials: true, validateStatus: () => true }
                 );
                 console.log(response.data);
-                
+
                 setMalads(response.data.malads);
                 setFilteredMalads(response.data.malads);
             } catch (error) {
@@ -80,31 +80,6 @@ function List() {
                         className="w-full border-none focus:outline-none placeholder-gray-400"
                     />
                 </div>
-
-                {/* Type Filter */}
-                {/* <select
-                    value={typeFilter}
-                    onChange={(e) => setTypeFilter(e.target.value)}
-                    className="p-2 border rounded-md shadow-sm"
-                >
-                    <option value="">نوع المريض"</option>
-                    <option value="CHU">CHU</option>
-                    <option value="Clinic">Clinic</option>
-                </select> */}
-
-                {/* Location Filter */}
-                {/* <select
-                    value={locationFilter}
-                    onChange={(e) => setLocationFilter(e.target.value)}
-                    className="p-2 border rounded-md shadow-sm"
-                >
-                    <option value="">الموقع</option>
-                    {locations.map((location) => (
-                        <option key={location} value={location}>
-                            {location}
-                        </option>
-                    ))}
-                </select> */}
             </div>
 
             {/* Malads Table */}
