@@ -18,15 +18,15 @@ const MaladReview = ({ userId, maladId }) => {
         setError("");
         setSuccess("");
 
-        if (!rating || !review) {
-            setError("Rating and review are required.");
+        if (!rating) {
+            setError("Rating is required.");
             setLoading(false);
             return;
         }
 
         try {
             console.log(userId, maladId, rating, review);
-            
+
             const response = await axios.post(
                 `http://localhost:3000/Doctors/${userId}/Malads/${maladId}/Rate`,
                 {
@@ -36,12 +36,12 @@ const MaladReview = ({ userId, maladId }) => {
                 { withCredentials: true }
             );
             console.log(response.data);
-            
+
             setSuccess("Review submitted successfully!");
             window.location.reload();
         } catch (err) {
             console.log(err);
-            
+
             setError("Failed to submit the review?.");
         } finally {
             setLoading(false);
@@ -74,7 +74,7 @@ const MaladReview = ({ userId, maladId }) => {
                     placeholder="اكتب التفصيل هنا..."
                     value={review}
                     onChange={(e) => setReview(e.target.value)}
-                    required
+                    
                 />
 
                 <button
