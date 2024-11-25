@@ -10,8 +10,8 @@ const ReviewCard = ({ review }) => {
 
     return (
         <div className="w-full mx-auto bg-white shadow-md rounded-lg p-4 mb-6">
-            <div className="flex items-center justify-between">
-                <div className="flex items-center">
+            <div className="flex flex-col gap-2 ">
+                <div className="flex  items-center">
                     <span className="text-yellow-400 text-lg">
                         {stars.length > 0 ? stars : null}
                     </span>
@@ -19,12 +19,12 @@ const ReviewCard = ({ review }) => {
                         {rating?.toFixed(1)}
                     </span>
                 </div>
+                <div className="w-fit text-sm text-gray-500 ">{reviewedBy}</div>
             </div>
 
             <p className="text-gray-700 mt-3">{review?.Comment || null}</p>
 
             <div className=" mt-4">
-                <div className="text-sm text-gray-500">{reviewedBy}</div>
                 <div className="text-sm text-gray-400">
                     {review?.createdAt
                         ? new Date(review?.createdAt).toLocaleDateString()

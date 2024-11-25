@@ -20,6 +20,7 @@ function Malad() {
                     `http://localhost:3000/Doctors/${user.id}/Malads/Own/${id}`,
                     { withCredentials: true }
                 );
+                console.log(response.data);
                 setIs_rated(response.data.is_rated);
                 setMaladrates(response.data.maladrates);
                 setMalad(response.data.malad.Malad);
@@ -138,17 +139,29 @@ function Malad() {
                 )}
 
                 <div>
-                    <div className=" max-w-[80vw] pl-6 py-10">
+                    <div className="max-w-[80vw] pl-6 py-10">
                         <h2 className="text-2xl font-bold text-gray-600 mb-4 text-center">
                             التقييمات
                         </h2>
-
-                        {!maladrates || maladrates?.lenght == 0 ? (
-                            <div className=" text-center font-semibold text-sm text-gray-400">
+                        <div className="my-6 px-6 py-4 shadow-md font-semibold text-gray-500 flex gap-3 w-fit mx-auto rounded-lg ">
+                            <div>
+                                {maladrates && maladrates.length > 0
+                                    ? (
+                                          maladrates.reduce(
+                                              (sum, rate) => sum + rate.Rate,
+                                              0
+                                          ) / maladrates.length
+                                      ).toFixed(1) // Calculate average and format to 2 decimal places
+                                    : 0.0}
+                            </div>
+                            <div>اجمالي التقييم</div>
+                        </div>
+                        {!maladrates || maladrates.length === 0 ? (
+                            <div className="text-center font-semibold text-sm text-gray-400">
                                 لا يوجد تقييمات حاليا
                             </div>
                         ) : (
-                            maladrates?.map((review) => (
+                            maladrates.map((review) => (
                                 <ReviewCard key={review?.id} review={review} />
                             ))
                         )}
