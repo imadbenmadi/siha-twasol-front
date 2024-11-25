@@ -93,14 +93,14 @@ function BlogDetail() {
             </div>
 
             {/* Additional Information */}
-            <div className="p-4 rounded-lg">
+            <div className=" rounded-lg">
                 {blog?.ownerType === "Doctor" && blog?.Owner ? (
                     <Link
                         to={`/Malad/Companies/${blog?.companyId}/Doctors/${blog?.Owner.id}`}
-                        className="text-gray-600 mb-2"
+                        className="text-gray-600 mb-2 flex gap-2"
                     >
                         <span className="font-semibold text-gray-700">
-                            اسم الطبيب:{" "}
+                            ناشر المقال: :
                         </span>
                         <span className="text-blue-500 underline">
                             {blog?.Owner.firstName} {blog?.Owner.lastName}
@@ -110,7 +110,7 @@ function BlogDetail() {
             </div>
             <Link
                 to={`/Malad/Companies/${blog?.Company.id}`}
-                className="text-gray-600"
+                className="text-gray-600  flex gap-2"
             >
                 <span className="font-semibold text-gray-700">
                     {" "}
