@@ -63,7 +63,7 @@ import Malad_Edit_Profile from "./Components/Profiles/Malad/Profile/Edit_Profile
 import Malad_Companies from "./Components/Profiles/Malad/Companies/Companies.jsx";
 import Malad_Company from "./Components/Profiles/Malad/Companies/Company.jsx";
 import Malad_Company_doctors from "./Components/Profiles/Malad/Companies/Company_Components/DoctorsSection.jsx";
-import Malad_Company_doctor from "./Components/Profiles/Malad/Companies/Company_Components/Doctor.jsx";
+import Malad_Company_doctor from "./Components/Profiles/Malad/Companies/Company_Components/Doctor/Doctor.jsx";
 import Malad_Company_blogs from "./Components/Profiles/Malad/Companies/Company_Components/Blogs/BlogsSection.jsx";
 import Malad_Company_blog from "./Components/Profiles/Malad/Companies/Company_Components/Blogs/Blog.jsx";
 import Malad_Company_events from "./Components/Profiles/Malad/Companies/Company_Components/Events/EventsSection.jsx";
