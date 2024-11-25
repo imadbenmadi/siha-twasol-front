@@ -3,6 +3,7 @@ import { useAppContext } from "../../../../AppContext";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
+
 function List() {
     const { user } = useAppContext();
 
@@ -15,9 +16,12 @@ function List() {
 
     // Filters
     const [searchQuery, setSearchQuery] = useState("");
+
     useEffect(() => {
-        console.log("filteredMalads : ", filteredMalads);
-    }, [filteredMalads]);
+        console.log("malads : ", malads);
+    }, [malads]);
+
+    // Fetch malads data
     useEffect(() => {
         const fetchMalads = async () => {
             try {
@@ -30,8 +34,7 @@ function List() {
                 setMalads(response.data.malads);
                 setFilteredMalads(response.data.malads);
             } catch (error) {
-                console.log(error);
-
+                console.error(error);
                 setError("حدث خطأ أثناء تحميل بيانات المريض.");
             } finally {
                 setLoading(false);
@@ -40,18 +43,19 @@ function List() {
         fetchMalads();
     }, [id, user.id]);
 
+    // Filter malads based on search query
     useEffect(() => {
         if (malads) {
             const filtered = malads.filter((malad) => {
-                if (!malad) return false; // Safeguard
+                if (!malad || !malad.Malad) return false; // Safeguard
                 const matchesSearch =
-                    (malad?.firstName?.toLowerCase() ?? "").includes(
+                    (malad.Malad?.firstName?.toLowerCase() ?? "").includes(
                         searchQuery.toLowerCase()
                     ) ||
-                    (malad?.lastName?.toLowerCase() ?? "").includes(
+                    (malad.Malad?.lastName?.toLowerCase() ?? "").includes(
                         searchQuery.toLowerCase()
                     ) ||
-                    (malad?.email?.toLowerCase() ?? "").includes(
+                    (malad.Malad?.email?.toLowerCase() ?? "").includes(
                         searchQuery.toLowerCase()
                     );
 
@@ -64,6 +68,7 @@ function List() {
 
     if (loading) return <div>جاري التحميل...</div>;
     if (error) return <div className="text-red-600">{error}</div>;
+
     return (
         <div className="p-6">
             <h2 className="text-2xl font-semibold text-center mb-6">
@@ -118,33 +123,34 @@ function List() {
                                 >
                                     {/* Email */}
                                     <td className="px-6 py-4 text-gray-700">
-                                        {malad?.email}
+                                        {malad.Malad?.email}
                                     </td>
 
                                     {/* Name */}
                                     <td className="px-6 py-4 text-gray-700">
-                                        {malad?.firstName} {malad?.lastName}
+                                        {malad.Malad?.firstName}{" "}
+                                        {malad.Malad?.lastName}
                                     </td>
 
                                     {/* Telephone */}
                                     <td className="px-6 py-4 text-gray-600">
-                                        {malad?.telephone || "غير متوفر"}
+                                        {malad.Malad?.telephone || "غير متوفر"}
                                     </td>
 
                                     {/* Address */}
                                     <td className="px-6 py-4 text-gray-600">
-                                        {malad?.adress || "غير متوفر"}
+                                        {malad.Malad?.adress || "غير متوفر"}
                                     </td>
 
                                     {/* Gender */}
                                     <td className="px-6 py-4 text-gray-600">
-                                        {malad?.gender || "غير متوفر"}
+                                        {malad.Malad?.gender || "غير متوفر"}
                                     </td>
 
                                     {/* Action: View */}
                                     <td className="px-6 py-4">
                                         <Link
-                                            to={`/Doctor/Malads/Own/${malad?.id}`}
+                                            to={`/Doctor/Malads/Own/${malad.Malad?.id}`}
                                             className="py-1 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200"
                                         >
                                             عرض

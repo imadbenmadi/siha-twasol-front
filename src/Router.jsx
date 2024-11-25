@@ -94,7 +94,7 @@ import Doctor_Malads_Default from "./Components/Profiles/Doctor/Malads/Default.j
 import Doctor_Malads_List from "./Components/Profiles/Doctor/Malads/Malads_List.jsx";
 import Doctor_Malads_Owned from "./Components/Profiles/Doctor/Malads/Own_Malads.jsx";
 import Doctor_Malads_List_item from "./Components/Profiles/Doctor/Malads/Malad.jsx";
-import Doctor_Malads_Own_item from "./Components/Profiles/Doctor/Malads/Malad.jsx";
+import Doctor_Malads_Own_item from "./Components/Profiles/Doctor/Malads/Malad_Own_item.jsx";
 
 const routes = createBrowserRouter([
     {
