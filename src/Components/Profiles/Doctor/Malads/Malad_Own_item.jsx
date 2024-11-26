@@ -124,7 +124,7 @@ function Malad() {
                 </div>
                 <div className="flex justify-center mt-6 gap-4">
                     <Link
-                        to={"/Doctor/" + "/Malads/" + malad?.id + "/upload"}
+                        to={"/Doctor/Malads/" + malad?.id + "/upload"}
                         className="py-2 px-6 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-200"
                     >
                         اضافة ملف جديد
