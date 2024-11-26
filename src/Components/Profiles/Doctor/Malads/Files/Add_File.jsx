@@ -1,9 +1,16 @@
-import React from 'react'
-
+import React from "react";
+import { useState, useEffect } from "react";
+import ScrollToTop from "../../../../Shared/ScrollToTop";
 function Add_File() {
-  return (
-    <div>Add_File</div>
-  )
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+    return (
+        <div>
+            <ScrollToTop />
+            <div>hi</div>
+        </div>
+    );
 }
 
-export default Add_File
+export default Add_File;
