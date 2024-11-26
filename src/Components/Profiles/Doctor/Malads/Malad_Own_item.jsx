@@ -20,13 +20,11 @@ function Malad() {
                     `http://localhost:3000/Doctors/${user.id}/Malads/Own/${id}`,
                     { withCredentials: true }
                 );
-                console.log(response.data);
                 setIs_rated(response.data.is_rated);
                 setMaladrates(response.data.maladrates);
                 setMalad(response.data.malad.Malad);
                 setLoading(false);
             } catch (error) {
-                console.log(error);
 
                 setError("حدث خطأ أثناء تحميل بيانات المريض.");
                 setLoading(false);

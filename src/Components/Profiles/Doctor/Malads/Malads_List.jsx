@@ -23,13 +23,9 @@ function List() {
                     `http://localhost:3000/Doctors/${user.id}/Malads`,
                     { withCredentials: true }
                 );
-                console.log(response.data);
-
                 setMalads(response.data.malads);
                 setFilteredMalads(response.data.malads);
             } catch (error) {
-                console.log(error);
-
                 setError("حدث خطأ أثناء تحميل بيانات المريض.");
             } finally {
                 setLoading(false);

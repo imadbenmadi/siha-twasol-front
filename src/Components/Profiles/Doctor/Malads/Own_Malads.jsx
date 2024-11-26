@@ -17,10 +17,6 @@ function List() {
     // Filters
     const [searchQuery, setSearchQuery] = useState("");
 
-    useEffect(() => {
-        console.log("malads : ", malads);
-    }, [malads]);
-
     // Fetch malads data
     useEffect(() => {
         const fetchMalads = async () => {
@@ -29,7 +25,6 @@ function List() {
                     `http://localhost:3000/Doctors/${user.id}/Malads/Own`,
                     { withCredentials: true }
                 );
-                console.log("response : ", response.data);
 
                 setMalads(response.data.malads);
                 setFilteredMalads(response.data.malads);

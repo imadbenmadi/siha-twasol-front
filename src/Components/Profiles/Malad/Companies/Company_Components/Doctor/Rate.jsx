@@ -25,8 +25,6 @@ const MaladReview = ({ userId, doctorId }) => {
         }
 
         try {
-            console.log(userId, doctorId, rating, review);
-
             const response = await axios.post(
                 `http://localhost:3000/Malads/${userId}/Doctors/${doctorId}/Rate`,
                 {
@@ -35,13 +33,9 @@ const MaladReview = ({ userId, doctorId }) => {
                 },
                 { withCredentials: true }
             );
-            console.log(response.data);
-
             setSuccess("Review submitted successfully!");
             window.location.reload();
         } catch (err) {
-            console.log(err);
-
             setError("Failed to submit the review?.");
         } finally {
             setLoading(false);

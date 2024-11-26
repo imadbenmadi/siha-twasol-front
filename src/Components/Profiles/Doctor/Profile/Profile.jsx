@@ -3,9 +3,6 @@ import { useAppContext } from "../../../../AppContext";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 function Profile() {
-    useEffect(() => {
-        console.log(user);
-    }, []);
     const { user } = useAppContext();
     return (
         <div

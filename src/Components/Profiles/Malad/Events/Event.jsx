@@ -22,8 +22,6 @@ function EventDetail() {
                         validateStatus: () => true,
                     }
                 );
-                console.log(response);
-
                 if (response.status === 200) {
                     setEvent(response.data);
                 } else if (response.status === 401) {

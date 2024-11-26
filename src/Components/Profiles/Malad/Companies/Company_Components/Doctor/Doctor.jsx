@@ -26,15 +26,12 @@ function Malad() {
                     `http://localhost:3000/Malads/${user?.id}/Companies/${compnayId}/Doctors/${doctorId}`,
                     { withCredentials: true }
                 );
-                // console.log(response.data);
                 setIs_rated(response.data.is_rated);
                 setDoctorRates(response.data.doctorRates);
                 setIs_in_list(response.data.is_in_List);
                 setDoctor(response.data.doctor);
                 setLoading(false);
             } catch (error) {
-                console.log(error);
-
                 setError("حدث خطأ أثناء تحميل بيانات المريض.");
                 setLoading(false);
             }

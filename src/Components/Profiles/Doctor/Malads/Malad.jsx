@@ -28,7 +28,6 @@ function Malad() {
                 {},
                 { withCredentials: true }
             );
-            console.log(response.data);
 
             Swal.fire({
                 icon: "success",
@@ -41,7 +40,6 @@ function Malad() {
             Navigate("/Doctor/Malads/List");
             setAddLoading(false);
         } catch (error) {
-            console.log(error);
             setAddLoading(false);
         } finally {
             setAddLoading(false);
@@ -54,14 +52,12 @@ function Malad() {
                     `http://localhost:3000/Doctors/${malad?.id}/Malads/${id}`,
                     { withCredentials: true }
                 );
-                // console.log(response.data);
                 setIs_rated(response.data.is_rated);
                 setMaladrates(response.data.maladrates);
                 setIs_in_list(response.data.is_in_list);
                 setMalad(response.data.malad);
                 setLoading(false);
             } catch (error) {
-                console.log(error);
 
                 setError("حدث خطأ أثناء تحميل بيانات المريض.");
                 setLoading(false);

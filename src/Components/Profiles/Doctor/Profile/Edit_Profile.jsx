@@ -72,7 +72,6 @@ function EditProfile() {
                     withCredentials: true,
                 }
             );
-            console.log(response);
             
 
             if (response.status === 200) {
