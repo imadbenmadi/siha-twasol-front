@@ -13,6 +13,11 @@ function Malad() {
     const [malad, setMalad] = useState(null);
     const [maladrates, setMaladrates] = useState([]);
     const [is_rated, setIs_rated] = useState(false);
+    const [files, setFiles] = useState([]);
+    useEffect(() => {
+        console.log(files);
+    }, [files]);
+        
     useEffect(() => {
         const fetchMalad = async () => {
             try {
@@ -20,12 +25,14 @@ function Malad() {
                     `http://localhost:3000/Doctors/${user.id}/Malads/Own/${id}`,
                     { withCredentials: true }
                 );
+                console.log(response.data);
+
                 setIs_rated(response.data.is_rated);
                 setMaladrates(response.data.maladrates);
                 setMalad(response.data.malad.Malad);
+                setFiles(response.data.malad_files);
                 setLoading(false);
             } catch (error) {
-
                 setError("حدث خطأ أثناء تحميل بيانات المريض.");
                 setLoading(false);
             }
@@ -127,6 +134,39 @@ function Malad() {
                     >
                         اضافة ملف جديد
                     </Link>
+                </div>
+            </div>
+            <div>
+                <div className="max-w-[80vw] pl-6 py-10">
+                    <h2 className="text-2xl font-bold text-gray-600 mb-4 text-center">
+                        الملفات
+                    </h2>
+                    {!files || files.length === 0 ? (
+                        <div className="text-center font-semibold text-sm text-gray-400">
+                            لا توجد ملفات حاليا
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {files.map((file) => (
+                                <div
+                                    key={file.id}
+                                    className="bg-white shadow-md rounded-lg p-4"
+                                >
+                                    <h3 className="text-lg font-semibold text-gray-600 mb-2">
+                                        {file.Title}
+                                    </h3>
+                                    <a
+                                        href={`http://localhost:3000/${file.file_link}`}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="text-blue-500 hover:underline"
+                                    >
+                                        تحميل الملف
+                                    </a>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
             <div className=" mt-6">

@@ -14,7 +14,7 @@ function Add_File() {
     const [dragging, setDragging] = useState(false);
     const fileInputRef = useRef(null);
     const [progress, setProgress] = useState(0);
-    const [title, setTitle] = useState("");
+    const [Title, setTitle] = useState("");
     const [isUploading, setIsUploading] = useState(false);
     const location = useLocation();
     const maladId = location.pathname.split("/")[3]; // Adjust based on URL
@@ -27,7 +27,7 @@ function Add_File() {
             if (file.size > MAX_FILE_SIZE) {
                 Swal.fire({
                     icon: "error",
-                    title: "الملف كبير جدًا",
+                    Title: "الملف كبير جدًا",
                     text: "أقصى حجم مسموح به هو 500 ميقابايت.",
                     confirmButtonColor: "#3085d6",
                 });
@@ -45,7 +45,7 @@ function Add_File() {
             if (file.size > MAX_FILE_SIZE) {
                 Swal.fire({
                     icon: "error",
-                    title: "الملف كبير جدًا",
+                    Title: "الملف كبير جدًا",
                     text: "أقصى حجم مسموح به هو 500 ميقابايت.",
                     confirmButtonColor: "#3085d6",
                 });
@@ -60,11 +60,11 @@ function Add_File() {
             setIsUploading(true);
             const formData = new FormData();
             formData.append("file", file);
-            formData.append("title", title);
+            formData.append("Title", Title);
 
             axios
                 .post(
-                    `http://localhost:3000/Doctors/${user.id}/Malads/${maladId}/file`,
+                    `http://localhost:3000/Doctors/${user.id}/Malads/${maladId}/Files`,
                     formData,
                     {
                         withCredentials: true,
@@ -82,10 +82,12 @@ function Add_File() {
                     }
                 )
                 .then((response) => {
-                    if (response.status === 200) {
+                    console.log(response);
+                    
+                    if (response.status === 201) {
                         Swal.fire({
                             icon: "success",
-                            title: "تم التحميل بنجاح",
+                            Title: "تم التحميل بنجاح",
                             text: response.data.message,
                             confirmButtonColor: "#3085d6",
                         }).then(() => {
@@ -94,7 +96,7 @@ function Add_File() {
                     } else {
                         Swal.fire({
                             icon: "error",
-                            title: "فشل التحميل",
+                            Title: "فشل التحميل",
                             text:
                                 response.data.message +
                                 " : " +
@@ -110,14 +112,14 @@ function Add_File() {
                     if (error.response && error.response.status === 413) {
                         Swal.fire({
                             icon: "error",
-                            title: "الملف كبير جدًا : الحد الأقصى 500 ميقابايت",
+                            Title: "الملف كبير جدًا : الحد الأقصى 500 ميقابايت",
                             text: error.message,
                             confirmButtonColor: "#3085d6",
                         });
                     } else {
                         Swal.fire({
                             icon: "error",
-                            title: "فشل التحميل",
+                            Title: "فشل التحميل",
                             text: error.message,
                             confirmButtonColor: "#3085d6",
                         });
@@ -128,7 +130,7 @@ function Add_File() {
         } else {
             Swal.fire({
                 icon: "warning",
-                title: "لم يتم اختيار ملف",
+                Title: "لم يتم اختيار ملف",
                 text: "يرجى اختيار ملف لتحميله.",
                 confirmButtonColor: "#3085d6",
             });
@@ -154,12 +156,12 @@ function Add_File() {
                             clipRule="evenodd"
                         />
                     </svg>
-                    العودة إلى الحالة المرضية
+                    العودة  
                 </Link>
 
                 <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-2xl">
                     <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
-                        رفع ملف الحالة المرضية
+                        رفع الملف 
                     </h2>
 
                     <div
@@ -218,7 +220,7 @@ function Add_File() {
                                 type="text"
                                 placeholder="أدخل عنوان الملف"
                                 className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                                value={title}
+                                value={Title}
                                 onChange={(e) => setTitle(e.target.value)}
                                 disabled={isUploading}
                             />
