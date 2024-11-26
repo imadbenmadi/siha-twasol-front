@@ -96,6 +96,8 @@ import Doctor_Malads_Owned from "./Components/Profiles/Doctor/Malads/Own_Malads.
 import Doctor_Malads_List_item from "./Components/Profiles/Doctor/Malads/Malad.jsx";
 import Doctor_Malads_Own_item from "./Components/Profiles/Doctor/Malads/Malad_Own_item.jsx";
 
+import Doctor_Add_File from "./Components/Profiles/Doctor/Malads/Files/Add_File.jsx";
+import Doctor_File from "./Components/Profiles/Doctor/Malads/Files/File.jsx";
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -296,6 +298,14 @@ const routes = createBrowserRouter([
                             {
                                 path: "/Doctor/Malads/Own/:id",
                                 element: <Doctor_Malads_Own_item />,
+                            },
+                            {
+                                path: "/Doctor/Malads/:id/upload",
+                                element: <Doctor_Add_File />,
+                            },
+                            {
+                                path: "/Doctor/Malads/:id/Files/:id",
+                                element: <Doctor_File />,
                             },
                         ],
                     },
