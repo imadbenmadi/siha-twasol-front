@@ -141,6 +141,7 @@ function Event() {
                 <div className="w-full h-64 bg-gray-300 flex items-center justify-center">
                     {event.image_link ? (
                         <img
+                            loading="lazy"
                             src={`http://localhost:3000${event.image_link}`}
                             alt="Event Image"
                             className="w-full h-full object-cover"

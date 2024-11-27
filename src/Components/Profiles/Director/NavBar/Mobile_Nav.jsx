@@ -27,7 +27,12 @@ function Mobile_Nav({ Active_nav, handleLogout, LogoutClicked }) {
             h-full bg-white border-b"
             >
                 <div>
-                        <img src={Logo} alt="Logo" className=" w-[50px] " />
+                    <img
+                        loading="lazy"
+                        src={Logo}
+                        alt="Logo"
+                        className=" w-[50px] "
+                    />
                 </div>
                 <div className=" flex items-center justify-center gap-4 md:gap-6">
                     <Menu_Toogler

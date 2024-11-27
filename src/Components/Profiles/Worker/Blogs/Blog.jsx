@@ -139,6 +139,7 @@ function Blog() {
                 <div className="w-full h-64 bg-gray-300 flex items-center justify-center">
                     {blog.image_link ? (
                         <img
+                            loading="lazy"
                             src={`http://localhost:3000${blog.image_link}`}
                             alt="Blog Image"
                             className="w-full h-full object-cover"

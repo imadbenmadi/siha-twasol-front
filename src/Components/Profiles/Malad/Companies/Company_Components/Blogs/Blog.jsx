@@ -22,6 +22,7 @@ function BlogDetail() {
             {/* Blog Image */}
             {blog?.image_link && (
                 <img
+                    loading="lazy"
                     src={`http://localhost:3000/${blog?.image_link}`}
                     alt={blog?.Title}
                     className="w-full h-64 object-cover rounded-lg mb-6"

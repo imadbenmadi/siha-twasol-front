@@ -14,7 +14,12 @@ function Mobile_Nav() {
         <>
             <div className=" flex gap-5 items-center justify-between mx-3 md:hidden h-full ">
                 <div>
-                    <img src={Logo} alt="Logo" className=" w-[50px] " />
+                    <img
+                        loading="lazy"
+                        src={Logo}
+                        alt="Logo"
+                        className=" w-[50px] "
+                    />
                 </div>
                 <Menu_Toogler
                     MobileNav_Open={MobileNav_Open}

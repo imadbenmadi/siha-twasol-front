@@ -49,7 +49,7 @@ function Director() {
     if (loading)
         return (
             <div className=" w-screen h-screen flex flex-col items-center justify-center">
-                <img src={Logo} alt="" className=" w-20 pb-6" />
+                <img loading="lazy" src={Logo} alt="" className=" w-20 pb-6" />
                 <span className="loader"></span>
             </div>
         );

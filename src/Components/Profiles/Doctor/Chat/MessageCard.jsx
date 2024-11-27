@@ -22,6 +22,7 @@ const MessageCard = ({
                         className={`rounded-lg transition-transform duration-300 flex text-sm  font-semibold gap-1 justify-start my-2`}
                     >
                         <img
+                            loading="lazy"
                             src={logo_img}
                             alt=""
                             className=" w-[70px] h-fit  rounded-full shrink-0 "

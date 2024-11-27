@@ -7,7 +7,12 @@ function Laptop_Nav_Items() {
           md:text-md lg:text-lg  font-[500]  text-black_text h-full p-2 "
         >
             <div>
-                <img src={Logo} alt="Logo" className=" w-[50px]  " />
+                <img
+                    loading="lazy"
+                    src={Logo}
+                    alt="Logo"
+                    className=" w-[50px]  "
+                />
             </div>
             <div className="flex gap-6 lg:gap-12">
                 <div className=" md:hover:text-blue_v transition-all duration-150  cursor-pointer">

@@ -146,6 +146,7 @@ function AddEvent() {
                             {imagePreview && (
                                 <div className="mt-4">
                                     <img
+                                        loading="lazy"
                                         src={imagePreview}
                                         alt="معاينة الصورة"
                                         className="w-fit h-48 object-cover rounded-lg shadow-md"

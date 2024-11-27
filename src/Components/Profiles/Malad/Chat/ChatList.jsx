@@ -133,6 +133,7 @@ const ChatList = () => {
                                             }
                                         >
                                             <img
+                                                loading="lazy"
                                                 className="rounded-full w-12 h-12 object-cover"
                                                 src={`http://localhost:3000/${chat?.Doctor?.profile_pic_link}`}
                                                 alt=""

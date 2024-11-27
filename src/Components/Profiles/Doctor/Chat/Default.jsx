@@ -11,7 +11,12 @@ const ChatList = () => {
                     <div className="text-gray_v font-semibold text-center w-full ">
                         Please select a room to start chat
                     </div>
-                    <img src={chat_icon} className="w-32" alt="Chat Icon" />
+                    <img
+                        loading="lazy"
+                        src={chat_icon}
+                        className="w-32"
+                        alt="Chat Icon"
+                    />
                 </div>
             </div>
         </div>

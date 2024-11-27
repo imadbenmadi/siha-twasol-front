@@ -172,6 +172,7 @@ function EventCard({ event }) {
             {/* Event Image */}
             {event.image_link && (
                 <img
+                    loading="lazy"
                     src={`http://localhost:3000/${event.image_link}`}
                     alt={event.Title}
                     className="w-full h-48 object-cover rounded-t-lg"

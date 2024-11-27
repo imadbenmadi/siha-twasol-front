@@ -24,7 +24,12 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
     return (
         <div className="hidden  md:flex  items-center justify-between mx-2 lg:mx-12  md:text-md lg:text-lg  font-[500] text-black_text h-full p-2 ">
             <div>
-                <img src={Logo} alt="Logo" className=" w-[50px]  " />
+                <img
+                    loading="lazy"
+                    src={Logo}
+                    alt="Logo"
+                    className=" w-[50px]  "
+                />
             </div>
             <div className="flex gap-6 lg:gap-14">
                 <div
@@ -77,6 +82,7 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                 <div className=" relative">
                     {user?.profile_pic_link ? (
                         <img
+                            loading="lazy"
                             src={`http://localhost:3000/${user.profile_pic_link}`}
                             onError={(e) => {
                                 e.target.onerror = null;
@@ -88,6 +94,7 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                         />
                     ) : (
                         <img
+                            loading="lazy"
                             src={user_default}
                             alt="pic"
                             className=" w-8 cursor-pointer"

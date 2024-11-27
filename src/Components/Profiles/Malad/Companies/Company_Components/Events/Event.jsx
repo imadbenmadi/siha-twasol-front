@@ -22,6 +22,7 @@ function EventDetail() {
             {/* Event Image */}
             {event?.image_link && (
                 <img
+                    loading="lazy"
                     src={`http://localhost:3000/${event?.image_link}`}
                     alt={event?.Title}
                     className="w-full h-64 object-cover rounded-lg mb-6"

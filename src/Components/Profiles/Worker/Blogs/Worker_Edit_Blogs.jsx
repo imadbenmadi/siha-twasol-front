@@ -192,6 +192,7 @@ function EditBlog() {
                                     </label>
                                     {imagePreview ? (
                                         <img
+                                            loading="lazy"
                                             src={imagePreview}
                                             alt="معاينة الصورة"
                                             className="w-fit h-48 object-cover rounded-lg shadow-md mb-4"

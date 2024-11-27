@@ -19,6 +19,7 @@ function Profile() {
                 </h3>
                 {user?.profile_pic_link ? (
                     <img
+                        loading="lazy"
                         src={`http://localhost:3000/${user.profile_pic_link}`}
                         alt="Profile"
                         className="w-32 h-32 rounded-full mx-auto object-cover"

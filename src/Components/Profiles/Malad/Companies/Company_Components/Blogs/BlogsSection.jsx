@@ -38,6 +38,7 @@ function BlogCard({ blog, companyId }) {
             {/* Blog Image */}
             {blog.image_link && (
                 <img
+                    loading="lazy"
                     src={`http://localhost:3000/${blog.image_link}`}
                     alt={blog.Title}
                     className="w-full h-48 object-cover rounded-t-lg"

@@ -51,6 +51,7 @@ function Mobile_Nav({ Active_nav, handleLogout, LogoutClicked }) {
                 <div className=" flex items-center justify-center gap-4 md:gap-6">
                     <div>
                         <img
+                            loading="lazy"
                             src={notification_icon}
                             alt=""
                             onClick={toogleopen_Notifications}
