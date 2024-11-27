@@ -1,275 +1,112 @@
 import { createBrowserRouter } from "react-router-dom";
-import React, { lazy, Suspense } from "react";
 
-const Home = lazy(() => import("./Components/Home/Home.jsx"));
-const App = lazy(() => import("./App"));
-const Login = lazy(() => import("./Components/Auth/Login/Login"));
-const Register = lazy(() => import("./Components/Auth/Register/Register"));
-const Default = lazy(() => import("./Default"));
+import Home from "./Components/Home/Home.jsx";
+import App from "./App.jsx";
+import Login from "./Components/Auth/Login/Login.jsx";
+import Register from "./Components/Auth/Register/Register.jsx";
+import Default from "./Default.jsx";
 
-const Not_Found = lazy(() => import("./Components/Not_Found"));
-const Not_Finished = lazy(() => import("./Components/Not_Finished"));
-const ErrorElement = lazy(() => import("./Components/ErrorElement"));
+import Not_Found from "./Components/Not_Found.jsx";
+import Not_Finished from "./Components/Not_Finished.jsx";
+import ErrorElement from "./Components/ErrorElement.jsx";
 
-const Malad = lazy(() => import("./Components/Profiles/Malad/Malad.jsx"));
-const Doctor = lazy(() => import("./Components/Profiles/Doctor/Doctor.jsx"));
-const Director = lazy(() =>
-    import("./Components/Profiles/Director/Director.jsx")
-);
-const Worker = lazy(() => import("./Components/Profiles/Worker/Worker.jsx"));
+import Malad from "./Components/Profiles/Malad/Malad.jsx";
+import Doctor from "./Components/Profiles/Doctor/Doctor.jsx";
+import Director from "./Components/Profiles/Director/Director.jsx";
+import Worker from "./Components/Profiles/Worker/Worker.jsx";
 
-const Worker_Profile = lazy(() =>
-    import("./Components/Profiles/Worker/Profile/Profile.jsx")
-);
-const Malad_Profile = lazy(() =>
-    import("./Components/Profiles/Malad/Profile/Profile.jsx")
-);
+import Worker_Profile from "./Components/Profiles/Worker/Profile/Profile.jsx";
+import Malad_Profile from "./Components/Profiles/Malad/Profile/Profile.jsx";
 
 // import Malad from "./Components/Profiles/Director/Director.jsx";
-const Director_default = lazy(() =>
-    import("./Components/Profiles/Director/Director_Default.jsx")
-);
-const Malad_default = lazy(() =>
-    import("./Components/Profiles/Malad/Malad_Default.jsx")
-);
-const Doctor_default = lazy(() =>
-    import("./Components/Profiles/Doctor/Doctor_Default.jsx")
-);
-const Worker_default = lazy(() =>
-    import("./Components/Profiles/Worker/Worker_Default.jsx")
-);
+import Director_default from "./Components/Profiles/Director/Director_Default.jsx";
+import Malad_default from "./Components/Profiles/Malad/Malad_Default.jsx";
+import Doctor_default from "./Components/Profiles/Doctor/Doctor_Default.jsx";
+import Worker_default from "./Components/Profiles/Worker/Worker_Default.jsx";
 
-const Director_workers = lazy(() =>
-    import("./Components/Profiles/Director/Workers/Director_workers.jsx")
-);
-const Director_worker = lazy(() =>
-    import("./Components/Profiles/Director/Workers/Wroker.jsx")
-);
-const Director_Add_Worker = lazy(() =>
-    import("./Components/Profiles/Director/Workers/Director_Add_workers.jsx")
-);
-const Director_Edit_Worker = lazy(() =>
-    import("./Components/Profiles/Director/Workers/Director_Edit_workers.jsx")
-);
+import Director_workers from "./Components/Profiles/Director/Workers/Director_workers.jsx";
+import Director_worker from "./Components/Profiles/Director/Workers/Wroker.jsx";
+import Director_Add_Worker from "./Components/Profiles/Director/Workers/Director_Add_workers.jsx";
+import Director_Edit_Worker from "./Components/Profiles/Director/Workers/Director_Edit_workers.jsx";
 
-const Director_Services = lazy(() =>
-    import("./Components/Profiles/Director/Services/Director_Services.jsx")
-);
-const Director_Services_add = lazy(() =>
-    import("./Components/Profiles/Director/Services/Director_Add_service.jsx")
-);
-const Director_Services_edit = lazy(() =>
-    import("./Components/Profiles/Director/Services/Edit_Service.jsx")
-);
+import Director_Services from "./Components/Profiles/Director/Services/Director_Services.jsx";
+import Director_Services_add from "./Components/Profiles/Director/Services/Director_Add_service.jsx";
+import Director_Services_edit from "./Components/Profiles/Director/Services/Edit_Service.jsx";
 
-const Director_Doctors = lazy(() =>
-    import("./Components/Profiles/Director/Doctors/Director_Doctors.jsx")
-);
-const Director_Doctors_add = lazy(() =>
-    import("./Components/Profiles/Director/Doctors/Add_doctor.jsx")
-);
-const Director_doctor = lazy(() =>
-    import("./Components/Profiles/Director/Doctors/Doctor.jsx")
-);
-const Director_Edit_doctor = lazy(() =>
-    import("./Components/Profiles/Director/Doctors/Edit_doctor.jsx")
-);
+import Director_Doctors from "./Components/Profiles/Director/Doctors/Director_Doctors.jsx";
+import Director_Doctors_add from "./Components/Profiles/Director/Doctors/Add_doctor.jsx";
+import Director_doctor from "./Components/Profiles/Director/Doctors/Doctor.jsx";
+import Director_Edit_doctor from "./Components/Profiles/Director/Doctors/Edit_doctor.jsx";
 
-const Director_Blogs = lazy(() =>
-    import("./Components/Profiles/Director/Blogs/Director_Blogs.jsx")
-);
-const Director_Blog = lazy(() =>
-    import("./Components/Profiles/Director/Blogs/Blog.jsx")
-);
-const Director_Add_Blogs = lazy(() =>
-    import("./Components/Profiles/Director/Blogs/Director_Add_Blogs.jsx")
-);
-const Director_Edit_Blogs = lazy(() =>
-    import("./Components/Profiles/Director/Blogs/Director_Edit_Blogs.jsx")
-);
+import Director_Blogs from "./Components/Profiles/Director/Blogs/Director_Blogs.jsx";
+import Director_Blog from "./Components/Profiles/Director/Blogs/Blog.jsx";
+import Director_Add_Blogs from "./Components/Profiles/Director/Blogs/Director_Add_Blogs.jsx";
+import Director_Edit_Blogs from "./Components/Profiles/Director/Blogs/Director_Edit_Blogs.jsx";
 
-const Director_Events = lazy(() =>
-    import("./Components/Profiles/Director/Events/Director_Events.jsx")
-);
-const Director_Event = lazy(() =>
-    import("./Components/Profiles/Director/Events/Event.jsx")
-);
-const Director_Add_Events = lazy(() =>
-    import("./Components/Profiles/Director/Events/Director_Add_Event.jsx")
-);
-const Director_Edit_Events = lazy(() =>
-    import("./Components/Profiles/Director/Events/Director_Edit_Events.jsx")
-);
+import Director_Events from "./Components/Profiles/Director/Events/Director_Events.jsx";
+import Director_Event from "./Components/Profiles/Director/Events/Event.jsx";
+import Director_Add_Events from "./Components/Profiles/Director/Events/Director_Add_Event.jsx";
+import Director_Edit_Events from "./Components/Profiles/Director/Events/Director_Edit_Events.jsx";
 // ______________________________________________________
 
-const Worker_blog = lazy(() =>
-    import("./Components/Profiles/Worker/Blogs/Blog.jsx")
-);
-const Worker_Blogs = lazy(() =>
-    import("./Components/Profiles/Worker/Blogs/Worker_Blogs.jsx")
-);
-const Worker_Add_Blogs = lazy(() =>
-    import("./Components/Profiles/Worker/Blogs/Worker_Add_Blogs.jsx")
-);
-const Worker_Edit_Blogs = lazy(() =>
-    import("./Components/Profiles/Worker/Blogs/Worker_Edit_Blogs.jsx")
-);
+import Worker_blog from "./Components/Profiles/Worker/Blogs/Blog.jsx";
+import Worker_Blogs from "./Components/Profiles/Worker/Blogs/Worker_Blogs.jsx";
+import Worker_Add_Blogs from "./Components/Profiles/Worker/Blogs/Worker_Add_Blogs.jsx";
+import Worker_Edit_Blogs from "./Components/Profiles/Worker/Blogs/Worker_Edit_Blogs.jsx";
 
-const Worker_event = lazy(() =>
-    import("./Components/Profiles/Worker/Events/Event.jsx")
-);
-const Worker_Events = lazy(() =>
-    import("./Components/Profiles/Worker/Events/Worker_Events.jsx")
-);
-const Worker_Add_Events = lazy(() =>
-    import("./Components/Profiles/Worker/Events/Worker_Add_Event.jsx")
-);
-const Worker_Edit_Events = lazy(() =>
-    import("./Components/Profiles/Worker/Events/Worker_Edit_Events.jsx")
-);
+import Worker_event from "./Components/Profiles/Worker/Events/Event.jsx";
+import Worker_Events from "./Components/Profiles/Worker/Events/Worker_Events.jsx";
+import Worker_Add_Events from "./Components/Profiles/Worker/Events/Worker_Add_Event.jsx";
+import Worker_Edit_Events from "./Components/Profiles/Worker/Events/Worker_Edit_Events.jsx";
+// ______________________________________________________
+import Malad_Edit_Profile from "./Components/Profiles/Malad/Profile/Edit_Profile.jsx";
+import Malad_Companies from "./Components/Profiles/Malad/Companies/Companies.jsx";
+import Malad_Company from "./Components/Profiles/Malad/Companies/Company.jsx";
+import Malad_Company_doctors from "./Components/Profiles/Malad/Companies/Company_Components/DoctorsSection.jsx";
+import Malad_Company_doctor from "./Components/Profiles/Malad/Companies/Company_Components/Doctor/Doctor.jsx";
+import Malad_Company_blogs from "./Components/Profiles/Malad/Companies/Company_Components/Blogs/BlogsSection.jsx";
+import Malad_Company_blog from "./Components/Profiles/Malad/Companies/Company_Components/Blogs/Blog.jsx";
+import Malad_Company_events from "./Components/Profiles/Malad/Companies/Company_Components/Events/EventsSection.jsx";
+import Malad_Company_event from "./Components/Profiles/Malad/Companies/Company_Components/Events/Event.jsx";
+import Malad_Company_informations from "./Components/Profiles/Malad/Companies/Company_Components/info.jsx";
+import Default_Malad_company from "./Components/Profiles/Malad/Companies/Company_Components/Default.jsx";
 
-// Malad Components
-const Malad_Edit_Profile = lazy(() =>
-    import("./Components/Profiles/Malad/Profile/Edit_Profile.jsx")
-);
-const Malad_Companies = lazy(() =>
-    import("./Components/Profiles/Malad/Companies/Companies.jsx")
-);
-const Malad_Company = lazy(() =>
-    import("./Components/Profiles/Malad/Companies/Company.jsx")
-);
-const Malad_Company_doctors = lazy(() =>
-    import(
-        "./Components/Profiles/Malad/Companies/Company_Components/DoctorsSection.jsx"
-    )
-);
-const Malad_Company_doctor = lazy(() =>
-    import(
-        "./Components/Profiles/Malad/Companies/Company_Components/Doctor/Doctor.jsx"
-    )
-);
-const Malad_Company_blogs = lazy(() =>
-    import(
-        "./Components/Profiles/Malad/Companies/Company_Components/Blogs/BlogsSection.jsx"
-    )
-);
-const Malad_Company_blog = lazy(() =>
-    import(
-        "./Components/Profiles/Malad/Companies/Company_Components/Blogs/Blog.jsx"
-    )
-);
-const Malad_Company_events = lazy(() =>
-    import(
-        "./Components/Profiles/Malad/Companies/Company_Components/Events/EventsSection.jsx"
-    )
-);
-const Malad_Company_event = lazy(() =>
-    import(
-        "./Components/Profiles/Malad/Companies/Company_Components/Events/Event.jsx"
-    )
-);
-const Malad_Company_informations = lazy(() =>
-    import("./Components/Profiles/Malad/Companies/Company_Components/info.jsx")
-);
-const Default_Malad_company = lazy(() =>
-    import(
-        "./Components/Profiles/Malad/Companies/Company_Components/Default.jsx"
-    )
-);
+import Malad_Events from "./Components/Profiles/Malad/Events/Events.jsx";
+import Malad_Event from "./Components/Profiles/Malad/Events/Event.jsx";
+import Malad_Blogs from "./Components/Profiles/Malad/Blogs/Blogs.jsx";
+import Malad_Blog from "./Components/Profiles/Malad/Blogs/Blog.jsx";
+// ______________________________________________________
+import Doctor_Edit_Profile from "./Components/Profiles/Doctor/Profile/Edit_Profile.jsx";
+import Doctor_Profile from "./Components/Profiles/Doctor/Profile/Profile.jsx";
 
-const Malad_Events = lazy(() =>
-    import("./Components/Profiles/Malad/Events/Events.jsx")
-);
-const Malad_Event = lazy(() =>
-    import("./Components/Profiles/Malad/Events/Event.jsx")
-);
-const Malad_Blogs = lazy(() =>
-    import("./Components/Profiles/Malad/Blogs/Blogs.jsx")
-);
-const Malad_Blog = lazy(() =>
-    import("./Components/Profiles/Malad/Blogs/Blog.jsx")
-);
+import Doctor_blog from "./Components/Profiles/Doctor/Blogs/Blog.jsx";
+import Doctor_Blogs from "./Components/Profiles/Doctor/Blogs/Blogs.jsx";
+import Doctor_Add_Blogs from "./Components/Profiles/Doctor/Blogs/Add_Blogs.jsx";
+import Doctor_Edit_Blogs from "./Components/Profiles/Doctor/Blogs/Edit_Blogs.jsx";
 
-// Doctor Components
-const Doctor_Edit_Profile = lazy(() =>
-    import("./Components/Profiles/Doctor/Profile/Edit_Profile.jsx")
-);
-const Doctor_Profile = lazy(() =>
-    import("./Components/Profiles/Doctor/Profile/Profile.jsx")
-);
+import Doctor_event from "./Components/Profiles/Doctor/Events/Event.jsx";
+import Doctor_Events from "./Components/Profiles/Doctor/Events/Events.jsx";
+import Doctor_Add_Events from "./Components/Profiles/Doctor/Events/Add_Event.jsx";
+import Doctor_Edit_Events from "./Components/Profiles/Doctor/Events/Edit_Events.jsx";
 
-const Doctor_blog = lazy(() =>
-    import("./Components/Profiles/Doctor/Blogs/Blog.jsx")
-);
-const Doctor_Blogs = lazy(() =>
-    import("./Components/Profiles/Doctor/Blogs/Blogs.jsx")
-);
-const Doctor_Add_Blogs = lazy(() =>
-    import("./Components/Profiles/Doctor/Blogs/Add_Blogs.jsx")
-);
-const Doctor_Edit_Blogs = lazy(() =>
-    import("./Components/Profiles/Doctor/Blogs/Edit_Blogs.jsx")
-);
+import Doctor_Malads from "./Components/Profiles/Doctor/Malads/Malads.jsx";
+import Doctor_Malads_Default from "./Components/Profiles/Doctor/Malads/Default.jsx";
+import Doctor_Malads_List from "./Components/Profiles/Doctor/Malads/Malads_List.jsx";
+import Doctor_Malads_Owned from "./Components/Profiles/Doctor/Malads/Own_Malads.jsx";
+import Doctor_Malads_List_item from "./Components/Profiles/Doctor/Malads/Malad.jsx";
+import Doctor_Malads_Own_item from "./Components/Profiles/Doctor/Malads/Malad_Own_item.jsx";
 
-const Doctor_event = lazy(() =>
-    import("./Components/Profiles/Doctor/Events/Event.jsx")
-);
-const Doctor_Events = lazy(() =>
-    import("./Components/Profiles/Doctor/Events/Events.jsx")
-);
-const Doctor_Add_Events = lazy(() =>
-    import("./Components/Profiles/Doctor/Events/Add_Event.jsx")
-);
-const Doctor_Edit_Events = lazy(() =>
-    import("./Components/Profiles/Doctor/Events/Edit_Events.jsx")
-);
+import Doctor_Add_File from "./Components/Profiles/Doctor/Malads/Files/Add_File.jsx";
+import Doctor_File from "./Components/Profiles/Doctor/Malads/Files/File.jsx";
 
-const Doctor_Malads = lazy(() =>
-    import("./Components/Profiles/Doctor/Malads/Malads.jsx")
-);
-const Doctor_Malads_Default = lazy(() =>
-    import("./Components/Profiles/Doctor/Malads/Default.jsx")
-);
-const Doctor_Malads_List = lazy(() =>
-    import("./Components/Profiles/Doctor/Malads/Malads_List.jsx")
-);
-const Doctor_Malads_Owned = lazy(() =>
-    import("./Components/Profiles/Doctor/Malads/Own_Malads.jsx")
-);
-const Doctor_Malads_List_item = lazy(() =>
-    import("./Components/Profiles/Doctor/Malads/Malad.jsx")
-);
-const Doctor_Malads_Own_item = lazy(() =>
-    import("./Components/Profiles/Doctor/Malads/Malad_Own_item.jsx")
-);
+// ______________________________________________________
+import Doctor_chatList from "./Components/Profiles/Doctor/Chat/ChatList.jsx";
+import Doctor_chatRoom from "./Components/Profiles/Doctor/Chat/ChatRoom.jsx";
+import Doctor_chatList_default from "./Components/Profiles/Doctor/Chat/Default.jsx";
 
-const Doctor_Add_File = lazy(() =>
-    import("./Components/Profiles/Doctor/Malads/Files/Add_File.jsx")
-);
-const Doctor_File = lazy(() =>
-    import("./Components/Profiles/Doctor/Malads/Files/File.jsx")
-);
-
-// Chat Components
-const Doctor_chatList = lazy(() =>
-    import("./Components/Profiles/Doctor/Chat/ChatList")
-);
-const Doctor_chatRoom = lazy(() =>
-    import("./Components/Profiles/Doctor/Chat/ChatRoom")
-);
-const Doctor_chatList_default = lazy(() =>
-    import("./Components/Profiles/Doctor/Chat/Default")
-);
-
-const Malad_chatList = lazy(() =>
-    import("./Components/Profiles/Malad/Chat/ChatList")
-);
-const Malad_chatRoom = lazy(() =>
-    import("./Components/Profiles/Malad/Chat/ChatRoom")
-);
-const Malad_chatList_default = lazy(() =>
-    import("./Components/Profiles/Malad/Chat/Default")
-);
+import Malad_chatList from "./Components/Profiles/Malad/Chat/ChatList.jsx";
+import Malad_chatRoom from "./Components/Profiles/Malad/Chat/ChatRoom.jsx";
+import Malad_chatList_default from "./Components/Profiles/Malad/Chat/Default.jsx";
 
 const routes = createBrowserRouter([
     {
