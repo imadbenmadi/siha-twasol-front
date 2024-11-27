@@ -21,6 +21,8 @@ const ChatList = () => {
                     withCredentials: true,
                     validateStatus: () => true,
                 });
+                console.log(response);
+
                 if (response.status === 200) {
                     setChats(response.data.rooms);
                 } else if (response.status === 401) {
@@ -139,8 +141,7 @@ const ChatList = () => {
                                             <div className="flex-col flex">
                                                 <div className="text-sm text-gray_v font-semibold break-all">
                                                     {`${
-                                                        chat?.Doctor
-                                                            ?.lastName
+                                                        chat?.Doctor?.lastName
                                                             ? chat?.Doctor
                                                                   ?.lastName
                                                                   .length > 10
@@ -148,8 +149,7 @@ const ChatList = () => {
                                                                       0,
                                                                       10
                                                                   ) + "..."
-                                                                : chat
-                                                                      ?.Doctor
+                                                                : chat?.Doctor
                                                                       ?.lastName
                                                             : "not available"
                                                     }`}

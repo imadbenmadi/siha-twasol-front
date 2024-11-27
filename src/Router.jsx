@@ -212,7 +212,7 @@ const routes = createBrowserRouter([
                         element: <Malad_Blog />,
                     },
                     {
-                        path: "/Malad/CharRooms",
+                        path: "/Malad/ChatRooms",
                         element: <Malad_chatList />,
                         errorElement: <ErrorElement />,
                         children: [
@@ -221,7 +221,7 @@ const routes = createBrowserRouter([
                                 element: <Malad_chatList_default />,
                             },
                             {
-                                path: "/Malad/CharRooms/:roomId",
+                                path: "/Malad/ChatRooms/:roomId",
                                 element: <Malad_chatRoom />,
                                 errorElement: <ErrorElement />,
                             },
