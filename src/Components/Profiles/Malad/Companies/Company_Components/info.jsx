@@ -17,7 +17,7 @@ function Info() {
             );
             setIsFollowing(response.data.isFollowing);
         } catch (error) {
-            console.error("Error checking follow status:", error);
+            // console.error("Error checking follow status:", error);
         }
     };
 

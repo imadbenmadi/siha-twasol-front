@@ -29,7 +29,6 @@ function List() {
                 setMalads(response.data.malads);
                 setFilteredMalads(response.data.malads);
             } catch (error) {
-                console.error(error);
                 setError("حدث خطأ أثناء تحميل بيانات المريض.");
             } finally {
                 setLoading(false);

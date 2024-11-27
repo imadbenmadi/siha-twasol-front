@@ -20,9 +20,6 @@ function Malad() {
     const [delete_loading, setDeleteLoading] = useState(false);
 
     const Navigate = useNavigate();
-    useEffect(() => {
-        console.log(files);
-    }, [files]);
 
     useEffect(() => {
         const fetchMalad = async () => {
@@ -31,7 +28,6 @@ function Malad() {
                     `http://localhost:3000/Doctors/${user.id}/Malads/Own/${id}`,
                     { withCredentials: true }
                 );
-                console.log(response.data);
 
                 setIs_rated(response.data.is_rated);
                 setMaladrates(response.data.maladrates);
@@ -53,7 +49,6 @@ function Malad() {
                 `http://localhost:3000/Doctors/${user.id}/Malads/${malad.id}`,
                 { withCredentials: true }
             );
-            console.log(response.data);
             if (response.status === 200) {
                 Swal.fire({
                     icon: "success",

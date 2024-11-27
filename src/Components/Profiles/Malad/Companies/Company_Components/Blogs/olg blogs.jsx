@@ -19,7 +19,6 @@ function BlogsSection() {
                 setBlogs(response.data.blogs);
             } catch (error) {
                 setError("Failed to load blogs. Please try again later.");
-                console.error("Error fetching blogs:", error);
             } finally {
                 setLoading(false);
             }

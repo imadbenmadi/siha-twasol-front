@@ -82,7 +82,6 @@ function Add_File() {
                     }
                 )
                 .then((response) => {
-                    console.log(response);
                     
                     if (response.status === 201) {
                         Swal.fire({

@@ -96,7 +96,6 @@ const ChatRoom = () => {
                 setTimeout(() => setIsNewMessage(false), 500); // Reset the new message state after the transition
             }
         } catch (error) {
-            console.log(error);
             Swal.fire({
                 icon: "error",
                 title: "Failed to send message, please try again",
