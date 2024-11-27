@@ -41,7 +41,7 @@ const MessageCard = ({
             <div
                 key={index}
                 className={`rounded-lg transition-transform duration-300 flex text-sm  font-semibold ${
-                    msg.senderType === "client"
+                    msg.senderType === "doctor"
                         ? "justify-end"
                         : "justify-start"
                 } ${
@@ -57,7 +57,7 @@ const MessageCard = ({
             >
                 <div
                     className={`rounded-lg ${
-                        msg.senderType === "client"
+                        msg.senderType === "doctor"
                             ? "bg-blue-600 text-white"
                             : "bg-gray-100 text-black_text"
                     }`}

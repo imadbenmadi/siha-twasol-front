@@ -13,7 +13,7 @@ const ChatList = ({ userId }) => {
     const [chats, setChats] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const apiUrl = `http://localhost:3000/Messages/client/${user?.id}/rooms`;
+    const apiUrl = `http://localhost:3000/Messages/doctor/${user?.id}/rooms`;
 
     useEffect(() => {
         const fetchChats = async () => {
@@ -44,7 +44,7 @@ const ChatList = ({ userId }) => {
     const handleChatClick = (chatId) => {
         setChats((prevChats) =>
             prevChats.map((chat) =>
-                chat.id === chatId ? { ...chat, clientUnreadMessages: 0 } : chat
+                chat.id === chatId ? { ...chat, doctorUnreadMessages: 0 } : chat
             )
         );
     };
@@ -127,7 +127,7 @@ const ChatList = ({ userId }) => {
                                     <li key={chat.id} className="">
                                         <Link
                                             className="p-4 flex items-center gap-x-4 border-y border-y-gray_white"
-                                            to={`/Client/rooms/${chat.id}`}
+                                            to={`/Doctor/rooms/${chat.id}`}
                                             onClick={() =>
                                                 handleChatClick(chat.id)
                                             }
@@ -157,7 +157,7 @@ const ChatList = ({ userId }) => {
                                                 </div>
                                                 <div className="text-xs text-red-600 pt-1 font-semibold">
                                                     {getUnreadMessagesText(
-                                                        chat.clientUnreadMessages,
+                                                        chat.doctorUnreadMessages,
                                                         chat
                                                     )}
                                                 </div>

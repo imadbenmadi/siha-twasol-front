@@ -19,8 +19,8 @@ const ChatRoom = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [sendLoading, setSendLoading] = useState(false);
-    const chatApiUrl = `http://localhost:3000/Messages/client/${userId}/rooms/${roomId}`;
-    const postApiUrl = `http://localhost:3000/Messages/client/${userId}/rooms/${roomId}`;
+    const chatApiUrl = `http://localhost:3000/Messages/doctor/${userId}/rooms/${roomId}`;
+    const postApiUrl = `http://localhost:3000/Messages/doctor/${userId}/rooms/${roomId}`;
 
     const messagesEndRef = useRef(null);
     const chatContainerRef = useRef(null);
@@ -134,7 +134,7 @@ const ChatRoom = () => {
                             No messages here yet.
                         </p>
                         <p className="text-sm text-gray-400">
-                            Start a chatting with the Client.
+                            Start a chatting with the Doctor.
                         </p>
                     </div>
                 ) : (
@@ -164,7 +164,7 @@ const ChatRoom = () => {
                         const textarea = e.target;
                         textarea.style.height = "auto"; // Reset height to calculate new height
                         textarea.style.height = textarea.scrollHeight + "px"; // Set new height based on scrollHeight
-                        if (textarea.scrollHeight > textarea.clientHeight) {
+                        if (textarea.scrollHeight > textarea.doctorHeight) {
                             textarea.style.overflowY = "scroll";
                         } else {
                             textarea.style.overflowY = "hidden";
