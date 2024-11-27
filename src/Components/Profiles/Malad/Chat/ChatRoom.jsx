@@ -70,7 +70,7 @@ const ChatRoom = () => {
                 postApiUrl,
                 {
                     message: newMessage,
-                    freelancerId: room.Freelancer.id,
+                    maladId: room.Malad.id,
                 },
                 {
                     withCredentials: true,
@@ -96,6 +96,12 @@ const ChatRoom = () => {
                 setTimeout(() => setIsNewMessage(false), 500); // Reset the new message state after the transition
             }
         } catch (error) {
+            console.log(error);
+            Swal.fire({
+                icon: "error",
+                title: "Failed to send message, please try again",
+                text: error.message,
+            });
         } finally {
             setSendLoading(false);
         }

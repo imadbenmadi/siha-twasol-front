@@ -7,13 +7,7 @@ function Default() {
     const { isAuth, userType, userId } = useAppContext();
     const Navigate = useNavigate();
     useEffect(() => {
-        // else if (isAuth && userType == "Director") {
-        //     // Navigate(`/Director/${userId}`);
-        //     Navigate(`/Director`);
-        // } else if (isAuth && userType == "freelancer") {
-        //     // Navigate(`/Freelancer/${userId}`);
-        //     Navigate(`/Freelancer`);
-        // } else Navigate("/Home");
+       
 
         if (!isAuth || !userType) Navigate("/Home");
         if (isAuth && userType == "Director") {
