@@ -127,7 +127,7 @@ const ChatList = ({ userId }) => {
                                     <li key={chat.id} className="">
                                         <Link
                                             className="p-4 flex items-center gap-x-4 border-y border-y-gray_white"
-                                            to={`/Doctor/rooms/${chat.id}`}
+                                            to={`/Doctor/ChatRooms/${chat.id}`}
                                             onClick={() =>
                                                 handleChatClick(chat.id)
                                             }

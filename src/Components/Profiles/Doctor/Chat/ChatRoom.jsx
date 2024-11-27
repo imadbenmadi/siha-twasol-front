@@ -70,7 +70,7 @@ const ChatRoom = () => {
                 postApiUrl,
                 {
                     message: newMessage,
-                    freelancerId: room.Freelancer.id,
+                    freelancerId: room.Malad.id,
                 },
                 {
                     withCredentials: true,

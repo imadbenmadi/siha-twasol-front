@@ -10,7 +10,7 @@ const ChatList = () => {
     const [chats, setChats] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const apiUrl = `http://localhost:3000/Messages/doctor/${user?.id}/rooms`;
+    const apiUrl = `http://localhost:3000/Messages/malad/${user?.id}/rooms`;
 
     useEffect(() => {
         const fetchChats = async () => {
@@ -41,7 +41,7 @@ const ChatList = () => {
     const handleChatClick = (chatId) => {
         setChats((prevChats) =>
             prevChats.map((chat) =>
-                chat.id === chatId ? { ...chat, doctorUnreadMessages: 0 } : chat
+                chat.id === chatId ? { ...chat, maladUnreadMessages: 0 } : chat
             )
         );
     };
@@ -126,37 +126,37 @@ const ChatList = () => {
                                     <li key={chat.id} className="">
                                         <Link
                                             className="p-4 flex items-center gap-x-4 border-y border-y-gray_white"
-                                            to={`/Doctor/rooms/${chat.id}`}
+                                            to={`/Doctor/ChatRooms/${chat.id}`}
                                             onClick={() =>
                                                 handleChatClick(chat.id)
                                             }
                                         >
                                             <img
                                                 className="rounded-full w-12 h-12 object-cover"
-                                                src={`http://localhost:3000/${chat?.Freelancer?.profile_pic_link}`}
+                                                src={`http://localhost:3000/${chat?.Doctor?.profile_pic_link}`}
                                                 alt=""
                                             />
                                             <div className="flex-col flex">
                                                 <div className="text-sm text-gray_v font-semibold break-all">
                                                     {`${
-                                                        chat?.Freelancer
+                                                        chat?.Doctor
                                                             ?.lastName
-                                                            ? chat?.Freelancer
+                                                            ? chat?.Doctor
                                                                   ?.lastName
                                                                   .length > 10
-                                                                ? chat?.Freelancer?.lastName.slice(
+                                                                ? chat?.Doctor?.lastName.slice(
                                                                       0,
                                                                       10
                                                                   ) + "..."
                                                                 : chat
-                                                                      ?.Freelancer
+                                                                      ?.Doctor
                                                                       ?.lastName
                                                             : "not available"
                                                     }`}
                                                 </div>
                                                 <div className="text-xs text-red-600 pt-1 font-semibold">
                                                     {getUnreadMessagesText(
-                                                        chat.doctorUnreadMessages,
+                                                        chat.maladUnreadMessages,
                                                         chat
                                                     )}
                                                 </div>

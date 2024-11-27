@@ -127,30 +127,28 @@ const ChatList = ({ userId }) => {
                                     <li key={chat.id} className="">
                                         <Link
                                             className="p-4 flex items-center gap-x-4 border-y border-y-gray_white"
-                                            to={`/Doctor/rooms/${chat.id}`}
+                                            to={`/Doctor/ChatRooms/${chat.id}`}
                                             onClick={() =>
                                                 handleChatClick(chat.id)
                                             }
                                         >
                                             <img
                                                 className="rounded-full w-12 h-12 object-cover"
-                                                src={`http://localhost:3000/${chat?.Freelancer?.profile_pic_link}`}
+                                                src={`http://localhost:3000/${chat?.Malad?.profile_pic_link}`}
                                                 alt=""
                                             />
                                             <div className="flex-col flex">
                                                 <div className="text-xs text-gray_v font-semibold">
                                                     {`${
-                                                        chat?.Freelancer
-                                                            ?.lastName
-                                                            ? chat?.Freelancer
+                                                        chat?.Malad?.lastName
+                                                            ? chat?.Malad
                                                                   ?.lastName
                                                                   .length > 10
-                                                                ? chat?.Freelancer?.lastName.slice(
+                                                                ? chat?.Malad?.lastName.slice(
                                                                       0,
                                                                       10
                                                                   ) + "..."
-                                                                : chat
-                                                                      ?.Freelancer
+                                                                : chat?.Malad
                                                                       ?.lastName
                                                             : "not available"
                                                     }`}
