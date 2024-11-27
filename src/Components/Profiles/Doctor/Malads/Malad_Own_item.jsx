@@ -4,6 +4,9 @@ import axios from "axios";
 import { useAppContext } from "../../../../AppContext";
 import ReviewCard from "./Rate_Card";
 import Rate from "./Rate";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 function Malad() {
     const location = useLocation();
     const { user } = useAppContext();
@@ -14,10 +17,13 @@ function Malad() {
     const [maladrates, setMaladrates] = useState([]);
     const [is_rated, setIs_rated] = useState(false);
     const [files, setFiles] = useState([]);
+    const [delete_loading, setDeleteLoading] = useState(false);
+
+    const Navigate = useNavigate();
     useEffect(() => {
         console.log(files);
     }, [files]);
-        
+
     useEffect(() => {
         const fetchMalad = async () => {
             try {
@@ -39,6 +45,36 @@ function Malad() {
         };
         fetchMalad();
     }, []);
+    const handle_delete = async (id) => {
+        setDeleteLoading(true);
+
+        try {
+            const response = await axios.delete(
+                `http://localhost:3000/Doctors/${user.id}/Malads/${id}`,
+                { withCredentials: true }
+            );
+            console.log(response.data);
+            if (response.status === 200) {
+                Swal.fire({
+                    icon: "success",
+                    title: "تم حذف المريض بنجاح",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                setTimeout(() => {
+                    Navigate("/Doctor/Malads/Own");
+                }, 1500);
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: "error",
+                title: "حدث خطأ أثناء حذف المريض",
+                text: error.response.data.message,
+            });
+        } finally {
+            setDeleteLoading(false);
+        }
+    };
 
     if (loading) return <div>جاري التحميل...</div>;
     if (error) return <div className="text-red-600">{error}</div>;
@@ -128,6 +164,17 @@ function Malad() {
                     </p>
                 </div>
                 <div className="flex justify-center mt-6 gap-4">
+                    {delete_loading ? (
+                        <span className="small-loader mt-2 w-full m-auto"></span>
+                    ) : (
+                        <div
+                            className=" bg-red-500 cursor-pointer
+                                     text-white font-semibold px-4 py-2 rounded-md"
+                            onClick={handle_delete}
+                        >
+                            حذف المريض من القائمة
+                        </div>
+                    )}
                     <Link
                         to={"/Doctor/Malads/" + malad?.id + "/upload"}
                         className="py-2 px-6 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-200"
