@@ -104,21 +104,6 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
             </div>
             <div className=" flex items center justify-center gap-5">
                 <div className="flex items-center justify-center gap-6 relative ">
-                    <div className="flex items-center justify-center gap-6 ">
-                        <div className="flex items-center justify-center gap-6 relative">
-                            <div className="relative">
-                                {Notifications?.length > 0 && (
-                                    <div className=" w-2 h-2 rounded-full bg-red-500 absolute top-0 right-0 "></div>
-                                )}
-                                <img
-                                    src={notification_icon}
-                                    alt=""
-                                    className=" cursor-pointer shrink-0 w-full"
-                                    onClick={toogleopen_Notifications}
-                                />
-                            </div>
-                        </div>
-                    </div>
                     <div className=" relative">
                         {user?.profile_pic_link ? (
                             <img
@@ -161,66 +146,6 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                                         >
                                             <TbLogout2 className="  text-xl" />
                                             Logout
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        ) : null}
-                        {open_Notifications ? (
-                            <div
-                                className="absolute top-10 right-0 bg-white shadow border  
-                             rounded-lg   z-50   min-w-[500px] h-[calc(100vh-100px)] overflow-y-auto
-                             custom-overflow
-                             "
-                            >
-                                <div className=" text-gray_v py-2 px-7 text-md font-semibold border-b">
-                                    Notifications
-                                </div>
-                                <div>
-                                    {Notifications?.length > 0 ? (
-                                        Notifications.map((notification) => (
-                                            <div
-                                                onClick={() => {
-                                                    Delete_Notification(
-                                                        notification.id
-                                                    );
-                                                    Navigate(notification.link);
-                                                    setopen_Notifications(
-                                                        false
-                                                    );
-                                                    setProfileClicked(false);
-                                                }}
-                                                key={notification.id}
-                                                className="flex items-center gap-3 py-1 px-3 border-b cursor-pointer hover:bg-gray-100"
-                                            >
-                                                <div className=" flex gap-2 ">
-                                                    <IoMdNotificationsOutline className="shrink-0 mt-2" />
-                                                    <div>
-                                                        <div className="text-black_text font-semibold">
-                                                            {
-                                                                notification?.title
-                                                            }
-                                                        </div>
-                                                        <div className="text-gray_v text-sm">
-                                                            {notification?.text}
-                                                        </div>
-                                                        <div className="text-gray_v text-xs pt-1">
-                                                            {/* {new Date(
-                                                            notification?.createdAt
-                                                        ).toLocaleDateString()} */}
-                                                            {dayjs(
-                                                                notification?.createdAt
-                                                            ).format(
-                                                                "DD MMMM YYYY"
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))
-                                    ) : (
-                                        <div className="text-center text-gray_v pt-6 flex-gap-2 ">
-                                            No Notifications
                                         </div>
                                     )}
                                 </div>
