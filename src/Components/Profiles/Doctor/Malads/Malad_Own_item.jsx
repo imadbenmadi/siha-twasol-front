@@ -50,7 +50,7 @@ function Malad() {
 
         try {
             const response = await axios.delete(
-                `http://localhost:3000/Doctors/${user.id}/Malads/${id}`,
+                `http://localhost:3000/Doctors/${user.id}/Malads/${malad.id}`,
                 { withCredentials: true }
             );
             console.log(response.data);
