@@ -70,13 +70,15 @@ const ChatRoom = () => {
                 postApiUrl,
                 {
                     message: newMessage,
-                    maladId: room.Malad.id,
+                    doctorId: room.Doctor.id,
                 },
                 {
                     withCredentials: true,
                     validateStatus: () => true,
                 }
             );
+            console.log(response);
+
             if (response.status === 401) {
                 Navigate("/Login");
             } else if (response.status !== 200) {
