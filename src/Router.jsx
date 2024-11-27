@@ -98,6 +98,16 @@ import Doctor_Malads_Own_item from "./Components/Profiles/Doctor/Malads/Malad_Ow
 
 import Doctor_Add_File from "./Components/Profiles/Doctor/Malads/Files/Add_File.jsx";
 import Doctor_File from "./Components/Profiles/Doctor/Malads/Files/File.jsx";
+
+// ______________________________________________________
+import Doctor_chatList from "./Components/Profiles/Doctor/Chat/ChatList";
+import Doctor_chatRoom from "./Components/Profiles/Doctor/Chat/ChatRoom";
+import Doctor_chatList_default from "./Components/Profiles/Doctor/Chat/Default";
+
+import Malad_chatList from "./Components/Profiles/Malad/Chat/ChatList";
+import Malad_chatRoom from "./Components/Profiles/Malad/Chat/ChatRoom";
+import Malad_chatList_default from "./Components/Profiles/Malad/Chat/Default";
+
 const routes = createBrowserRouter([
     {
         path: "/",
@@ -202,8 +212,20 @@ const routes = createBrowserRouter([
                         element: <Malad_Blog />,
                     },
                     {
-                        path: "/Malad/ChatRooms",
-                        element: <Not_Finished />,
+                        path: "/Malad/CharRooms",
+                        element: <Malad_chatList />,
+                        errorElement: <ErrorElement />,
+                        children: [
+                            {
+                                index: true,
+                                element: <Malad_chatList_default />,
+                            },
+                            {
+                                path: "/Malad/CharRooms/:roomId",
+                                element: <Malad_chatRoom />,
+                                errorElement: <ErrorElement />,
+                            },
+                        ],
                     },
 
                     {
@@ -309,9 +331,22 @@ const routes = createBrowserRouter([
                             },
                         ],
                     },
+
                     {
                         path: "/Doctor/ChatRooms",
-                        element: <Not_Finished />,
+                        element: <Doctor_chatList />,
+                        errorElement: <ErrorElement />,
+                        children: [
+                            {
+                                index: true,
+                                element: <Doctor_chatList_default />,
+                            },
+                            {
+                                path: "/Doctor/ChatRooms/:roomId",
+                                element: <Doctor_chatRoom />,
+                                errorElement: <ErrorElement />,
+                            },
+                        ],
                     },
 
                     {

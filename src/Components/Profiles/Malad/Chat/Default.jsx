@@ -2,8 +2,8 @@ import { Outlet } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useAppContext } from "../../../AppContext";
-import chat_icon from "../../../../public/chat.png";
+import { useAppContext } from "../../../../AppContext";
+import chat_icon from "../../../../../public/chat.png";
 import { useNavigate } from "react-router-dom";
 
 const ChatList = ({ userId }) => {

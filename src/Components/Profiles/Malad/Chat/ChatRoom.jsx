@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useAppContext } from "../../../AppContext";
+import { useAppContext } from "../../../../AppContext";
 import { FaArrowUp } from "react-icons/fa";
 import MessageCard from "./MessageCard";
 import Swal from "sweetalert2";
