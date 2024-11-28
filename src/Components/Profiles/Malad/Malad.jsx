@@ -10,10 +10,17 @@ import Logo from "../../../../public/Logo.png";
 function Director() {
     const Navigate = useNavigate();
     const [loading, setLoading] = useState(true);
-    const { userId, isAuth, set_user, userType, set_Auth, user, set_Messages } =
-        useAppContext();
-    useEffect(() => {
-    }, []);
+    const {
+        userId,
+        isAuth,
+        set_user,
+        userType,
+        set_Auth,
+        user,
+        set_Messages,
+        set_Notifications,
+    } = useAppContext();
+    useEffect(() => {}, []);
     useEffect(() => {
         if (!isAuth || !userId) {
             set_Auth(false);
@@ -42,9 +49,33 @@ function Director() {
                 window.location.href = "/home";
             }
         };
-        fetchData().then(() => {
-            setLoading(false);
-        });
+        const fetchNotifications = async () => {
+            try {
+                const response = await axios.get(
+                    `http://localhost:3000/Malads/${userId}/Notifications`,
+                    {
+                        withCredentials: true,
+                        // validateStatus: () => true,
+                    }
+                );
+                console.log(response);
+
+                if (response.status == 200) {
+                    set_Notifications(response.data.Notifications);
+                } else {
+                    set_Notifications([]);
+                }
+            } catch (error) {
+                console.log(error);
+
+                set_Notifications([]);
+            }
+        };
+        fetchData()
+            .then(() => fetchNotifications())
+            .then(() => {
+                setLoading(false);
+            });
     }, []);
     if (loading)
         return (
