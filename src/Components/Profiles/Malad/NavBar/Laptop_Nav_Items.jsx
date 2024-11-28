@@ -182,7 +182,7 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                              "
                         >
                             <div className=" text-gray_v py-2 px-7 text-md font-semibold border-b">
-                                Notifications
+                                الاشعارات
                             </div>
                             <div>
                                 {Notifications?.length > 0 ? (
@@ -199,8 +199,8 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                                             key={notification.id}
                                             className="flex items-center gap-3 py-1 px-3 border-b cursor-pointer hover:bg-gray-100"
                                         >
-                                            <div className=" flex gap-2 ">
-                                                <IoMdNotificationsOutline className="shrink-0 mt-2" />
+                                            <div className=" flex w-full justify-between mx-3 gap-2 ">
+                                                <IoMdNotificationsOutline className="shrink-0 mt-2 font-bold text-2xl" />
                                                 <div>
                                                     <div className="text-black_text font-semibold">
                                                         {notification?.title}

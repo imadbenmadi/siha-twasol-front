@@ -79,7 +79,7 @@ function Mobile_Nav({ Active_nav, handleLogout, LogoutClicked }) {
                              overflow-y-auto custom-overflow"
                 >
                     <div className=" text-gray_v py-2 px-7 text-md font-semibold border-b">
-                        Notifications
+                        الاشعارات
                     </div>
                     <div>
                         {Notifications?.length > 0 ? (
