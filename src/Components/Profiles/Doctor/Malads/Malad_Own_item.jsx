@@ -71,8 +71,13 @@ function Malad() {
         }
     };
 
-    if (loading) return <div>جاري التحميل...</div>;
-    if (error) return <div className="text-red-600">{error}</div>;
+    if (loading)
+        return (
+            <div className=" w-screen h-screen flex flex-col items-center justify-center">
+                <span className="loader"></span>
+            </div>
+        );
+    if (error) return <div className="text-red-600 font-semibold text-center">{error}</div>;
 
     return (
         <>

@@ -8,7 +8,14 @@ import { Suspense } from "react";
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
         <AppProvider>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense
+                fallback={
+                    <div className=" w-screen h-screen flex flex-col items-center justify-center">
+                        <img src={Logo} alt="" className=" w-20 pb-6" />
+                        <span className="loader"></span>
+                    </div>
+                }
+            >
                 <RouterProvider router={Router} />
             </Suspense>
         </AppProvider>
