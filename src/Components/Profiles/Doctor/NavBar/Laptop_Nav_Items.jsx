@@ -1,44 +1,21 @@
 import { Link } from "react-router-dom";
 import Logo from "../../../../../public/Logo.png";
 import user_default from "../../../../../public/user_default2.png";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { TbLogout2 } from "react-icons/tb";
-import { FiUser } from "react-icons/fi";
 import { useAppContext } from "../../../../AppContext";
-import { useNavigate } from "react-router-dom";
-import notification_icon from "../../../../../public/Notification.png";
 
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 dayjs.extend(customParseFormat);
 import axios from "axios";
 function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
-    const Navigate = useNavigate();
-    const { user, Notifications, set_Messages } = useAppContext();
+    const { user } = useAppContext();
     const [ProfileClicked, setProfileClicked] = useState(false);
     const toogleProfile = () => {
-        setopen_Notifications(false);
         setProfileClicked(!ProfileClicked);
     };
-    const [open_Notifications, setopen_Notifications] = useState(false);
-    const toogleopen_Notifications = () => {
-        setProfileClicked(false);
-        setopen_Notifications(!open_Notifications);
-    };
-    const Delete_Notification = (id) => {
-        const newNotifications = Notifications.filter(
-            (notification) => notification.id !== id
-        );
-        set_Notifications(newNotifications);
-        axios.delete(
-            `http://localhost:3000/Teachers/${user?.id}/Notifications/${id}`,
 
-            {
-                withCredentials: true,
-                validateStatus: () => true,
-            }
-        );
-    };
     return (
         <div className="hidden  md:flex  items-center justify-between mx-2 lg:mx-12  md:text-md lg:text-lg  font-[500] text-black_text h-full p-2 ">
             <div>

@@ -31,7 +31,7 @@ function Mobile_Nav({ Active_nav, handleLogout, LogoutClicked }) {
         );
         set_Notifications(newNotifications);
         axios.delete(
-            `http://localhost:3000/Teachers/${user?.id}/Notifications/${id}`,
+            `http://localhost:3000/Malads/${user?.id}/Notifications/${id}`,
 
             {
                 withCredentials: true,
