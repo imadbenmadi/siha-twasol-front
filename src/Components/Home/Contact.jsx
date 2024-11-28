@@ -30,14 +30,14 @@ function Contact() {
             Swal.fire({
                 icon: "warning",
                 // title: "Oops...",
-                text: "Please fill all the message fields",
+                text: "الرجاء ملء جميع الحقول",
             });
             return;
         } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
             Swal.fire({
                 icon: "warning",
                 // title: "Oops...",
-                text: "Please enter a valid email address",
+                text: "الرجاء إدخال بريد إلكتروني صالح",
             });
         } else {
             setLoading(true);
@@ -59,7 +59,7 @@ function Contact() {
                     Swal.fire({
                         icon: "success",
                         // title: "Oops...",
-                        text: "Message sent successfully",
+                        text: "تم إرسال الرسالة بنجاح",
                     });
 
                     setfirstName("");
@@ -72,7 +72,7 @@ function Contact() {
                     Swal.fire({
                         icon: "error",
                         // title: "Oops...",
-                        text: "Something went wrong",
+                        text: "حدث خطأ ما",
                     });
                 });
         }

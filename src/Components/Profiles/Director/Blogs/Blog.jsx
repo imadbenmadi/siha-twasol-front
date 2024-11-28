@@ -79,14 +79,14 @@ function Blog() {
                     } else {
                         Swal.fire(
                             "خطأ",
-                            response.data.message || "Failed to delete blog.",
+                            response.data.message || "خطأ في حذف المقال.",
                             "error"
                         );
                     }
                 } catch (deleteError) {
                     Swal.fire(
                         "خطأ",
-                        deleteError.message || "Failed to delete blog.",
+                        deleteError.message || "حدث خطأ أثناء حذف المقال.",
                         "error"
                     );
                 } finally {

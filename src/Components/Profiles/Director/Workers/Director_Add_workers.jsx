@@ -64,7 +64,11 @@ function Director_Addworkers() {
                 if (response.status === 200) {
                     setServices(response.data.Services);
                 } else if (response.status === 401) {
-                    Swal.fire("Error", "You should login again", "error");
+                    Swal.fire(
+                        "Error",
+                        "يجب عليك تسجيل الدخول مرة اخرى",
+                        "error"
+                    );
                     Naviagte("/Login");
                 } else {
                     setError(response.data);

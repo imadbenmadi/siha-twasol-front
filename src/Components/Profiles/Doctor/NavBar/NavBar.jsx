@@ -33,10 +33,10 @@ function NavBar() {
                 set_Auth(false);
                 // You can use state or context to handle the logout state in your application
             } else {
-                Swal.fire("Error!", `Something Went Wrong ,`, "error");
+                Swal.fire("Error!", "", "error");
             }
         } catch (error) {
-            Swal.fire("Error!", `Something Went Wrong `, "error");
+            Swal.fire("Error!", "", "error");
         }
         window.location.href = "/home";
         setLogoutClicked(false);

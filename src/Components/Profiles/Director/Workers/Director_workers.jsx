@@ -30,7 +30,11 @@ function Director_workers() {
                 if (response.status === 200) {
                     setUsers(response.data.Users);
                 } else if (response.status === 401) {
-                    Swal.fire("Error", "You should login again", "error");
+                    Swal.fire(
+                        "Error",
+                        "يجب عليك تسجيل الدخول مرة اخرى",
+                        "error"
+                    );
                     navigate("/Login");
                 } else {
                     setError(response.data);

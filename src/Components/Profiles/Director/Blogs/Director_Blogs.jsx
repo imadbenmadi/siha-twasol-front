@@ -33,10 +33,14 @@ function Blogs() {
                 if (response.status === 200) {
                     setBlogs(response.data.blogs || []);
                 } else if (response.status === 401) {
-                    Swal.fire("Error", "You should login again", "error");
+                    Swal.fire(
+                        "Error",
+                        "يجب عليك تسجيل الدخول مرة اخرى",
+                        "error"
+                    );
                     navigate("/Login");
                 } else {
-                    setError(response.data.message || "An error occurred.");
+                    setError(response.data.message || ".");
                 }
             } catch (error) {
                 setError("Failed to fetch blogs. Please try again later.");

@@ -36,10 +36,10 @@ function NavBar() {
                 Naviagte("/");
                 // You can use state or context to handle the logout state in your application
             } else {
-                Swal.fire("Error!", `Something Went Wrong ,`, "error");
+                Swal.fire("Error!", "", "error");
             }
         } catch (error) {
-            Swal.fire("Error!", `Something Went Wrong `, "error");
+            Swal.fire("Error!", "", "error");
         }
         setLogoutClicked(false);
     };
