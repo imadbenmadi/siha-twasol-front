@@ -70,7 +70,7 @@ function List() {
     );
 
     return (
-        <div className="p-6">
+        <div className="p-6 max-w-[100vw]">
             <h2 className="text-2xl font-semibold text-center mb-6">
                 قائمة المرضى
             </h2>
@@ -91,7 +91,7 @@ function List() {
             </div>
 
             {/* Malads Table */}
-            <div className="overflow-x-auto rounded-lg shadow-lg">
+            <div className="overflow-x-auto rounded-lg shadow-lg max-w-[100vw]">
                 <table className="table-auto w-full text-center border border-gray-200 rounded-lg">
                     <thead>
                         <tr className="bg-gray-100 text-gray-700 font-medium">

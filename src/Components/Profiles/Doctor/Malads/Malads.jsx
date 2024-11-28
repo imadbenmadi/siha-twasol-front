@@ -67,7 +67,7 @@ function Malads() {
 
             {/* Main Content */}
             <main
-                className={`flex-1 p-8 bg-white shadow-lg rounded-lg transition-all duration-300 ${
+                className={`flex-1 md:p-8 bg-white shadow-lg rounded-lg transition-all duration-300 ${
                     isSidebarOpen ? "ml-64" : "ml-0"
                 } md:ml-64`}
             >

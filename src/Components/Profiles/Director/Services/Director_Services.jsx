@@ -158,58 +158,55 @@ function Services() {
                         </div>
                     </div>
                 ) : (
-                    <table className="table-auto   w-fit mx-auto mt-12 text-sm text-center overflow-auto">
-                        <thead>
-                            <tr className="bg-gray_white font-normal">
-                                <th className="px-4 py-2 rounded-tl-md">
-                                    الاسم
-                                </th>
-
-                                <th className="px-4 py-2 border-l border-white">
-                                    تاريخ الإنشاء
-                                </th>
-                                <th className="px-4 py-2 border-l border-white"></th>
-                                {/* <th className="px-4 py-2 border-l border-white rounded-tr-md">
-                                    Action
-                                </th> */}
-                            </tr>
-                        </thead>
-                        <tbody className="text-xs text-center font-semibold">
-                            {filteredServices?.map((service_item) => (
-                                <tr key={service_item?.id}>
-                                    <td className="border px-4 py-2">{`${service_item.Name}`}</td>
-
-                                    <td className="border px-4 py-2">
-                                        {dayjs(service_item?.createdAt).format(
-                                            "DD MMMM YYYY"
-                                        )}
-                                    </td>
-                                    <td className="border px-4 py-2 flex gap-6 items-center justify-center">
-                                        <Link
-                                            to={`/Director/Services/${service_item.id}/Edit`}
-                                            className="bg-blue_v text-white px-4 py-1 rounded-md "
-                                        >
-                                            تعديل
-                                        </Link>
-                                        {deleteLoading ? (
-                                            <span className="small-loader"></span>
-                                        ) : (
-                                            <button
-                                                onClick={() =>
-                                                    handleDelete(
-                                                        service_item.id
-                                                    )
-                                                }
-                                                className="py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600"
-                                            >
-                                                حذف
-                                            </button>
-                                        )}
-                                    </td>
+                    <div className="overflow-auto max-w-screen">
+                        <table className="table-auto w-full mx-auto mt-12 text-sm text-center">
+                            <thead>
+                                <tr className="bg-gray_white font-normal">
+                                    <th className="px-4 py-2 rounded-tl-md">
+                                        الاسم
+                                    </th>
+                                    <th className="px-4 py-2 border-l border-white">
+                                        تاريخ الإنشاء
+                                    </th>
+                                    <th className="px-4 py-2 border-l border-white"></th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody className="text-xs text-center font-semibold">
+                                {filteredServices?.map((service_item) => (
+                                    <tr key={service_item?.id}>
+                                        <td className="border px-4 py-2">{`${service_item.Name}`}</td>
+                                        <td className="border px-4 py-2">
+                                            {dayjs(
+                                                service_item?.createdAt
+                                            ).format("DD MMMM YYYY")}
+                                        </td>
+                                        <td className="border h-full px-4 py-2 flex gap-6 items-center justify-center">
+                                            <Link
+                                                to={`/Director/Services/${service_item.id}/Edit`}
+                                                className="bg-blue_v h-full text-white px-4 py-1 rounded-md "
+                                            >
+                                                تعديل
+                                            </Link>
+                                            {deleteLoading ? (
+                                                <span className="small-loader"></span>
+                                            ) : (
+                                                <button
+                                                    onClick={() =>
+                                                        handleDelete(
+                                                            service_item.id
+                                                        )
+                                                    }
+                                                    className="py-2 px-4 h-full bg-red-500 text-white rounded-md hover:bg-red-600"
+                                                >
+                                                    حذف
+                                                </button>
+                                            )}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 )}
             </div>
         );

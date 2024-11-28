@@ -25,7 +25,7 @@ function Register() {
             </div>
             <div className="w-full h-screen overflow-y-auto py-12 bg-white flex flex-col items-center justify-center ">
                 <div className=" w-[80%] text-black">
-                    <div className=" pb-4 pt-24 md:pt-0 ">
+                    <div className=" pb-4 pt-14 md:pt-0 ">
                         <div className=" text-3xl font-semibold ">
                             👋 SCS مرحبا بك في
                         </div>

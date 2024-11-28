@@ -95,9 +95,9 @@ function Director_Addworkers() {
     } else {
         return (
             <div className="flex text-right">
-                <div className="w-full  overflow-y-auto py-12 bg-white flex flex-col items-center justify-center ">
+                <div className="w-full  overflow-y-auto py-6 md:py-12 bg-white flex flex-col items-center justify-center ">
                     <div className=" w-[80%] text-black">
-                        <div className=" pb-4 pt-24 md:pt-0 ">
+                        <div className=" pb-4 pt-14 md:pt-0 ">
                             <div className=" text-3xl font-semibold ">
                                 صفحة اضافة عمال جدد
                             </div>
