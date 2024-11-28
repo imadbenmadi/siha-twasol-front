@@ -71,7 +71,7 @@ function EditBlog() {
                     validateStatus: () => true,
                 }
             );
-            
+
             if (response.status === 200) {
                 Swal.fire("نجاح", "تم تحديث المقال بنجاح", "success");
                 navigate(`/Worker/Blogs/${blogId}`);
@@ -97,7 +97,7 @@ function EditBlog() {
 
     if (loading) {
         return (
-            <div className="w-[80vw] h-[80vh] flex items-center justify-center">
+            <div className="w-[100vw] h-[80vh] flex items-center justify-center">
                 <span className="loader"></span>
             </div>
         );
@@ -105,7 +105,7 @@ function EditBlog() {
 
     if (error) {
         return (
-            <div className="w-[80vw] h-screen flex items-center justify-center">
+            <div className="w-[100vw] h-screen flex items-center justify-center">
                 <div className="text-red-600 font-semibold">{error}</div>
             </div>
         );
@@ -113,7 +113,7 @@ function EditBlog() {
 
     if (!blog) {
         return (
-            <div className="w-[80vw] h-screen flex items-center justify-center">
+            <div className="w-[100vw] h-screen flex items-center justify-center">
                 <div className="text-red-600 font-semibold">
                     لم يتم العثور على المقال
                 </div>

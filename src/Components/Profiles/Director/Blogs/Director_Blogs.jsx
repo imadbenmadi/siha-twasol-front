@@ -59,7 +59,7 @@ function Blogs() {
 
     if (loading) {
         return (
-            <div className="w-[80vw] h-[80vh] flex flex-col items-center justify-center">
+            <div className="w-[100vw] h-[80vh] flex flex-col items-center justify-center">
                 <span className="loader"></span>
             </div>
         );
@@ -67,7 +67,7 @@ function Blogs() {
 
     if (error) {
         return (
-            <div className="w-[80vw] h-screen flex items-center justify-center">
+            <div className="w-[100vw] h-screen flex items-center justify-center">
                 <div className="text-red-600 font-semibold">{error}</div>
             </div>
         );

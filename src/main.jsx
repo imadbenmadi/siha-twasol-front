@@ -5,6 +5,7 @@ import Router from "./Router";
 import { RouterProvider } from "react-router";
 import { AppProvider } from "./AppContext";
 import { Suspense } from "react";
+import Logo from "../public/Logo.png";
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
         <AppProvider>

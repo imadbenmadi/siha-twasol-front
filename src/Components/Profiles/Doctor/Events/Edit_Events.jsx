@@ -97,7 +97,7 @@ function EditEvent() {
 
     if (loading) {
         return (
-            <div className="w-[80vw] h-[80vh] flex items-center justify-center">
+            <div className="w-[100vw] h-[80vh] flex items-center justify-center">
                 <span className="loader"></span>
             </div>
         );
@@ -105,7 +105,7 @@ function EditEvent() {
 
     if (error) {
         return (
-            <div className="w-[80vw] h-screen flex items-center justify-center">
+            <div className="w-[100vw] h-screen flex items-center justify-center">
                 <div className="text-red-600 font-semibold">{error}</div>
             </div>
         );
@@ -113,7 +113,7 @@ function EditEvent() {
 
     if (!event) {
         return (
-            <div className="w-[80vw] h-screen flex items-center justify-center">
+            <div className="w-[100vw] h-screen flex items-center justify-center">
                 <div className="text-red-600 font-semibold">
                     لم يتم العثور على الحدث
                 </div>

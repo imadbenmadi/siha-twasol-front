@@ -109,13 +109,13 @@ function edit_doctor() {
     }, []);
     if (loading) {
         return (
-            <div className="w-[80vw] h-[80vh] flex flex-col items-center justify-center">
+            <div className="w-[100vw] h-[80vh] flex flex-col items-center justify-center">
                 <span className="loader"></span>
             </div>
         );
     } else if (error) {
         return (
-            <div className="w-[80vw] h-screen flex items-center justify-center">
+            <div className="w-[100vw] h-screen flex items-center justify-center">
                 <div className="text-red-600 font-semibold">
                     {error.message}
                 </div>
@@ -123,7 +123,7 @@ function edit_doctor() {
         );
     } else if (!doctor) {
         return (
-            <div className="w-[80vw] h-screen flex items-center justify-center">
+            <div className="w-[100vw] h-screen flex items-center justify-center">
                 <div className="text-red-600 font-semibold">
                     لم يتم العثور على العامل
                 </div>
