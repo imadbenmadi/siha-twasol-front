@@ -145,7 +145,7 @@ function Worker() {
                             تاريخ الإنشاء:
                         </h3>
                         <p className="text-gray-700">
-                            {dayjs(worker.createdAt).format("DD MMMM YYYY")}
+                            {dayjs(worker.createdAt).format("DD-MMM-YYYY")}
                         </p>
                     </div>
                     <div className="mb-4">

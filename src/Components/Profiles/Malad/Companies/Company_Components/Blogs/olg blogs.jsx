@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import axios from "axios";
 import { useAppContext } from "../../../../../../AppContext";
+import dayjs from "dayjs";
 function BlogsSection() {
     const { company } = useOutletContext();
     const [blogs, setBlogs] = useState([]);
@@ -90,7 +91,7 @@ function BlogCard({ blog, companyId }) {
 
                 {/* Blog Date */}
                 <p className="text-sm text-gray-500 mb-2">
-                    التاريخ: {new Date(blog.createdAt).toLocaleDateString()}
+                    التاريخ: {dayjs(blog?.createdAt).format("DD-MMM-YYYY")}
                 </p>
 
                 {/* Blog Description */}

@@ -153,8 +153,8 @@ function Blogs() {
                                         {blog.Description || "No Description"}
                                     </td>
                                     <td className="border px-4 py-2">
-                                        {dayjs(blog.createdAt).format(
-                                            "DD MMMM YYYY"
+                                        {dayjs(blog?.createdAt).format(
+                                            "DD-MMM-YYYY"
                                         )}
                                     </td>
                                     <td className="border px-4 py-2">

@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppContext } from "../../../../AppContext";
 import { Link } from "react-router-dom";
-
+import dayjs from "dayjs";
 function Profile() {
     const { user } = useAppContext();
     return (
@@ -48,7 +48,7 @@ function Profile() {
                 <p className="text-gray-600">
                     <span className="font-medium">تاريخ الميلاد:</span>{" "}
                     {user?.birthDate
-                        ? new Date(user?.birthDate).toLocaleDateString("ar")
+                        ? dayjs(user?.birthDate).format("DD-MMM-YYYY")
                         : "غير متوفر"}
                 </p>
                 <p className="text-gray-600">
@@ -69,13 +69,13 @@ function Profile() {
                 <p>
                     <span className="font-medium">تاريخ إنشاء الحساب:</span>{" "}
                     {user?.createdAt
-                        ? new Date(user.createdAt).toLocaleDateString("ar")
+                        ? dayjs(user?.createdAt).format("DD-MMM-YYYY")
                         : "غير متوفر"}
                 </p>
                 <p>
                     <span className="font-medium">آخر تحديث:</span>{" "}
                     {user?.updatedAt
-                        ? new Date(user.updatedAt).toLocaleDateString("ar")
+                        ? dayjs(user?.createdAt).format("DD-MMM-YYYY")
                         : "غير متوفر"}
                 </p>
             </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useOutletContext } from "react-router-dom";
-
+import dayjs from "dayjs";
 function EventsSection() {
     const { company } = useOutletContext();
     const [events, setEvents] = useState([]);
@@ -54,7 +54,7 @@ function EventCard({ event, companyId }) {
 
                 {/* Event Date */}
                 <p className="text-sm text-gray-500 mb-2">
-                    التاريخ: {new Date(event.createdAt).toLocaleDateString()}
+                    التاريخ: {dayjs(event?.createdAt).format("DD-MMM-YYYY")}
                 </p>
 
                 {/* Event Description */}

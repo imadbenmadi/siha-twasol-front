@@ -178,7 +178,7 @@ function Services() {
                                         <td className="border px-4 py-2">
                                             {dayjs(
                                                 service_item?.createdAt
-                                            ).format("DD MMMM YYYY")}
+                                            ).format("DD-MMM-YYYY")}
                                         </td>
                                         <td className="border h-full px-4 py-2 flex gap-6 items-center justify-center">
                                             <Link

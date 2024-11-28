@@ -160,7 +160,7 @@ function Event() {
 
                     {/* Date */}
                     <p className="text-gray-500 text-sm mb-4">
-                        {dayjs(event.createdAt).format("DD MMMM YYYY")}
+                        {dayjs(event?.createdAt).format("DD-MMM-YYYY")}
                     </p>
 
                     {/* Description */}

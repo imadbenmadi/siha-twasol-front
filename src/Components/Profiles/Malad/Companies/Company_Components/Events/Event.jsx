@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
-
+import dayjs from "dayjs";
 function EventDetail() {
     const { id } = useParams();
     const { company } = useOutletContext();
@@ -36,7 +36,7 @@ function EventDetail() {
 
             {/* Event Date */}
             <p className="text-sm text-gray-500 mb-4">
-                التاريخ: {new Date(event?.createdAt).toLocaleDateString()}
+                التاريخ: {dayjs(event?.createdAt).format("DD-MMM-YYYY")}
             </p>
 
             {/* Event Description */}

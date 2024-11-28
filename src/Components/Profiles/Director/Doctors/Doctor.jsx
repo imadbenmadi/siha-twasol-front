@@ -153,7 +153,7 @@ function Doctor() {
                             تاريخ الإنشاء:
                         </h3>
                         <p className="text-gray-700">
-                            {dayjs(doctor.createdAt).format("DD MMMM YYYY")}
+                            {dayjs(doctor?.createdAt).format("DD-MMM-YYYY")}
                         </p>
                     </div>
                     <div className="mb-4">

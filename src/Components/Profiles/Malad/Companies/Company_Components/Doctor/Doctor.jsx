@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import ReviewCard from "./Rate_Card";
 import Rate from "./Rate";
+import dayjs from "dayjs";
 function Malad() {
     const location = useLocation();
     const { user } = useAppContext();
@@ -99,12 +100,7 @@ function Malad() {
                         <span className="font-medium">التخصص :</span>{" "}
                         {doctor?.speciality || "غير متوفر"}
                     </p>
-                    {/* <p className="text-gray-600">
-                    <span className="font-medium">تاريخ الميلاد:</span>{" "}
-                    {doctor?.birthDate
-                        ? new Date(doctor?.birthDate).toLocaleDateString("ar")
-                        : "غير متوفر"}
-                </p> */}
+                    
                 </div>
                 <div className="border-b pb-4 mb-4">
                     <h3 className="text-xl font-semibold text-gray-700 mb-2">

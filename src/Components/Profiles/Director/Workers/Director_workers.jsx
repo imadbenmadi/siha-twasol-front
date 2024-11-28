@@ -159,7 +159,7 @@ function Director_workers() {
                                         <td className="border px-4 py-2">
                                             {dayjs(
                                                 worker_item?.createdAt
-                                            ).format("DD MMMM YYYY")}
+                                            ).format("DD-MMM-YYYY")}
                                         </td>
                                         <td className="border px-4 py-2">
                                             <Link

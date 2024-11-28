@@ -160,7 +160,7 @@ function Doctors() {
                                         <td className="border px-4 py-2">
                                             {dayjs(
                                                 doctor_item?.createdAt
-                                            ).format("DD MMMM YYYY")}
+                                            ).format("DD-MMM-YYYY")}
                                         </td>
                                         <td className="border px-4 py-2">
                                             <Link

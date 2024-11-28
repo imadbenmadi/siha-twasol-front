@@ -158,7 +158,7 @@ function Blog() {
 
                     {/* Date */}
                     <p className="text-gray-500 text-sm mb-4">
-                        {dayjs(blog.createdAt).format("DD MMMM YYYY")}
+                        {dayjs(blog?.createdAt).format("DD-MMM-YYYY")}
                     </p>
 
                     {/* Description */}

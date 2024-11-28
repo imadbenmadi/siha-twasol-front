@@ -209,14 +209,10 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                                                         {notification?.text}
                                                     </div>
                                                     <div className="text-gray_v text-xs pt-1">
-                                                        {/* {new Date(
-                                                            notification?.createdAt
-                                                        ).toLocaleDateString()} */}
+                                                        dayjs(notification?.createdAt).format("DD-MMM-YYYY")
                                                         {dayjs(
                                                             notification?.createdAt
-                                                        ).format(
-                                                            "DD MMMM YYYY"
-                                                        )}
+                                                        ).format("DD-MMM-YYYY")}
                                                     </div>
                                                 </div>
                                             </div>

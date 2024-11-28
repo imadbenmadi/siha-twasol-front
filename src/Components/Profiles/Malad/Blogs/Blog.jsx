@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { useAppContext } from "../../../../AppContext";
 import { useLocation } from "react-router-dom";
+import dayjs from "dayjs";
 function BlogDetail() {
     const navigate = useNavigate();
     const { user } = useAppContext();
@@ -88,8 +89,7 @@ function BlogDetail() {
             </div>
             <div className="text-gray-700 leading-relaxed mb-6">
                 <p>
-                    تاريخ النشر:{" "}
-                    {new Date(blog?.createdAt).toLocaleDateString()}
+                    تاريخ النشر: {dayjs(blog?.createdAt).format("DD-MMM-YYYY")}
                 </p>
             </div>
 

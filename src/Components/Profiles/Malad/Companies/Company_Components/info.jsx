@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-
+import dayjs from "dayjs";
 function Info() {
     const { company } = useOutletContext();
     const [followLoading, setFollowLoading] = useState(false);
@@ -95,11 +95,11 @@ function Info() {
                 </p>
                 <p className="text-gray-700 mb-2">
                     <span className="font-semibold">تاريخ الإنشاء:</span>{" "}
-                    {new Date(company?.createdAt).toLocaleDateString()}
+                    {dayjs(company?.createdAt).format("DD-MMM-YYYY")}
                 </p>
                 <p className="text-gray-700 mb-2">
                     <span className="font-semibold">آخر تحديث:</span>{" "}
-                    {new Date(company?.updatedAt).toLocaleDateString()}
+                    {dayjs(company?.updatedAt).format("DD-MMM-YYYY")}
                 </p>
             </div>
 

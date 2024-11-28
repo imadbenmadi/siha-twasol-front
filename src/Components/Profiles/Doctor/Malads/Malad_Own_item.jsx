@@ -6,7 +6,7 @@ import ReviewCard from "./Rate_Card";
 import Rate from "./Rate";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-
+import dayjs from "dayjs";
 function Malad() {
     const location = useLocation();
     const { user } = useAppContext();
@@ -77,7 +77,12 @@ function Malad() {
                 <span className="loader"></span>
             </div>
         );
-    if (error) return <div className="text-red-600 font-semibold text-center">{error}</div>;
+    if (error)
+        return (
+            <div className="text-red-600 font-semibold text-center">
+                {error}
+            </div>
+        );
 
     return (
         <>
@@ -127,9 +132,7 @@ function Malad() {
                     <p className="text-gray-600">
                         <span className="font-medium">تاريخ الميلاد:</span>{" "}
                         {malad?.birthDate
-                            ? new Date(malad?.birthDate).toLocaleDateString(
-                                  "ar"
-                              )
+                            ? dayjs(malad?.birthDate).format("DD-MMM-YYYY")
                             : "غير متوفر"}
                     </p>
                     <p className="text-gray-600">
@@ -150,17 +153,13 @@ function Malad() {
                     <p>
                         <span className="font-medium">تاريخ إنشاء الحساب:</span>{" "}
                         {malad?.createdAt
-                            ? new Date(malad?.createdAt).toLocaleDateString(
-                                  "ar"
-                              )
+                            ? dayjs(malad?.createdAt).format("DD-MMM-YYYY")
                             : "غير متوفر"}
                     </p>
                     <p>
                         <span className="font-medium">آخر تحديث:</span>{" "}
                         {malad?.updatedAt
-                            ? new Date(malad?.updatedAt).toLocaleDateString(
-                                  "ar"
-                              )
+                            ? dayjs(malad?.updatedAt).format("DD-MMM-YYYY")
                             : "غير متوفر"}
                     </p>
                 </div>

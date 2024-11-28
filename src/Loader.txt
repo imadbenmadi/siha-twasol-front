@@ -34,3 +34,5 @@ dayjs.extend(customParseFormat);
 {new Date(
     project.createdAt
 ).toLocaleDateString()}
+
+const date = dayjs(item?.createdAt).format("DD-MMM-YYYY");

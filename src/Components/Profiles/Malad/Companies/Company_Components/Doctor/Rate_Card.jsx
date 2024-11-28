@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 const ReviewCard = ({ review }) => {
     const rating = review?.Rate || 0; // Default to 0 if Rate is null
     const stars = Array.from({ length: rating }).map((_, idx) => (
@@ -27,7 +28,7 @@ const ReviewCard = ({ review }) => {
             <div className=" mt-4">
                 <div className="text-sm text-gray-400">
                     {review?.createdAt
-                        ? new Date(review?.createdAt).toLocaleDateString()
+                        ? dayjs(review?.createdAt).format("DD-MMM-YYYY")
                         : null}
                 </div>
             </div>

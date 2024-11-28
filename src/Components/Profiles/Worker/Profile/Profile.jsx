@@ -1,5 +1,6 @@
 import React from "react";
 import { useAppContext } from "../../../../AppContext";
+import dayjs from "dayjs";
 function Profile() {
     const { user } = useAppContext();
     return (
@@ -55,9 +56,8 @@ function Profile() {
             <div className="text-gray-600">
                 <p>
                     <span className="font-medium">تاريخ إنشاء الحساب:</span>{" "}
-                    {new Date(user?.createdAt).toLocaleDateString("ar")}
+                    {dayjs(user?.createdAt).format("DD-MMM-YYYY")}
                 </p>
-                
             </div>
         </div>
     );
