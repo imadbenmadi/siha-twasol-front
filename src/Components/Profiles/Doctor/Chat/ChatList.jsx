@@ -116,7 +116,7 @@ const ChatList = () => {
         <div className="">
             {chats.length === 0 ? (
                 <p className="text-sm font-semibold  text-center w-full text-gray_v pt-12">
-                    No chats available.
+                    لا توجد محادثات
                 </p>
             ) : (
                 <>
@@ -151,7 +151,7 @@ const ChatList = () => {
                                                                   ) + "..."
                                                                 : chat?.Malad
                                                                       ?.lastName
-                                                            : "not available"
+                                                            : "غير متوفر"
                                                     }`}
                                                 </div>
                                                 <div className="text-xs text-red-600 pt-1 font-semibold">

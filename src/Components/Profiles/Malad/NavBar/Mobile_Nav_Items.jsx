@@ -98,7 +98,7 @@ function Mobile_Nav_Items({
                                     }}
                                 >
                                     <TbLogout2 className="  text-xl" />
-                                    Logout
+                                     تسجيل الخروج
                                 </div>
                             )}
                         </div>

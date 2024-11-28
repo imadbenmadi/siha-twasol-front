@@ -187,7 +187,7 @@ function Add_File() {
                                     {file.name}
                                 </p>
                                 <p className="text-sm text-gray-500">
-                                    {Math.round(file.size / 1024 / 1024)} MB
+                                    {Math.round(file.size / 1024 / 1024)} ميقابايت
                                 </p>
                             </div>
                         ) : (

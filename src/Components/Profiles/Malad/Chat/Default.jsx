@@ -9,7 +9,7 @@ const ChatList = () => {
                      pt-12 hidden md:flex flex-grow  gap-6 "
                 >
                     <div className="text-gray_v font-semibold text-center w-full ">
-                        Please select a room to start chat
+                        اختر محادثة للبدء
                     </div>
                     <img
                         loading="lazy"

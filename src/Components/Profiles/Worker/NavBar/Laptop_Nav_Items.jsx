@@ -121,7 +121,7 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                                         }}
                                     >
                                         <TbLogout2 className="  text-xl" />
-                                        Logout
+                                        <>تسجيل الخروج</>
                                     </div>
                                 )}
                             </div>

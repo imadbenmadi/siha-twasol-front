@@ -168,7 +168,7 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                                         }}
                                     >
                                         <TbLogout2 className="  text-xl" />
-                                        Logout
+                                        تسجيل الخروج
                                     </div>
                                 )}
                             </div>
@@ -220,7 +220,7 @@ function Laptop_Nav_Items({ Active_nav, handleLogout, LogoutClicked }) {
                                     ))
                                 ) : (
                                     <div className="text-center text-gray_v pt-6 flex-gap-2 ">
-                                        No Notifications
+                                        لا يوجد اشعارات
                                     </div>
                                 )}
                             </div>

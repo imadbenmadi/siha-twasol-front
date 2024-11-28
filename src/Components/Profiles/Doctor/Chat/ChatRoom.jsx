@@ -98,7 +98,7 @@ const ChatRoom = () => {
         } catch (error) {
             Swal.fire({
                 icon: "error",
-                title: "Failed to send message, please try again",
+                title: " خطأ في إرسال الرسالة، يرجى المحاولة مرة أخرى",
                 text: error.message,
             });
         } finally {
@@ -136,10 +136,10 @@ const ChatRoom = () => {
                 {!messages || messages.length === 0 ? (
                     <div className="text-center pt-12">
                         <p className="text-lg font-semibold text-gray-600 mb-4">
-                            No messages here yet.
+                            لا توجد رسائل
                         </p>
                         <p className="text-sm text-gray-400">
-                            Start a chatting with the doctor.
+                            ابدأ بإرسال رسالة للطبيب
                         </p>
                     </div>
                 ) : (

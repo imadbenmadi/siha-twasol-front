@@ -137,10 +137,10 @@ const ChatRoom = () => {
                 {!messages || messages.length === 0 ? (
                     <div className="text-center pt-12">
                         <p className="text-lg font-semibold text-gray-600 mb-4">
-                            No messages here yet.
+                            لا توجد رسائل
                         </p>
                         <p className="text-sm text-gray-400">
-                            Start a chatting with the Doctor.
+                            ابدأ بإرسال رسالة للطبيب
                         </p>
                     </div>
                 ) : (

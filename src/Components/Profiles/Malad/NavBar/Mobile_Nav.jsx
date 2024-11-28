@@ -115,7 +115,7 @@ function Mobile_Nav({ Active_nav, handleLogout, LogoutClicked }) {
                             ))
                         ) : (
                             <div className="text-center text-gray_v pt-6 flex-gap-2 ">
-                                No Notifications
+                                لا يوجد اشعارات
                             </div>
                         )}
                     </div>
