@@ -12,6 +12,7 @@ import { useLocation } from "react-router";
 import axios from "axios";
 function Director_Addworkers() {
     const Naviagte = useNavigate();
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [Services, setServices] = useState([]);
     const [serviceChoice, setServiceChoice] = useState("");

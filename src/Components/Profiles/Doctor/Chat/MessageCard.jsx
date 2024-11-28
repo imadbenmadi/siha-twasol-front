@@ -1,5 +1,5 @@
 import React from "react";
-
+import logo_img from "../../../../../public/logo.png";
 const MessageCard = ({
     msg,
     userId,
